@@ -1,40 +1,25 @@
 class CamundaGrailsPlugin {
-    // the plugin version
     def version = "0.1"
-    // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.3 > *"
-    // resources that are excluded from plugin packaging
     def pluginExcludes = [
         "grails-app/views/error.gsp"
     ]
-
-    // TODO Fill in these fields
-    def title = "Camunda Plugin" // Headline display name of the plugin
-    def author = "Your name"
-    def authorEmail = ""
+    def title = "camunda BPM Plugin" // Headline display name of the plugin
+    def author = "Martin Schimak"
+    def authorEmail = "martin.schimak@plexiti.com"
     def description = '''\
-Brief summary/description of the plugin.
+Integrates the camunda BPM platform with Grails. camunda BPM is a flexible framework for workflow 
+and process automation. It's core is a native BPMN 2.0 process engine that runs inside the Java 
+Virtual Machine. It is a perfect match for the Spring Framework - and therefore for Grails, too. 
+On top of the process engine, you can choose from a stack of tools for human workflow management, 
+operations & monitoring.
 '''
-
-    // URL to the plugin's documentation
     def documentation = "http://grails.org/plugin/camunda"
-
-    // Extra (optional) plugin metadata
-
-    // License: one of 'APACHE', 'GPL2', 'GPL3'
-//    def license = "APACHE"
-
-    // Details of company behind the plugin (if there is one)
-//    def organization = [ name: "My Company", url: "http://www.my-company.com/" ]
-
-    // Any additional developers beyond the author specified above.
-//    def developers = [ [ name: "Joe Bloggs", email: "joe@bloggs.net" ]]
-
-    // Location of the plugin's issue tracker.
-//    def issueManagement = [ system: "JIRA", url: "http://jira.grails.org/browse/GPMYPLUGIN" ]
-
-    // Online location of the plugin's browseable source code.
-//    def scm = [ url: "http://svn.codehaus.org/grails-plugins/" ]
+    def license = "APACHE"
+    def organization = [ name: "plexiti GmbH", url: "http://plexiti.com" ]
+    // def developers = [ [ name: "Joe Bloggs", email: "joe@bloggs.net" ] ]
+    def issueManagement = [ system: "github", url: "https://github.com/plexiti/camunda-grails-plugin/issues" ]
+    def scm = [ url: "https://github.com/plexiti/camunda-grails-plugin" ]
 
     def doWithWebDescriptor = { xml ->
         // TODO Implement additions to web.xml (optional), this event occurs before

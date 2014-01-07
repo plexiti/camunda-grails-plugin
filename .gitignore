@@ -1,4 +1,7 @@
 *.iws
+*.iml
+*.ipr
+*.sha1
 *Db.properties
 *Db.script
 .settings
@@ -13,5 +16,6 @@ stacktrace.log
 /out/
 /web-app/plugins
 /web-app/WEB-INF/classes
+/web-app/WEB-INF/tld
 /.link_to_grails_plugins/
 /target-eclipse/
