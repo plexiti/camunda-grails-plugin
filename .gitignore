@@ -1,6 +1,7 @@
 *.iws
 *.iml
 *.ipr
+*.sha1
 *Db.properties
 *Db.script
 .settings
