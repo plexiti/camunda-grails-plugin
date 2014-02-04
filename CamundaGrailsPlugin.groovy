@@ -1,5 +1,12 @@
+import grails.util.Environment
+import org.camunda.bpm.engine.impl.jobexecutor.DefaultJobExecutor
+import org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration
+import org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
+import org.camunda.bpm.engine.spring.container.ManagedProcessEngineFactoryBean
+import org.camunda.bpm.engine.test.mock.MockExpressionManager
+
 class CamundaGrailsPlugin {
-    def version = "0.1"
+    def version = "0.1-SNAPSHOT"
     def grailsVersion = "2.3 > *"
     def pluginExcludes = [
         "grails-app/views/error.gsp"
@@ -26,7 +33,46 @@ operations & monitoring.
     }
 
     def doWithSpring = {
-        // TODO Implement runtime spring config (optional)
+
+        processApplication(SpringServletProcessApplication)
+
+        processEngine(ManagedProcessEngineFactoryBean) {
+            processEngineConfiguration = ref("processEngineConfiguration")
+        }
+
+        processEngineConfiguration(SpringProcessEngineConfiguration) {
+            processEngineName = "default"
+            dataSource = ref("dataSource")
+            transactionManager = ref("transactionManager")
+            databaseType = "h2"
+            databaseSchemaUpdate = "true"
+            jobExecutor = ref("jobExecutor")
+            jobExecutorActivate = false
+            deploymentResources = [
+                "file:./grails-app/processes/**/*.bpmn",
+                "file:./grails-app/processes/**/*.png"
+            ]
+            history = "activity"
+            switch (Environment.current.name) {
+                case ["development"] :
+                    expressionManager = bean(MockExpressionManager)
+            }
+        }
+
+        jobExecutor(DefaultJobExecutor) {
+            corePoolSize = 3
+            maxPoolSize = 10
+        }
+
+        runtimeService(processEngine: "getRuntimeService")
+        repositoryService(processEngine: "getRepositoryService")
+        taskService(processEngine: "getTaskService")
+        managementService(processEngine: "getManagementService")
+        identityService(processEngine: "getIdentityService")
+        authorizationService(processEngine: "getAuthorizationService")
+        historyService(processEngine: "getHistoryService")
+        formService(processEngine: "getFormService")
+
     }
 
     def doWithDynamicMethods = { ctx ->
