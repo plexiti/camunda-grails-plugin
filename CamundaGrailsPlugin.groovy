@@ -1,5 +1,3 @@
-import grails.util.Environment
-import org.camunda.bpm.engine.impl.jobexecutor.DefaultJobExecutor
 import org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration
 import org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
 import org.camunda.bpm.engine.spring.container.ManagedProcessEngineFactoryBean
@@ -35,35 +33,25 @@ operations & monitoring.
     def doWithSpring = {
 
         processApplication(SpringServletProcessApplication)
-
         processEngine(ManagedProcessEngineFactoryBean) {
             processEngineConfiguration = ref("processEngineConfiguration")
         }
-
-        processEngineConfiguration(SpringProcessEngineConfiguration) {
-            processEngineName = "default"
+        processEngineConfiguration(SpringProcessEngineConfiguration) { beanDefinition ->
             dataSource = ref("dataSource")
             transactionManager = ref("transactionManager")
-            databaseType = "h2"
-            databaseSchemaUpdate = "true"
-            jobExecutor = ref("jobExecutor")
-            jobExecutorActivate = false
-            deploymentResources = [
-                "file:./grails-app/processes/**/*.bpmn",
-                "file:./grails-app/processes/**/*.png"
-            ]
-            history = "activity"
-            switch (Environment.current.name) {
-                case ["development"] :
-                    expressionManager = bean(MockExpressionManager)
+            if (System.properties['grails.test.phase']) {
+                databaseSchemaUpdate = true
+                jobExecutorActivate = System.properties['grails.test.phase'] == 'functional'
+                expressionManager = bean(MockExpressionManager)
+                deploymentResources = [
+                    "classpath:/**/*.bpmn",
+                    "classpath:/**/*.png"
+                ]
+            }
+            application.config.grails.plugin.camunda.each {
+                beanDefinition.setPropertyValue(it.key, it.value)
             }
         }
-
-        jobExecutor(DefaultJobExecutor) {
-            corePoolSize = 3
-            maxPoolSize = 10
-        }
-
         runtimeService(processEngine: "getRuntimeService")
         repositoryService(processEngine: "getRepositoryService")
         taskService(processEngine: "getTaskService")
