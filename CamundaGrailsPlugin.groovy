@@ -1,3 +1,4 @@
+import grails.util.Environment
 import org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration
 import org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
 import org.camunda.bpm.engine.spring.container.ManagedProcessEngineFactoryBean
@@ -22,7 +23,9 @@ operations & monitoring.
     def documentation = "http://grails.org/plugin/camunda"
     def license = "APACHE"
     def organization = [ name: "plexiti GmbH", url: "http://plexiti.com" ]
-    // def developers = [ [ name: "Joe Bloggs", email: "joe@bloggs.net" ] ]
+    def developers = [ 
+        [ name: "Martin Schimak", email: "martin.schimak@plexiti.com" ] 
+    ]
     def issueManagement = [ system: "github", url: "https://github.com/plexiti/camunda-grails-plugin/issues" ]
     def scm = [ url: "https://github.com/plexiti/camunda-grails-plugin" ]
 
@@ -39,14 +42,16 @@ operations & monitoring.
         processEngineConfiguration(SpringProcessEngineConfiguration) { beanDefinition ->
             dataSource = ref("dataSource")
             transactionManager = ref("transactionManager")
-            if (System.properties['grails.test.phase']) {
+            if (Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]) {
                 databaseSchemaUpdate = true
-                jobExecutorActivate = System.properties['grails.test.phase'] == 'functional'
-                expressionManager = bean(MockExpressionManager)
                 deploymentResources = [
                     "classpath:/**/*.bpmn",
                     "classpath:/**/*.png"
                 ]
+            }
+            if (System.properties['grails.test.phase']) {
+                jobExecutorActivate = System.properties['grails.test.phase'] == 'functional'
+                expressionManager = bean(MockExpressionManager)
             }
             application.config.grails.plugin.camunda.each {
                 beanDefinition.setPropertyValue(it.key, it.value)
@@ -85,4 +90,5 @@ operations & monitoring.
     def onShutdown = { event ->
         // TODO Implement code that is executed when the application shuts down (optional)
     }
+    
 }
