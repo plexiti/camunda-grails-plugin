@@ -40,8 +40,16 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
         // runtime 'mysql:mysql-connector-java:5.1.24'
-        compile "org.camunda.bpm:camunda-engine:$camundaVersion"
-        runtime "org.camunda.bpm:camunda-engine-spring:$camundaVersion"
+        compile ("org.camunda.bpm:camunda-engine:$camundaVersion") {
+            excludes 'spring-beans'
+        }
+        runtime ("org.camunda.bpm:camunda-engine-spring:$camundaVersion") {
+            excludes 'spring-asm'
+            excludes 'spring-beans'
+            excludes 'spring-context'
+            excludes 'spring-jdbc'
+            excludes 'spring-orm'
+        }
     }
 
     plugins {
@@ -49,5 +57,6 @@ grails.project.dependency.resolution = {
               ":rest-client-builder:1.0.3") {
             export = false
         }
+        test ":hibernate:3.6.10.6" // or ":hibernate4:4.1.11.6"
     }
 }
