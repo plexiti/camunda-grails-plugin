@@ -1,3 +1,4 @@
+import grails.util.BuildScope
 import grails.util.Environment
 import org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration
 import org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
@@ -49,8 +50,8 @@ operations & monitoring.
                     "classpath:/**/*.png"
                 ]
             }
-            if (System.properties['grails.test.phase']) {
-                jobExecutorActivate = System.properties['grails.test.phase'] == 'functional'
+            if (System.properties['grails.test.phase'] != 'functional') {
+                jobExecutorActivate = false
                 expressionManager = bean(MockExpressionManager)
             }
             application.config.grails.plugin.camunda.each {
