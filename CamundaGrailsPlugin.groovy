@@ -1,4 +1,3 @@
-import grails.util.BuildScope
 import grails.util.Environment
 import org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration
 import org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
@@ -24,9 +23,7 @@ operations & monitoring.
     def documentation = "http://grails.org/plugin/camunda"
     def license = "APACHE"
     def organization = [ name: "plexiti GmbH", url: "http://plexiti.com" ]
-    def developers = [ 
-        [ name: "Martin Schimak", email: "martin.schimak@plexiti.com" ] 
-    ]
+    def developers = [ ]
     def issueManagement = [ system: "github", url: "https://github.com/plexiti/camunda-grails-plugin/issues" ]
     def scm = [ url: "https://github.com/plexiti/camunda-grails-plugin" ]
 
