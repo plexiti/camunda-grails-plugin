@@ -1,4 +1,4 @@
-package grails.plugins.camunda
+package grails.plugin.camunda
 
 import grails.test.mixin.TestMixin
 import grails.test.mixin.support.GrailsUnitTestMixin
