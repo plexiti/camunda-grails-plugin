@@ -1,4 +1,3 @@
-import groovy.transform.Field
 
 /*
  * Copyright 2014 the original author or authors.
@@ -26,35 +25,34 @@ import groovy.transform.Field
 includeTargets << grailsScript("_GrailsInit")
 includeTargets << grailsScript("_GrailsCreateArtifacts")
 
-@Field static def type = 'Process'
-@Field static def ext = 'bpmn'
-@Field static def processPath = 'grails-app/processes'
-
 target('default' : 'Creates a new camunda BPM process definition.') {
-    depends(checkVersion, parseArguments)
+    depends(compile, checkVersion, parseArguments)
 
-    promptForName(type: type)
+    def constants = classLoader.loadClass("grails.plugins.camunda.Constants")
+    def identifiers = classLoader.loadClass("grails.plugins.camunda.Identifiers")
+
+    promptForName(type: constants.TYPE)
 
     for (process in argsMap["params"]) {
 
-        def (pkg, name) = identifiers(process)
+        def (pkg, name) = identifiers.generate(process)
 
         try {
-            def file = new File("${basedir}/${processPath}/${pkg.replace('.', '/')}${name}${type}.${ext}")
+            def file = new File("${basedir}/${constants.PROCESS_PATH}/${pkg.replace('.', '/')}${name}${constants.TYPE}.${constants.EXTENSION}")
             if (file.exists()) {
-                if (!confirmInput("${type} ${name}${type}.${ext} already exists. Overwrite?","${name}${type}.${ext}.overwrite")) {
+                if (!confirmInput("${constants.TYPE} ${name}${constants.TYPE}.${constants.EXTENSION} already exists. Overwrite?","${name}${constants.TYPE}.${constants.EXTENSION}.overwrite")) {
                     return
                 }
             }
             file.parentFile?.mkdirs()
-            ant.copy(file: "$camundaPluginDir/src/templates/processes/${type}.bpmn.template",
+            ant.copy(file: "$camundaPluginDir/src/templates/processes/${constants.TYPE}.bpmn.template",
                     tofile: file.path, verbose: true, overwrite: true) {
                 filterset {
-                    filter token: 'artifact.name', value: "${name}${type}"
+                    filter token: 'artifact.name', value: "${name}${constants.TYPE}"
                 }
             }
             event("CreatedFile", [file])
-            createIntegrationTest(name: "${pkg}${name}", suffix: type)
+            createIntegrationTest(name: "${pkg}${name}", suffix: constants.TYPE)
         } catch (e) {
             e.printStackTrace()
             exit 1
@@ -62,15 +60,6 @@ target('default' : 'Creates a new camunda BPM process definition.') {
 
     }
 
-}
-
-static def identifiers(String fullName) {
-    def identifier = '[a-zA-Z_][a-zA-Z0-9_]*'
-    def name = fullName - ~"\\.${ext}\$"
-    assert name =~ "^(${identifier}\\.)*(${identifier})\$" : "The package and name of your " +
-        "new process definition (name = $name) does not qualify as a valid Java identifier. For " +
-        "compatibility reasons, please choose a name which would qualify as a valid Java class name."
-    [name.substring(0, name.lastIndexOf('.') + 1), name.substring(name.lastIndexOf('.') + 1) - ~"$type\$"]
 }
 
 USAGE = """
