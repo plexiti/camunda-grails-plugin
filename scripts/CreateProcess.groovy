@@ -28,8 +28,8 @@ includeTargets << grailsScript("_GrailsCreateArtifacts")
 target('default' : 'Creates a new camunda BPM process definition.') {
     depends(compile, checkVersion, parseArguments)
 
-    def constants = classLoader.loadClass("grails.plugins.camunda.Constants")
-    def identifiers = classLoader.loadClass("grails.plugins.camunda.Identifiers")
+    def constants = classLoader.loadClass("grails.plugin.camunda.Constants")
+    def identifiers = classLoader.loadClass("grails.plugin.camunda.Identifiers")
 
     promptForName(type: constants.TYPE)
 

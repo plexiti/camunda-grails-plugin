@@ -1,4 +1,4 @@
-package grails.plugins.camunda
+package grails.plugin.camunda
 
 /**
  * @author Martin Schimak <martin.schimak@plexiti.com>
