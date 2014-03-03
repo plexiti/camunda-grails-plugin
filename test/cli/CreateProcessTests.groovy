@@ -3,31 +3,36 @@ import grails.test.AbstractCliTestCase
 class CreateProcessTests extends AbstractCliTestCase {
 
     void testCreateProcess() {
-        
-        //workDir = new File("$workDir/target/test-app")
-        //execute(["create-app", "--inplace", "test-app"])
+       [
+           "com.plexiti.Sample",
+           "com.plexiti.Sample.bpmn",
+           "com.plexiti.SampleProcess",
+           "com.plexiti.SampleProcess.bpmn",
+       ].each { processName ->
+           createProcess(processName)
+       }
+    }
+    
+    void createProcess(String processName) {
 
-        def pkg = "com.plexiti"
-        def processName = "SampleProcess"
-
-        def pkgPath = pkg.replace('.', '/')
-
-        def bpmnFile = new File("${workDir}/grails-app/processes/${pkgPath}/${processName}.bpmn")
-        def testFile = new File("${workDir}/test/integration/${pkgPath}/${processName}Spec.groovy")
-
+        def bpmnFile = new File("${workDir}/grails-app/processes/com/plexiti/SampleProcess.bpmn")
+        def testFile = new File("${workDir}/test/integration/com/plexiti/SampleProcessSpec.groovy")
         assert !bpmnFile.exists()
         assert !testFile.exists()
 
-        execute(["create-process", "com.plexiti.SampleProcess"])
+        try {
+            execute(["create-process", processName])
+            assert waitForProcess() == 0
+            verifyHeader()
+            assert bpmnFile.exists()
+            assert testFile.exists()
+        } finally {
+            if (bpmnFile.exists())
+                bpmnFile.delete()
+            if (testFile.exists())
+                testFile.delete()
+        }
 
-        assert waitForProcess() == 0
-        verifyHeader()
-        assert bpmnFile.exists()
-        assert testFile.exists()
-        
-        bpmnFile.delete()
-        testFile.delete()
-        
     }
     
 }
