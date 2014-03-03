@@ -11,7 +11,7 @@ class Identifiers {
         assert name =~ "^(${identifier}\\.)*(${identifier})\$" : "The package and name of your " +
                 "new process definition (name = $name) does not qualify as a valid Java identifier. For " +
                 "compatibility reasons, please choose a name which would qualify as a valid Java class name."
-        [name.substring(0, name.lastIndexOf('.') + 1), name.substring(name.lastIndexOf('.') + 1) - ~"$Constants.TYPE\$"]
+        [name.substring(0, name.lastIndexOf('.')), name.substring(name.lastIndexOf('.') + 1) - ~"$Constants.TYPE\$"]
     }
 
 }

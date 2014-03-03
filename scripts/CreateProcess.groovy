@@ -38,7 +38,7 @@ target('default' : 'Creates a new camunda BPM process definition.') {
         def (pkg, name) = identifiers.generate(process)
 
         try {
-            def file = new File("${basedir}/${constants.PROCESS_PATH}/${pkg.replace('.', '/')}${name}${constants.TYPE}.${constants.EXTENSION}")
+            def file = new File("${basedir}/${constants.PROCESS_PATH}/${pkg.replace('.', '/')}/${name}${constants.TYPE}.${constants.EXTENSION}")
             if (file.exists()) {
                 if (!confirmInput("${constants.TYPE} ${name}${constants.TYPE}.${constants.EXTENSION} already exists. Overwrite?","${name}${constants.TYPE}.${constants.EXTENSION}.overwrite")) {
                     return
@@ -52,7 +52,7 @@ target('default' : 'Creates a new camunda BPM process definition.') {
                 }
             }
             event("CreatedFile", [file])
-            createIntegrationTest(name: "${pkg}${name}", suffix: constants.TYPE)
+            createIntegrationTest(name: "${pkg}.${name}", suffix: constants.TYPE)
         } catch (e) {
             e.printStackTrace()
             exit 1
