@@ -1,3 +1,5 @@
+import groovy.transform.Field
+
 /*
  * Copyright 2014 the original author or authors.
  *
@@ -24,11 +26,12 @@
 includeTargets << grailsScript("_GrailsInit")
 includeTargets << grailsScript("_GrailsCreateArtifacts")
 
+@Field static def type = 'Process'
+@Field static def ext = 'bpmn'
+@Field static def processPath = 'grails-app/processes'
+
 target('default' : 'Creates a new camunda BPM process definition.') {
     depends(checkVersion, parseArguments)
-
-    def type = 'Process'
-    def ext = 'bpmn'
 
     promptForName(type: type)
 
@@ -37,7 +40,7 @@ target('default' : 'Creates a new camunda BPM process definition.') {
         def (pkg, name) = identifiers(process)
 
         try {
-            def file = new File("${basedir}/grails-app/processes/${pkg.replace('.', '/')}${name}${type}.${ext}")
+            def file = new File("${basedir}/${processPath}/${pkg.replace('.', '/')}${name}${type}.${ext}")
             if (file.exists()) {
                 if (!confirmInput("${type} ${name}${type}.${ext} already exists. Overwrite?","${name}${type}.${ext}.overwrite")) {
                     return
@@ -61,13 +64,13 @@ target('default' : 'Creates a new camunda BPM process definition.') {
 
 }
 
-static String[] identifiers(String fullName) {
+static def identifiers(String fullName) {
     def identifier = '[a-zA-Z_][a-zA-Z0-9_]*'
-    def name = fullName - ~/\.bpmn$/
+    def name = fullName - ~"\\.${ext}\$"
     assert name =~ "^(${identifier}\\.)*(${identifier})\$" : "The package and name of your " +
         "new process definition (name = $name) does not qualify as a valid Java identifier. For " +
         "compatibility reasons, please choose a name which would qualify as a valid Java class name."
-    [name.substring(0, name.lastIndexOf('.') + 1), name.substring(name.lastIndexOf('.') + 1) - ~/Process$/]
+    [name.substring(0, name.lastIndexOf('.') + 1), name.substring(name.lastIndexOf('.') + 1) - ~"$type\$"]
 }
 
 USAGE = """
