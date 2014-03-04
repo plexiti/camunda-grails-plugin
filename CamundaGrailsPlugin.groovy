@@ -6,7 +6,7 @@ import org.camunda.bpm.engine.test.mock.MockExpressionManager
 import org.slf4j.bridge.SLF4JBridgeHandler
 
 class CamundaGrailsPlugin {
-    def version = "0.1-SNAPSHOT"
+    def version = "0.1.0-SNAPSHOT"
     def grailsVersion = "2.3 > *"
     def pluginExcludes = [
         "grails-app/views/error.gsp"
