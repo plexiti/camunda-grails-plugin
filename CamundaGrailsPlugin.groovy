@@ -33,36 +33,39 @@ operations & monitoring.
 
     def doWithSpring = {
 
-        processApplication(SpringServletProcessApplication)
-        processEngine(ManagedProcessEngineFactoryBean) {
-            processEngineConfiguration = ref("processEngineConfiguration")
+        if (!application.config.grails.plugin.camunda.deployment.scenario 
+            || application.config.grails.plugin.camunda.deployment.scenario == 'embedded') {
+            processApplication(SpringServletProcessApplication)
+            processEngine(ManagedProcessEngineFactoryBean) {
+                processEngineConfiguration = ref("processEngineConfiguration")
+            }
+            processEngineConfiguration(SpringProcessEngineConfiguration) { beanDefinition ->
+                dataSource = ref("dataSource")
+                transactionManager = ref("transactionManager")
+                if (Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]) {
+                    databaseSchemaUpdate = true
+                    deploymentResources = [
+                        "classpath:/**/*.bpmn",
+                        "classpath:/**/*.png"
+                    ]
+                }
+                if (System.properties['grails.test.phase'] != 'functional') {
+                    jobExecutorActivate = false
+                    expressionManager = bean(MockExpressionManager)
+                }
+                application.config.grails.plugin.camunda.engine.configuration.each {
+                    beanDefinition.setPropertyValue(it.key, it.value)
+                }
+            }
+            runtimeService(processEngine: "getRuntimeService")
+            repositoryService(processEngine: "getRepositoryService")
+            taskService(processEngine: "getTaskService")
+            managementService(processEngine: "getManagementService")
+            identityService(processEngine: "getIdentityService")
+            authorizationService(processEngine: "getAuthorizationService")
+            historyService(processEngine: "getHistoryService")
+            formService(processEngine: "getFormService")
         }
-        processEngineConfiguration(SpringProcessEngineConfiguration) { beanDefinition ->
-            dataSource = ref("dataSource")
-            transactionManager = ref("transactionManager")
-            if (Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]) {
-                databaseSchemaUpdate = true
-                deploymentResources = [
-                    "classpath:/**/*.bpmn",
-                    "classpath:/**/*.png"
-                ]
-            }
-            if (System.properties['grails.test.phase'] != 'functional') {
-                jobExecutorActivate = false
-                expressionManager = bean(MockExpressionManager)
-            }
-            application.config.grails.plugin.camunda.each {
-                beanDefinition.setPropertyValue(it.key, it.value)
-            }
-        }
-        runtimeService(processEngine: "getRuntimeService")
-        repositoryService(processEngine: "getRepositoryService")
-        taskService(processEngine: "getTaskService")
-        managementService(processEngine: "getManagementService")
-        identityService(processEngine: "getIdentityService")
-        authorizationService(processEngine: "getAuthorizationService")
-        historyService(processEngine: "getHistoryService")
-        formService(processEngine: "getFormService")
 
     }
 
