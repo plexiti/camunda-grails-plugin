@@ -3,6 +3,7 @@ import org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration
 import org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
 import org.camunda.bpm.engine.spring.container.ManagedProcessEngineFactoryBean
 import org.camunda.bpm.engine.test.mock.MockExpressionManager
+import org.slf4j.bridge.SLF4JBridgeHandler
 
 class CamundaGrailsPlugin {
     def version = "0.1-SNAPSHOT"
@@ -37,34 +38,38 @@ operations & monitoring.
             || application.config.grails.plugin.camunda.deployment.scenario == 'embedded') {
             processApplication(SpringServletProcessApplication)
             processEngine(ManagedProcessEngineFactoryBean) {
-                processEngineConfiguration = ref("processEngineConfiguration")
+                processEngineConfiguration = ref('processEngineConfiguration')
             }
             processEngineConfiguration(SpringProcessEngineConfiguration) { beanDefinition ->
-                dataSource = ref("dataSource")
-                transactionManager = ref("transactionManager")
+                dataSource = ref('dataSource')
+                transactionManager = ref('transactionManager')
                 if (Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]) {
                     databaseSchemaUpdate = true
-                    deploymentResources = [
-                        "classpath:/**/*.bpmn",
-                        "classpath:/**/*.png"
-                    ]
+                    deploymentResources = ['classpath:/**/*.bpmn']
                 }
-                if (System.properties['grails.test.phase'] != 'functional') {
-                    jobExecutorActivate = false
-                    expressionManager = bean(MockExpressionManager)
+                if (System.properties.containsKey('grails.test.phase')) {
+                    if (!SLF4JBridgeHandler.installed 
+                            && !application.config.flatten().containsKey('grails.logging.jul.usebridge')) {
+                        SLF4JBridgeHandler.removeHandlersForRootLogger();
+                        SLF4JBridgeHandler.install();
+                    }
+                    if (System.properties['grails.test.phase'] != 'functional') {
+                        jobExecutorActivate = false
+                        expressionManager = bean(MockExpressionManager)
+                    }
                 }
                 application.config.grails.plugin.camunda.engine.configuration.each {
                     beanDefinition.setPropertyValue(it.key, it.value)
                 }
             }
-            runtimeService(processEngine: "getRuntimeService")
-            repositoryService(processEngine: "getRepositoryService")
-            taskService(processEngine: "getTaskService")
-            managementService(processEngine: "getManagementService")
-            identityService(processEngine: "getIdentityService")
-            authorizationService(processEngine: "getAuthorizationService")
-            historyService(processEngine: "getHistoryService")
-            formService(processEngine: "getFormService")
+            runtimeService(processEngine: 'getRuntimeService')
+            repositoryService(processEngine: 'getRepositoryService')
+            taskService(processEngine: 'getTaskService')
+            managementService(processEngine: 'getManagementService')
+            identityService(processEngine: 'getIdentityService')
+            authorizationService(processEngine: 'getAuthorizationService')
+            historyService(processEngine: 'getHistoryService')
+            formService(processEngine: 'getFormService')
         }
 
     }
