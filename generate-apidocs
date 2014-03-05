@@ -1,0 +1,9 @@
+grails clean
+grails doc
+git checkout gh-pages
+ls -d1 target/docs/* | cut -c 13- | xargs rm
+mv target/docs/* .
+git add .
+git commit -m "chore(docs): execute 'grails doc' and republish to gh-pages."
+git push
+git checkout master
