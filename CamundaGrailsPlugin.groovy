@@ -34,8 +34,8 @@ monitoring.
 
     def doWithSpring = {
 
-        if (!application.config.grails.plugin.camunda.deployment.scenario 
-            || application.config.grails.plugin.camunda.deployment.scenario == 'embedded') {
+        if (!application.config.camunda.deployment.scenario 
+            || application.config.camunda.deployment.scenario == 'embedded') {
             processApplication(SpringServletProcessApplication)
             processEngine(ManagedProcessEngineFactoryBean) {
                 processEngineConfiguration = ref('processEngineConfiguration')
@@ -58,7 +58,7 @@ monitoring.
                         expressionManager = bean(MockExpressionManager)
                     }
                 }
-                application.config.grails.plugin.camunda.engine.configuration.each {
+                application.config.camunda.engine.configuration.each {
                     beanDefinition.setPropertyValue(it.key, it.value)
                 }
             }
