@@ -15,11 +15,11 @@ class CamundaGrailsPlugin {
     def author = "Martin Schimak"
     def authorEmail = "martin.schimak@plexiti.com"
     def description = '''\
-Integrates the camunda BPM platform with Grails. camunda BPM is a flexible framework for workflow 
-and process automation. It's core is a native BPMN 2.0 process engine that runs inside the Java 
-Virtual Machine. It is a perfect match for the Spring Framework - and therefore for Grails, too. 
-On top of the process engine, you can choose from a stack of tools for human workflow management, 
-operations & monitoring.
+This plugin integrates the camunda BPM platform with Grails. camunda BPM is a flexible framework for 
+workflow and process automation. It's core is a native BPMN 2.0 process engine that runs inside the Java 
+Virtual Machine. It is a perfect match for the Spring Framework - and therefore for Grails, too. On top 
+of the process engine, you can choose from a stack of tools for human workflow management, operations & 
+monitoring.
 '''
     def documentation = "http://grails.org/plugin/camunda"
     def license = "APACHE"
