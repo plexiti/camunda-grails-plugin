@@ -50,16 +50,20 @@ monitoring.
                     deploymentResources = ['classpath:/**/*.bpmn']
                 }
                 if (System.properties.containsKey('grails.test.phase')) {
+                    // During test phases, use jul bridge in case no explicit user configuration exists
                     if (!SLF4JBridgeHandler.installed 
                             && !application.flatConfig.containsKey('grails.logging.jul.usebridge')) {
                         SLF4JBridgeHandler.removeHandlersForRootLogger();
                         SLF4JBridgeHandler.install();
                     }
+                    // During test phases (except functional), assume as default behaviour single 
+                    // threaded testing - with MockExpressionManager and deactivated jobExecutor
                     if (System.properties['grails.test.phase'] != 'functional') {
                         jobExecutorActivate = false
                         expressionManager = bean(MockExpressionManager)
                     }
                 }
+                // Now set explicit user configuration and override our previously set defaults 
                 application.config.camunda.engine.configuration.each {
                     beanDefinition.setPropertyValue(it.key, it.value)
                 }
