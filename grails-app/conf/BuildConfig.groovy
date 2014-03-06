@@ -21,6 +21,8 @@ grails.project.fork = [
     console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
 ]
 
+def camundaVersion = System.getProperty("camunda-bpm.version") ?: "7.0.0-Final"
+
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -50,6 +52,14 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.24'
+        compile ("org.camunda.bpm:camunda-engine:$camundaVersion") {
+            excludes 'spring-beans'
+        }
+        runtime ("org.camunda.bpm:camunda-engine-spring:$camundaVersion") {
+            excludes 'spring-context'
+            excludes 'spring-jdbc'
+            excludes 'spring-orm'
+        }
     }
 
     plugins {
