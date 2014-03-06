@@ -1,3 +1,4 @@
+import grails.plugin.camunda.Identifiers
 import grails.util.Environment
 import org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration
 import org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
@@ -36,11 +37,12 @@ monitoring.
 
         if (!application.config.camunda.deployment.scenario 
             || application.config.camunda.deployment.scenario == 'embedded') {
-            processApplication(SpringServletProcessApplication)
-            processEngine(ManagedProcessEngineFactoryBean) {
-                processEngineConfiguration = ref('processEngineConfiguration')
+            // Instantiate basic camunda beans for embedded scenario
+            camundaProcessApplicationBean(SpringServletProcessApplication)
+            camundaProcessEngineBean(ManagedProcessEngineFactoryBean) {
+                processEngineConfiguration = ref('camundaProcessEngineConfigurationBean')
             }
-            processEngineConfiguration(SpringProcessEngineConfiguration) { beanDefinition ->
+            camundaProcessEngineConfigurationBean(SpringProcessEngineConfiguration) { beanDefinition ->
                 dataSource = ref('dataSource')
                 transactionManager = ref('transactionManager')
                 if (Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]) {
@@ -49,7 +51,7 @@ monitoring.
                 }
                 if (System.properties.containsKey('grails.test.phase')) {
                     if (!SLF4JBridgeHandler.installed 
-                            && !application.config.flatten().containsKey('grails.logging.jul.usebridge')) {
+                            && !application.flatConfig.containsKey('grails.logging.jul.usebridge')) {
                         SLF4JBridgeHandler.removeHandlersForRootLogger();
                         SLF4JBridgeHandler.install();
                     }
@@ -62,14 +64,19 @@ monitoring.
                     beanDefinition.setPropertyValue(it.key, it.value)
                 }
             }
-            runtimeService(processEngine: 'getRuntimeService')
-            repositoryService(processEngine: 'getRepositoryService')
-            taskService(processEngine: 'getTaskService')
-            managementService(processEngine: 'getManagementService')
-            identityService(processEngine: 'getIdentityService')
-            authorizationService(processEngine: 'getAuthorizationService')
-            historyService(processEngine: 'getHistoryService')
-            formService(processEngine: 'getFormService')
+            // Instantiate camunda service API beans
+            camundaRuntimeServiceBean(camundaProcessEngineBean: 'getRuntimeService')
+            camundaRepositoryServiceBean(camundaProcessEngineBean: 'getRepositoryService')
+            camundaTaskServiceBean(camundaProcessEngineBean: 'getTaskService')
+            camundaManagementServiceBean(camundaProcessEngineBean: 'getManagementService')
+            camundaIdentityServiceBean(camundaProcessEngineBean: 'getIdentityService')
+            camundaAuthorizationServiceBean(camundaProcessEngineBean: 'getAuthorizationService')
+            camundaHistoryServiceBean(camundaProcessEngineBean: 'getHistoryService')
+            camundaFormServiceBean(camundaProcessEngineBean: 'getFormService')
+            // Finally, register all camunda beans under their default or user configured aliases
+            springConfig.beanNames.findAll { it.startsWith("camunda") && it.endsWith("Bean") }.each {
+                springConfig.addAlias Identifiers.beanName(it), it
+            }
         }
 
     }
