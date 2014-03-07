@@ -22,7 +22,7 @@ Virtual Machine. It is a perfect match for the Spring Framework - and therefore 
 of the process engine, you can choose from a stack of tools for human workflow management, operations & 
 monitoring.
 '''
-    def documentation = "http://grails.org/plugin/camunda"
+    def documentation = "http://plexiti.github.io/camunda-grails-plugin/"
     def license = "APACHE"
     def organization = [ name: "plexiti GmbH", url: "http://plexiti.com" ]
     def developers = [ ]
