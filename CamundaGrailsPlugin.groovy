@@ -1,5 +1,4 @@
 import grails.plugin.camunda.CamundaPluginSupport
-import grails.plugin.camunda.Constants
 
 class CamundaGrailsPlugin {
 
