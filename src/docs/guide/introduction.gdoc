@@ -1,13 +1,10 @@
-This is an example documentation template. The syntax format is similar to "Textile":http://textile.thresholdstate.com/.
+This plugin integrates the camunda BPM platform with the Grails web application framework.
+*[camunda BPM|http://camunda.org]* is a flexible framework for workflow and process automation.
+It's core is a native *[BPMN 2.0|http://www.omg.org/spec/BPMN/2.0/]* process engine that runs
+inside the Java Virtual Machine. It is a perfect match for the Spring Framework - and therefore for
+*[Grails|http://grails.org]*, too.
 
-You can apply formatting such as *bold*, _italic_ and @code@. Bullets are possible too:
+Please check out *[camunda.org|http://camunda.org/]* to get started with camunda BPM. Read on here
+to get started with the camunda Grails plugin!
 
-* Bullet 1
-* Bullet 2
-
-As well as numbered lists:
-
-# Number 1
-# Number 2
-
-The documentation also handles links to [guide items|guide:introduction] as well as [reference|items]
+!modeler.png!

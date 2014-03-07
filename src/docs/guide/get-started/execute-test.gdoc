@@ -1,0 +1,13 @@
+{code:bash}
+grails test-app integration: org.camunda.my.TestProcess
+{code}
+
+When executing the test you should see the following familiar output :-)
+
+{code:bash}
+| Running 1 integration test... 1 of 1
+| Completed 1 integration test, 0 failed in 0m 0s
+| Tests PASSED - view reports in ./target/test-reports
+{code}
+
+*Congrats!* You are successfully using camunda BPM with the Grails framework!

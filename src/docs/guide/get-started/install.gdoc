@@ -1,0 +1,23 @@
+In your BuildConfig.groovy configure the following plugin dependency:
+
+{code:xml}
+plugins {
+    compile \":camunda:0.1.0"
+}
+{code}
+
+Until camunda fully finishes its migration to maven central, you will also need to configure the
+following custom repository:
+
+{code:xml}
+repositories {
+    mavenRepo "https://app.camunda.com/nexus/content/groups/public"
+}
+{code}
+
+You may want to refresh your dependencies now in order to make sure that Grails properly
+installs the plugin. Type on your command line
+
+{code:bash}
+grails refresh-dependencies
+{code}

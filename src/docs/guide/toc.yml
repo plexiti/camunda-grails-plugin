@@ -1,1 +1,15 @@
 introduction: Introduction
+get-started: 
+    title: Get Started
+    install: Install the plugin
+    create-process: Create a process definition
+    execute-test: Execute the integration test
+usage:
+    title: Usage
+    services: camunda Service API
+    testing: Testing processes
+conventions: 
+    title: Conventions
+    environments: Environments
+configuration: Configuration
+resources: Further resources
