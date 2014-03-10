@@ -4,7 +4,7 @@ get-started:
     install: Install the plugin
     create-process: Create a process definition
     execute-test: Execute the integration test
-conventions: A Word About Conventions
+conventions: A Word about Conventions
 usage:
     title: User Guide
     script-create-process: Create a process definition

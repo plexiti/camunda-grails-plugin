@@ -1,4 +1,60 @@
-- process name
-- process id
-- processes folder
-- war deployment
+Grails uses [convention over
+configuration|http://grails.org/doc/latest/guide/gettingStarted.html#conventionOverConfiguration] to configure
+itself. This typically means that the names and locations of files are used instead of explicit configuration.
+Following this paradigm and the approach of other plugins like e.g. [quartz|http://grails.org/plugin/quartz] or
+[routing|http://grails.org/plugin/routing], the *camunda* plugin adds the "grails-app/processes" folder as soon as
+you create your first process via the [create-process|Scripts] command:
+
+* *your-project* = top level project directory
+** *grails-app* = standard grails layout directory
+*** *processes* = process definitions directory for *.bpmn resources
+
+Within that folder you may choose to group your *\*.bpmn* process definitions into packages. Every *\*.bpmn* file
+inside that directory will go into your *\*.war* when packaging it via Grails. (You may then choose to
+automatically redeploy those process definitions - or not - by explicitely configuring the 'deploymentResources'
+setting of your [configuration|guide:process-engine-configuration].)
+
+The [create-process|Scripts] command uses another two naming conventions. The name you choose for your process
+will be suffixed with *\*Process.bpmn* - in case you haven't provided that yourself as a part of the name.
+Therefore issueing e.g.
+
+{code:bash}
+grails create-process org.camunda.my.Test
+{code}
+
+will result in the following two files being generated for you:
+
+{code:bash}
+| Created file grails-app/processes/org/camunda/my/TestProcess.bpmn
+| Created file test/integration/org/camunda/my/TestProcessSpec.groovy
+{code}
+
+Furthermore, every executable BPMN process must have an id defined inside its xml structure. The plugin takes care
+of generating this id for you - in the given example as "TestProcess", hence the name of the generated bpmn
+resource - but without package name and file extension:
+
+{code:xml}
+<process id="TestProcess" name="TestProcess" isExecutable="true">
+  ...
+</process>
+{code}
+
+When editing this freshly generated process definition with [camunda modeler|http://camunda.org/bpmn/tool/], you
+will see this id when opening the "properties" pane and clicking into the free area of the diagram:
+
+!TestProcessModeler.png!
+
+{note}Feel free to change the generated 'name' attribute to a better human readable version of the name!{note}
+
+This 'id' attribute is needed when using the [camunda API services|guide:services], like e.g. starting a process
+instance by 'key' (which is referring to this id attribute):
+
+{code:groovy}
+runtimeService.startProcessInstanceByKey("TestProcess")
+{code}
+
+Both conventions - the *\*Process* suffix as well as the artifact 'id' being unique across packages follow typical
+Grails conventions and therefore make sense for greenfield projects. However, the plugin will not strictly enforce
+these conventions. You may choose to place other *\*.bpmn' files into your grails-app/processes folder and they
+will be accessible by integration tests, bundled into the war and deployed to the engine, too.
+
