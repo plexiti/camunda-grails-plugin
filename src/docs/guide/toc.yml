@@ -4,10 +4,11 @@ get-started:
     install: Install the plugin
     create-process: Create a process definition
     execute-test: Execute the integration test
+conventions: A Word About Conventions
 usage:
     title: User Guide
     script-create-process: Create a process definition
-    services: Inject camunda API services
+    services: Inject camunda API Services
     configuration: 
         title: Configure the camunda plugin
         deployment-scenario: Set the deployment scenario
@@ -18,7 +19,4 @@ usage:
         bean-names: Provide alternative bean names
         override-configuration: Override plugin configuration with custom beans
 testing: Testing Guide
-conventions: 
-    title: A word about conventions
-    environments: Environments
-resources: Further resources
+resources: Further Resources

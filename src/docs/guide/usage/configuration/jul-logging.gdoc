@@ -6,6 +6,6 @@ setting in your Config.groovy. See the information about the performance impact 
 *In case the bridge is not turned off explicitely by you, the plugin will turn it on for all Grails test phases.*
 However, your explicit choice won't be overridden. 
 
-{note}This decision makes sure that the bridge is turned on for tests executed in the Grails 'test' environment,
-for which no explicit choice is made in the default grails application. As soon as you make a decision for your
-environment, the plugin won't interfere anymore.{note}
+{note}This decision in particular makes sure that the bridge is turned on for tests executed in the default Grails
+environment '*test*', for which no explicit setting is made in the default grails application. As soon as you make
+an explicit decision for any of your default or custom environments, the plugin won't interfere anymore.{note}

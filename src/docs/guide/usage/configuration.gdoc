@@ -10,5 +10,4 @@ camunda {
 {code}
 
 {note} You will need such a configuration section to deploy to other environments than
-*dev*elopment and *test*. Find more about [process engine
-configuration|guide:process-engine-configuration]. {note}
+*dev*elopment and *test*. Find out more in the following two chapters. {note}

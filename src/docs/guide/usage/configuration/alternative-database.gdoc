@@ -1,6 +1,6 @@
 camunda's ORM mapping is provided by the mybatis mapping framework. Therefore the plugin can -
 and does by default - reuse your Grails 'dataSource' and 'transactionManager' beans, however it
-needs to be separately informed about a databaseType different from Grails default 'h2':
+needs to be informed about a databaseType different from Grails default 'h2':
 
 {code}
 camunda {
