@@ -44,9 +44,7 @@ grails.project.dependency.resolution = {
             excludes 'spring-beans'
         }
         runtime ("org.camunda.bpm:camunda-engine-spring:$camundaVersion") {
-            excludes 'spring-context'
-            excludes 'spring-jdbc'
-            excludes 'spring-orm'
+            excludes 'spring-context', 'spring-jdbc', 'spring-orm'
         }
     }
 
