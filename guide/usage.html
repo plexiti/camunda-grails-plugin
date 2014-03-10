@@ -1,168 +1,128 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-    <head>
-        <title>camunda Grails plugin 0.1.0-SNAPSHOT</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
-        <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
+<head>
+    <title>3 User Guide 0.1.0-SNAPSHOT</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
     <script type="text/javascript">
-function addJsClass(el) {
+function addJsClass() {
     var classes = document.body.className.split(" ");
     classes.push("js");
     document.body.className = classes.join(" ");
 }
     </script>
-    </head>
+</head>
 
-    <body class="body" onload="addJsClass();">
-        <div id="navigation">
-            <ul>
-                <li>
-                    <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
-                        <a href="../guide/index.html" class="button">Table of contents</a>
-                        <div id="nav-summary-childs" style="display:none;">
-                            
-                            <div class="toc-item" style="margin-left:0"><a href="#introduction"><strong>1</strong><span>Introduction</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:0"><a href="#get-started"><strong>2</strong><span>Get Started</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:0"><a href="#usage"><strong>3</strong><span>User Guide</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:0"><a href="#testing"><strong>4</strong><span>Testing Guide</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:0"><a href="#conventions"><strong>5</strong><span>A word about conventions</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:0"><a href="#resources"><strong>6</strong><span>Further resources</span></a></div>
-                            
-                        </div>
+<body class="body" onload="addJsClass();">
+<div id="navigation">
+    <ul>
+        <li>
+            <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                <a href="../guide/index.html" class="button">Table of contents</a>
+
+                <div id="nav-summary-childs" style="display:none;">
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
                     </div>
-                </li>
-                <li class="separator selected">
-                    <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
-                </li>
-            </ul>
-        </div>
-        <div id="header">
-            <div class="images clearfix">
-                
-                
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/get-started.html"><strong>2</strong><span>Get Started</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/usage.html"><strong>3</strong><span>User Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/testing.html"><strong>4</strong><span>Testing Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/conventions.html"><strong>5</strong><span>A word about conventions</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/resources.html"><strong>6</strong><span>Further resources</span></a>
+                    </div>
+                    
+                </div>
             </div>
-            <p>The camunda Grails plugin integrates the camunda BPM platform with the Grails web application framework.</p>
-        </div>
+        </li>
+        <li class="separator selected">
+            <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+        </li>
+    </ul>
+</div>
+<div id="header">
+    <div class="images clearfix">
+        
+        
+    </div>
+    <p>The camunda Grails plugin integrates the camunda BPM platform with the Grails web application framework.</p>
+</div>
 
 
-        <table id="colset" border="0" cellpadding="0" cellspacing="0">
-            <tr>
-                <td id="col1">
-                    <div id="main" class="corner-all">
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="corner-all">
 
-                        <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+                
+                    <div class="toc-item prev-left"><a href="../guide/get-started.html">&lt;&lt; <strong>2</strong><span>Get Started</span></a></div>
+                
 
-                        <div class="project">
-                            <h1>camunda Grails plugin - Reference Documentation</h1>
-                            <p><strong>Authors:</strong> Martin Schimak</p>
-                            <p><strong>Version:</strong> 0.1.0-SNAPSHOT</p>
-                            
-                        </div>
+                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
-                        
-                        <div id="table-of-content">
-                            <h2>Table of Contents</h2>
-                            
-                            <div class="toc-item" style="margin-left:0px"><a href="#introduction"><strong>1</strong><span>Introduction</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:0px"><a href="#get-started"><strong>2</strong><span>Get Started</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:10px"><a href="#install"><strong>2.1</strong><span>Install the plugin</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:10px"><a href="#create-process"><strong>2.2</strong><span>Create a process definition</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:10px"><a href="#execute-test"><strong>2.3</strong><span>Execute the integration test</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:0px"><a href="#usage"><strong>3</strong><span>User Guide</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:10px"><a href="#script-create-process"><strong>3.1</strong><span>Create a process definition</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:10px"><a href="#services"><strong>3.2</strong><span>Inject camunda API services</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:10px"><a href="#configuration"><strong>3.3</strong><span>Configure the camunda plugin</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:20px"><a href="#deployment-scenario"><strong>3.3.1</strong><span>Set the deployment scenario</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:20px"><a href="#process-engine-configuration"><strong>3.3.2</strong><span>Configure your process engine</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:20px"><a href="#jul-logging"><strong>3.3.3</strong><span>Consider your java.util.logging settings</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:20px"><a href="#alternative-database"><strong>3.3.4</strong><span>Use a different database</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:20px"><a href="#alternative-engine-version"><strong>3.3.5</strong><span>Use an alternative version of camunda</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:20px"><a href="#bean-names"><strong>3.3.6</strong><span>Provide alternative bean names</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:20px"><a href="#override-configuration"><strong>3.3.7</strong><span>Override plugin configuration with custom beans</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:0px"><a href="#testing"><strong>4</strong><span>Testing Guide</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:0px"><a href="#conventions"><strong>5</strong><span>A word about conventions</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:10px"><a href="#environments"><strong>5.1</strong><span>Environments</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:0px"><a href="#resources"><strong>6</strong><span>Further resources</span></a></div>
-                            
-                            <div style="clear:both" ></div>
-                        </div>
-                        
-                        
-
-<h1 id="introduction">1 Introduction</h1>
-This plugin integrates the camunda BPM platform with the Grails web application framework.
-<strong class="bold"><a href="http://camunda.org" target="blank">camunda BPM</a></strong> is a flexible framework for workflow and process automation.
-It's core is a native <strong class="bold"><a href="http://www.omg.org/spec/BPMN/2.0/" target="blank">BPMN 2.0</a></strong> process engine that runs
-inside the Java Virtual Machine. It is a perfect match for the Spring Framework - and therefore for
-<strong class="bold"><a href="http://grails.org" target="blank">Grails</a></strong>, too.<p class="paragraph"/>Please check out <strong class="bold"><a href="http://camunda.org/" target="blank">camunda.org</a></strong> to get started with camunda BPM. Read on here
-to get started with the camunda Grails plugin!<p class="paragraph"/><img border="0" class="center" src="../img/modeler.png"></img>
+                
+                    <div class="toc-item next-right"><a href="../guide/testing.html"><strong>4</strong><span>Testing Guide</span> >></a></div>
+                
 
 
-<h1 id="get-started">2 Get Started</h1>
+                <div class="project">
+                    <h1>3 User Guide - Reference Documentation</h1>
 
+                    <p><strong>Authors:</strong> Martin Schimak</p>
 
+                    <p><strong>Version:</strong> 0.1.0-SNAPSHOT</p>
 
-<h2 id="install">2.1 Install the plugin</h2>
-In your BuildConfig.groovy configure the following plugin dependency:<p class="paragraph"/><div class="code"><pre>plugins &#123;
-    compile &#34;:camunda:0.1.0"
-&#125;</pre></div><p class="paragraph"/>Until camunda fully finishes its migration to maven central, you will also need to configure the
-following custom repository:<p class="paragraph"/><div class="code"><pre>repositories &#123;
-    mavenRepo <span class="xml&#45;quote">"https://app.camunda.com/nexus/content/groups/public"</span>
-&#125;</pre></div><p class="paragraph"/>You may want to refresh your dependencies now in order to make sure that Grails properly
-installs the plugin. Type on your command line<p class="paragraph"/><div class="code"><pre>grails refresh&#45;dependencies</pre></div>
+                    
+                </div>
 
+                
+                <div id="table-of-content">
+                    <h2>Table of Contents</h2>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#script-create-process"><strong>3.1</strong><span>Create a process definition</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#services"><strong>3.2</strong><span>Inject camunda API services</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#configuration"><strong>3.3</strong><span>Configure the camunda plugin</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="#deployment-scenario"><strong>3.3.1</strong><span>Set the deployment scenario</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="#process-engine-configuration"><strong>3.3.2</strong><span>Configure your process engine</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="#jul-logging"><strong>3.3.3</strong><span>Consider your java.util.logging settings</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="#alternative-database"><strong>3.3.4</strong><span>Use a different database</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="#alternative-engine-version"><strong>3.3.5</strong><span>Use an alternative version of camunda</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="#bean-names"><strong>3.3.6</strong><span>Provide alternative bean names</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="#override-configuration"><strong>3.3.7</strong><span>Override plugin configuration with custom beans</span></a>
+                    </div>
+                    
+                </div>
+                
 
-
-<h2 id="create-process">2.2 Create a process definition</h2>
-You can now create a <strong class="bold">BPMN 2.0</strong> process definition by issueing the following command:<p class="paragraph"/><div class="code"><pre>grails create&#45;process &#91;name&#93;</pre></div><p class="paragraph"/>As name choose a 'package and class' like name of your choice, e.g. "<strong class="bold">org.camunda.my.TestProcess</strong>".
-You should see the following two files generated by Grails:<p class="paragraph"/><div class="code"><pre>| Created file grails&#45;app/processes/org/camunda/my/TestProcess.bpmn
-| Created file test/integration/org/camunda/my/TestProcessSpec.groovy</pre></div><p class="paragraph"/>You may now want to look at the generated BPMN process definition by making use of <a href="http://camunda.org/bpmn/tool/" target="blank">camunda
-modeler</a>. It's a minimal process, to get you started and build upon:<p class="paragraph"/><img border="0" class="center" src="../img/TestProcess.png"></img><p class="paragraph"/>Furthermore you will find a 'spock' based integration spec executing and checking that process. It
-does have a bit more content than your typical almost empty Grails spec template...<p class="paragraph"/><div class="code"><pre>&#91;...&#93;
-given: <span class="java&#45;quote">"a <span class="java&#45;keyword">new</span> instance of TestProcess"</span>
-runtimeService.startProcessInstanceByKey(<span class="java&#45;quote">"TestProcess"</span>)<p class="paragraph"/>when: <span class="java&#45;quote">"completing the user task"</span>
-def task = taskService.createTaskQuery().singleResult()
-taskService.complete(task.id)<p class="paragraph"/>then: <span class="java&#45;quote">"the service method defined <span class="java&#45;keyword">for</span> the subsequent service task was called exactly once"</span>
-1 &#42; sampleTestProcessService.serviceMethod()
-&#91;...&#93;</pre></div><p class="paragraph"/>&#8230; again to get you started with typical process testing boilerplate readily adapted to your
-freshly created process definition and to build upon. You can directly execute that test:
-
-
-
-<h2 id="execute-test">2.3 Execute the integration test</h2>
-<blockquote class="note">Beware that this test will populate your test environment database with camunda related
-tables. By default, this will be a H2 in memory database preconfigured by Grails - so everything
-fine with that. For other databases, you will need to adapt the <a href="../guide/single.html#alternative-database" class="guide">plugin
-configuration</a>, too.</blockquote><p class="paragraph"/><div class="code"><pre>grails test&#45;app integration: org.camunda.my.TestProcess</pre></div><p class="paragraph"/>When executing the test you should see the following familiar output :-)<p class="paragraph"/><div class="code"><pre>| Running 1 integration test&#8230; 1 of 1
-| Completed 1 integration test, 0 failed in 0m 0s
-| Tests PASSED &#45; view reports in ./target/test&#45;reports</pre></div><p class="paragraph"/><strong class="bold">Congrats!</strong> You are successfully using camunda BPM with the Grails framework!
-
+                
 
 <h1 id="usage">3 User Guide</h1>
 After having <a href="../guide/single.html#install" class="guide">installed</a> the plugin you can immediately start to use the camunda
@@ -344,31 +304,16 @@ services. </blockquote>
 
 
 
-<h1 id="testing">4 Testing Guide</h1>
-
-
-
-<h1 id="conventions">5 A word about conventions</h1>
-<ul class="minus">
-<li>process name</li>
-<li>process id</li>
-<li>processes folder</li>
-<li>war deployment</li>
-</ul><p class="paragraph"/>
-
-
-<h2 id="environments">5.1 Environments</h2>
-
-
-
-<h1 id="resources">6 Further resources</h1>
-<ul class="star">
-<li>http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/package-summary.html</li>
-</ul><p class="paragraph"/>
-
-                    </div>
-                </td>
-                <td id="col2">
+                <div style="clear:both;margin-top:15px;"></div>
+                
+                    <div class="toc-item prev-left"><a href="../guide/get-started.html">&lt;&lt; <strong>2</strong><span>Get Started</span></a></div>
+                
+                    <div class="toc-item next-right"><a href="../guide/testing.html"><strong>4</strong><span>Testing Guide</span> >></a></div>
+                
+                <div style="clear:both"></div>
+            </div>
+        </td>
+        <td id="col2">
             <div class="local clearfix">
                 <div class="local-title">
                     <a href="../guide/index.html" target="mainFrame">Quick Reference</a>
@@ -378,69 +323,67 @@ services. </blockquote>
                     
                     <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Environments</h1><div class="menu-sub">
                         
-                        
-                        <div class="menu-item"><a href="../ref/Environments/%5Bcustom%5D.html">[custom]</a>
-                        </div>
-                        
-                        <div class="menu-item"><a href="../ref/Environments/development.html">development</a>
-                        </div>
-                        
-                        <div class="menu-item"><a href="../ref/Environments/production.html">production</a>
-                        </div>
-                        
-                        <div class="menu-item"><a href="../ref/Environments/test.html">test</a>
-                        </div>
-                        
-                        </div>
+                            
+                            <div class="menu-item"><a href="../ref/Environments/%5Bcustom%5D.html">[custom]</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Environments/development.html">development</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Environments/production.html">production</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Environments/test.html">test</a>
+                            </div>
+                            
+                            </div>
                     </div>
                     
                     <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Scripts</h1><div class="menu-sub">
                         
-                        
-                        <div class="menu-item"><a href="../ref/Scripts/create-process.html">create-process</a>
-                        </div>
-                        
-                        </div>
+                            
+                            <div class="menu-item"><a href="../ref/Scripts/create-process.html">create-process</a>
+                            </div>
+                            
+                            </div>
                     </div>
                     
                     <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Test Phases</h1><div class="menu-sub">
                         
-                        
-                        <div class="menu-item"><a href="../ref/Test%20Phases/functional.html">functional</a>
-                        </div>
-                        
-                        <div class="menu-item"><a href="../ref/Test%20Phases/integration.html">integration</a>
-                        </div>
-                        
-                        <div class="menu-item"><a href="../ref/Test%20Phases/other.html">other</a>
-                        </div>
-                        
-                        <div class="menu-item"><a href="../ref/Test%20Phases/unit.html">unit</a>
-                        </div>
-                        
-                        </div>
+                            
+                            <div class="menu-item"><a href="../ref/Test%20Phases/functional.html">functional</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Test%20Phases/integration.html">integration</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Test%20Phases/other.html">other</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Test%20Phases/unit.html">unit</a>
+                            </div>
+                            
+                            </div>
                     </div>
                     
                 </div>
             </div>
         </td>
-            </tr>
-        </table>
+    </tr>
+</table>
 
-        <div id="footer">
-            <div>
+<div id="footer">
+    <div>
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
 <img alt="Creative Commons 4.0" style="border-width:0; vertical-align: middle" src="http://i.creativecommons.org/l/by/4.0/80x15.png"></img></a>
 <span style="vertical-align: middle"><a href="http://github.com/martinschimak" property="cc:attributionName" rel="cc:attributionURL">Martin Schimak</a>, 
 <a href="http://plexiti.com" property="cc:attributionName" rel="cc:attributionURL">plexiti GmbH</a></span>
 </div>
 
-            
-        </div>
-
-
+    
+</div>
 
 <script type="text/javascript" src="../js/docs.js"></script>
 
-    </body>
+</body>
 </html>
