@@ -5,11 +5,20 @@ get-started:
     create-process: Create a process definition
     execute-test: Execute the integration test
 usage:
-    title: Usage
-    services: camunda Service API
-    testing: Testing processes
+    title: User Guide
+    script-create-process: Create a process definition
+    services: Inject camunda API services
+    configuration: 
+        title: Configure the camunda plugin
+        deployment-scenario: Set the deployment scenario
+        process-engine-configuration: Configure your process engine
+        jul-logging: Consider your java.util.logging settings
+        alternative-database: Use a different database 
+        alternative-engine-version: Use an alternative version of camunda 
+        bean-names: Provide alternative bean names
+        override-configuration: Override plugin configuration with custom beans
+testing: Testing Guide
 conventions: 
-    title: Conventions
+    title: A word about conventions
     environments: Environments
-configuration: Configuration
 resources: Further resources

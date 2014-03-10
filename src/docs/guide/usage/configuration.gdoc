@@ -1,0 +1,14 @@
+It is not necessary to add configuration in order to [get started|guide:get-started]. However,
+you will need some configuration to deploy to other environments than *dev*elopment and *test*.
+The plugin provides the possibility to adapt to your specific requirements by adding a new
+section '*camunda*' to your *Config.groovy* (either top-level or beneath a specific environment):
+
+{code:xml}
+camunda {
+  ...
+}
+{code}
+
+{note} You will need such a configuration section to deploy to other environments than
+*dev*elopment and *test*. Find more about [process engine
+configuration|guide:process-engine-configuration]. {note}

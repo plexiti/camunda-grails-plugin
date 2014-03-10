@@ -1,0 +1,16 @@
+You can set the [deployment
+scenario|http://docs.camunda.org/latest/guides/user-guide/#introduction-architecture-overview-camunda-bpm-platform-architecture]
+for your process engine. The plugin currently supports the deployment scenarios 
+
+- '*embedded*' (default): the process engine is embedded into your grails application and started and stopped with your grails application lifecycle 
+- '*none*': the process engine configuration and startup is turned off
+
+{code:groovy}
+camunda {
+  deployment.scenario = "embedded" // (or "none")
+}
+{code}
+
+{note}
+The value 'embedded' is the *default* in case you do not set and change it explicitely.
+{note}

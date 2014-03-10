@@ -1,0 +1,21 @@
+Many of camunda's API service names are quite generic (like 'taskService', 'managementService'
+etc) - especially when having in mind the Grails naming convention to use '*Service' as a name
+pattern for Grails services. On the other hand typical camunda users are used to the established
+service names and will expect to use these services via their established names. Therefore the
+plugin provides these services via the [established names|guide:services]. However, in order to
+avoid potential name conflicts with grails services pre-existing in your project, the plugin also
+allows to change these default bean names via configuration:
+
+{code:xml}
+camunda {
+  beans.runtimeService = 'myCamundaRuntimeService'
+}
+{code}
+
+Internally the plugin realises this with Spring's bean alias mechanism. Instead of the default 
+alias 'runtimeService' the custom alias 'myCamundaRuntimeService' is used. You can then inject
+your 'org.camunda.bpm.engine.RuntimeService'-typed bean as
+
+{code:groovy}
+def myCamundaRuntimeService
+{code}

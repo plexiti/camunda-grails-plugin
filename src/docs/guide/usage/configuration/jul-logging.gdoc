@@ -1,0 +1,11 @@
+camunda uses [java.util.logging|http://docs.camunda.org/latest/guides/user-guide/#process-engine-logging].
+Therefore you need to make a conscious choice about whether to turn on/off the 'grails.logging.jul.usebridge'
+setting in your Config.groovy. See the information about the performance impact on
+[http://www.slf4j.org|http://www.slf4j.org/legacy.html#jul-to-slf4j].
+
+*In case the bridge is not turned off explicitely by you, the plugin will turn it on for all Grails test phases.*
+However, your explicit choice won't be overridden. 
+
+{note}This decision makes sure that the bridge is turned on for tests executed in the Grails 'test' environment,
+for which no explicit choice is made in the default grails application. As soon as you make a decision for your
+environment, the plugin won't interfere anymore.{note}

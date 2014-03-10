@@ -1,3 +1,8 @@
+{note}Beware that this test will populate your test environment database with camunda related
+tables. By default, this will be a H2 in memory database preconfigured by Grails - so everything
+fine with that. For other databases, you will need to adapt the [plugin
+configuration|guide:alternative-database], too.{note}
+
 {code:bash}
 grails test-app integration: org.camunda.my.TestProcess
 {code}

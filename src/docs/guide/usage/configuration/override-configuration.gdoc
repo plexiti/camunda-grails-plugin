@@ -1,0 +1,11 @@
+Of course, it is also possible to override some or all of the camunda spring beans defined by the
+plugin via the standard Grails way: by editing '*grails-app/conf/spring/resources.groovy*'. In
+order to do that properly it is useful to know that the plugin registers all beans following the
+name convention *camunda\[DefaultAlias\]Bean*, e.g. the 'processEngine' is registered as bean
+'camundaProcessEngineBean', then given either its default alias 'processEngine' (or its [custom
+alias|guide:bean-names] defined by the user).
+
+{note} This decision was made partly in order to allow the configuration of [alternative bean
+names|guide:bean-names], partly because some historic 2.3 versions of Grails display issues with
+custom spring beans named in potential "conflict" with the *Service name convention for Grails
+services. {note}
