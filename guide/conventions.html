@@ -95,7 +95,7 @@ configuration</a> to configure
 itself. This typically means that the names and locations of files are used instead of explicit configuration.
 Following this paradigm and the approach of other plugins like e.g. <a href="http://grails.org/plugin/quartz" target="blank">quartz</a> or
 <a href="http://grails.org/plugin/routing" target="blank">routing</a>, the <strong class="bold">camunda</strong> plugin adds the "grails-app/processes" folder as soon as
-you create your first process via the <a href="../ref/Scripts/create-process.html" class="Scripts">create-process</a> command:
+you create your first process via the <a href="../ref/Command Line/create-process.html" class="Command Line">create-process</a> command:
 <ul class="star">
 <li><strong class="bold">your-project</strong> = top level project directory</li>
 <ul class="star">
@@ -105,7 +105,7 @@ you create your first process via the <a href="../ref/Scripts/create-process.htm
 </ul></ul></ul><p class="paragraph"/>Within that folder you may choose to group your <strong class="bold">&#42;.bpmn</strong> process definitions into packages. Every <strong class="bold">&#42;.bpmn</strong> file
 inside that directory will go into your <strong class="bold">&#42;.war</strong> when packaging it via Grails. (You may then choose to
 automatically redeploy those process definitions - or not - by explicitely configuring the 'deploymentResources'
-setting of your <a href="../guide/single.html#process-engine-configuration" class="guide">configuration</a>.)<p class="paragraph"/>The <a href="../ref/Scripts/create-process.html" class="Scripts">create-process</a> command uses another two naming conventions. The name you choose for your process
+setting of your <a href="../guide/single.html#process-engine-configuration" class="guide">configuration</a>.)<p class="paragraph"/>The <a href="../ref/Command Line/create-process.html" class="Command Line">create-process</a> command uses another two naming conventions. The name you choose for your process
 will be suffixed with <strong class="bold">&#42;Process.bpmn</strong> - in case you haven't provided that yourself as a part of the name.
 Therefore issueing e.g.<p class="paragraph"/><div class="code"><pre>grails create&#45;process org.camunda.my.Test</pre></div><p class="paragraph"/>will result in the following two files being generated for you:<p class="paragraph"/><div class="code"><pre>| Created file grails&#45;app/processes/org/camunda/my/TestProcess.bpmn
 | Created file test/integration/org/camunda/my/TestProcessSpec.groovy</pre></div><p class="paragraph"/>Furthermore, every executable BPMN process must have an id defined inside its xml structure. The plugin takes care
@@ -170,10 +170,10 @@ will be accessible by integration tests, bundled into the war and deployed to th
                             </div>
                     </div>
                     
-                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Scripts</h1><div class="menu-sub">
+                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Command Line</h1><div class="menu-sub">
                         
                             
-                            <div class="menu-item"><a href="../ref/Scripts/create-process.html">create-process</a>
+                            <div class="menu-item"><a href="../ref/Command%20Line/create-process.html">create-process</a>
                             </div>
                             
                             </div>
