@@ -1,5 +1,8 @@
 import grails.test.AbstractCliTestCase
 
+/**
+ * @author Martin Schimak <martin.schimak@plexiti.com>
+ */
 class CreateProcessTests extends AbstractCliTestCase {
 
     void testCreateProcess() {
