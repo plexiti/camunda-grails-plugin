@@ -2,12 +2,12 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4.3.1 Set the deployment scenario 0.1.0-SNAPSHOT</title>
+    <title>camunda Grails plugin 0.1.0-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
-    <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
     <script type="text/javascript">
-function addJsClass() {
+function addJsClass(el) {
     var classes = document.body.className.split(" ");
     classes.push("js");
     document.body.className = classes.join(" ");
@@ -16,13 +16,14 @@ function addJsClass() {
 </head>
 
 <body class="body" onload="addJsClass();">
+
 <div id="navigation">
     <ul>
         <li>
             <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
                 <a href="../../guide/index.html" class="button">Table of contents</a>
 
-                <div id="nav-summary-childs" style="display:none;">
+                <div id="nav-summary-childs">
                     
                     <div class="toc-item" style="margin-left:0"><a href="../../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
                     </div>
@@ -62,55 +63,12 @@ function addJsClass() {
 <table id="colset" border="0" cellpadding="0" cellspacing="0">
     <tr>
         <td id="col1">
-            <div id="main" class="corner-all">
-
-                
-                    <div class="toc-item prev-left"><a href="../../guide/conventions.html">&lt;&lt; <strong>3</strong><span>A Word about Conventions</span></a></div>
-                
+            <div id="main" class="reference corner-all">
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
-                
-                    <div class="toc-item next-right"><a href="../../guide/testing.html"><strong>5</strong><span>Testing Guide</span> >></a></div>
-                
-
-
-                <div class="project">
-                    <h1>4.3.1 Set the deployment scenario - Reference Documentation</h1>
-
-                    <p><strong>Authors:</strong> Martin Schimak</p>
-
-                    <p><strong>Version:</strong> 0.1.0-SNAPSHOT</p>
-
-                    
-                </div>
-
-                
-
-                
-
-<h2 id="deployment-scenario">4.3.1 Set the deployment scenario</h2>
-You can set the <a href="http://docs.camunda.org/latest/guides/user-guide/#introduction-architecture-overview-camunda-bpm-platform-architecture" target="blank">deployment
-scenario</a>
-for your process engine. The plugin currently supports the deployment scenarios 
-<ul class="minus">
-<li>'<strong class="bold">embedded</strong>' (default): the process engine is embedded into your grails application and started and stopped with your grails application lifecycle</li>
-<li>'<strong class="bold">none</strong>': the process engine configuration and startup is turned off</li>
-</ul><p class="paragraph"/><div class="code"><pre>camunda &#123;
-  deployment.scenario = <span class="java&#45;quote">"embedded"</span> // (or <span class="java&#45;quote">"none"</span>)
-&#125;</pre></div><p class="paragraph"/><blockquote class="note">
-The value 'embedded' is the <strong class="bold">default</strong> in case you do not set and change it explicitely.
-</blockquote>
-
-
-
-                <div style="clear:both;margin-top:15px;"></div>
-                
-                    <div class="toc-item prev-left"><a href="../../guide/conventions.html">&lt;&lt; <strong>3</strong><span>A Word about Conventions</span></a></div>
-                
-                    <div class="toc-item next-right"><a href="../../guide/testing.html"><strong>5</strong><span>Testing Guide</span> >></a></div>
-                
-                <div style="clear:both"></div>
+                <h2>Bean 'managementService'</h2><p class="paragraph"/>You can use the <strong class="bold"><a href="http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/ManagementService.html" target="blank">org.camunda.bpm.engine.ManagementService</a></strong> as an injectable bean:<p class="paragraph"/><div class="code"><pre>def managementService</pre></div><p class="paragraph"/>The plugin registers the bean as 'camundaManagementServiceBean' with the default alias 'managementService'.
+You can change this default alias via <a href="../../guide/single.html#bean-names" class="guide">configuration</a>.
             </div>
         </td>
         <td id="col2">
@@ -121,8 +79,10 @@ The value 'embedded' is the <strong class="bold">default</strong> in case you do
                 </div>
                 <div class="menu">
                     
-                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Beans</h1><div class="menu-sub">
-                        
+                    <div class="menu-block">
+                        <h1 class="menu-title" onclick="toggleRef(nextElement(this))">Beans</h1>
+                        <div class="menu-sub selected">
+                            
                             
                             <div class="menu-item"><a href="../../ref/Beans/authorizationService.html">authorizationService</a>
                             </div>
@@ -151,16 +111,18 @@ The value 'embedded' is the <strong class="bold">default</strong> in case you do
                             <div class="menu-item"><a href="../../ref/Beans/taskService.html">taskService</a>
                             </div>
                             
-                            </div>
+                        </div>
                     </div>
                     
-                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Scripts</h1><div class="menu-sub">
-                        
+                    <div class="menu-block">
+                        <h1 class="menu-title" onclick="toggleRef(nextElement(this))">Scripts</h1>
+                        <div class="menu-sub">
+                            
                             
                             <div class="menu-item"><a href="../../ref/Scripts/create-process.html">create-process</a>
                             </div>
                             
-                            </div>
+                        </div>
                     </div>
                     
                 </div>
@@ -180,7 +142,8 @@ The value 'embedded' is the <strong class="bold">default</strong> in case you do
     
 </div>
 
-<script type="text/javascript" src="../js/docs.js"></script>
+
+<script type="text/javascript" src="../../js/docs.js"></script>
 
 </body>
 </html>
