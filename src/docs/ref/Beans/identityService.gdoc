@@ -1,0 +1,10 @@
+h2. Bean 'identityService'
+
+You can use the *[org.camunda.bpm.engine.IdentityService|http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/IdentityService.html]* as an injectable bean:
+
+{code}
+def identityService
+{code}
+
+The plugin registers the bean as 'camundaIdentityServiceBean' with the default alias 'identityService'.
+You can change this default alias via [configuration|guide:bean-names].

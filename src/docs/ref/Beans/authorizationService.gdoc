@@ -1,0 +1,10 @@
+h2. Bean 'authorizationService'
+
+You can use the *[org.camunda.bpm.engine.AuthorizationService|http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/AuthorizationService.html]* as an injectable bean:
+
+{code}
+def authorizationService
+{code}
+
+The plugin registers the bean as 'camundaAuthorizationServiceBean' with the default alias 'authorizationService'.
+You can change this default alias via [configuration|guide:bean-names].

@@ -1,0 +1,10 @@
+h2. Bean 'formService'
+
+You can use the *[org.camunda.bpm.engine.FormService|http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/FormService.html]* as an injectable bean:
+
+{code}
+def formService
+{code}
+
+The plugin registers the bean as 'camundaFormServiceBean' with the default alias 'formService'.
+You can change this default alias via [configuration|guide:bean-names].

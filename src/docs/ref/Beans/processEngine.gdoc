@@ -1,0 +1,11 @@
+h2. Bean 'processEngine'
+
+You can use the *[org.camunda.bpm.engine.ProcessEngine|http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/ProcessEngine.html]* 
+as an injectable bean:
+
+{code}
+def processEngine
+{code}
+
+The plugin registers the bean as 'camundaProcessEngineBean' with the default alias 'processEngine'.
+You can change this default alias via [configuration|guide:bean-names].

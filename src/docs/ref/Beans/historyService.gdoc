@@ -1,0 +1,10 @@
+h2. Bean 'historyService'
+
+You can use the *[org.camunda.bpm.engine.HistoryService|http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/HistoryService.html]* as an injectable bean:
+
+{code}
+def historyService
+{code}
+
+The plugin registers the bean as 'camundaHistoryServiceBean' with the default alias 'historyService'.
+You can change this default alias via [configuration|guide:bean-names].

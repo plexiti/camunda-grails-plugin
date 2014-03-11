@@ -1,0 +1,10 @@
+h2. Bean 'taskService'
+
+You can use the *[org.camunda.bpm.engine.TaskService|http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/TaskService.html]* as an injectable bean:
+
+{code}
+def taskService
+{code}
+
+The plugin registers the bean as 'camundaTaskServiceBean' with the default alias 'taskService'.
+You can change this default alias via [configuration|guide:bean-names].

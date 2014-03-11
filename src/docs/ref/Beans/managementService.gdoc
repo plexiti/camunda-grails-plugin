@@ -1,0 +1,10 @@
+h2. Bean 'managementService'
+
+You can use the *[org.camunda.bpm.engine.ManagementService|http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/ManagementService.html]* as an injectable bean:
+
+{code}
+def managementService
+{code}
+
+The plugin registers the bean as 'camundaManagementServiceBean' with the default alias 'managementService'.
+You can change this default alias via [configuration|guide:bean-names].

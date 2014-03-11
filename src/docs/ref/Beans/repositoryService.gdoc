@@ -1,0 +1,10 @@
+h2. Bean 'repositoryService'
+
+You can use the *[org.camunda.bpm.engine.RepositoryService|http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/RepositoryService.html]* as an injectable bean:
+
+{code}
+def repositoryService
+{code}
+
+The plugin registers the bean as 'camundaRepositoryServiceBean' with the default alias 'repositoryService'.
+You can change this default alias via [configuration|guide:bean-names].

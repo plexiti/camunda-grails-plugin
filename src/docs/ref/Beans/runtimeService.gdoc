@@ -1,0 +1,10 @@
+h2. Bean 'runtimeService'
+
+You can use the *[org.camunda.bpm.engine.RuntimeService|http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/RuntimeService.html]* as an injectable bean:
+
+{code}
+def runtimeService
+{code}
+
+The plugin registers the bean as 'camundaRuntimeServiceBean' with the default alias 'runtimeService'.
+You can change this default alias via [configuration|guide:bean-names].
