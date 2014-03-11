@@ -55,6 +55,6 @@ runtimeService.startProcessInstanceByKey("TestProcess")
 
 Both conventions - the *\*Process* suffix as well as the artifact 'id' being unique across packages follow typical
 Grails conventions and therefore make sense for greenfield projects. However, the plugin will not strictly enforce
-these conventions. You may choose to place other *\*.bpmn' files into your grails-app/processes folder and they
+these conventions. You may choose to place other *\*.bpmn* files into your grails-app/processes folder and they
 will be accessible by integration tests, bundled into the war and deployed to the engine, too.
 

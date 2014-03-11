@@ -1,0 +1,12 @@
+During the integration test phase of Grails (any environment), two configuration values are set by the plugin: the
+camunda [job executor|http://docs.camunda.org/latest/guides/user-guide/#process-engine-the-job-executor] is *by
+default* turned *off* and service [mocking|http://docs.camunda.org/latest/guides/user-guide/#testing-using-mocks-to-test-your-process-application]
+is made available.
+
+{note}Beware: you can explicitely turn on/off the job executor in your environment by
+[configuration|guide:configuration]. In this case the plugin will not interfere with your explicit choice!{note}
+
+In essence this behaviour makes sure that you can perform your tests
+
+* in a single-threaded manner, fully controlled by your test code, and without having the job executor interfering from background threads.
+* with the possibility to mock your service calls from within the process

@@ -13,10 +13,17 @@ usage:
         title: Configure the camunda plugin
         deployment-scenario: Set the deployment scenario
         process-engine-configuration: Configure your process engine
-        jul-logging: Consider your java.util.logging settings
+        jul-logging: Consider 'java.util.logging' settings
         alternative-database: Use a different database 
         alternative-engine-version: Use an alternative version of camunda 
         bean-names: Provide alternative bean names
         override-configuration: Override plugin configuration with custom beans
-testing: Testing Guide
-resources: Further Resources
+testing: 
+    title: Testing Guide
+    drive-process: Drive the process instances
+    mock-services: Mock the service calls
+resources: 
+    title: Further Resources
+    plugin-resources: camunda Grails plugin
+    camunda-resources: camunda BPM
+    modeler-resources: camunda Modeler

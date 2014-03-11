@@ -1,0 +1,20 @@
+For testing purposes, you can (and must!) explicitely "drive" your process whenever it arrives at a "wait state".
+Please review the discussion about [transactions in
+processes|http://docs.camunda.org/latest/guides/user-guide/#process-engine-transactions-in-processes] to learn
+more about that. Such a wait state is always reached for e.g. user tasks, but with the job executor turned off in
+particular also for service tasks marked to be [continued
+asynchronously|http://docs.camunda.org/latest/guides/user-guide/#process-engine-transactions-in-processes-asynchronous-continuations]:
+
+{code:xml}
+<serviceTask id="myServiceTask" ... camunda:async="true">
+...
+</serviceTask>
+{code}
+
+In such a case you must now mimic the work of the background job executor and explicitely tell the process to
+"move on" with execution, e.g. by writing:
+
+{code}
+def job = managementService.createJobQuery().processInstanceId(pid).singleResult()
+managementService.executeJob(job.id)
+{code}
