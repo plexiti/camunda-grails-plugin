@@ -1,4 +1,4 @@
-h2. Script 'create-process'
+h2. Command 'create-process'
 
 You can create a *BPMN 2.0* process definition by issueing the following command:
 

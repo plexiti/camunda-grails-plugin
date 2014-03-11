@@ -3,7 +3,7 @@ configuration|http://grails.org/doc/latest/guide/gettingStarted.html#conventionO
 itself. This typically means that the names and locations of files are used instead of explicit configuration.
 Following this paradigm and the approach of other plugins like e.g. [quartz|http://grails.org/plugin/quartz] or
 [routing|http://grails.org/plugin/routing], the *camunda* plugin adds the "grails-app/processes" folder as soon as
-you create your first process via the [create-process|Scripts] command:
+you create your first process via the [create-process|Command Line] command:
 
 * *your-project* = top level project directory
 ** *grails-app* = standard grails layout directory
@@ -14,7 +14,7 @@ inside that directory will go into your *\*.war* when packaging it via Grails. (
 automatically redeploy those process definitions - or not - by explicitely configuring the 'deploymentResources'
 setting of your [configuration|guide:process-engine-configuration].)
 
-The [create-process|Scripts] command uses another two naming conventions. The name you choose for your process
+The [create-process|Command Line] command uses another two naming conventions. The name you choose for your process
 will be suffixed with *\*Process.bpmn* - in case you haven't provided that yourself as a part of the name.
 Therefore issueing e.g.
 
