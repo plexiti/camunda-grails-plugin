@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>5 A word about conventions 0.1.0-SNAPSHOT</title>
+    <title>3 A Word about Conventions 0.1.0-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -30,16 +30,16 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../guide/get-started.html"><strong>2</strong><span>Get Started</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/usage.html"><strong>3</strong><span>User Guide</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/conventions.html"><strong>3</strong><span>A Word about Conventions</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/testing.html"><strong>4</strong><span>Testing Guide</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/usage.html"><strong>4</strong><span>User Guide</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/conventions.html"><strong>5</strong><span>A word about conventions</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/testing.html"><strong>5</strong><span>Testing Guide</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/resources.html"><strong>6</strong><span>Further resources</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/resources.html"><strong>6</strong><span>Further Resources</span></a>
                     </div>
                     
                 </div>
@@ -65,18 +65,18 @@ function addJsClass() {
             <div id="main" class="corner-all">
 
                 
-                    <div class="toc-item prev-left"><a href="../guide/testing.html">&lt;&lt; <strong>4</strong><span>Testing Guide</span></a></div>
+                    <div class="toc-item prev-left"><a href="../guide/get-started.html">&lt;&lt; <strong>2</strong><span>Get Started</span></a></div>
                 
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../guide/resources.html"><strong>6</strong><span>Further resources</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/usage.html"><strong>4</strong><span>User Guide</span> >></a></div>
                 
 
 
                 <div class="project">
-                    <h1>5 A word about conventions - Reference Documentation</h1>
+                    <h1>3 A Word about Conventions - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Martin Schimak</p>
 
@@ -86,35 +86,45 @@ function addJsClass() {
                 </div>
 
                 
-                <div id="table-of-content">
-                    <h2>Table of Contents</h2>
-                    
-                    <div class="toc-item" style="margin-left:0px"><a href="#environments"><strong>5.1</strong><span>Environments</span></a>
-                    </div>
-                    
-                </div>
-                
 
                 
 
-<h1 id="conventions">5 A word about conventions</h1>
-<ul class="minus">
-<li>process name</li>
-<li>process id</li>
-<li>processes folder</li>
-<li>war deployment</li>
-</ul><p class="paragraph"/>
-
-
-<h2 id="environments">5.1 Environments</h2>
-
+<h1 id="conventions">3 A Word about Conventions</h1>
+Grails uses <a href="http://grails.org/doc/latest/guide/gettingStarted.html#conventionOverConfiguration" target="blank">convention over
+configuration</a> to configure
+itself. This typically means that the names and locations of files are used instead of explicit configuration.
+Following this paradigm and the approach of other plugins like e.g. <a href="http://grails.org/plugin/quartz" target="blank">quartz</a> or
+<a href="http://grails.org/plugin/routing" target="blank">routing</a>, the <strong class="bold">camunda</strong> plugin adds the "grails-app/processes" folder as soon as
+you create your first process via the <a href="../ref/Scripts/create-process.html" class="Scripts">create-process</a> command:
+<ul class="star">
+<li><strong class="bold">your-project</strong> = top level project directory</li>
+<ul class="star">
+<li><strong class="bold">grails-app</strong> = standard grails layout directory</li>
+<ul class="star">
+<li><strong class="bold">processes</strong> = process definitions directory for *.bpmn resources</li>
+</ul></ul></ul><p class="paragraph"/>Within that folder you may choose to group your <strong class="bold">&#42;.bpmn</strong> process definitions into packages. Every <strong class="bold">&#42;.bpmn</strong> file
+inside that directory will go into your <strong class="bold">&#42;.war</strong> when packaging it via Grails. (You may then choose to
+automatically redeploy those process definitions - or not - by explicitely configuring the 'deploymentResources'
+setting of your <a href="../guide/single.html#process-engine-configuration" class="guide">configuration</a>.)<p class="paragraph"/>The <a href="../ref/Scripts/create-process.html" class="Scripts">create-process</a> command uses another two naming conventions. The name you choose for your process
+will be suffixed with <strong class="bold">&#42;Process.bpmn</strong> - in case you haven't provided that yourself as a part of the name.
+Therefore issueing e.g.<p class="paragraph"/><div class="code"><pre>grails create&#45;process org.camunda.my.Test</pre></div><p class="paragraph"/>will result in the following two files being generated for you:<p class="paragraph"/><div class="code"><pre>| Created file grails&#45;app/processes/org/camunda/my/TestProcess.bpmn
+| Created file test/integration/org/camunda/my/TestProcessSpec.groovy</pre></div><p class="paragraph"/>Furthermore, every executable BPMN process must have an id defined inside its xml structure. The plugin takes care
+of generating this id for you - in the given example as "TestProcess", hence the name of the generated bpmn
+resource - but without package name and file extension:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;process id=<span class="xml&#45;quote">"TestProcess"</span> name=<span class="xml&#45;quote">"TestProcess"</span> isExecutable=<span class="xml&#45;quote">"true"</span>&#62;</span>
+  &#8230;
+<span class="xml&#45;tag">&#60;/process&#62;</span></pre></div><p class="paragraph"/>When editing this freshly generated process definition with <a href="http://camunda.org/bpmn/tool/" target="blank">camunda modeler</a>, you
+will see this id when opening the "properties" pane and clicking into the free area of the diagram:<p class="paragraph"/><img border="0" class="center" src="../img/TestProcessModeler.png"></img><p class="paragraph"/><blockquote class="note">Feel free to change the generated 'name' attribute to a better human readable version of the name!</blockquote><p class="paragraph"/>This 'id' attribute is needed when using the <a href="../guide/single.html#services" class="guide">camunda API services</a>, like e.g. starting a process
+instance by 'key' (which is referring to this id attribute):<p class="paragraph"/><div class="code"><pre>runtimeService.startProcessInstanceByKey(<span class="java&#45;quote">"TestProcess"</span>)</pre></div><p class="paragraph"/>Both conventions - the <strong class="bold">&#42;Process</strong> suffix as well as the artifact 'id' being unique across packages follow typical
+Grails conventions and therefore make sense for greenfield projects. However, the plugin will not strictly enforce
+these conventions. You may choose to place other <strong class="bold">&#42;.bpmn</strong> files into your grails-app/processes folder and they
+will be accessible by integration tests, bundled into the war and deployed to the engine, too.<p class="paragraph"/>
 
 
                 <div style="clear:both;margin-top:15px;"></div>
                 
-                    <div class="toc-item prev-left"><a href="../guide/testing.html">&lt;&lt; <strong>4</strong><span>Testing Guide</span></a></div>
+                    <div class="toc-item prev-left"><a href="../guide/get-started.html">&lt;&lt; <strong>2</strong><span>Get Started</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../guide/resources.html"><strong>6</strong><span>Further resources</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/usage.html"><strong>4</strong><span>User Guide</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
@@ -127,46 +137,10 @@ function addJsClass() {
                 </div>
                 <div class="menu">
                     
-                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Environments</h1><div class="menu-sub">
-                        
-                            
-                            <div class="menu-item"><a href="../ref/Environments/%5Bcustom%5D.html">[custom]</a>
-                            </div>
-                            
-                            <div class="menu-item"><a href="../ref/Environments/development.html">development</a>
-                            </div>
-                            
-                            <div class="menu-item"><a href="../ref/Environments/production.html">production</a>
-                            </div>
-                            
-                            <div class="menu-item"><a href="../ref/Environments/test.html">test</a>
-                            </div>
-                            
-                            </div>
-                    </div>
-                    
                     <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Scripts</h1><div class="menu-sub">
                         
                             
                             <div class="menu-item"><a href="../ref/Scripts/create-process.html">create-process</a>
-                            </div>
-                            
-                            </div>
-                    </div>
-                    
-                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Test Phases</h1><div class="menu-sub">
-                        
-                            
-                            <div class="menu-item"><a href="../ref/Test%20Phases/functional.html">functional</a>
-                            </div>
-                            
-                            <div class="menu-item"><a href="../ref/Test%20Phases/integration.html">integration</a>
-                            </div>
-                            
-                            <div class="menu-item"><a href="../ref/Test%20Phases/other.html">other</a>
-                            </div>
-                            
-                            <div class="menu-item"><a href="../ref/Test%20Phases/unit.html">unit</a>
                             </div>
                             
                             </div>

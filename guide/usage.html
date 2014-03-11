@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>3 User Guide 0.1.0-SNAPSHOT</title>
+    <title>4 User Guide 0.1.0-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -30,16 +30,16 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../guide/get-started.html"><strong>2</strong><span>Get Started</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/usage.html"><strong>3</strong><span>User Guide</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/conventions.html"><strong>3</strong><span>A Word about Conventions</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/testing.html"><strong>4</strong><span>Testing Guide</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/usage.html"><strong>4</strong><span>User Guide</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/conventions.html"><strong>5</strong><span>A word about conventions</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/testing.html"><strong>5</strong><span>Testing Guide</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/resources.html"><strong>6</strong><span>Further resources</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/resources.html"><strong>6</strong><span>Further Resources</span></a>
                     </div>
                     
                 </div>
@@ -65,18 +65,18 @@ function addJsClass() {
             <div id="main" class="corner-all">
 
                 
-                    <div class="toc-item prev-left"><a href="../guide/get-started.html">&lt;&lt; <strong>2</strong><span>Get Started</span></a></div>
+                    <div class="toc-item prev-left"><a href="../guide/conventions.html">&lt;&lt; <strong>3</strong><span>A Word about Conventions</span></a></div>
                 
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../guide/testing.html"><strong>4</strong><span>Testing Guide</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/testing.html"><strong>5</strong><span>Testing Guide</span> >></a></div>
                 
 
 
                 <div class="project">
-                    <h1>3 User Guide - Reference Documentation</h1>
+                    <h1>4 User Guide - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Martin Schimak</p>
 
@@ -89,34 +89,34 @@ function addJsClass() {
                 <div id="table-of-content">
                     <h2>Table of Contents</h2>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#script-create-process"><strong>3.1</strong><span>Create a process definition</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#script-create-process"><strong>4.1</strong><span>Create a process definition</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#services"><strong>3.2</strong><span>Inject camunda API services</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#services"><strong>4.2</strong><span>Inject camunda API Services</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#configuration"><strong>3.3</strong><span>Configure the camunda plugin</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#configuration"><strong>4.3</strong><span>Configure the camunda plugin</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#deployment-scenario"><strong>3.3.1</strong><span>Set the deployment scenario</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#deployment-scenario"><strong>4.3.1</strong><span>Set the deployment scenario</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#process-engine-configuration"><strong>3.3.2</strong><span>Configure your process engine</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#process-engine-configuration"><strong>4.3.2</strong><span>Configure your process engine</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#jul-logging"><strong>3.3.3</strong><span>Consider your java.util.logging settings</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#jul-logging"><strong>4.3.3</strong><span>Consider 'java.util.logging' settings</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#alternative-database"><strong>3.3.4</strong><span>Use a different database</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#alternative-database"><strong>4.3.4</strong><span>Use a different database</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#alternative-engine-version"><strong>3.3.5</strong><span>Use an alternative version of camunda</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#alternative-engine-version"><strong>4.3.5</strong><span>Use an alternative version of camunda</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#bean-names"><strong>3.3.6</strong><span>Provide alternative bean names</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#bean-names"><strong>4.3.6</strong><span>Provide alternative bean names</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#override-configuration"><strong>3.3.7</strong><span>Override plugin configuration with custom beans</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#override-configuration"><strong>4.3.7</strong><span>Override plugin configuration with custom beans</span></a>
                     </div>
                     
                 </div>
@@ -124,28 +124,30 @@ function addJsClass() {
 
                 
 
-<h1 id="usage">3 User Guide</h1>
+<h1 id="usage">4 User Guide</h1>
 After having <a href="../guide/single.html#install" class="guide">installed</a> the plugin you can immediately start to use the camunda
 process engine.
 
 
-<h2 id="script-create-process">3.1 Create a process definition</h2>
+<h2 id="script-create-process">4.1 Create a process definition</h2>
 You can create a <strong class="bold">BPMN 2.0</strong> process definition by issueing the following command:<p class="paragraph"/><div class="code"><pre>grails create&#45;process &#91;name&#93;</pre></div><p class="paragraph"/>As name choose a 'package and class' like name of your choice, e.g. "<strong class="bold">org.camunda.my.TestProcess</strong>".
 You should see the following two files generated by Grails:<p class="paragraph"/><div class="code"><pre>| Created file grails&#45;app/processes/org/camunda/my/TestProcess.bpmn
 | Created file test/integration/org/camunda/my/TestProcessSpec.groovy</pre></div><p class="paragraph"/>You may now want to look at the generated BPMN process definition by making use of <a href="http://camunda.org/bpmn/tool/" target="blank">camunda
-modeler</a>. It's a minimal process, to get you started and build upon:<p class="paragraph"/><img border="0" class="center" src="../img/TestProcess.png"></img><p class="paragraph"/>Furthermore you will find a 'spock' based integration spec executing and checking that process. It
+modeler</a>. It's a minimal process, but enough to get you started with user tasks and
+services and to build upon:<p class="paragraph"/><img border="0" class="center" src="../img/TestProcessModeler.png"></img><p class="paragraph"/>Furthermore you will find a 'spock' based integration spec executing and checking that process. It
 does have a bit more content than your typical almost empty Grails spec template...<p class="paragraph"/><div class="code"><pre>&#91;...&#93;
 given: <span class="java&#45;quote">"a <span class="java&#45;keyword">new</span> instance of TestProcess"</span>
 runtimeService.startProcessInstanceByKey(<span class="java&#45;quote">"TestProcess"</span>)<p class="paragraph"/>when: <span class="java&#45;quote">"completing the user task"</span>
 def task = taskService.createTaskQuery().singleResult()
 taskService.complete(task.id)<p class="paragraph"/>then: <span class="java&#45;quote">"the service method defined <span class="java&#45;keyword">for</span> the subsequent service task was called exactly once"</span>
 1 &#42; sampleTestProcessService.serviceMethod()
-&#91;...&#93;</pre></div><p class="paragraph"/>&#8230; again to get you started with typical process testing boilerplate readily adapted to your
-freshly created process definition and to build upon.
+&#91;...&#93;</pre></div><p class="paragraph"/>&#8230; again to get you started with typical process testing boilerplate readily adapted to your freshly created
+process definition and to build upon. Please check out the chapter about <a href="../guide/single.html#conventions" class="guide">conventions</a> in order
+to fully appreciate the consequences of the process template being generated for you.
 
 
 
-<h2 id="services">3.2 Inject camunda API services</h2>
+<h2 id="services">4.2 Inject camunda API Services</h2>
 You can inject the camunda process engine API services into your grails artifacts (like
 controllers, services, etc). The following services can be found in the package
 <a href="http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/package-summary.html" target="blank">org.camunda.bpm.engine</a>
@@ -158,30 +160,29 @@ IdentityService identityService
 ManagementService managementService
 RepositoryService repositoryService
 RuntimeService runtimeService
-TaskService taskService</pre></div><p class="paragraph"/><blockquote class="note"> Note that many of these bean names are quite generic - especially when having in mind
-the Grails naming convention to use '*Service' as a name pattern for Grails services. On the
-other hand typical camunda users are used to the service names shown above and will expect to use
-these services via their established names. Therefore the plugin provides these services via
-those names shown above. However, in order to avoid potential name conflicts with grails services
-pre-existing in your project, the plugin also allows to <strong class="bold">change these default bean names</strong> via
-<a href="../guide/single.html#configuration" class="guide">configuration</a>. </blockquote><p class="paragraph"/>In addition to the camunda API services, the ProcessEngine itself can be used as an injectable
+TaskService taskService</pre></div><p class="paragraph"/><blockquote class="note"> Note that many of these bean names are quite generic (like 'taskService', 'managementService' etc) and
+could easily clash with names you want to use in your application for other purposes - even more so when having in
+mind the Grails naming convention to use <strong class="bold">&#42;Service</strong> as a name pattern for Grails services. On the other hand
+typical camunda users are used to the service names shown above and will expect to use these services via their
+established names. Therefore the plugin provides these services via those names shown above. However, in order to
+avoid potential name conflicts with grails services pre-existing in your project, the plugin also allows to
+<strong class="bold">change these default bean names</strong> via <a href="../guide/single.html#bean-names" class="guide">configuration</a>. </blockquote><p class="paragraph"/>In addition to the camunda API services, the ProcessEngine itself can be used as an injectable
 dependency, too:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.camunda.bpm.engine.&#42;
 &#8230; 
 ProcessEngine processEngine</pre></div><p class="paragraph"/>
 
 
-<h2 id="configuration">3.3 Configure the camunda plugin</h2>
+<h2 id="configuration">4.3 Configure the camunda plugin</h2>
 It is not necessary to add configuration in order to <a href="../guide/single.html#get-started" class="guide">get started</a>. However,
 you will need some configuration to deploy to other environments than <strong class="bold">dev</strong>elopment and <strong class="bold">test</strong>.
 The plugin provides the possibility to adapt to your specific requirements by adding a new
 section '<strong class="bold">camunda</strong>' to your <strong class="bold">Config.groovy</strong> (either top-level or beneath a specific environment):<p class="paragraph"/><div class="code"><pre>camunda &#123;
   &#8230;
 &#125;</pre></div><p class="paragraph"/><blockquote class="note"> You will need such a configuration section to deploy to other environments than
-<strong class="bold">dev</strong>elopment and <strong class="bold">test</strong>. Find more about <a href="../guide/single.html#process-engine-configuration" class="guide">process engine
-configuration</a>. </blockquote>
+<strong class="bold">dev</strong>elopment and <strong class="bold">test</strong>. Find out more in the following two chapters. </blockquote>
 
 
-<h2 id="deployment-scenario">3.3.1 Set the deployment scenario</h2>
+<h2 id="deployment-scenario">4.3.1 Set the deployment scenario</h2>
 You can set the <a href="http://docs.camunda.org/latest/guides/user-guide/#introduction-architecture-overview-camunda-bpm-platform-architecture" target="blank">deployment
 scenario</a>
 for your process engine. The plugin currently supports the deployment scenarios 
@@ -196,7 +197,7 @@ The value 'embedded' is the <strong class="bold">default</strong> in case you do
 
 
 
-<h2 id="process-engine-configuration">3.3.2 Configure your process engine</h2>
+<h2 id="process-engine-configuration">4.3.2 Configure your process engine</h2>
 You can fully control your embedded camunda process engine configuration via Config.groovy:<p class="paragraph"/><div class="code"><pre>camunda &#123;
   engine &#123;
     configuration &#123;
@@ -235,20 +236,20 @@ mocking is made available. Find more information about that in section
 <a href="../guide/single.html#testing" class="guide">testing</a>.</blockquote>
 
 
-<h2 id="jul-logging">3.3.3 Consider your java.util.logging settings</h2>
+<h2 id="jul-logging">4.3.3 Consider 'java.util.logging' settings</h2>
 camunda uses <a href="http://docs.camunda.org/latest/guides/user-guide/#process-engine-logging" target="blank">java.util.logging</a>.
 Therefore you need to make a conscious choice about whether to turn on/off the 'grails.logging.jul.usebridge'
 setting in your Config.groovy. See the information about the performance impact on
 <a href="http://www.slf4j.org/legacy.html#jul-to-slf4j" target="blank">http://www.slf4j.org</a>.<p class="paragraph"/><strong class="bold">In case the bridge is not turned off explicitely by you, the plugin will turn it on for all Grails test phases.</strong>
-However, your explicit choice won't be overridden.<p class="paragraph"/><blockquote class="note">This decision makes sure that the bridge is turned on for tests executed in the Grails 'test' environment,
-for which no explicit choice is made in the default grails application. As soon as you make a decision for your
-environment, the plugin won't interfere anymore.</blockquote>
+However, your explicit choice won't be overridden.<p class="paragraph"/><blockquote class="note">This decision in particular makes sure that the bridge is turned on for tests executed in the default Grails
+environment '<strong class="bold">test</strong>', for which no explicit setting is made in the default grails application. As soon as you make
+an explicit decision for any of your default or custom environments, the plugin won't interfere anymore.</blockquote>
 
 
-<h2 id="alternative-database">3.3.4 Use a different database</h2>
+<h2 id="alternative-database">4.3.4 Use a different database</h2>
 camunda's ORM mapping is provided by the mybatis mapping framework. Therefore the plugin can -
 and does by default - reuse your Grails 'dataSource' and 'transactionManager' beans, however it
-needs to be separately informed about a databaseType different from Grails default 'h2':<p class="paragraph"/><div class="code"><pre>camunda &#123;
+needs to be informed about a databaseType different from Grails default 'h2':<p class="paragraph"/><div class="code"><pre>camunda &#123;
   engine &#123;
     configuration &#123;
       databaseType = <span class="java&#45;quote">"postgres"</span> // one of (as of writing): &#91;h2, mysql, oracle, postgres, mssql, db2&#93;
@@ -261,7 +262,7 @@ for different database types.
 
 
 
-<h2 id="alternative-engine-version">3.3.5 Use an alternative version of camunda</h2>
+<h2 id="alternative-engine-version">4.3.5 Use an alternative version of camunda</h2>
 Currently the plugin comes bundled with a dependency to the release <strong class="bold">7.0.0-Final</strong> of camunda BPM.
 However you may want to choose another version. You then have to explicitely override the needed 
 dependencies in your BuildConfig.groovy:<p class="paragraph"/><div class="code"><pre>dependencies &#123;
@@ -277,21 +278,21 @@ your application with the spring framework version provided by the Grails versio
 
 
 
-<h2 id="bean-names">3.3.6 Provide alternative bean names</h2>
-Many of camunda's API service names are quite generic (like 'taskService', 'managementService'
-etc) - especially when having in mind the Grails naming convention to use '*Service' as a name
-pattern for Grails services. On the other hand typical camunda users are used to the established
-service names and will expect to use these services via their established names. Therefore the
-plugin provides these services via the <a href="../guide/single.html#services" class="guide">established names</a>. However, in order to
-avoid potential name conflicts with grails services pre-existing in your project, the plugin also
-allows to change these default bean names via configuration:<p class="paragraph"/><div class="code"><pre>camunda &#123;
+<h2 id="bean-names">4.3.6 Provide alternative bean names</h2>
+Many of camunda's API service names are quite generic (like 'taskService', 'managementService' etc) and could
+easily clash with names you want to use in your application for other purposes - even more so when having in mind
+the Grails naming convention to use <strong class="bold">&#42;Service</strong> as a name pattern for Grails services. On the other hand typical
+camunda users are used to the established service names and will expect to use these services via their
+established names. Therefore the plugin provides these services via the <a href="../guide/single.html#services" class="guide">established names</a>.
+However, in order to avoid potential name conflicts with grails services pre-existing in your project, the plugin
+also allows to change these default bean names via configuration:<p class="paragraph"/><div class="code"><pre>camunda &#123;
   beans.runtimeService = 'myCamundaRuntimeService'
-&#125;</pre></div><p class="paragraph"/>Internally the plugin realises this with Spring's bean alias mechanism. Instead of the default 
+&#125;</pre></div><p class="paragraph"/>Internally the plugin realises this with Spring's bean aliasing mechanism. Instead of the default 
 alias 'runtimeService' the custom alias 'myCamundaRuntimeService' is used. You can then inject
 your 'org.camunda.bpm.engine.RuntimeService'-typed bean as<p class="paragraph"/><div class="code"><pre>def myCamundaRuntimeService</pre></div>
 
 
-<h2 id="override-configuration">3.3.7 Override plugin configuration with custom beans</h2>
+<h2 id="override-configuration">4.3.7 Override plugin configuration with custom beans</h2>
 Of course, it is also possible to override some or all of the camunda spring beans defined by the
 plugin via the standard Grails way: by editing '<strong class="bold">grails-app/conf/spring/resources.groovy</strong>'. In
 order to do that properly it is useful to know that the plugin registers all beans following the
@@ -306,9 +307,9 @@ services. </blockquote>
 
                 <div style="clear:both;margin-top:15px;"></div>
                 
-                    <div class="toc-item prev-left"><a href="../guide/get-started.html">&lt;&lt; <strong>2</strong><span>Get Started</span></a></div>
+                    <div class="toc-item prev-left"><a href="../guide/conventions.html">&lt;&lt; <strong>3</strong><span>A Word about Conventions</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../guide/testing.html"><strong>4</strong><span>Testing Guide</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/testing.html"><strong>5</strong><span>Testing Guide</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
@@ -321,46 +322,10 @@ services. </blockquote>
                 </div>
                 <div class="menu">
                     
-                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Environments</h1><div class="menu-sub">
-                        
-                            
-                            <div class="menu-item"><a href="../ref/Environments/%5Bcustom%5D.html">[custom]</a>
-                            </div>
-                            
-                            <div class="menu-item"><a href="../ref/Environments/development.html">development</a>
-                            </div>
-                            
-                            <div class="menu-item"><a href="../ref/Environments/production.html">production</a>
-                            </div>
-                            
-                            <div class="menu-item"><a href="../ref/Environments/test.html">test</a>
-                            </div>
-                            
-                            </div>
-                    </div>
-                    
                     <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Scripts</h1><div class="menu-sub">
                         
                             
                             <div class="menu-item"><a href="../ref/Scripts/create-process.html">create-process</a>
-                            </div>
-                            
-                            </div>
-                    </div>
-                    
-                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Test Phases</h1><div class="menu-sub">
-                        
-                            
-                            <div class="menu-item"><a href="../ref/Test%20Phases/functional.html">functional</a>
-                            </div>
-                            
-                            <div class="menu-item"><a href="../ref/Test%20Phases/integration.html">integration</a>
-                            </div>
-                            
-                            <div class="menu-item"><a href="../ref/Test%20Phases/other.html">other</a>
-                            </div>
-                            
-                            <div class="menu-item"><a href="../ref/Test%20Phases/unit.html">unit</a>
                             </div>
                             
                             </div>
