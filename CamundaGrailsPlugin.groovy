@@ -34,7 +34,7 @@ Virtual Machine. It is a perfect match for the Spring Framework - and therefore 
     def issueManagement = [ system: "github", url: "https://github.com/plexiti/camunda-grails-plugin/issues" ]
     def grailsVersion = "2.3 > *"
 
-    def pluginExcludes = [ "grails-app/views/error.gsp", "grails-app/processes/" ]
+    def pluginExcludes = [ "grails-app/processes/" ]
 
     def doWithSpring = CamundaPluginSupport.doWithSpring
 
