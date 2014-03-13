@@ -19,14 +19,29 @@
  */
 def processesDir = "${basedir}/grails-app/processes"
 
+// when testing, remember the test phase identifier
 eventTestPhaseStart = { args ->
     System.properties["grails.test.phase"] = args
 }
 
+// when creating a war, include the *.bpmn resources
 eventCreateWarStart = { warName, stagingDir ->
     if ((processesDir as File).exists()) {
         ant.copy(todir: "${stagingDir}/WEB-INF/classes") {
             fileset(dir: processesDir) {
+                include(name: "**/*.bpmn")
+            }
+        }
+    }
+}
+
+// when compiling, clean up *.bpmn from dev tomcat work dir
+// (avoids camunda's duplicate bpmn deployment id error message)
+eventCompileStart = { type ->
+    def tomcatWorkDir = "${projectWorkDir}/tomcat/work"
+    if ((tomcatWorkDir as File).exists()) {
+        ant.delete() {
+            fileset(dir: tomcatWorkDir) {
                 include(name: "**/*.bpmn")
             }
         }
