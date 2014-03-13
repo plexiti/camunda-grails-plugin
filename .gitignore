@@ -21,3 +21,4 @@ stacktrace.log
 /target-eclipse/
 generate-docs
 camunda.tmproj
+release.sh
