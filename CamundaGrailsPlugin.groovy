@@ -17,7 +17,7 @@ import grails.plugin.camunda.CamundaPluginSupport
 
 class CamundaGrailsPlugin {
 
-    def title = "camunda BPM Plugin"
+    def title = "camunda Grails Plugin"
     def version = "0.1.0-SNAPSHOT"
     def author = "Martin Schimak"
     def authorEmail = "martin.schimak@plexiti.com"
