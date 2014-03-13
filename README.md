@@ -17,7 +17,7 @@ Or go straight to the camunda Grails plugin guide to **[get started](http://plex
 <a name="resources"/>
 ## Resources
 
-* [Grails Plugin Site](http://grails.org/plugins)
+* [Grails Plugin Site](http://grails.org/plugin/camunda)
 * [Plugin Guide](http://plexiti.github.io/camunda-grails-plugin)
 * [Issue Tracking](https://github.com/plexiti/camunda-grails-plugin/issues)
 * [Roadmap](https://github.com/martinschimak/camunda-grails-plugin/issues/milestone)
