@@ -17,8 +17,7 @@ package grails.plugin.camunda
 
 import grails.util.Environment
 import org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration
-import org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
-import org.camunda.bpm.engine.spring.container.ManagedProcessEngineFactoryBean
+import org.camunda.bpm.engine.spring.ProcessEngineFactoryBean
 import org.camunda.bpm.engine.test.mock.MockExpressionManager
 import org.slf4j.bridge.SLF4JBridgeHandler
 
@@ -30,9 +29,7 @@ class CamundaPluginSupport {
     static doWithSpring = {
         if (!application.config.camunda.deployment.scenario
                 || application.config.camunda.deployment.scenario == 'embedded') {
-            // Instantiate basic camunda beans for embedded scenario
-            camundaProcessApplicationBean(SpringServletProcessApplication)
-            camundaProcessEngineBean(ManagedProcessEngineFactoryBean) {
+            camundaProcessEngineBean(ProcessEngineFactoryBean) {
                 processEngineConfiguration = ref('camundaProcessEngineConfigurationBean')
             }
             camundaProcessEngineConfigurationBean(SpringProcessEngineConfiguration) { beanDefinition ->
