@@ -57,8 +57,9 @@ class CamundaPluginSupport {
                 // Now set explicit user configuration and override our previously set defaults 
                 application.config.camunda.engine.configuration.each {
                     beanDefinition.setPropertyValue(it.key, 
-                        BeanUtils.isSimpleProperty(BeanUtils.findPropertyType(it.key, SpringProcessEngineConfiguration)) 
-                            ? it.value : ref(it.value)
+                        it.value instanceof String 
+                                && !(String.class.isAssignableFrom(BeanUtils.findPropertyType(it.key, SpringProcessEngineConfiguration))) 
+                            ? ref(it.value) : it.value
                     )
                 }
             }
