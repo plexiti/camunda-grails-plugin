@@ -20,6 +20,7 @@ import org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration
 import org.camunda.bpm.engine.spring.ProcessEngineFactoryBean
 import org.camunda.bpm.engine.test.mock.MockExpressionManager
 import org.slf4j.bridge.SLF4JBridgeHandler
+import org.springframework.beans.BeanUtils
 
 /**
  * @author Martin Schimak <martin.schimak@plexiti.com>
@@ -55,7 +56,10 @@ class CamundaPluginSupport {
                 }
                 // Now set explicit user configuration and override our previously set defaults 
                 application.config.camunda.engine.configuration.each {
-                    beanDefinition.setPropertyValue(it.key, it.value)
+                    beanDefinition.setPropertyValue(it.key, 
+                        BeanUtils.isSimpleProperty(BeanUtils.findPropertyType(it.key, SpringProcessEngineConfiguration)) 
+                            ? it.value : ref(it.value)
+                    )
                 }
             }
             // Instantiate camunda service API beans
