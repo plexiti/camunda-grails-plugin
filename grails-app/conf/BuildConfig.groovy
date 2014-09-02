@@ -52,6 +52,6 @@ grails.project.dependency.resolution = {
               ":rest-client-builder:1.0.3") {
             export = false
         }
-        test ":hibernate:3.6.10.6" // or ":hibernate4:4.1.11.6"
+        test ":hibernate:3.6.10.14" // or ":hibernate4:4.3.5.2"
     }
 }
