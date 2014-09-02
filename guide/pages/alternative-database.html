@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4.3.4 Use a different database 0.1.1</title>
+    <title>4.3.5 Use a different database 0.3.0-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -80,11 +80,11 @@ function addJsClass() {
 
 
                 <div class="project">
-                    <h1>4.3.4 Use a different database - Reference Documentation</h1>
+                    <h1>4.3.5 Use a different database - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Martin Schimak</p>
 
-                    <p><strong>Version:</strong> 0.1.1</p>
+                    <p><strong>Version:</strong> 0.3.0-SNAPSHOT</p>
 
                     
                 </div>
@@ -93,7 +93,7 @@ function addJsClass() {
 
                 
 
-<h2 id="alternative-database">4.3.4 Use a different database</h2>
+<h2 id="alternative-database">4.3.5 Use a different database</h2>
 camunda's ORM mapping is provided by the mybatis mapping framework. Therefore the plugin can -
 and does by default - reuse your Grails 'dataSource' and 'transactionManager' beans, however it
 needs to be informed about a databaseType different from Grails default 'h2':<p class="paragraph"/><div class="code"><pre>camunda &#123;
@@ -105,7 +105,22 @@ needs to be informed about a databaseType different from Grails default 'h2':<p 
 &#125;</pre></div><p class="paragraph"/>Find here a list of camunda's <a href="http://docs.camunda.org/7.0/guides/user-guide/#introduction-supported-environments" target="blank">enviroments supported</a> 
 by the version bundled with the plugin and the corresponding 
 <a href="http://docs.camunda.org/latest/guides/user-guide/#process-engine-database-configuration" target="blank">configuration values</a> 
-for different database types.
+for different database types.<p class="paragraph"/>You can also point the process engine to a different database than the one you use for your grails 
+domain objects. First configure it in your '<strong class="bold">grails-app/conf/DataSource.groovy</strong>'...<p class="paragraph"/><div class="code"><pre>dataSource &#123;
+  dbCreate = <span class="java&#45;quote">"create&#45;drop"</span> // one of 'create', 'create&#45;drop', 'update', 'validate', ''
+  url = <span class="java&#45;quote">"jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"</span>
+&#125;
+&#8230;
+dataSource_camunda &#123;
+  dbCreate = <span class="java&#45;quote">"create&#45;drop"</span> // one of 'create', 'create&#45;drop', 'update', 'validate', ''
+  url = <span class="java&#45;quote">"jdbc:h2:mem:devDbCamunda;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"</span>
+&#125;</pre></div><p class="paragraph"/>&#8230; then reference this alternative dataSource bean in '<strong class="bold">grails-app/conf/Config.groovy</strong>':<p class="paragraph"/><div class="code"><pre>camunda &#123;
+  engine &#123;
+    configuration &#123;
+      dataSource = <span class="java&#45;quote">"dataSource_camunda"</span>
+    &#125;
+  &#125;
+&#125;</pre></div>
 
 
 

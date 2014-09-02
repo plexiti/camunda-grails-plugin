@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4 User Guide 0.1.1</title>
+    <title>4 User Guide 0.3.0-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -84,7 +84,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Martin Schimak</p>
 
-                    <p><strong>Version:</strong> 0.1.1</p>
+                    <p><strong>Version:</strong> 0.3.0-SNAPSHOT</p>
 
                     
                 </div>
@@ -108,19 +108,22 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:10px"><a href="#process-engine-configuration"><strong>4.3.2</strong><span>Configure your process engine</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#jul-logging"><strong>4.3.3</strong><span>Consider 'java.util.logging' settings</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#configuration-possibilities"><strong>4.3.3</strong><span>Use primitive types, any object or even spring beans</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#alternative-database"><strong>4.3.4</strong><span>Use a different database</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#jul-logging"><strong>4.3.4</strong><span>Consider 'java.util.logging' settings</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#alternative-engine-version"><strong>4.3.5</strong><span>Use an alternative version of camunda</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#alternative-database"><strong>4.3.5</strong><span>Use a different database</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#bean-names"><strong>4.3.6</strong><span>Provide alternative bean names</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#alternative-engine-version"><strong>4.3.6</strong><span>Use an alternative version of camunda</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#override-configuration"><strong>4.3.7</strong><span>Override plugin configuration with custom beans</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#bean-names"><strong>4.3.7</strong><span>Provide alternative bean names</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:10px"><a href="#override-configuration"><strong>4.3.8</strong><span>Override plugin configuration with custom beans</span></a>
                     </div>
                     
                 </div>
@@ -240,7 +243,33 @@ mocking is made available. Find more information about that in section
 <a href="../guide/single.html#testing" class="guide">testing</a>.</blockquote>
 
 
-<h2 id="jul-logging">4.3.3 Consider 'java.util.logging' settings</h2>
+<h2 id="configuration-possibilities">4.3.3 Use primitive types, any object or even spring beans</h2>
+For configuration, you can of course use primitive typed configuration values such as Strings and booleans, like e.g.<p class="paragraph"/><div class="code"><pre>camunda &#123;
+  engine &#123;
+    configuration &#123;
+      processEngineName = <span class="java&#45;quote">"myCustomName"</span>
+      databaseSchemaUpdate = <span class="java&#45;keyword">false</span>
+    &#125;
+  &#125;
+&#125;</pre></div><p class="paragraph"/>but also any object available in Config.groovy or directly constructed within it, like e.g.<p class="paragraph"/><div class="code"><pre>List&#60;BpmnParseListener&#62; parseHandlers = <span class="java&#45;keyword">new</span> ArrayList&#60;BpmnParseListener&#62;();
+parseHandlers.add(<span class="java&#45;keyword">new</span> CustomParseHandler());<p class="paragraph"/>camunda &#123;
+    engine &#123;
+        configuration &#123;
+            preParseListeners = parseHandlers
+        &#125;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>or even spring beans configured e.g. via '<strong class="bold">grails-app/conf/spring/resources.groovy</strong>' or e.g. via '<strong class="bold">grails-app/conf/DataSource.groovy</strong>',
+simply referencing them via their <strong class="bold">bean name</strong>:<p class="paragraph"/><div class="code"><pre>camunda &#123;
+    engine &#123;
+        configuration &#123;
+            dataSource = <span class="java&#45;quote">"dataSource_camunda"</span>
+        &#125;
+    &#125;
+&#125;</pre></div>
+
+
+
+<h2 id="jul-logging">4.3.4 Consider 'java.util.logging' settings</h2>
 camunda uses <a href="http://docs.camunda.org/latest/guides/user-guide/#process-engine-logging" target="blank">java.util.logging</a>.
 Therefore you need to make a conscious choice about whether to turn on/off the 'grails.logging.jul.usebridge'
 setting in your Config.groovy. See the information about the performance impact on
@@ -250,7 +279,7 @@ environment '<strong class="bold">test</strong>', for which no explicit setting 
 an explicit decision for any of your default or custom environments, the plugin won't interfere anymore.</blockquote>
 
 
-<h2 id="alternative-database">4.3.4 Use a different database</h2>
+<h2 id="alternative-database">4.3.5 Use a different database</h2>
 camunda's ORM mapping is provided by the mybatis mapping framework. Therefore the plugin can -
 and does by default - reuse your Grails 'dataSource' and 'transactionManager' beans, however it
 needs to be informed about a databaseType different from Grails default 'h2':<p class="paragraph"/><div class="code"><pre>camunda &#123;
@@ -262,12 +291,27 @@ needs to be informed about a databaseType different from Grails default 'h2':<p 
 &#125;</pre></div><p class="paragraph"/>Find here a list of camunda's <a href="http://docs.camunda.org/7.0/guides/user-guide/#introduction-supported-environments" target="blank">enviroments supported</a> 
 by the version bundled with the plugin and the corresponding 
 <a href="http://docs.camunda.org/latest/guides/user-guide/#process-engine-database-configuration" target="blank">configuration values</a> 
-for different database types.
+for different database types.<p class="paragraph"/>You can also point the process engine to a different database than the one you use for your grails 
+domain objects. First configure it in your '<strong class="bold">grails-app/conf/DataSource.groovy</strong>'...<p class="paragraph"/><div class="code"><pre>dataSource &#123;
+  dbCreate = <span class="java&#45;quote">"create&#45;drop"</span> // one of 'create', 'create&#45;drop', 'update', 'validate', ''
+  url = <span class="java&#45;quote">"jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"</span>
+&#125;
+&#8230;
+dataSource_camunda &#123;
+  dbCreate = <span class="java&#45;quote">"create&#45;drop"</span> // one of 'create', 'create&#45;drop', 'update', 'validate', ''
+  url = <span class="java&#45;quote">"jdbc:h2:mem:devDbCamunda;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"</span>
+&#125;</pre></div><p class="paragraph"/>&#8230; then reference this alternative dataSource bean in '<strong class="bold">grails-app/conf/Config.groovy</strong>':<p class="paragraph"/><div class="code"><pre>camunda &#123;
+  engine &#123;
+    configuration &#123;
+      dataSource = <span class="java&#45;quote">"dataSource_camunda"</span>
+    &#125;
+  &#125;
+&#125;</pre></div>
 
 
 
-<h2 id="alternative-engine-version">4.3.5 Use an alternative version of camunda</h2>
-Currently the plugin comes bundled with a dependency to the release <strong class="bold">7.0.0-Final</strong> of camunda BPM.
+<h2 id="alternative-engine-version">4.3.6 Use an alternative version of camunda</h2>
+Currently the plugin comes bundled with a dependency to the release <strong class="bold">7.1.0-Final</strong> of camunda BPM.
 However you may want to choose another version. You then have to explicitely override the needed 
 dependencies in your BuildConfig.groovy:<p class="paragraph"/><div class="code"><pre>dependencies &#123;
   compile (<span class="xml&#45;quote">"org.camunda.bpm:camunda&#45;engine:$camundaVersion"</span>) &#123;
@@ -278,11 +322,14 @@ dependencies in your BuildConfig.groovy:<p class="paragraph"/><div class="code">
   &#125;
 &#125;</pre></div><p class="paragraph"/>Replace '$camundaVersion' with the version of camunda of your choice. It is recommended to
 explicitely exclude any spring dependencies coming with camunda and make sure to properly test
-your application with the spring framework version provided by the Grails version you use.
+your application with the spring framework version provided by the Grails version you use.<p class="paragraph"/>Note that for camunda versions prior to 7.1.0-Final, you must also configure camunda's custom 
+maven repository:<p class="paragraph"/><div class="code"><pre>repositories &#123;
+    mavenRepo <span class="java&#45;quote">"https://app.camunda.com/nexus/content/groups/<span class="java&#45;keyword">public</span>"</span>
+  &#125;</pre></div>
 
 
 
-<h2 id="bean-names">4.3.6 Provide alternative bean names</h2>
+<h2 id="bean-names">4.3.7 Provide alternative bean names</h2>
 Many of camunda's API service names are quite generic (like 'taskService', 'managementService' etc) and could
 easily clash with names you want to use in your application for other purposes - even more so when having in mind
 the Grails naming convention to use <strong class="bold">&#42;Service</strong> as a name pattern for Grails services. On the other hand typical
@@ -296,7 +343,7 @@ alias 'runtimeService' the custom alias 'myCamundaRuntimeService' is used. You c
 your 'org.camunda.bpm.engine.RuntimeService'-typed bean as<p class="paragraph"/><div class="code"><pre>def myCamundaRuntimeService</pre></div>
 
 
-<h2 id="override-configuration">4.3.7 Override plugin configuration with custom beans</h2>
+<h2 id="override-configuration">4.3.8 Override plugin configuration with custom beans</h2>
 Of course, it is also possible to override some or all of the camunda spring beans defined by the
 plugin via the standard Grails way: by editing '<strong class="bold">grails-app/conf/spring/resources.groovy</strong>'. In
 order to do that properly it is useful to know that the plugin registers all beans following the

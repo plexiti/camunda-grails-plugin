@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4.3.5 Use an alternative version of camunda 0.1.1</title>
+    <title>4.3.6 Use an alternative version of camunda 0.3.0-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -80,11 +80,11 @@ function addJsClass() {
 
 
                 <div class="project">
-                    <h1>4.3.5 Use an alternative version of camunda - Reference Documentation</h1>
+                    <h1>4.3.6 Use an alternative version of camunda - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Martin Schimak</p>
 
-                    <p><strong>Version:</strong> 0.1.1</p>
+                    <p><strong>Version:</strong> 0.3.0-SNAPSHOT</p>
 
                     
                 </div>
@@ -93,8 +93,8 @@ function addJsClass() {
 
                 
 
-<h2 id="alternative-engine-version">4.3.5 Use an alternative version of camunda</h2>
-Currently the plugin comes bundled with a dependency to the release <strong class="bold">7.0.0-Final</strong> of camunda BPM.
+<h2 id="alternative-engine-version">4.3.6 Use an alternative version of camunda</h2>
+Currently the plugin comes bundled with a dependency to the release <strong class="bold">7.1.0-Final</strong> of camunda BPM.
 However you may want to choose another version. You then have to explicitely override the needed 
 dependencies in your BuildConfig.groovy:<p class="paragraph"/><div class="code"><pre>dependencies &#123;
   compile (<span class="xml&#45;quote">"org.camunda.bpm:camunda&#45;engine:$camundaVersion"</span>) &#123;
@@ -105,7 +105,10 @@ dependencies in your BuildConfig.groovy:<p class="paragraph"/><div class="code">
   &#125;
 &#125;</pre></div><p class="paragraph"/>Replace '$camundaVersion' with the version of camunda of your choice. It is recommended to
 explicitely exclude any spring dependencies coming with camunda and make sure to properly test
-your application with the spring framework version provided by the Grails version you use.
+your application with the spring framework version provided by the Grails version you use.<p class="paragraph"/>Note that for camunda versions prior to 7.1.0-Final, you must also configure camunda's custom 
+maven repository:<p class="paragraph"/><div class="code"><pre>repositories &#123;
+    mavenRepo <span class="java&#45;quote">"https://app.camunda.com/nexus/content/groups/<span class="java&#45;keyword">public</span>"</span>
+  &#125;</pre></div>
 
 
 
