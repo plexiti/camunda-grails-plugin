@@ -2,16 +2,7 @@ In your BuildConfig.groovy configure the following plugin dependency:
 
 {code:xml}
 plugins {
-    compile \":camunda:0.1.1"
-}
-{code}
-
-Until camunda fully finishes its migration to maven central, you will also need to configure the
-following custom repository:
-
-{code:xml}
-repositories {
-    mavenRepo "https://app.camunda.com/nexus/content/groups/public"
+    compile \":camunda:0.2.0"
 }
 {code}
 
