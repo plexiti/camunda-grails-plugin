@@ -20,8 +20,8 @@ Or go straight to the camunda Grails plugin guide to **[get started](http://plex
 * [Grails Plugin Site](http://grails.org/plugin/camunda)
 * [Plugin Guide](http://plexiti.github.io/camunda-grails-plugin)
 * [Issue Tracking](https://github.com/plexiti/camunda-grails-plugin/issues)
-* [Roadmap](https://github.com/martinschimak/camunda-grails-plugin/issues/milestones)
-* [Changelog](https://github.com/martinschimak/camunda-grails-plugin/issues/milestones?state=closed)
+* [Roadmap](https://github.com/martinschimak/camunda-grails-plugin/milestones)
+* [Changelog](https://github.com/plexiti/camunda-grails-plugin/milestones?direction=desc&sort=due_date&state=closed)
 * [Releases](https://github.com/plexiti/camunda-grails-plugin/releases)
 
 Want to **contribute**? You are very welcome! Please contact me directly via [eMail](mailto:martin.schimak@plexiti.com).
