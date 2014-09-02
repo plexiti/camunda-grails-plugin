@@ -30,6 +30,7 @@ grails.project.dependency.resolution = {
         grailsCentral()
         mavenLocal()
         mavenCentral()
+        mavenRepo "https://app.camunda.com/nexus/content/groups/public" // necessary to test with 7.0.0 and new alpha versions
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
         //mavenRepo "http://repository.codehaus.org"
