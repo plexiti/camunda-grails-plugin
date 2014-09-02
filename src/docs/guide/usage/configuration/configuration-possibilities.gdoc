@@ -1,0 +1,40 @@
+For configuration, you can of course use primitive typed configuration values such as Strings and booleans, like e.g.
+
+{code}
+camunda {
+  engine {
+    configuration {
+      processEngineName = "myCustomName"
+      databaseSchemaUpdate = false
+    }
+  }
+}
+{code}
+
+but also any object available in Config.groovy or directly constructed within it, like e.g.  
+
+{code}
+List<BpmnParseListener> parseHandlers = new ArrayList<BpmnParseListener>();
+parseHandlers.add(new CustomParseHandler());
+
+camunda {
+    engine {
+        configuration {
+            preParseListeners = parseHandlers
+        }
+    }
+}
+{code}
+
+or even spring beans configured e.g. via '*grails-app/conf/spring/resources.groovy*' or e.g. via '*grails-app/conf/DataSource.groovy*',
+simply referencing them via their *bean name*:
+
+{code}
+camunda {
+    engine {
+        configuration {
+            dataSource = "dataSource_camunda"
+        }
+    }
+}
+{code}

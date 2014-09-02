@@ -16,3 +16,30 @@ Find here a list of camunda's [enviroments supported|http://docs.camunda.org/7.0
 by the version bundled with the plugin and the corresponding 
 [configuration values|http://docs.camunda.org/latest/guides/user-guide/#process-engine-database-configuration] 
 for different database types.
+
+You can also point the process engine to a different database than the one you use for your grails 
+domain objects. First configure it in your '*grails-app/conf/DataSource.groovy*'...
+
+{code}
+dataSource {
+  dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+  url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+}
+...
+dataSource_camunda {
+  dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+  url = "jdbc:h2:mem:devDbCamunda;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+}
+{code}
+
+... then reference this alternative dataSource bean in '*grails-app/conf/Config.groovy*': 
+
+{code}
+camunda {
+  engine {
+    configuration {
+      dataSource = "dataSource_camunda"
+    }
+  }
+}
+{code}

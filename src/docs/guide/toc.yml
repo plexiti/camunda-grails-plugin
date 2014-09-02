@@ -13,6 +13,7 @@ usage:
         title: Configure the camunda plugin
         deployment-scenario: Set the deployment scenario
         process-engine-configuration: Configure your process engine
+        configuration-possibilities: Use primitive types, any object or even spring beans
         jul-logging: Consider 'java.util.logging' settings
         alternative-database: Use a different database 
         alternative-engine-version: Use an alternative version of camunda 
