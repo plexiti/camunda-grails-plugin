@@ -22,7 +22,9 @@ Or go straight to the camunda Grails plugin guide to **[get started](http://plex
 * [Issue Tracking](https://github.com/plexiti/camunda-grails-plugin/issues)
 * [Roadmap](https://github.com/martinschimak/camunda-grails-plugin/milestones)
 * [Changelog](https://github.com/plexiti/camunda-grails-plugin/milestones?direction=desc&sort=due_date&state=closed)
-* [Releases](https://github.com/plexiti/camunda-grails-plugin/releases)
+* [GitHub Releases](https://github.com/plexiti/camunda-grails-plugin/releases)
+* [Maven Releases](http://repo.grails.org/grails/plugins-releases/org/grails/plugins/camunda/)
+* [Continuous Integration](https://plexiti-foss.ci.cloudbees.com/job/camunda-grails-plugin/job/camunda-grails-plugin/)
 
 Want to **contribute**? You are very welcome! Please contact me directly via [eMail](mailto:martin.schimak@plexiti.com).
 
