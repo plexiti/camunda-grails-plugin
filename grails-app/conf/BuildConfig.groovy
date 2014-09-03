@@ -18,6 +18,10 @@ grails.project.fork = [
 
 def camundaVersion = System.getProperty("camunda-bpm.version") ?: "7.1.0-Final"
 
+grails.project.repos.snapshots.url = "https://repository-plexiti-foss.forge.cloudbees.com/snapshot/"
+grails.project.repos.snapshots.username = "martinschimak"
+grails.project.repos.snapshots.password = System.getProperty("password")
+
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
