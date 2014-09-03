@@ -16,6 +16,9 @@
 package grails.plugin.camunda
 
 import grails.util.Environment
+import org.camunda.bpm.engine.ProcessEngineException
+import org.camunda.bpm.engine.RepositoryService
+import org.camunda.bpm.engine.repository.DeploymentBuilder
 import org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration
 import org.camunda.bpm.engine.spring.ProcessEngineFactoryBean
 import org.camunda.bpm.engine.test.mock.MockExpressionManager
@@ -75,6 +78,34 @@ class CamundaPluginSupport {
             // Finally, register all camunda beans under their default or user configured aliases
             springConfig.beanNames.findAll { it.startsWith("camunda") && it.endsWith("Bean") }.each {
                 springConfig.addAlias Identifiers.beanName(it), it
+            }
+        }
+    }
+    
+    static onchange = { event ->
+        if (event.source && event.source.file) { // ./grails-app/processes/**/*.bpmn resource changed
+            // reload in 'dev' and 'test' by default, or when explicitely configured
+            if (event.application.config.camunda.deployment.autoreload == true 
+                || (!event.application.flatConfig.containsKey('camunda.deployment.autoreload') 
+                    && Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ])) {
+                RepositoryService repositoryService = event.ctx.getBean("camundaRepositoryServiceBean")
+                DeploymentBuilder deploymentBuilder = repositoryService
+                    .createDeployment()
+                    .enableDuplicateFiltering()
+                    .name("GrailsHotDeployment")
+                File resource = event.source.file
+                String resourceName
+                try {
+                    resourceName = resource.absolutePath
+                } catch (IOException e) {
+                    resourceName = resource.name
+                }
+                try {
+                    deploymentBuilder.addInputStream(resourceName, resource.newInputStream())
+                } catch (IOException e) {
+                    throw new ProcessEngineException("couldn't auto deploy resource $resource: $e.message", e)
+                }
+                deploymentBuilder.deploy()
             }
         }
     }

@@ -1,0 +1,16 @@
+You can automatically reload and redeploy '*.bpmn*' process definitions placed beneath 
+'*grails-app/processes*'. When changing the process definition while you are running 
+your application with '*run-app*', it will be redeployed to the process engine.
+
+You can turn this feature on/off explicitely:
+
+{code:groovy}
+camunda {
+  deployment.autoreload = true // (or false)
+}
+{code}
+
+{note}
+The autoreload feature is *by default enabled* for grails 'dev' and 'test' environments. 
+For all other environments it is by default disabled.
+{note}
