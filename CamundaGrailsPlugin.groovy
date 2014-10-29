@@ -18,7 +18,7 @@ import grails.plugin.camunda.CamundaPluginSupport
 class CamundaGrailsPlugin {
 
     def title = "camunda Grails Plugin"
-    def version = "0.3.0"
+    def version = "0.4.0-SNAPSHOT"
     def author = "Martin Schimak"
     def authorEmail = "martin.schimak@plexiti.com"
     def organization = [ name: "plexiti GmbH", url: "http://plexiti.com" ]
