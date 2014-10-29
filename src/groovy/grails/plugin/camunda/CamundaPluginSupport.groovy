@@ -41,6 +41,7 @@ class CamundaPluginSupport {
                 transactionManager = ref('transactionManager')
                 if (Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]) {
                     databaseSchemaUpdate = true
+                    jobExecutorActivate = true
                     deploymentResources = ['classpath:/**/*.bpmn']
                 }
                 if (System.properties.containsKey('grails.test.phase')) {
