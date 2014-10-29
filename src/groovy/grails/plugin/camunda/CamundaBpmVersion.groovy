@@ -57,7 +57,7 @@ class CamundaBpmVersion {
     public static String getVersion() {
         if (testVersion)
             return testVersion
-        ProcessEngine.class.package.implementationVersion 
+        ProcessEngine.class.package.implementationVersion ?: "7.0.0-Final"
     }
 
 }

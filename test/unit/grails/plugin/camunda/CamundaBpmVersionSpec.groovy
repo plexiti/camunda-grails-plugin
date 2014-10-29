@@ -15,7 +15,7 @@ class CamundaBpmVersionSpec extends Specification {
         def version = CamundaBpmVersion.version
 
         then: "we expect to see a specific pattern"
-        version == "7.1.0-Final"
+        version == null || version =~ CamundaBpmVersion.versionPattern
         
     }
     
