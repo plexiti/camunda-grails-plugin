@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>5 Testing Guide 0.2.0</title>
+    <title>5 Testing Guide 0.3.0</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -84,7 +84,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Martin Schimak</p>
 
-                    <p><strong>Version:</strong> 0.2.0</p>
+                    <p><strong>Version:</strong> 0.3.0</p>
 
                     
                 </div>
@@ -97,6 +97,9 @@ function addJsClass() {
                     </div>
                     
                     <div class="toc-item" style="margin-left:0px"><a href="#mock-services"><strong>5.2</strong><span>Mock the service calls</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#auto-reload"><strong>5.3</strong><span>Auto reload and redeploy your bpmn process definitions</span></a>
                     </div>
                     
                 </div>
@@ -139,6 +142,13 @@ provided you use the
 <a href="http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/test/mock/MockExpressionManager.html" target="blank">MockExpressionManager</a>
 for resolving your JUEL expression identifiers - which is what the plugin will make sure for Grails' integration test
 phase.
+
+
+<h2 id="auto-reload">5.3 Auto reload and redeploy your bpmn process definitions</h2>
+You can automatically reload and redeploy '<strong class="bold">.bpmn</strong>' process definitions placed beneath 
+'<strong class="bold">grails-app/processes</strong>'. When changing the process definition while you are running 
+your application with '<strong class="bold">run-app</strong>', it will be redeployed to the process engine.<p class="paragraph"/>Also check the possibility to turn this feature on/off explicitely <a href="../guide/single.html#auto-reload-configuration" class="guide">by configuration</a>.
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>

@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4.3 Configure the camunda plugin 0.2.0</title>
+    <title>4.3 Configure the camunda plugin 0.3.0</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -84,7 +84,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Martin Schimak</p>
 
-                    <p><strong>Version:</strong> 0.2.0</p>
+                    <p><strong>Version:</strong> 0.3.0</p>
 
                     
                 </div>
@@ -115,6 +115,9 @@ function addJsClass() {
                     </div>
                     
                     <div class="toc-item" style="margin-left:0px"><a href="#override-configuration"><strong>4.8</strong><span>Override plugin configuration with custom beans</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#auto-reload-configuration"><strong>4.9</strong><span>Configure auto reloading of bpmn process definitions</span></a>
                     </div>
                     
                 </div>
@@ -156,11 +159,12 @@ You can fully control your embedded camunda process engine configuration via Con
   &#125;
 &#125;</pre></div><p class="paragraph"/>Find a full specification of the values possible in the camunda docs for the spring <a href="http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/spring/SpringProcessEngineConfiguration.html" target="blank">process
 engine configuration</a>.<p class="paragraph"/>Note that in case you do not configure a value the plugin relies on the default values coming
-with the camunda engine in use - with the following two exceptions for the default grails
+with the camunda engine in use - with the following three exceptions for the default grails
 environments <strong class="bold">dev</strong>elopment and <strong class="bold">test</strong>:
 <ul class="minus">
 <li>your database is populated with camunda tables the first time the database is accessed</li>
 <li>any *.bpmn process definitions found in the classpath will be deployed to the database</li>
+<li>the job executor is turned on</li>
 </ul><p class="paragraph"/><blockquote class="note">This choice was made in order to make it as easy as possible to <a href="../guide/single.html#get-started" class="guide">get
 started</a> while relying on explicit configuration choices when deploying to
 other (and potentially production) databases.</blockquote><p class="paragraph"/>That means if you want to have that same behaviour for any other environment, you need to
@@ -169,6 +173,7 @@ explicitely configure that in Config.groovy:<p class="paragraph"/><div class="co
     configuration &#123;
       databaseSchemaUpdate = <span class="java&#45;keyword">true</span>
       deploymentResources = &#91;'classpath:/&#42;&#42;/&#42;.bpmn'&#93;
+      jobExecutorActivate = <span class="java&#45;keyword">true</span>
     &#125;
   &#125;
 &#125;</pre></div><p class="paragraph"/>Obviously you can also change the configuration for the environments development and test, for
@@ -178,6 +183,7 @@ the sake of the example e.g. to the current camunda defaults used for the grails
     configuration &#123;
       databaseSchemaUpdate = <span class="java&#45;keyword">false</span>
       deploymentResources = &#91;&#93;
+      jobExecutorActivate = <span class="java&#45;keyword">false</span>
     &#125;
   &#125;
 &#125;</pre></div><p class="paragraph"/><blockquote class="note"> Please be aware that during integration test phase of any environment, two more camunda
@@ -296,6 +302,18 @@ alias</a> defined by the user).<p class="paragraph"/><blockquote class="note"> T
 names</a>, partly because some historic 2.3 versions of Grails display issues with
 custom spring beans named in potential "conflict" with the *Service name convention for Grails
 services. </blockquote>
+
+
+
+<h2 id="auto-reload-configuration">4.3.9 Configure auto reloading of bpmn process definitions</h2>
+You can automatically reload and redeploy '<strong class="bold">.bpmn</strong>' process definitions placed beneath 
+'<strong class="bold">grails-app/processes</strong>'. When changing the process definition while you are running 
+your application with '<strong class="bold">run-app</strong>', it will be redeployed to the process engine.<p class="paragraph"/>You can turn this feature on/off explicitely:<p class="paragraph"/><div class="code"><pre>camunda &#123;
+  deployment.autoreload = <span class="java&#45;keyword">true</span> // (or <span class="java&#45;keyword">false</span>)
+&#125;</pre></div><p class="paragraph"/><blockquote class="note">
+The autoreload feature is <strong class="bold">by default enabled</strong> for grails 'dev' and 'test' environments. 
+For all other environments it is by default disabled.
+</blockquote>
 
 
 

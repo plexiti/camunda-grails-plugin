@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>6.2 camunda BPM 0.3.0</title>
+    <title>4.3.9 Configure auto reloading of bpmn process definitions 0.3.0</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -69,16 +69,18 @@ function addJsClass() {
             <div id="main" class="corner-all">
 
                 
-                    <div class="toc-item prev-left"><a href="../../guide/testing.html">&lt;&lt; <strong>5</strong><span>Testing Guide</span></a></div>
+                    <div class="toc-item prev-left"><a href="../../guide/conventions.html">&lt;&lt; <strong>3</strong><span>A Word about Conventions</span></a></div>
                 
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
+                    <div class="toc-item next-right"><a href="../../guide/testing.html"><strong>5</strong><span>Testing Guide</span> >></a></div>
+                
 
 
                 <div class="project">
-                    <h1>6.2 camunda BPM - Reference Documentation</h1>
+                    <h1>4.3.9 Configure auto reloading of bpmn process definitions - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Martin Schimak</p>
 
@@ -91,20 +93,23 @@ function addJsClass() {
 
                 
 
-<h2 id="camunda-resources">6.2 camunda BPM</h2>
-<ul class="star">
-<li><a href="http://docs.camunda.org/latest/guides/user-guide/" target="blank">User Guide</a></li>
-<li><a href="http://docs.camunda.org/latest/guides/installation-guide/" target="blank">Installation Guide</a></li>
-<li><a href="http://docs.camunda.org/latest/api-references/bpmn20/" target="blank">BPMN 2.0 Implementation Reference</a></li>
-<li><a href="http://docs.camunda.org/latest/api-references/javadoc/" target="blank">Java API</a></li>
-<li><a href="https://github.com/orgs/camunda" target="blank">GitHub Repositories</a></li>
-<li><a href="https://app.camunda.com/jira/browse/CAM" target="blank">Issue Tracking</a></li>
-</ul><p class="paragraph"/>
+<h2 id="auto-reload-configuration">4.3.9 Configure auto reloading of bpmn process definitions</h2>
+You can automatically reload and redeploy '<strong class="bold">.bpmn</strong>' process definitions placed beneath 
+'<strong class="bold">grails-app/processes</strong>'. When changing the process definition while you are running 
+your application with '<strong class="bold">run-app</strong>', it will be redeployed to the process engine.<p class="paragraph"/>You can turn this feature on/off explicitely:<p class="paragraph"/><div class="code"><pre>camunda &#123;
+  deployment.autoreload = <span class="java&#45;keyword">true</span> // (or <span class="java&#45;keyword">false</span>)
+&#125;</pre></div><p class="paragraph"/><blockquote class="note">
+The autoreload feature is <strong class="bold">by default enabled</strong> for grails 'dev' and 'test' environments. 
+For all other environments it is by default disabled.
+</blockquote>
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>
                 
-                    <div class="toc-item prev-left"><a href="../../guide/testing.html">&lt;&lt; <strong>5</strong><span>Testing Guide</span></a></div>
+                    <div class="toc-item prev-left"><a href="../../guide/conventions.html">&lt;&lt; <strong>3</strong><span>A Word about Conventions</span></a></div>
+                
+                    <div class="toc-item next-right"><a href="../../guide/testing.html"><strong>5</strong><span>Testing Guide</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
