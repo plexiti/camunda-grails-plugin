@@ -272,7 +272,25 @@ class CamundaBpmVersionSpec extends Specification {
         "7.2.0-beta1"  | "7.2.0-Final" | false
         "7.2.0-beta2"  | "7.2.0-Final" | false
         "7.2.0-Final"  | "7.2.0-Final" | true
-        
+
+        "7.2.0-SNAPSHOT" | "7.0.0-alpha1" | true
+        "7.2.0-SNAPSHOT" | "7.0.0-alpha2" | true
+        "7.2.0-SNAPSHOT" | "7.0.0-beta1"  | true
+        "7.2.0-SNAPSHOT" | "7.0.0-beta2"  | true
+        "7.2.0-SNAPSHOT" | "7.0.0-Final"  | true
+        "7.2.0-SNAPSHOT" | "7.1.0-alpha1" | true
+        "7.2.0-SNAPSHOT" | "7.1.0-alpha2" | true
+        "7.2.0-SNAPSHOT" | "7.1.0-beta1"  | true
+        "7.2.0-SNAPSHOT" | "7.1.0-beta2"  | true
+        "7.2.0-SNAPSHOT" | "7.1.0-Final"  | true
+        "7.2.0-SNAPSHOT" | "7.2.0-alpha1" | false
+        "7.2.0-SNAPSHOT" | "7.2.0-alpha2" | false
+        "7.2.0-SNAPSHOT" | "7.2.0-beta1"  | false
+        "7.2.0-SNAPSHOT" | "7.2.0-beta2"  | false
+        "7.2.0-SNAPSHOT" | "7.2.0-Final"  | false
+
+        "7.2.0-SNAPSHOT" | "7.2.0-SNAPSHOT"  | false
+
     }
 
 }
