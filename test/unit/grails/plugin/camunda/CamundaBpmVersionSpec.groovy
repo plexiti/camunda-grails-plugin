@@ -38,258 +38,403 @@ class CamundaBpmVersionSpec extends Specification {
         "7.0.0-beta1"  | "7.0.0-alpha1" | true
         "7.0.0-beta2"  | "7.0.0-alpha1" | true
         "7.0.0-Final"  | "7.0.0-alpha1" | true
+        "7.0.0"        | "7.0.0-alpha1" | true
         "7.1.0-alpha1" | "7.0.0-alpha1" | true
         "7.1.0-alpha2" | "7.0.0-alpha1" | true
         "7.1.0-beta1"  | "7.0.0-alpha1" | true
         "7.1.0-beta2"  | "7.0.0-alpha1" | true
         "7.1.0-Final"  | "7.0.0-alpha1" | true
+        "7.1.0"        | "7.0.0-alpha1" | true
         "7.2.0-alpha1" | "7.0.0-alpha1" | true
         "7.2.0-alpha2" | "7.0.0-alpha1" | true
         "7.2.0-beta1"  | "7.0.0-alpha1" | true
         "7.2.0-beta2"  | "7.0.0-alpha1" | true
         "7.2.0-Final"  | "7.0.0-alpha1" | true
+        "7.2.0"        | "7.0.0-alpha1" | true
 
         "7.0.0-alpha1" | "7.0.0-alpha2" | false
         "7.0.0-alpha2" | "7.0.0-alpha2" | true
         "7.0.0-beta1"  | "7.0.0-alpha2" | true
         "7.0.0-beta2"  | "7.0.0-alpha2" | true
         "7.0.0-Final"  | "7.0.0-alpha2" | true
+        "7.0.0"        | "7.0.0-alpha2" | true
         "7.1.0-alpha1" | "7.0.0-alpha2" | true
         "7.1.0-alpha2" | "7.0.0-alpha2" | true
         "7.1.0-beta1"  | "7.0.0-alpha2" | true
         "7.1.0-beta2"  | "7.0.0-alpha2" | true
         "7.1.0-Final"  | "7.0.0-alpha2" | true
+        "7.1.0"        | "7.0.0-alpha2" | true
         "7.2.0-alpha1" | "7.0.0-alpha2" | true
         "7.2.0-alpha2" | "7.0.0-alpha2" | true
         "7.2.0-beta1"  | "7.0.0-alpha2" | true
         "7.2.0-beta2"  | "7.0.0-alpha2" | true
         "7.2.0-Final"  | "7.0.0-alpha2" | true
+        "7.2.0"        | "7.0.0-alpha2" | true
 
         "7.0.0-alpha1" | "7.0.0-beta1" | false
         "7.0.0-alpha2" | "7.0.0-beta1" | false
         "7.0.0-beta1"  | "7.0.0-beta1" | true
         "7.0.0-beta2"  | "7.0.0-beta1" | true
         "7.0.0-Final"  | "7.0.0-beta1" | true
+        "7.0.0"        | "7.0.0-beta1" | true
         "7.1.0-alpha1" | "7.0.0-beta1" | true
         "7.1.0-alpha2" | "7.0.0-beta1" | true
         "7.1.0-beta1"  | "7.0.0-beta1" | true
         "7.1.0-beta2"  | "7.0.0-beta1" | true
         "7.1.0-Final"  | "7.0.0-beta1" | true
+        "7.1.0"        | "7.0.0-beta1" | true
         "7.2.0-alpha1" | "7.0.0-beta1" | true
         "7.2.0-alpha2" | "7.0.0-beta1" | true
         "7.2.0-beta1"  | "7.0.0-beta1" | true
         "7.2.0-beta2"  | "7.0.0-beta1" | true
         "7.2.0-Final"  | "7.0.0-beta1" | true
+        "7.2.0"        | "7.0.0-beta1" | true
 
         "7.0.0-alpha1" | "7.0.0-beta2" | false
         "7.0.0-alpha2" | "7.0.0-beta2" | false
         "7.0.0-beta1"  | "7.0.0-beta2" | false
         "7.0.0-beta2"  | "7.0.0-beta2" | true
         "7.0.0-Final"  | "7.0.0-beta2" | true
+        "7.0.0"        | "7.0.0-beta2" | true
         "7.1.0-alpha1" | "7.0.0-beta2" | true
         "7.1.0-alpha2" | "7.0.0-beta2" | true
         "7.1.0-beta1"  | "7.0.0-beta2" | true
         "7.1.0-beta2"  | "7.0.0-beta2" | true
         "7.1.0-Final"  | "7.0.0-beta2" | true
+        "7.1.0"        | "7.0.0-beta2" | true
         "7.2.0-alpha1" | "7.0.0-beta2" | true
         "7.2.0-alpha2" | "7.0.0-beta2" | true
         "7.2.0-beta1"  | "7.0.0-beta2" | true
         "7.2.0-beta2"  | "7.0.0-beta2" | true
         "7.2.0-Final"  | "7.0.0-beta2" | true
+        "7.2.0"        | "7.0.0-beta2" | true
 
         "7.0.0-alpha1" | "7.0.0-Final" | false
         "7.0.0-alpha2" | "7.0.0-Final" | false
         "7.0.0-beta1"  | "7.0.0-Final" | false
         "7.0.0-beta2"  | "7.0.0-Final" | false
         "7.0.0-Final"  | "7.0.0-Final" | true
+        "7.0.0"        | "7.0.0-Final" | true
         "7.1.0-alpha1" | "7.0.0-Final" | true
         "7.1.0-alpha2" | "7.0.0-Final" | true
         "7.1.0-beta1"  | "7.0.0-Final" | true
         "7.1.0-beta2"  | "7.0.0-Final" | true
         "7.1.0-Final"  | "7.0.0-Final" | true
+        "7.1.0"        | "7.0.0-Final" | true
         "7.2.0-alpha1" | "7.0.0-Final" | true
         "7.2.0-alpha2" | "7.0.0-Final" | true
         "7.2.0-beta1"  | "7.0.0-Final" | true
         "7.2.0-beta2"  | "7.0.0-Final" | true
         "7.2.0-Final"  | "7.0.0-Final" | true
+        "7.2.0"        | "7.0.0-Final" | true
 
         "7.0.0-alpha1" | "7.1.0-alpha1" | false
         "7.0.0-alpha2" | "7.1.0-alpha1" | false
         "7.0.0-beta1"  | "7.1.0-alpha1" | false
         "7.0.0-beta2"  | "7.1.0-alpha1" | false
         "7.0.0-Final"  | "7.1.0-alpha1" | false
+        "7.0.0"        | "7.1.0-alpha1" | false
         "7.1.0-alpha1" | "7.1.0-alpha1" | true
         "7.1.0-alpha2" | "7.1.0-alpha1" | true
         "7.1.0-beta1"  | "7.1.0-alpha1" | true
         "7.1.0-beta2"  | "7.1.0-alpha1" | true
         "7.1.0-Final"  | "7.1.0-alpha1" | true
+        "7.1.0"        | "7.1.0-alpha1" | true
         "7.2.0-alpha1" | "7.1.0-alpha1" | true
         "7.2.0-alpha2" | "7.1.0-alpha1" | true
         "7.2.0-beta1"  | "7.1.0-alpha1" | true
         "7.2.0-beta2"  | "7.1.0-alpha1" | true
         "7.2.0-Final"  | "7.1.0-alpha1" | true
+        "7.2.0"        | "7.1.0-alpha1" | true
 
         "7.0.0-alpha1" | "7.1.0-alpha2" | false
         "7.0.0-alpha2" | "7.1.0-alpha2" | false
         "7.0.0-beta1"  | "7.1.0-alpha2" | false
         "7.0.0-beta2"  | "7.1.0-alpha2" | false
         "7.0.0-Final"  | "7.1.0-alpha2" | false
+        "7.0.0"        | "7.1.0-alpha2" | false
         "7.1.0-alpha1" | "7.1.0-alpha2" | false
         "7.1.0-alpha2" | "7.1.0-alpha2" | true
         "7.1.0-beta1"  | "7.1.0-alpha2" | true
         "7.1.0-beta2"  | "7.1.0-alpha2" | true
         "7.1.0-Final"  | "7.1.0-alpha2" | true
+        "7.1.0"        | "7.1.0-alpha2" | true
         "7.2.0-alpha1" | "7.1.0-alpha2" | true
         "7.2.0-alpha2" | "7.1.0-alpha2" | true
         "7.2.0-beta1"  | "7.1.0-alpha2" | true
         "7.2.0-beta2"  | "7.1.0-alpha2" | true
         "7.2.0-Final"  | "7.1.0-alpha2" | true
+        "7.2.0"        | "7.1.0-alpha2" | true
 
         "7.0.0-alpha1" | "7.1.0-beta1" | false
         "7.0.0-alpha2" | "7.1.0-beta1" | false
         "7.0.0-beta1"  | "7.1.0-beta1" | false
         "7.0.0-beta2"  | "7.1.0-beta1" | false
         "7.0.0-Final"  | "7.1.0-beta1" | false
+        "7.0.0"        | "7.1.0-beta1" | false
         "7.1.0-alpha1" | "7.1.0-beta1" | false
         "7.1.0-alpha2" | "7.1.0-beta1" | false
         "7.1.0-beta1"  | "7.1.0-beta1" | true
         "7.1.0-beta2"  | "7.1.0-beta1" | true
         "7.1.0-Final"  | "7.1.0-beta1" | true
+        "7.1.0"        | "7.1.0-beta1" | true
         "7.2.0-alpha1" | "7.1.0-beta1" | true
         "7.2.0-alpha2" | "7.1.0-beta1" | true
         "7.2.0-beta1"  | "7.1.0-beta1" | true
         "7.2.0-beta2"  | "7.1.0-beta1" | true
         "7.2.0-Final"  | "7.1.0-beta1" | true
+        "7.2.0"        | "7.1.0-beta1" | true
 
         "7.0.0-alpha1" | "7.1.0-beta2" | false
         "7.0.0-alpha2" | "7.1.0-beta2" | false
         "7.0.0-beta1"  | "7.1.0-beta2" | false
         "7.0.0-beta2"  | "7.1.0-beta2" | false
         "7.0.0-Final"  | "7.1.0-beta2" | false
+        "7.0.0"        | "7.1.0-beta2" | false
         "7.1.0-alpha1" | "7.1.0-beta2" | false
         "7.1.0-alpha2" | "7.1.0-beta2" | false
         "7.1.0-beta1"  | "7.1.0-beta2" | false
         "7.1.0-beta2"  | "7.1.0-beta2" | true
         "7.1.0-Final"  | "7.1.0-beta2" | true
+        "7.1.0"        | "7.1.0-beta2" | true
         "7.2.0-alpha1" | "7.1.0-beta2" | true
         "7.2.0-alpha2" | "7.1.0-beta2" | true
         "7.2.0-beta1"  | "7.1.0-beta2" | true
         "7.2.0-beta2"  | "7.1.0-beta2" | true
         "7.2.0-Final"  | "7.1.0-beta2" | true
+        "7.2.0"        | "7.1.0-beta2" | true
 
         "7.0.0-alpha1" | "7.1.0-Final" | false
         "7.0.0-alpha2" | "7.1.0-Final" | false
         "7.0.0-beta1"  | "7.1.0-Final" | false
         "7.0.0-beta2"  | "7.1.0-Final" | false
         "7.0.0-Final"  | "7.1.0-Final" | false
+        "7.0.0"        | "7.1.0-Final" | false
         "7.1.0-alpha1" | "7.1.0-Final" | false
         "7.1.0-alpha2" | "7.1.0-Final" | false
         "7.1.0-beta1"  | "7.1.0-Final" | false
         "7.1.0-beta2"  | "7.1.0-Final" | false
         "7.1.0-Final"  | "7.1.0-Final" | true
+        "7.1.0"        | "7.1.0-Final" | true
         "7.2.0-alpha1" | "7.1.0-Final" | true
         "7.2.0-alpha2" | "7.1.0-Final" | true
         "7.2.0-beta1"  | "7.1.0-Final" | true
         "7.2.0-beta2"  | "7.1.0-Final" | true
         "7.2.0-Final"  | "7.1.0-Final" | true
+        "7.2.0"        | "7.1.0-Final" | true
 
         "7.0.0-alpha1" | "7.2.0-alpha1" | false
         "7.0.0-alpha2" | "7.2.0-alpha1" | false
         "7.0.0-beta1"  | "7.2.0-alpha1" | false
         "7.0.0-beta2"  | "7.2.0-alpha1" | false
         "7.0.0-Final"  | "7.2.0-alpha1" | false
+        "7.0.0"        | "7.2.0-alpha1" | false
         "7.1.0-alpha1" | "7.2.0-alpha1" | false
         "7.1.0-alpha2" | "7.2.0-alpha1" | false
         "7.1.0-beta1"  | "7.2.0-alpha1" | false
         "7.1.0-beta2"  | "7.2.0-alpha1" | false
         "7.1.0-Final"  | "7.2.0-alpha1" | false
+        "7.1.0"        | "7.2.0-alpha1" | false
         "7.2.0-alpha1" | "7.2.0-alpha1" | true
         "7.2.0-alpha2" | "7.2.0-alpha1" | true
         "7.2.0-beta1"  | "7.2.0-alpha1" | true
         "7.2.0-beta2"  | "7.2.0-alpha1" | true
         "7.2.0-Final"  | "7.2.0-alpha1" | true
+        "7.2.0"        | "7.2.0-alpha1" | true
 
         "7.0.0-alpha1" | "7.2.0-alpha2" | false
         "7.0.0-alpha2" | "7.2.0-alpha2" | false
         "7.0.0-beta1"  | "7.2.0-alpha2" | false
         "7.0.0-beta2"  | "7.2.0-alpha2" | false
         "7.0.0-Final"  | "7.2.0-alpha2" | false
+        "7.0.0"        | "7.2.0-alpha2" | false
         "7.1.0-alpha1" | "7.2.0-alpha2" | false
         "7.1.0-alpha2" | "7.2.0-alpha2" | false
         "7.1.0-beta1"  | "7.2.0-alpha2" | false
         "7.1.0-beta2"  | "7.2.0-alpha2" | false
         "7.1.0-Final"  | "7.2.0-alpha2" | false
+        "7.1.0"        | "7.2.0-alpha2" | false
         "7.2.0-alpha1" | "7.2.0-alpha2" | false
         "7.2.0-alpha2" | "7.2.0-alpha2" | true
         "7.2.0-beta1"  | "7.2.0-alpha2" | true
         "7.2.0-beta2"  | "7.2.0-alpha2" | true
         "7.2.0-Final"  | "7.2.0-alpha2" | true
+        "7.2.0"        | "7.2.0-alpha2" | true
 
         "7.0.0-alpha1" | "7.2.0-beta1" | false
         "7.0.0-alpha2" | "7.2.0-beta1" | false
         "7.0.0-beta1"  | "7.2.0-beta1" | false
         "7.0.0-beta2"  | "7.2.0-beta1" | false
         "7.0.0-Final"  | "7.2.0-beta1" | false
+        "7.0.0"        | "7.2.0-beta1" | false
         "7.1.0-alpha1" | "7.2.0-beta1" | false
         "7.1.0-alpha2" | "7.2.0-beta1" | false
         "7.1.0-beta1"  | "7.2.0-beta1" | false
         "7.1.0-beta2"  | "7.2.0-beta1" | false
+        "7.1.0"        | "7.2.0-beta1" | false
         "7.1.0-Final"  | "7.2.0-beta1" | false
         "7.2.0-alpha1" | "7.2.0-beta1" | false
         "7.2.0-alpha2" | "7.2.0-beta1" | false
         "7.2.0-beta1"  | "7.2.0-beta1" | true
         "7.2.0-beta2"  | "7.2.0-beta1" | true
         "7.2.0-Final"  | "7.2.0-beta1" | true
+        "7.2.0"        | "7.2.0-beta1" | true
 
         "7.0.0-alpha1" | "7.2.0-beta2" | false
         "7.0.0-alpha2" | "7.2.0-beta2" | false
         "7.0.0-beta1"  | "7.2.0-beta2" | false
         "7.0.0-beta2"  | "7.2.0-beta2" | false
         "7.0.0-Final"  | "7.2.0-beta2" | false
+        "7.0.0"        | "7.2.0-beta2" | false
         "7.1.0-alpha1" | "7.2.0-beta2" | false
         "7.1.0-alpha2" | "7.2.0-beta2" | false
         "7.1.0-beta1"  | "7.2.0-beta2" | false
         "7.1.0-beta2"  | "7.2.0-beta2" | false
         "7.1.0-Final"  | "7.2.0-beta2" | false
+        "7.1.0"        | "7.2.0-beta2" | false
         "7.2.0-alpha1" | "7.2.0-beta2" | false
         "7.2.0-alpha2" | "7.2.0-beta2" | false
         "7.2.0-beta1"  | "7.2.0-beta2" | false
         "7.2.0-beta2"  | "7.2.0-beta2" | true
         "7.2.0-Final"  | "7.2.0-beta2" | true
+        "7.2.0"        | "7.2.0-beta2" | true
 
         "7.0.0-alpha1" | "7.2.0-Final" | false
         "7.0.0-alpha2" | "7.2.0-Final" | false
         "7.0.0-beta1"  | "7.2.0-Final" | false
         "7.0.0-beta2"  | "7.2.0-Final" | false
         "7.0.0-Final"  | "7.2.0-Final" | false
+        "7.0.0"        | "7.2.0-Final" | false
         "7.1.0-alpha1" | "7.2.0-Final" | false
         "7.1.0-alpha2" | "7.2.0-Final" | false
         "7.1.0-beta1"  | "7.2.0-Final" | false
         "7.1.0-beta2"  | "7.2.0-Final" | false
         "7.1.0-Final"  | "7.2.0-Final" | false
+        "7.1.0"        | "7.2.0-Final" | false
         "7.2.0-alpha1" | "7.2.0-Final" | false
         "7.2.0-alpha2" | "7.2.0-Final" | false
         "7.2.0-beta1"  | "7.2.0-Final" | false
         "7.2.0-beta2"  | "7.2.0-Final" | false
         "7.2.0-Final"  | "7.2.0-Final" | true
+        "7.2.0"        | "7.2.0-Final" | true
+
+        "7.0.0-alpha1" | "7.1.0-Final-ee" | false
+        "7.0.0-alpha2" | "7.1.0-Final-ee" | false
+        "7.0.0-beta1"  | "7.1.0-Final-ee" | false
+        "7.0.0-beta2"  | "7.1.0-Final-ee" | false
+        "7.0.0-Final"  | "7.1.0-Final-ee" | false
+        "7.0.0"        | "7.1.0-Final-ee" | false
+        "7.1.0-alpha1" | "7.1.0-Final-ee" | false
+        "7.1.0-alpha2" | "7.1.0-Final-ee" | false
+        "7.1.0-beta1"  | "7.1.0-Final-ee" | false
+        "7.1.0-beta2"  | "7.1.0-Final-ee" | false
+        "7.1.0-Final"  | "7.1.0-Final-ee" | true
+        "7.1.0"        | "7.1.0-Final-ee" | true
+        "7.2.0-alpha1" | "7.1.0-Final-ee" | true
+        "7.2.0-alpha2" | "7.1.0-Final-ee" | true
+        "7.2.0-beta1"  | "7.1.0-Final-ee" | true
+        "7.2.0-beta2"  | "7.1.0-Final-ee" | true
+        "7.2.0-Final"  | "7.1.0-Final-ee" | true
+        "7.2.0"        | "7.1.0-Final-ee" | true
+
+        "7.0.0-alpha1" | "7.1.0-ee" | false
+        "7.0.0-alpha2" | "7.1.0-ee" | false
+        "7.0.0-beta1"  | "7.1.0-ee" | false
+        "7.0.0-beta2"  | "7.1.0-ee" | false
+        "7.0.0-Final"  | "7.1.0-ee" | false
+        "7.0.0"        | "7.1.0-ee" | false
+        "7.1.0-alpha1" | "7.1.0-ee" | false
+        "7.1.0-alpha2" | "7.1.0-ee" | false
+        "7.1.0-beta1"  | "7.1.0-ee" | false
+        "7.1.0-beta2"  | "7.1.0-ee" | false
+        "7.1.0-Final"  | "7.1.0-ee" | true
+        "7.1.0"        | "7.1.0-ee" | true
+        "7.2.0-alpha1" | "7.1.0-ee" | true
+        "7.2.0-alpha2" | "7.1.0-ee" | true
+        "7.2.0-beta1"  | "7.1.0-ee" | true
+        "7.2.0-beta2"  | "7.1.0-ee" | true
+        "7.2.0-Final"  | "7.1.0-ee" | true
+        "7.2.0"        | "7.1.0-ee" | true
+
+        "7.0.0-alpha1" | "7.1.0" | false
+        "7.0.0-alpha2" | "7.1.0" | false
+        "7.0.0-beta1"  | "7.1.0" | false
+        "7.0.0-beta2"  | "7.1.0" | false
+        "7.0.0-Final"  | "7.1.0" | false
+        "7.0.0"        | "7.1.0" | false
+        "7.1.0-alpha1" | "7.1.0" | false
+        "7.1.0-alpha2" | "7.1.0" | false
+        "7.1.0-beta1"  | "7.1.0" | false
+        "7.1.0-beta2"  | "7.1.0" | false
+        "7.1.0-Final"  | "7.1.0" | true
+        "7.1.0"        | "7.1.0" | true
+        "7.2.0-alpha1" | "7.1.0" | true
+        "7.2.0-alpha2" | "7.1.0" | true
+        "7.2.0-beta1"  | "7.1.0" | true
+        "7.2.0-beta2"  | "7.1.0" | true
+        "7.2.0-Final"  | "7.1.0" | true
+        "7.2.0"        | "7.1.0" | true
+
+        "7.0.0-SNAPSHOT" | "7.0.0-alpha1" | false
+        "7.0.0-SNAPSHOT" | "7.0.0-alpha2" | false
+        "7.0.0-SNAPSHOT" | "7.0.0-beta1"  | false
+        "7.0.0-SNAPSHOT" | "7.0.0-beta2"  | false
+        "7.0.0-SNAPSHOT" | "7.0.0-Final"  | false
+        "7.0.0-SNAPSHOT" | "7.0.0"        | false
+        "7.0.0-SNAPSHOT" | "7.1.0-alpha1" | false
+        "7.0.0-SNAPSHOT" | "7.1.0-alpha2" | false
+        "7.0.0-SNAPSHOT" | "7.1.0-beta1"  | false
+        "7.0.0-SNAPSHOT" | "7.1.0-beta2"  | false
+        "7.0.0-SNAPSHOT" | "7.1.0-Final"  | false
+        "7.0.0-SNAPSHOT" | "7.1.0"        | false
+        "7.0.0-SNAPSHOT" | "7.2.0-alpha1" | false
+        "7.0.0-SNAPSHOT" | "7.2.0-alpha2" | false
+        "7.0.0-SNAPSHOT" | "7.2.0-beta1"  | false
+        "7.0.0-SNAPSHOT" | "7.2.0-beta2"  | false
+        "7.0.0-SNAPSHOT" | "7.2.0-Final"  | false
+        "7.0.0-SNAPSHOT" | "7.2.0"        | false
+
+        "7.1.0-SNAPSHOT" | "7.0.0-alpha1" | true
+        "7.1.0-SNAPSHOT" | "7.0.0-alpha2" | true
+        "7.1.0-SNAPSHOT" | "7.0.0-beta1"  | true
+        "7.1.0-SNAPSHOT" | "7.0.0-beta2"  | true
+        "7.1.0-SNAPSHOT" | "7.0.0-Final"  | true
+        "7.1.0-SNAPSHOT" | "7.0.0"        | true
+        "7.1.0-SNAPSHOT" | "7.1.0-alpha1" | false
+        "7.1.0-SNAPSHOT" | "7.1.0-alpha2" | false
+        "7.1.0-SNAPSHOT" | "7.1.0-beta1"  | false
+        "7.1.0-SNAPSHOT" | "7.1.0-beta2"  | false
+        "7.1.0-SNAPSHOT" | "7.1.0-Final"  | false
+        "7.1.0-SNAPSHOT" | "7.1.0"        | false
+        "7.1.0-SNAPSHOT" | "7.2.0-alpha1" | false
+        "7.1.0-SNAPSHOT" | "7.2.0-alpha2" | false
+        "7.1.0-SNAPSHOT" | "7.2.0-beta1"  | false
+        "7.1.0-SNAPSHOT" | "7.2.0-beta2"  | false
+        "7.1.0-SNAPSHOT" | "7.2.0-Final"  | false
+        "7.1.0-SNAPSHOT" | "7.2.0"        | false
 
         "7.2.0-SNAPSHOT" | "7.0.0-alpha1" | true
         "7.2.0-SNAPSHOT" | "7.0.0-alpha2" | true
         "7.2.0-SNAPSHOT" | "7.0.0-beta1"  | true
         "7.2.0-SNAPSHOT" | "7.0.0-beta2"  | true
         "7.2.0-SNAPSHOT" | "7.0.0-Final"  | true
+        "7.2.0-SNAPSHOT" | "7.0.0"        | true
         "7.2.0-SNAPSHOT" | "7.1.0-alpha1" | true
         "7.2.0-SNAPSHOT" | "7.1.0-alpha2" | true
         "7.2.0-SNAPSHOT" | "7.1.0-beta1"  | true
         "7.2.0-SNAPSHOT" | "7.1.0-beta2"  | true
         "7.2.0-SNAPSHOT" | "7.1.0-Final"  | true
+        "7.2.0-SNAPSHOT" | "7.1.0"        | true
         "7.2.0-SNAPSHOT" | "7.2.0-alpha1" | false
         "7.2.0-SNAPSHOT" | "7.2.0-alpha2" | false
         "7.2.0-SNAPSHOT" | "7.2.0-beta1"  | false
         "7.2.0-SNAPSHOT" | "7.2.0-beta2"  | false
         "7.2.0-SNAPSHOT" | "7.2.0-Final"  | false
-
+        "7.2.0-SNAPSHOT" | "7.2.0"        | false
+        
         "7.2.0-SNAPSHOT" | "7.2.0-SNAPSHOT"  | false
+        "7.1.0-SNAPSHOT" | "7.1.0-SNAPSHOT"  | false
+        "7.0.0-SNAPSHOT" | "7.0.0-SNAPSHOT"  | false
 
     }
 

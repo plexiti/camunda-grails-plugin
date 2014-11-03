@@ -10,7 +10,7 @@ import java.util.regex.Pattern
 class CamundaBpmVersion {
     
     protected static String testVersion
-    protected static Pattern versionPattern = ~/^(\d+)\.(\d+)\.(\d+)-(alpha|beta|Final|SNAPSHOT)(\d*)$/
+    protected static Pattern versionPattern = ~/^(\d+)\.(\d+)\.(\d+)-?(alpha|beta|Final|SNAPSHOT)?(\d*)(-ee)?$/
     
     public static boolean isAtLeast(String neededVersion) {
         def neededMatcher = versionPattern.matcher(neededVersion)
@@ -37,8 +37,8 @@ class CamundaBpmVersion {
                 if (actual > needed) {
                     return true
                 } else if (actual == needed) {
-                    actual = actualMatcher[0][4] as String
-                    needed = neededMatcher[0][4] as String
+                    actual = (actualMatcher[0][4] ?: "Final") as String
+                    needed = (neededMatcher[0][4] ?: "Final") as String
                     if (!actual.equals('SNAPSHOT')) {
                         if (actual.toLowerCase().compareTo(needed.toLowerCase()) > 0) {
                             return true
