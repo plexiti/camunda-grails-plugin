@@ -6,6 +6,8 @@ import grails.test.AbstractCliTestCase
 class CreateProcessTests extends AbstractCliTestCase {
 
     void testCreateProcess() {
+        
+        this.timeout = 5 * 60 * 1000
 
         def bpmnFile = new File("${workDir}/grails-app/processes/com/plexiti/SampleProcess.bpmn")
         def testFile = new File("${workDir}/test/integration/com/plexiti/SampleProcessSpec.groovy")
