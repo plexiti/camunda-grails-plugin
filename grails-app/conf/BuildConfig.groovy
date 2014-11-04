@@ -68,7 +68,7 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.1.0"
         compile ':cache:1.1.3'
         compile ':asset-pipeline:1.8.3'
-        compile ':camunda:0.3.0-SNAPSHOT'
+        compile ':camunda:0.4.0-SNAPSHOT'
         runtime ":hibernate:3.6.10.14" // or ":hibernate4:4.3.5.2"
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.0.2"
