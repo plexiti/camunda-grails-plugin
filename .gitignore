@@ -19,6 +19,5 @@ stacktrace.log
 /web-app/WEB-INF/tld
 /.link_to_grails_plugins/
 /target-eclipse/
-generate-docs
 camunda.tmproj
-release.sh
+/release*
