@@ -11,6 +11,10 @@ class CreateProcessTests extends AbstractCliTestCase {
 
         def bpmnFile = new File("${workDir}/grails-app/processes/com/plexiti/SampleProcess.bpmn")
         def testFile = new File("${workDir}/test/integration/com/plexiti/SampleProcessSpec.groovy")
+        if (bpmnFile.exists())
+            bpmnFile.delete()
+        if (testFile.exists())
+            testFile.delete()
         assert !bpmnFile.exists()
         assert !testFile.exists()
 
