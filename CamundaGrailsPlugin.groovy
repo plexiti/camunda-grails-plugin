@@ -38,6 +38,7 @@ Virtual Machine. It is a perfect match for the Spring Framework - and therefore 
 
     def watchedResources = [ "file:./grails-app/processes/**/*.bpmn" ]
     def doWithSpring = CamundaPluginSupport.doWithSpring
+    def doWithWebDescriptor = CamundaPluginSupport.doWithWebDescriptor
     def onChange = CamundaPluginSupport.onchange 
 
 }

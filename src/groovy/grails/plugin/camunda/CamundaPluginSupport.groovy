@@ -16,11 +16,15 @@
 package grails.plugin.camunda
 
 import grails.util.Environment
+import org.camunda.bpm.BpmPlatform
+import org.camunda.bpm.ProcessApplicationService
+import org.camunda.bpm.ProcessEngineService
 import org.camunda.bpm.engine.ProcessEngineException
 import org.camunda.bpm.engine.RepositoryService
 import org.camunda.bpm.engine.repository.DeploymentBuilder
 import org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration
 import org.camunda.bpm.engine.spring.ProcessEngineFactoryBean
+import org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
 import org.camunda.bpm.engine.test.mock.MockExpressionManager
 import org.slf4j.bridge.SLF4JBridgeHandler
 import org.springframework.beans.BeanUtils
@@ -67,6 +71,17 @@ class CamundaPluginSupport {
                     )
                 }
             }
+        } else if (application.config.camunda.deployment.scenario == 'shared') {
+            camundaProcessEngineServiceBean(BpmPlatform) { beanDefinition ->
+                beanDefinition.factoryMethod = 'getProcessEngineService'
+            }
+            camundaProcessEngineBean(camundaProcessEngineServiceBean: 'getDefaultProcessEngine')
+            if (!application.config.camunda.deployment.container
+                || application.config.camunda.deployment.container == 'tomcat') {
+            camundaProcessApplicationBean(SpringServletProcessApplication)
+            }
+        }
+        if (springConfig.beanNames.find { it == 'camundaProcessEngineBean' }) {
             // Instantiate camunda service API beans
             camundaRuntimeServiceBean(camundaProcessEngineBean: 'getRuntimeService')
             camundaRepositoryServiceBean(camundaProcessEngineBean: 'getRepositoryService')
@@ -79,6 +94,32 @@ class CamundaPluginSupport {
             // Finally, register all camunda beans under their default or user configured aliases
             springConfig.beanNames.findAll { it.startsWith("camunda") && it.endsWith("Bean") }.each {
                 springConfig.addAlias Identifiers.beanName(it), it
+            }
+        }
+    }
+    
+    static doWithWebDescriptor = { webXml ->
+        // for tomcat, declare resource links in web xml
+        if (application.config.camunda.deployment.scenario == 'shared'
+            && (!application.config.camunda.deployment.container
+              || application.config.camunda.deployment.container == 'tomcat')) {
+            def element = webXml.'context-param'
+            element[element.size() - 1] + {
+                'resource-ref' {
+                    'description'('Process Engine Service')
+                    'res-ref-name'('ProcessEngineService')
+                    'res-type'(ProcessEngineService.name)
+                    'res-auth'('Container')
+                }
+            }
+            element = webXml.'resource-ref'
+            element[element.size() - 1] + {
+                'resource-ref' {
+                    'description'('Process Application Service')
+                    'res-ref-name'('ProcessApplicationService')
+                    'res-type'(ProcessApplicationService.name)
+                    'res-auth'('Container')
+                }
             }
         }
     }

@@ -24,12 +24,33 @@ eventTestPhaseStart = { args ->
     System.properties["grails.test.phase"] = args
 }
 
-// when creating a war, include the *.bpmn resources
+// when creating a war
 eventCreateWarStart = { warName, stagingDir ->
+    // 1) include the *.bpmn resources
     if ((processesDir as File).exists()) {
         ant.copy(todir: "${stagingDir}/WEB-INF/classes") {
             fileset(dir: processesDir) {
                 include(name: "**/*.bpmn")
+            }
+        }
+    }
+    // 2) support 'shared' deployment scenario
+    if (config.camunda.deployment.scenario == 'shared') {
+        // create empty processes.xml but respect 'grails-app/conf/META-INF/processes.xml'
+        ant.mkdir(dir: "${stagingDir}/WEB-INF/classes/META-INF")
+        ant.touch(file: "${stagingDir}/WEB-INF/classes/META-INF/processes.xml")
+        // for tomcat, provide resource links, but respect 'web-app/META-INF/context.xml'
+        if (!config.camunda.deployment.container
+            || config.camunda.deployment.container == 'tomcat') {
+            ant.mkdir(dir: "${stagingDir}/META-INF")
+            ant.copy(file: "${camundaPluginDir}/web-app/META-INF/context.xml", todir: "${stagingDir}/META-INF")
+        }
+        // do not bundle libraries provided by container
+        ant.delete() {
+            fileset(dir: "${stagingDir}/WEB-INF/lib") {
+                include(name: "camunda-*.jar")
+                include(name: "groovy-all-*.jar")
+                exclude(name: "camunda-engine-spring-*.jar")
             }
         }
     }
@@ -38,10 +59,10 @@ eventCreateWarStart = { warName, stagingDir ->
 // when compiling, clean up *.bpmn from dev tomcat work dir
 // (avoids camunda's duplicate bpmn deployment id error message)
 eventCompileStart = { type ->
-    def tomcatWorkDir = "${projectWorkDir}/tomcat/work"
-    if ((tomcatWorkDir as File).exists()) {
+    def tomcatDir = "${projectWorkDir}/tomcat"
+    if ((tomcatDir as File).exists()) {
         ant.delete() {
-            fileset(dir: tomcatWorkDir) {
+            fileset(dir: tomcatDir) {
                 include(name: "**/*.bpmn")
             }
         }
