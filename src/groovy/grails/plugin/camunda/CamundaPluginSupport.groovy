@@ -16,6 +16,7 @@
 package grails.plugin.camunda
 
 import grails.util.Environment
+import grails.util.Metadata
 import org.camunda.bpm.BpmPlatform
 import org.camunda.bpm.ProcessApplicationService
 import org.camunda.bpm.ProcessEngineService
@@ -76,9 +77,9 @@ class CamundaPluginSupport {
                 beanDefinition.factoryMethod = 'getProcessEngineService'
             }
             camundaProcessEngineBean(camundaProcessEngineServiceBean: 'getDefaultProcessEngine')
-            if (!application.config.camunda.deployment.container
-                || application.config.camunda.deployment.container == 'tomcat') {
-            camundaProcessApplicationBean(SpringServletProcessApplication)
+            if (!application.config.camunda.deployment.application
+                || application.config.camunda.deployment.application instanceof SpringServletProcessApplication) {
+                    "${Metadata.current.'app.name'}"(application.config.camunda.deployment.application ?: SpringServletProcessApplication)
             }
         }
         if (springConfig.beanNames.find { it == 'camundaProcessEngineBean' }) {
