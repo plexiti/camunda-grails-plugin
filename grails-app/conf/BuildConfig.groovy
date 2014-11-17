@@ -21,7 +21,7 @@ grails.project.fork = [
     console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
 ]
 
-def camundaVersion = System.getProperty("camunda-bpm.version") ?: "7.1.0-Final"
+def camundaVersion = System.getProperty("camunda-bpm.version") ?: "7.2.0-alpha6"
 
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
