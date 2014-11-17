@@ -23,9 +23,9 @@ class CreateProcessTests extends AbstractCliTestCase {
             assert waitForProcess() == 0
             verifyHeader()
             assert bpmnFile.exists()
-            assert (new String(bpmnFile.readBytes()) =~ /SampleProcess/).size() == 4 // number of expected replacements
+            assert (new String(bpmnFile.readBytes()) =~ /SampleProcess/).size() == 3 // number of expected replacements
             assert testFile.exists()
-            assert (new String(testFile.readBytes()) =~ /SampleProcess/).size() == 15 // number of expected occurrences
+            assert (new String(testFile.readBytes()) =~ /SampleProcess/).size() == 11 // number of expected occurrences
             assert (new String(testFile.readBytes()) =~ /SampleProcessSpec/).size() == 1 // number of expected occurrences
         } finally {
             if (bpmnFile.exists())

@@ -2,6 +2,7 @@ package grails.plugin.camunda.test
 
 import org.camunda.bpm.engine.RuntimeService
 import org.camunda.bpm.engine.TaskService
+import org.camunda.bpm.engine.runtime.Execution
 import org.camunda.bpm.engine.test.mock.Mocks
 import spock.lang.Specification
 
@@ -19,21 +20,13 @@ class TestProcessSpec extends Specification {
     /**
      * 2) Mock your Grail(s) services called from TestProcess
      */
-    def sampleTestProcessService = Mock(SampleTestProcessService)
-
-    /*
-     * Sample service to get started quickly. For real testing, mock your actual
-     * Grails Service(s) called from TestProcess, then delete this!
-     */
-    class SampleTestProcessService {
-        void serviceMethod() {}
-    }
+    def sampleTestProcessService = Mock(SampleService)
 
     /**
      * 3) Register your service mocks to make them accessible via TestProcess
      */
     def setup() {
-        Mocks.register("sampleTestProcessService", sampleTestProcessService)
+        Mocks.register("sampleService", sampleTestProcessService)
     }
 
     def cleanup() {
@@ -53,7 +46,7 @@ class TestProcessSpec extends Specification {
         taskService.complete(task.id)
 
         then: "the service method defined for the subsequent service task was called exactly once"
-        1 * sampleTestProcessService.serviceMethod()
+        1 * sampleTestProcessService.serviceMethod(_ as Execution)
 
         and: "nothing else was called"
         0 * _
