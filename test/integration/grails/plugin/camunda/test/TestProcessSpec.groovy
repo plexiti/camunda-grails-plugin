@@ -20,7 +20,7 @@ class TestProcessSpec extends Specification {
     /**
      * 2) Mock your Grail(s) services called from TestProcess
      */
-    def sampleTestProcessService = Mock(SampleService)
+    def sampleTestProcessService = Mock(grails.plugin.camunda.test.SampleService)
 
     /**
      * 3) Register your service mocks to make them accessible via TestProcess
