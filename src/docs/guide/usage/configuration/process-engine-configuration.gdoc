@@ -1,4 +1,4 @@
-You can fully control your embedded camunda process engine configuration via Config.groovy:
+You can fully control your *embedded* camunda process engine configuration via Config.groovy:
 
 {code}
 camunda {
@@ -56,7 +56,7 @@ camunda {
 }
 {code}
 
-{note} Please be aware that during integration test phase of any environment, two more camunda
+{note} Please be aware that during integration test phase of any environment, two camunda
 configuration values are set by the plugin: the camunda job executor is turned off and service
 mocking is made available. Find more information about that in section
 [testing|guide:testing].{note}

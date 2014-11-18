@@ -20,8 +20,8 @@ your application with the spring framework version provided by the Grails versio
 Note that for camunda versions prior to 7.1.0-Final, you must also configure camunda's custom 
 maven repository:
 
-{code}
-  repositories {
-    mavenRepo "https://app.camunda.com/nexus/content/groups/public"
-  }
+{code:groovy}
+repositories {
+  mavenRepo "https://app.camunda.com/nexus/content/groups/public"
+}
 {code}

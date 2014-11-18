@@ -1,0 +1,36 @@
+Download and start a vanilla [Tomcat|http://tomcat.apache.org/download-70.cgi].
+Furthermore, you will need to add some explicit configuration, as the plugin 
+doesn't interfere with default camunda configuration values for production 
+environments. To get started with a basic configuration for your embedded engine 
+'*production*' environment, this might look like  
+
+{code}
+environments {
+    production {
+        camunda {
+            deployment.scenario = 'embedded' // optional, as 'embedded' is default value
+            engine {
+                configuration {
+                    databaseSchemaUpdate = true
+                    deploymentResources = ['classpath:/**/*.bpmn']
+                    jobExecutorActivate = true
+                }
+            }
+        }
+    }
+}
+{code}
+
+*Finally*, build your 'war' file ...
+
+{code:bash}
+grails war
+{code}
+
+...and deploy it to your vanilla tomcat containers 'webapp' folder.
+
+Optionally, you might want to download [camunda BPM standalone webapp|http://camunda.org/download/], 
+deploy it alongside your grails' webapp and point it to the database of your embedded engine. You can 
+then use camunda BPM cockpit to monitor and manage your processes. You can also use tasklist and work 
+with 'generated' and/or 'external' forms, 'embedded' forms however will just work in the 'shared' 
+process engine scenario.

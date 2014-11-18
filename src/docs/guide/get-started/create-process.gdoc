@@ -30,7 +30,7 @@ def task = taskService.createTaskQuery().singleResult()
 taskService.complete(task.id)
 
 then: "the service method defined for the subsequent service task was called exactly once"
-1 * sampleTestProcessService.serviceMethod()
+1 * sampleTestProcessService.serviceMethod(_ as Execution)
 [...]
 {code}
 

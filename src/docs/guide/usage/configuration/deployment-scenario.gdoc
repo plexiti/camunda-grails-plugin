@@ -2,15 +2,45 @@ You can set the [deployment
 scenario|http://docs.camunda.org/latest/guides/user-guide/#introduction-architecture-overview-camunda-bpm-platform-architecture]
 for your process engine. The plugin currently supports the deployment scenarios 
 
-- '*embedded*' (default): the process engine is embedded into your grails application and started and stopped with your grails application lifecycle 
+- '*embedded*' (default): the process engine is embedded into your grails application and started and stopped with your grails application lifecycle. Download a vanilla Tomcat 7 Distribution and deploy your grails application to Tomcat's 'webapp' folder.
+- '*shared*': the process engine is shared, so preconfigured within and managed by your container: 
 - '*none*': the process engine configuration and startup is turned off
 
 {code:groovy}
 camunda {
-  deployment.scenario = "embedded" // (or "none")
+  deployment.scenario = "embedded" // (or "shared", "none")
 }
 {code}
 
 {note}
-The value 'embedded' is the *default* in case you do not set and change it explicitely.
+The value 'embedded' is the *default* in case you do not set it explicitely.
 {note}
+
+Typically, you will want to use the 'shared' engine only for those grails environments which you 
+use to prepare your container deployment war, e.g. 'production': 
+
+{code:groovy}
+environments {
+    production {
+        camunda {
+            deployment {
+                scenario = "shared"
+            }
+        }
+    }
+}
+{code}
+
+{note}
+Currently the plugin only supports *tomcat* as a container to look up a shared process engine. Download 
+camunda BPM *Tomcat* distribution.
+{note}
+
+For a shared scenario, you may want to provide your own *@ProcessApplication* annotated class 
+in order to use its configuration possibilities. For details, please read camunda docs about the 
+[process application class|http://docs.camunda.org/latest/guides/user-guide/#process-applications-the-process-application-class].
+Just place this class into your grails application's '/src/groovy' or 'src/java' folder and the 
+camunda BPM container will detect and use it. However, you don't *need* your own custom *@ProcessApplication* 
+annotated class, the camunda grails plugin will automatically take care of registering a default 
+SpringServletProcessApplication for you!
+

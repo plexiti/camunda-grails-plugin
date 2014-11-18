@@ -1,7 +1,7 @@
 You can call services from within your process via [JUEL|http://juel.sourceforge.net] expressions, like e.g.
 
 {code}
-<serviceTask id="myServiceTask" camunda:expression="#{sampleTestProcessService.serviceMethod()}" ... >
+<serviceTask id="myServiceTask" camunda:expression="#{sampleTestProcessService.serviceMethod(execution)}" ... >
 ...
 </serviceTask>
 {code}
@@ -9,11 +9,11 @@ You can call services from within your process via [JUEL|http://juel.sourceforge
 For your tests, instead of calling your actual service 'sampleTestProcessService' you can call a mock, like e.g.
 
 {code}
-def sampleTestProcessService = Mock(SampleTestProcessService)
-org.camunda.bpm.engine.test.mock.Mocks.register("sampleTestProcessService", sampleTestProcessService)
+def sampleTestProcessService = Mock(SampleService)
+org.camunda.bpm.engine.test.mock.Mocks.register("sampleService", sampleTestProcessService)
 {code}
 
-This will make sure that the juel identifier 'sampleTestProcessService' will be resolved to the mock instance,
+This will make sure that the juel identifier 'sampleService' will be resolved to the mock instance,
 provided you use the
 [MockExpressionManager|http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/test/mock/MockExpressionManager.html]
 for resolving your JUEL expression identifiers - which is what the plugin will make sure for Grails' integration test

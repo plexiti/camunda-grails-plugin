@@ -1,0 +1,29 @@
+Do you want to see the *camunda BPM* tasklist and cockpit web apps *in action* with your 
+freshly created process? Then download a *[camunda BPM|http://camunda.org/download/] distribution* 
+for *tomcat*, expand the archive, go to the expanded folder and start it by issuing:
+ 
+{code:bash}
+./start-camunda.sh
+{code}
+
+Now, return to your your grails project command line, and create a 'war' file prepared to use
+the process engine managed by the camunda BPM tomcat container and shared with your grails app:
+
+{code:bash}
+grails -Dcamunda.deployment.scenario=shared war
+{code}
+
+Move the war generated in your target folder into the camunda BPM tomcat 'webapp' folder. 
+Open [http://localhost:8080/camunda-welcome|http://localhost:8080/camunda-welcome] and navigate 
+to the tasklist application. Log in with user 'demo', password 'demo' and start your new process 
+via the (little bit hidden :-) "start process" button in the top right corner:
+
+!tasklist-start-process.png!
+
+The sample form shows you different types of fields. You must at least select one of the values
+in the 'sampleRequiredSelectionField' in order to validate the start form and enable the 
+"Start"-Button. Start the process and you should see the "Sample UserTask" of your process 
+assigned to you as user "demo". You may want to check out the diagram pane of your process and then
+complete the task via the form. This will execute the subsequent service task (which logs 
+the process variables provided by you into your tomcats logs/catalina.out file) and immediately 
+after that finish your process instance.

@@ -1,0 +1,10 @@
+Of course, you can use the process engine just internally in your application. Then 
+just inject [camunda API services|guide:services] into your grails controllers and/or 
+services and use them behind the scenes.
+
+As an alternative to building your custom 'full fledged' grails application, you might 
+want to use *[camunda tasklist|http://docs.camunda.org/latest/guides/user-guide/#tasklist]* 
+to work yourself through your processes. In that case you will want to create 
+some forms which can be presented to your camunda BPM tasklist user.
+
+!tasklist-dashboard.png!
