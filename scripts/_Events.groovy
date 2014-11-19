@@ -1,3 +1,5 @@
+import static grails.plugin.camunda.Configuration.config
+
 /*
  * Copyright 2014 Martin Schimak - plexiti GmbH
  *
@@ -35,13 +37,12 @@ eventCreateWarStart = { warName, stagingDir ->
         }
     }
     // 2) support 'shared' deployment scenario
-    if (config.camunda.deployment.scenario == 'shared') {
+    if (config('camunda.deployment.scenario') == 'shared') {
         // create empty processes.xml but respect 'grails-app/conf/META-INF/processes.xml'
         ant.mkdir(dir: "${stagingDir}/WEB-INF/classes/META-INF")
         ant.touch(file: "${stagingDir}/WEB-INF/classes/META-INF/processes.xml")
         // for tomcat, provide resource links, but respect 'web-app/META-INF/context.xml'
-        if (!config.camunda.deployment.container
-            || config.camunda.deployment.container == 'tomcat') {
+        if (config('camunda.deployment.container') == 'tomcat') {
             ant.mkdir(dir: "${stagingDir}/META-INF")
             ant.copy(file: "${camundaPluginDir}/web-app/META-INF/context.xml", todir: "${stagingDir}/META-INF")
         }

@@ -30,14 +30,15 @@ import org.camunda.bpm.engine.test.mock.MockExpressionManager
 import org.slf4j.bridge.SLF4JBridgeHandler
 import org.springframework.beans.BeanUtils
 
+import static grails.plugin.camunda.Configuration.*
+
 /**
  * @author Martin Schimak <martin.schimak@plexiti.com>
  */
 class CamundaPluginSupport {
 
     static doWithSpring = {
-        if (!application.config.camunda.deployment.scenario
-                || application.config.camunda.deployment.scenario == 'embedded') {
+        if (config('camunda.deployment.scenario') == 'embedded') {
             camundaProcessEngineBean(ProcessEngineFactoryBean) {
                 processEngineConfiguration = ref('camundaProcessEngineConfigurationBean')
             }
@@ -72,14 +73,13 @@ class CamundaPluginSupport {
                     )
                 }
             }
-        } else if (application.config.camunda.deployment.scenario == 'shared') {
+        } else if (config('camunda.deployment.scenario') == 'shared') {
             camundaProcessEngineServiceBean(BpmPlatform) { beanDefinition ->
                 beanDefinition.factoryMethod = 'getProcessEngineService'
             }
             camundaProcessEngineBean(camundaProcessEngineServiceBean: 'getDefaultProcessEngine')
-            if (!application.config.camunda.deployment.application
-                || application.config.camunda.deployment.application instanceof SpringServletProcessApplication) {
-                    "${Metadata.current.'app.name'}"(application.config.camunda.deployment.application ?: SpringServletProcessApplication)
+            if (SpringServletProcessApplication.isAssignableFrom(config('camunda.deployment.application') as Class)) {
+                "${Metadata.current.'app.name'}"(config('camunda.deployment.application'))
             }
         }
         if (springConfig.beanNames.find { it == 'camundaProcessEngineBean' }) {
@@ -101,9 +101,8 @@ class CamundaPluginSupport {
     
     static doWithWebDescriptor = { webXml ->
         // for tomcat, declare resource links in web xml
-        if (application.config.camunda.deployment.scenario == 'shared'
-            && (!application.config.camunda.deployment.container
-              || application.config.camunda.deployment.container == 'tomcat')) {
+        if (config('camunda.deployment.scenario') == 'shared'
+            && (config('camunda.deployment.container') == 'tomcat')) {
             def element = webXml.'context-param'
             element[element.size() - 1] + {
                 'resource-ref' {
@@ -128,9 +127,7 @@ class CamundaPluginSupport {
     static onchange = { event ->
         if (event.source && event.source.file) { // ./grails-app/processes/**/*.bpmn resource changed
             // reload in 'dev' and 'test' by default, or when explicitely configured
-            if (event.application.config.camunda.deployment.autoreload == true 
-                || (!event.application.flatConfig.containsKey('camunda.deployment.autoreload') 
-                    && Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ])) {
+            if (config('camunda.deployment.autoreload')) {
                 RepositoryService repositoryService = event.ctx.getBean("camundaRepositoryServiceBean")
                 DeploymentBuilder deploymentBuilder = repositoryService
                     .createDeployment()
