@@ -10,7 +10,7 @@ Now, return to your your grails project command line, and create a 'war' file pr
 the process engine managed by the camunda BPM tomcat container and shared with your grails app:
 
 {code:bash}
-grails -Dcamunda.deployment.scenario=shared war
+grails war
 {code}
 
 Move the war generated in your target folder into the camunda BPM tomcat 'webapp' folder. 

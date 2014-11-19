@@ -2,8 +2,8 @@ You can set the [deployment
 scenario|http://docs.camunda.org/latest/guides/user-guide/#introduction-architecture-overview-camunda-bpm-platform-architecture]
 for your process engine. The plugin currently supports the deployment scenarios 
 
-- '*embedded*' (default): the process engine is embedded into your grails application and started and stopped with your grails application lifecycle. Download a vanilla Tomcat 7 Distribution and deploy your grails application to Tomcat's 'webapp' folder.
-- '*shared*': the process engine is shared, so preconfigured within and managed by your container: 
+- '*embedded*' the process engine is embedded into your grails application and started and stopped with your grails application lifecycle
+- '*shared*': the process engine is shared, so preconfigured within and managed by your container 
 - '*none*': the process engine configuration and startup is turned off
 
 {code:groovy}
@@ -13,7 +13,14 @@ camunda {
 {code}
 
 {note}
-The value 'embedded' is the *default* in case you do not set it explicitely.
+As long as you do not set this value explicitely, the plugin assumes for grails' environments @dev@ 
+and @test@ the value 'embedded' to be the default scenario, *for all other environment the value 
+'shared'* (except if you have provided explicit @camunda.engine.configuration@ values for an embedded 
+engine in which case 'embedded' remains default for other environments, too). The moment you 
+set this value explicitely, the plugin of course won't interfere anymore!
+{note}
+
+The moment you set the value explicitely, the plugin won't interfere with your decision. However,  
 {note}
 
 Typically, you will want to use the 'shared' engine only for those grails environments which you 
