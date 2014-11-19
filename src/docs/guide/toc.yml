@@ -10,22 +10,25 @@ usage:
     title: User Guide
     script-create-process: Create a process definition
     services: Inject camunda API Services
-    configuration: 
-        title: Configure the camunda plugin
-        deployment-scenario: Set the deployment scenario
-        process-engine-configuration: Configure your process engine
-        configuration-possibilities: Use primitive types, any object or even spring beans
-        jul-logging: Consider 'java.util.logging' settings
-        alternative-database: Use a different database 
-        alternative-engine-version: Use an alternative version of camunda 
-        bean-names: Provide alternative bean names
-        override-configuration: Override plugin configuration with custom beans
-        auto-reload-configuration: Configure auto reloading of bpmn process definitions
-forms: 
-    title: Forms guide
     embedded-forms: Develop a camunda BPM tasklist application
-    embedded-forms-in-action: Deploy your camunda BPM tasklist app
-    custom-form-controllers: Deliver forms via your own grails controllers
+    custom-form-controllers: Redirect camunda BPM tasklist to your own grails application
+configuration: 
+    title: Configuration Guide
+    deployment-scenario: Set the deployment scenario
+    configuration-embedded:
+        title: Configure an 'embedded' process engine
+        process-engine-configuration: Configure your process engine
+        configuration-possibilities: Use primitive types, beans or any other object
+        alternative-database: Use an alternative database 
+    configuration-shared:
+        title: Configure a 'shared' process engine
+        processes-xml: Provide a custom processes.xml file
+        process-application-class: Provide a custom process application class
+    jul-logging: Consider 'java.util.logging' settings
+    alternative-engine-version: Use an alternative version of camunda 
+    bean-names: Provide alternative bean names
+    override-configuration: Override plugin configuration with custom beans
+    auto-reload-configuration: Configure auto reloading of bpmn process definitions
 deployment: 
     title: Deployment Guide
     configuration-of-deployment-scenario: Consider your deployment scenario

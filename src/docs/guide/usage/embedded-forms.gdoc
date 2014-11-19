@@ -3,6 +3,8 @@ Using the camunda BPM tasklist with 'embedded' forms as described in this sectio
 work with a 'shared' process engine [deployment scenario|guide:deployment-scenario].
 {note}
 
+!tasklist-dashboard.png!
+
 With the help of the *camunda Grails Plugin* you can *use grails gsp views to dynamically* 
 *render 'embedded' forms* and hook them to the camunda BPM tasklist. You just need two things: 
 *First*, place your form into the views folder, like e.g. ...

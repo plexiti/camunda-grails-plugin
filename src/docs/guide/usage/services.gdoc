@@ -1,4 +1,5 @@
-You can inject the camunda process engine API services into your grails artifacts (like
+You can easily use the process engine internally in your application. Just inject 
+the camunda process engine API services into your grails artifacts (like
 controllers, services, etc). The following services can be found in the package
 [org.camunda.bpm.engine|http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/package-summary.html]
 and are made available under their 'bean style' class names, as shown here in alphabetical order:
@@ -33,3 +34,7 @@ import org.camunda.bpm.engine.*
 ProcessEngine processEngine
 {code}
 
+As an alternative to building your custom 'full fledged' grails application, you might 
+want to use *[camunda tasklist|http://docs.camunda.org/latest/guides/user-guide/#tasklist]* 
+to work yourself through your processes. In that case you will want to create 
+some forms which can be presented to your camunda BPM tasklist user.

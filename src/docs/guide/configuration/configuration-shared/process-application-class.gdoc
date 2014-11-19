@@ -1,0 +1,25 @@
+*camunda Grails Plugin* will automatically take care of registering a default 
+[process application class|http://docs.camunda.org/latest/guides/user-guide/#process-applications-the-process-application-class]
+of type @org.camunda.bpm.engine.spring.application.SpringServletProcessApplication@ 
+for you. So normally you don't need to do anything. 
+
+However, for some reason, you may want to provide a custom process application class. Place this class 
+inside your grails application's @/src/groovy@ or @src/java@ folder and register it like
+
+{code:groovy}
+environments {
+    production {
+        camunda {
+            deployment {
+                scenario = "shared"
+                application = my.project.pkg.MyCustomSpringServletProcessApplication 
+            }
+        }
+    }
+}
+{code}    
+
+The plugin will then use this class for either registering your custom spring process application (in 
+case this class extends @org.camunda.bpm.engine.spring.application.SpringServletProcessApplication@) 
+or for all other types the plugin will register nothing and assume that you want your container to detect and 
+use that class. In that latter case don't forget to annotate it with @org.camunda.bpm.application.ProcessApplication@.

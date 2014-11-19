@@ -1,0 +1,18 @@
+When deploying to a 'shared' process engine container, *camunda Grails Plugin* will 
+automatically add an empty @META-INF/processes.xml@ to your @war@ file, in case you 
+do not provide your own. 
+
+{note}
+Please read about camunda's 
+[processes.xml|http://docs.camunda.org/latest/api-references/deployment-descriptors/#descriptors-processesxml] 
+to learn more about its configuration possibilities.
+{note}
+
+If you want to provide your custom @processes.xml@, just place it into your @grails-app/conf@ folder like
+
+{code:bash}
+/grails-app/conf/META-INF/processes.xml
+{code}
+
+This will be bundled with your war like any other resource file and the plugin won't 
+interfere anymore when building your war.
