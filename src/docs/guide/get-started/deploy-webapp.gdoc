@@ -18,7 +18,7 @@ Open [http://localhost:8080/camunda-welcome|http://localhost:8080/camunda-welcom
 to the tasklist application. Log in with user 'demo', password 'demo' and start your new process 
 via the (little bit hidden :-) "start process" button in the top right corner:
 
-!tasklist-start-process.png!
+!tasklist-dashboard-start-process.png!
 
 The sample form shows you different types of fields. You must at least select one of the values
 in the 'sampleRequiredSelectionField' in order to validate the start form and enable the 
