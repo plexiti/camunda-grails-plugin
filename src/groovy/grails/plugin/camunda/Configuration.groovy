@@ -11,7 +11,10 @@ import org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
 class Configuration {
   
   static def defaults = [
-    'camunda.deployment.scenario' : 'embedded',
+    'camunda.deployment.scenario' : {
+      Holders.getGrailsApplication().config.camunda.engine.configuration ? 'embedded' :
+        (Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ] ? 'embedded' : 'shared')
+    },
     'camunda.deployment.application' : SpringServletProcessApplication,
     'camunda.deployment.container' : 'tomcat',
     'camunda.deployment.autoreload' : {
