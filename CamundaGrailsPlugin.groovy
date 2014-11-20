@@ -25,9 +25,10 @@ class CamundaGrailsPlugin {
     def license = "APACHE"
 
     def description = '''\
-This plugin integrates the camunda BPM platform with Grails. camunda BPM is a flexible framework for 
-workflow and process automation. It's core is a native BPMN 2.0 process engine that runs inside the Java 
-Virtual Machine. It is a perfect match for the Spring Framework - and therefore for Grails, too.'''
+This plugin integrates camunda BPM platform with Grails. camunda BPM is a 
+flexible framework for workflow and process automation. It's core is a 
+native BPMN 2.0 process engine running inside the Java Virtual Machine. It 
+is a perfect match for the Spring Framework, and therefore for Grails, too.'''
 
     def documentation = "http://plexiti.github.io/camunda-grails-plugin"
     def scm = [ url: "https://github.com/plexiti/camunda-grails-plugin" ]
