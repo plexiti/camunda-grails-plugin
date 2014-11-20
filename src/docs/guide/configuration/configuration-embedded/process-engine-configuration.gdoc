@@ -18,7 +18,7 @@ with the camunda engine in use - with the following three exceptions for the def
 environments *dev*elopment and *test*:
 
 - your database is populated with camunda tables the first time the database is accessed
-- any *.bpmn process definitions found in the classpath will be deployed to the database
+- any *.bpmn (and for legacy reasons *.bpmn20.xml) process definitions found in the classpath will be deployed to the database
 - the job executor is turned on
 
 {note}This choice was made in order to make it as easy as possible to [get
@@ -33,7 +33,7 @@ camunda {
   engine {
     configuration {
       databaseSchemaUpdate = true
-      deploymentResources = ['classpath:/**/*.bpmn']
+      deploymentResources = ['classpath:/**/*.bpmn', 'classpath:/**/*.bpmn20.xml']
       jobExecutorActivate = true
     }
   }

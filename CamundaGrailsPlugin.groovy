@@ -36,7 +36,7 @@ Virtual Machine. It is a perfect match for the Spring Framework - and therefore 
 
     def pluginExcludes = [ "grails-app/processes/" ]
 
-    def watchedResources = [ "file:./grails-app/processes/**/*.bpmn" ]
+    def watchedResources = [ "file:./grails-app/processes/**/*.bpmn", "file:./grails-app/processes/**/*.bpmn20.xml" ]
     def doWithSpring = CamundaPluginSupport.doWithSpring
     def doWithWebDescriptor = CamundaPluginSupport.doWithWebDescriptor
     def onChange = CamundaPluginSupport.onchange 

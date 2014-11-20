@@ -48,7 +48,7 @@ class CamundaPluginSupport {
                 if (Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]) {
                     databaseSchemaUpdate = true
                     jobExecutorActivate = true
-                    deploymentResources = ['classpath:/**/*.bpmn']
+                    deploymentResources = ['classpath:/**/*.bpmn', 'classpath:/**/*.bpmn20.xml']
                 }
                 if (System.properties.containsKey('grails.test.phase')) {
                     // During test phases, use jul bridge in case no explicit user configuration exists

@@ -8,11 +8,11 @@ Please read about camunda's
 to learn more about its configuration possibilities.
 {note}
 
-If you want to provide your custom @processes.xml@, just place it into your @grails-app/conf@ folder like
+If you want to provide your custom @processes.xml@, just place it into your @grails-app/processes@ folder like
 
 {code:bash}
-/grails-app/conf/META-INF/processes.xml
+/grails-app/processes/META-INF/processes.xml
 {code}
 
 This will be bundled with your war like any other resource file and the plugin won't 
-interfere anymore when building your war.
+interfere anymore with an empty processes.xml when building your war.

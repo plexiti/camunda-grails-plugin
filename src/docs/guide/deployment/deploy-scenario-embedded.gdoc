@@ -8,7 +8,7 @@ environments. To get started with a basic configuration for your embedded engine
 environments {
     production {
         camunda {
-            deployment.scenario = 'embedded' // optional, as 'embedded' is default value
+            deployment.scenario = 'embedded'
             engine {
                 configuration {
                     databaseSchemaUpdate = true

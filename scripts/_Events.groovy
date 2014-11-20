@@ -28,11 +28,12 @@ eventTestPhaseStart = { args ->
 
 // when creating a war
 eventCreateWarStart = { warName, stagingDir ->
-    // 1) include the *.bpmn resources
+    // 1) include the resources in the processes dir
     if ((processesDir as File).exists()) {
         ant.copy(todir: "${stagingDir}/WEB-INF/classes") {
             fileset(dir: processesDir) {
-                include(name: "**/*.bpmn")
+                include(name: "**")
+                include(name: "META-INF/**")
             }
         }
     }
@@ -65,6 +66,7 @@ eventCompileStart = { type ->
         ant.delete() {
             fileset(dir: tomcatDir) {
                 include(name: "**/*.bpmn")
+                include(name: "**/*.bpmn20.xml")
             }
         }
     }
