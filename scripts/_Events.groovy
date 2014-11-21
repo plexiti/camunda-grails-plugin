@@ -19,8 +19,12 @@
  */
 
 // when testing, remember the test phase identifier
-eventTestPhaseStart = { args ->
-    System.properties["grails.test.phase"] = args
+eventTestPhaseStart = { phase ->
+    System.properties['grails.test.phase'] = phase
+}
+
+eventTestPhaseEnd = { phase ->
+    System.clearProperty('grails.test.phase')
 }
 
 // when creating a war
