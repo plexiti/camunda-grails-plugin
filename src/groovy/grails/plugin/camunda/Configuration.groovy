@@ -50,14 +50,27 @@ class Configuration {
     'camunda.deployment.autoreload' : { it == 'true' ? true : (it == 'false' ? false : it) }
   ]
 
-  static def config(String property, config = Holders.getGrailsApplication()?.config) {
-    assert config
+  static def config(String property, ConfigObject conf = Holders.getGrailsApplication()?.config) {
+    assert conf
     def value = System.getProperty(property)
-    value = value == null ? config.flatten().get(property) : value
+    value = value == null ? conf.flatten().get(property) : value
     value = value == null ? defaults.get(property) : value
     value = value instanceof Closure ? value.call() : value
     try { value = value instanceof String ? converters.get(property).call(value) : value } catch (RuntimeException e) {}
-    validators.get(property).call(property, value)
+    if (value != null) {
+      validators.get(property)?.call(property, value)
+    } else {
+      def keys = defaults.keySet().toList()
+      keys.addAll(System.properties.stringPropertyNames())
+      keys.addAll(Holders.getGrailsApplication().config.flatten().keySet().collect { it.toString() })
+      value = [:]
+      keys.findAll { it.startsWith("${property}.") }.each { prop -> 
+        def v = config(prop)
+        if (v != null) 
+          value[prop] = v 
+      }
+      value = value ?: null
+    }
     return value
   }
   

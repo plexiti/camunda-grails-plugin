@@ -4,6 +4,7 @@ import grails.plugin.camunda.Configuration
 import grails.util.Environment
 import org.camunda.bpm.application.impl.ServletProcessApplication
 import org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
+import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -24,6 +25,21 @@ class ConfigurationSpec extends Specification {
       'camunda.deployment.application' | SpringServletProcessApplication
       'camunda.deployment.container'   | 'tomcat'
       'camunda.deployment.autoreload'  | Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]
+  }
+
+  def "Test that a property with subproperties returns an expected map."() {
+    when:
+      def deployment = Configuration.config('camunda.deployment') as Map
+    then:
+      deployment instanceof Map
+      deployment.size() == 4
+      deployment.keySet() == [
+        'camunda.deployment.scenario',
+        'camunda.deployment.application',
+        'camunda.deployment.container',
+        'camunda.deployment.autoreload',
+      ].toSet()
+      deployment['camunda.deployment.autoreload'] == Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]
   }
 
   @Unroll
@@ -85,6 +101,25 @@ class ConfigurationSpec extends Specification {
       'camunda.deployment.application' | SpringServletProcessApplication
       'camunda.deployment.container'   | 'tomcat'
       'camunda.deployment.autoreload'  | Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]
+  }
+
+  def "Test that a property with overriden subproperties returns an expected map."() {
+    given:
+      System.setProperty('camunda.deployment.test', 'test')
+      System.setProperty('camunda.deployment.scenario', 'shared')
+    when:
+      def deployment = Configuration.config('camunda.deployment') as Map
+    then:
+      deployment instanceof Map
+      deployment.size() == 5
+      deployment.keySet() == [
+        'camunda.deployment.test',
+        'camunda.deployment.scenario',
+        'camunda.deployment.application',
+        'camunda.deployment.container',
+        'camunda.deployment.autoreload',
+      ].toSet()
+      deployment['camunda.deployment.scenario'] == 'shared'
   }
 
 }
