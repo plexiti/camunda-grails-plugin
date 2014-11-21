@@ -1,6 +1,3 @@
-import static grails.plugin.camunda.Configuration.config
-import static grails.plugin.camunda.Constants.*
-
 /*
  * Copyright 2014 Martin Schimak - plexiti GmbH
  *
@@ -20,7 +17,6 @@ import static grails.plugin.camunda.Constants.*
 /**
  * @author Martin Schimak <martin.schimak@plexiti.com>
  */
-def processesDir = "${basedir}/${PROCESS_PATH}"
 
 // when testing, remember the test phase identifier
 eventTestPhaseStart = { args ->
@@ -29,7 +25,10 @@ eventTestPhaseStart = { args ->
 
 // when creating a war
 eventCreateWarStart = { warName, stagingDir ->
+    def constants = classLoader.loadClass("grails.plugin.camunda.Constants")
+    def config = classLoader.loadClass("grails.plugin.camunda.Configuration").&config
     // 1) include the resources in the processes dir
+    def processesDir = "${basedir}/${constants.PROCESS_PATH}"
     if ((processesDir as File).exists()) {
         ant.copy(todir: "${stagingDir}/WEB-INF/classes") {
             fileset(dir: processesDir) {
