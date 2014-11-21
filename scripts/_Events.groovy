@@ -1,4 +1,5 @@
 import static grails.plugin.camunda.Configuration.config
+import static grails.plugin.camunda.Constants.*
 
 /*
  * Copyright 2014 Martin Schimak - plexiti GmbH
@@ -19,7 +20,7 @@ import static grails.plugin.camunda.Configuration.config
 /**
  * @author Martin Schimak <martin.schimak@plexiti.com>
  */
-def processesDir = "${basedir}/grails-app/processes"
+def processesDir = "${basedir}/${PROCESS_PATH}"
 
 // when testing, remember the test phase identifier
 eventTestPhaseStart = { args ->
