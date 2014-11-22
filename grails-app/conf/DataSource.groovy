@@ -42,4 +42,19 @@ environments {
             }
         }
     }
+    embedded {
+        dataSource {
+            driverClassName = System.getProperty("dataSource.driverClassName") ?: 'org.postgresql.Driver'
+            username = System.getProperty("dataSource.username") ?: 'martin'
+            password = System.getProperty("dataSource.password") ?: ''
+            dbCreate = System.getProperty("dataSource.dbCreate") ?: 'create-drop'
+            url = System.getProperty("dataSource.dbCreate") ?: 'jdbc:postgresql://localhost/camunda_grails_plugin_test'
+        }
+    }
+    shared {
+        dataSource {
+          dbCreate = "update"
+          url = "jdbc:h2:mem:sharedDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+        }
+    }
 }

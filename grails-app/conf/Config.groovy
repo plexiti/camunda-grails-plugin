@@ -91,6 +91,21 @@ environments {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
+    embedded {
+        grails.logging.jul.usebridge = true
+        camunda {
+            engine {
+                configuration {
+                    databaseSchemaUpdate = true
+                    jobExecutorActivate = true
+                    deploymentResources = ['classpath:/**/*.bpmn', 'classpath:/**/*.bpmn20.xml']
+                }
+            }
+        }
+    }
+    shared {
+        grails.logging.jul.usebridge = true
+    }
 }
 
 // log4j configuration
