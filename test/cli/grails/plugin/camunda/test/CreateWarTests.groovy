@@ -1,3 +1,5 @@
+package grails.plugin.camunda.test
+
 import grails.test.AbstractCliTestCase
 import groovy.xml.Namespace
 import org.camunda.bpm.ProcessApplicationService
@@ -9,7 +11,7 @@ import org.camunda.bpm.ProcessEngineService
 class CreateWarTests extends AbstractCliTestCase {
 
     void "test development war file"() {
-        execute(["dev", "war"]) {
+        execute(["dev", "-Dgrails.war.exploded=true", "war"]) {
             assert !new File("$stageDir/WEB-INF/classes/META-INF/processes.xml").exists()
             assert !new File("$stageDir/META-INF/context.xml").exists()
             assert jars.find { it.startsWith('groovy-all-') }
@@ -24,7 +26,7 @@ class CreateWarTests extends AbstractCliTestCase {
     }
 
     void "test production war file"() {
-        execute(["prod", "war"]) {
+        execute(["prod", "-Dgrails.war.exploded=true", "war"]) {
             assert new File("$stageDir/META-INF/context.xml").exists()
             assert new File("$stageDir/WEB-INF/classes/META-INF/processes.xml").exists()
             assert !jars.find { it.startsWith('groovy-all') }
