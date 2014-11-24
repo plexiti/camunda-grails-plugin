@@ -86,11 +86,12 @@ class ConfigurationSpec extends Specification {
     then:
       Configuration.config(property) == actual
     where:
-      property                         | value                           | overridden                     | actual
-      'camunda.deployment.scenario'    | 'shared'                        | 'embedded'                     | 'embedded'
-      'camunda.deployment.application' | SpringServletProcessApplication | ServletProcessApplication.name | ServletProcessApplication
-      'camunda.deployment.container'   | 'jboss'                         | 'tomcat'                       | 'tomcat'
-      'camunda.deployment.autoreload'  | true                            | 'false'                        | false
+      property                                            | value                           | overridden                     | actual
+      'camunda.deployment.scenario'                       | 'shared'                        | 'embedded'                     | 'embedded'
+      'camunda.deployment.application'                    | SpringServletProcessApplication | ServletProcessApplication.name | ServletProcessApplication
+      'camunda.deployment.container'                      | 'jboss'                         | 'tomcat'                       | 'tomcat'
+      'camunda.deployment.autoreload'                     | true                            | 'false'                        | false
+      'camunda.engine.configuration.jobExecutorActivate'  | true                            | 'false'                        | false
   }
 
   @Unroll

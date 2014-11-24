@@ -3,7 +3,11 @@ package grails.plugin.camunda
 import grails.util.Environment
 import grails.util.Holders
 import org.camunda.bpm.application.AbstractProcessApplication
+import org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration
 import org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
+import org.springframework.beans.BeanUtils
+
+import javax.xml.bind.DatatypeConverter
 
 /**
  * @author Martin Schimak <martin.schimak@plexiti.com>
@@ -11,7 +15,7 @@ import org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
  */
 class Configuration {
   
-  static def defaults = [
+  private static def defaults = [
     /* By default work with an 'embedded' engine in dev and test environments, in all 
      * others with a 'shared' engine, except an explicit embedded engine configuration 
      * already exists (last case mainly for backwards compatibility 0.1.0 -> 0.3.0). */
@@ -55,7 +59,7 @@ class Configuration {
    * Validators exist for plugin specific configuration only, not for 
    * configuration dynamically used for camunda provided configuration beans.
    */
-  static def validators = [
+  private static def validators = [
     'camunda.deployment.scenario' : { property, value ->
       def allowed = ['embedded', 'shared', 'none']
       assert value in allowed :
@@ -77,13 +81,32 @@ class Configuration {
   ]
 
   /**
-   * Type conversion for string values exists for (non-string) plugin specific configuration 
-   * only, not for configuration dynamically used for camunda provided configuration beans.
+   * Type conversion for string values exists for (non-string) configuration only
    */
-  static def converters = [
-    'camunda.deployment.application' : { Class.forName(it as String) },
-    'camunda.deployment.autoreload' : { it == 'true' ? true : (it == 'false' ? false : it) }
+  private static def converters = [
+    'camunda.deployment.application' : { String p, String v -> 
+      Class.forName(v) 
+    },
+    'camunda.deployment.autoreload' : { String p, String v ->
+      v == 'true' ? true : (v == 'false' ? false : v) 
+    },
+    'camunda.engine.configuration' : { String p, String v ->
+      def name = BeanUtils.findPropertyType(p, SpringProcessEngineConfiguration).simpleName
+      name = name.substring(0, 1).toUpperCase() + name.substring(1)
+      return DatatypeConverter."parse$name"(v)
+    }
   ]
+  
+  private static def convert(String key, String value, String prop = null) {
+    if (converters.containsKey(key)) {
+      return converters.get(key).call(prop, value)
+    } else if (key.contains('.')) {
+      def idx = key.lastIndexOf('.')
+      return convert(key.substring(0, idx), value, key.substring(idx + 1))
+    } else {
+      return value
+    }
+  }
 
   static def config(String property, ConfigObject conf = Holders.getGrailsApplication()?.config) {
     assert conf
@@ -95,13 +118,12 @@ class Configuration {
     value = value == null ? defaults.get(property) : value
     // In case the value we found is a closure, we evaluate it now
     value = value instanceof Closure ? value.call() : value
-    try { // In case we deal with a string value and know a converter, we use it now
-      value = value instanceof String && converters.containsKey(property) ? 
-      converters.get(property).call(value) : value 
+    try { // In case we deal with a string value we try to convert it now
+      value = value instanceof String ? convert(property, value) : value
     } catch (RuntimeException e) {}
     if (value != null) {
     // In case we have a value and know a validator, we use it now
-     validators.get(property)?.call(property, value)
+      validators.get(property)?.call(property, value)
     } else {
       // In case we still don't have a value, it could be that we were looking for a 
       // parent configuration property of many children, so we try to build it by
