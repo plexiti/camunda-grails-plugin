@@ -24,7 +24,7 @@ class Configuration {
 
   static def validators = [
     'camunda.deployment.scenario' : { property, value ->
-      def allowed = ['embedded', 'shared']
+      def allowed = ['embedded', 'shared', 'none']
       assert value in allowed :
         "Config property $property must be one of $allowed, instead it was: $value"
     },
