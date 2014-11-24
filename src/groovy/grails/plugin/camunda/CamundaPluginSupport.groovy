@@ -78,8 +78,13 @@ class CamundaPluginSupport {
                 beanDefinition.factoryMethod = 'getProcessEngineService'
             }
             camundaProcessEngineBean(camundaProcessEngineServiceBean: 'getDefaultProcessEngine')
+            def processApplicationName = "${Metadata.current.'app.name'}"
             if (SpringServletProcessApplication.isAssignableFrom(config('camunda.deployment.application') as Class)) {
-                "${Metadata.current.'app.name'}"(config('camunda.deployment.application'))
+                "${processApplicationName}"(config('camunda.deployment.application'))
+            }
+            if (springConfig.beanNames.find { it == processApplicationName }) {
+                springConfig.addAlias 'camundaProcessApplicationBean', processApplicationName
+                springConfig.addAlias Identifiers.beanName('camundaProcessApplicationBean'), processApplicationName
             }
         }
         if (springConfig.beanNames.find { it == 'camundaProcessEngineBean' }) {
