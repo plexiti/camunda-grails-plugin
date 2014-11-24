@@ -87,6 +87,14 @@ environments {
     development {
         grails.logging.jul.usebridge = true
     }
+    test {
+        grails.logging.jul.usebridge = true
+        camunda {
+            beans {
+                historyService = 'alternativeHistoryServiceName'
+            }
+        }
+    }
     production {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
