@@ -15,7 +15,7 @@
  */
 package grails.plugin.camunda
 
-import grails.util.Holders
+import static grails.plugin.camunda.Configuration.config
 
 /**
  * @author Martin Schimak <martin.schimak@plexiti.com>
@@ -38,8 +38,8 @@ class Identifiers {
     static def beanName(String beanName) {
         if (beanName.startsWith("camunda") && beanName.endsWith("Bean")) {
             def defaultName = beanName.substring(7, 8).toLowerCase() + beanName.substring(8, beanName.size() - 4)
-            def configName = Holders.config.camunda.beans."$defaultName"
-            return configName ? configName : defaultName
+            def configName = config("camunda.beans.$defaultName")
+            return configName ?: defaultName
         }
         return beanName
     }

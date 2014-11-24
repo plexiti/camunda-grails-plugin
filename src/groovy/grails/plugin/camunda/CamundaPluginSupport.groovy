@@ -15,7 +15,6 @@
  */
 package grails.plugin.camunda
 
-import grails.util.Environment
 import grails.util.Metadata
 import org.camunda.bpm.BpmPlatform
 import org.camunda.bpm.ProcessApplicationService
@@ -45,30 +44,23 @@ class CamundaPluginSupport {
             camundaProcessEngineConfigurationBean(SpringProcessEngineConfiguration) { beanDefinition ->
                 dataSource = ref('dataSource')
                 transactionManager = ref('transactionManager')
-                if (Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]) {
-                    databaseSchemaUpdate = true
-                    jobExecutorActivate = true
-                    deploymentResources = ['classpath:/**/*.bpmn', 'classpath:/**/*.bpmn20.xml']
-                }
-                if (System.properties.containsKey('grails.test.phase')) {
+                if (config('grails.test.phase')) {
                     // During test phases, use jul bridge in case no explicit user configuration exists
-                    if (!SLF4JBridgeHandler.installed
-                            && !application.flatConfig.containsKey('grails.logging.jul.usebridge')) {
+                    if (!SLF4JBridgeHandler.installed && !config('grails.logging.jul.usebridge')) {
                         SLF4JBridgeHandler.removeHandlersForRootLogger();
                         SLF4JBridgeHandler.install();
                     }
-                    // During test phases (except functional), assume as default behaviour single 
-                    // threaded testing - with MockExpressionManager and deactivated jobExecutor
-                    if (System.properties['grails.test.phase'] != 'functional') {
-                        jobExecutorActivate = false
+                    // During test phases (except functional), use MockExpressionManager
+                    if (config('grails.test.phase') != 'functional') {
                         expressionManager = bean(MockExpressionManager)
                     }
                 }
-                // Now set explicit user configuration and override our previously set defaults 
-                application.config.camunda.engine.configuration.each {
-                    beanDefinition.setPropertyValue(it.key, 
+                // Now set configuration 
+                (config('camunda.engine.configuration') as Map<String, Object>).each {
+                    def prop = it.key.substring('camunda.engine.configuration'.length() + 1)
+                    beanDefinition.setPropertyValue(prop, 
                         it.value instanceof String 
-                                && !(String.class.isAssignableFrom(BeanUtils.findPropertyType(it.key, SpringProcessEngineConfiguration))) 
+                                && !(String.class.isAssignableFrom(BeanUtils.findPropertyType(prop, SpringProcessEngineConfiguration))) 
                             ? ref(it.value) : it.value
                     )
                 }
@@ -131,8 +123,8 @@ class CamundaPluginSupport {
     
     static onchange = { event ->
         if (event.source && event.source.file) { // ./grails-app/processes/**/*.bpmn resource changed
-            // reload in 'dev' and 'test' by default, or when explicitely configured
-            if (config('camunda.deployment.autoreload')) {
+            if (config('camunda.deployment.scenario') != 'none' 
+              && config('camunda.deployment.autoreload')) {
                 RepositoryService repositoryService = event.ctx.getBean("camundaRepositoryServiceBean")
                 DeploymentBuilder deploymentBuilder = repositoryService
                     .createDeployment()

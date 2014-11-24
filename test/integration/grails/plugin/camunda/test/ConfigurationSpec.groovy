@@ -4,7 +4,6 @@ import grails.plugin.camunda.Configuration
 import grails.util.Environment
 import org.camunda.bpm.application.impl.ServletProcessApplication
 import org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
-import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -20,11 +19,14 @@ class ConfigurationSpec extends Specification {
     expect:
       Configuration.config(property) == value
     where:
-      property                         | value
-      'camunda.deployment.scenario'    | 'embedded'
-      'camunda.deployment.application' | SpringServletProcessApplication
-      'camunda.deployment.container'   | 'tomcat'
-      'camunda.deployment.autoreload'  | Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]
+      property                                            | value
+      'camunda.deployment.scenario'                       | 'embedded'
+      'camunda.deployment.application'                    | SpringServletProcessApplication
+      'camunda.deployment.container'                      | 'tomcat'
+      'camunda.deployment.autoreload'                     | Environment.current in [Environment.DEVELOPMENT, Environment.TEST]
+      'camunda.engine.configuration.databaseSchemaUpdate' | { Environment.current in [Environment.DEVELOPMENT, Environment.TEST] ? true : null }.call()
+      'camunda.engine.configuration.jobExecutorActivate'  | false
+      'camunda.engine.configuration.deploymentResources'  | { Environment.current in [Environment.DEVELOPMENT, Environment.TEST] ? ['classpath:/**/*.bpmn', 'classpath:/**/*.bpmn20.xml'] : null }.call()
   }
 
   def "Test that a property with subproperties returns an expected map."() {
@@ -65,11 +67,14 @@ class ConfigurationSpec extends Specification {
     then:
       Configuration.config(property) == value
     where:
-      property                         | value
-      'camunda.deployment.scenario'    | 'shared'
-      'camunda.deployment.application' | ServletProcessApplication
-      'camunda.deployment.container'   | 'tomcat'
-      'camunda.deployment.autoreload'  | false
+      property                                            | value
+      'camunda.deployment.scenario'                       | 'shared'
+      'camunda.deployment.application'                    | ServletProcessApplication
+      'camunda.deployment.container'                      | 'tomcat'
+      'camunda.deployment.autoreload'                     | false
+      'camunda.engine.configuration.databaseSchemaUpdate' | false
+      'camunda.engine.configuration.jobExecutorActivate'  | true
+      'camunda.engine.configuration.deploymentResources'  | ['classpath:/**/*.bpmn']
   }
 
   @Unroll
@@ -97,10 +102,13 @@ class ConfigurationSpec extends Specification {
       Configuration.config(property) == value
     where:
       property                         | value
-      'camunda.deployment.scenario'    | 'embedded'
-      'camunda.deployment.application' | SpringServletProcessApplication
-      'camunda.deployment.container'   | 'tomcat'
-      'camunda.deployment.autoreload'  | Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]
+      'camunda.deployment.scenario'                       | 'embedded'
+      'camunda.deployment.application'                    | SpringServletProcessApplication
+      'camunda.deployment.container'                      | 'tomcat'
+      'camunda.deployment.autoreload'                     | Environment.current in [Environment.DEVELOPMENT, Environment.TEST]
+      'camunda.engine.configuration.databaseSchemaUpdate' | { Environment.current in [Environment.DEVELOPMENT, Environment.TEST] ? true : null }.call()
+      'camunda.engine.configuration.jobExecutorActivate'  | false
+      'camunda.engine.configuration.deploymentResources'  | { Environment.current in [Environment.DEVELOPMENT, Environment.TEST] ? ['classpath:/**/*.bpmn', 'classpath:/**/*.bpmn20.xml'] : null }.call()
   }
 
   def "Test that a property with overriden subproperties returns an expected map."() {
@@ -108,16 +116,19 @@ class ConfigurationSpec extends Specification {
       System.setProperty('camunda.deployment.test', 'test')
       System.setProperty('camunda.deployment.scenario', 'shared')
     when:
-      def deployment = Configuration.config('camunda.deployment') as Map
+      def deployment = Configuration.config('camunda') as Map
     then:
       deployment instanceof Map
-      deployment.size() == 5
+      deployment.size() == 8
       deployment.keySet() == [
         'camunda.deployment.test',
         'camunda.deployment.scenario',
         'camunda.deployment.application',
         'camunda.deployment.container',
         'camunda.deployment.autoreload',
+        'camunda.engine.configuration.jobExecutorActivate',
+        'camunda.engine.configuration.databaseSchemaUpdate',
+        'camunda.engine.configuration.deploymentResources',
       ].toSet()
       deployment['camunda.deployment.scenario'] == 'shared'
   }
