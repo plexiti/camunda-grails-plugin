@@ -22,3 +22,4 @@ stacktrace.log
 camunda.tmproj
 /release*
 /build
+.java-version
