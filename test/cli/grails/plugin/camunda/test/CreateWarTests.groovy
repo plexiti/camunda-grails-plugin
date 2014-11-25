@@ -46,7 +46,7 @@ class CreateWarTests extends AbstractCliTestCase {
     Node webXml
     
     void setUp() {
-        timeout = 5 * 60 * 1000
+        timeout = 10 * 60 * 1000
         if (stageDir.exists())
             stageDir.deleteDir()
     }
