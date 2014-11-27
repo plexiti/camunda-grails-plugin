@@ -16,12 +16,10 @@ import javax.xml.bind.DatatypeConverter
 class Configuration {
   
   private static def defaults = [
-    /* By default work with an 'embedded' engine in dev and test environments, in all 
-     * others with a 'shared' engine, except an explicit embedded engine configuration 
-     * already exists (last case mainly for backwards compatibility 0.1.0 -> 0.3.0). */
+    /* By default works with an 'embedded' engine in case an engine configuration exists. 
+     * This in turn is by default the case for the dev and test environments, see below. */
     'camunda.deployment.scenario' : {
-        (Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ] 
-          || config('camunda.engine.configuration') ? 'embedded' : 'shared')
+        config('camunda.engine.configuration') ? 'embedded' : 'shared'
     },
     /* By default use org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
      * (relevant for shared scenarios only). */
