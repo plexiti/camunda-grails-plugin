@@ -24,14 +24,14 @@ class Configuration {
     /* By default use org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
      * (relevant for shared scenarios only). */
     'camunda.deployment.application' : SpringServletProcessApplication,
-    /* By default assume 'tomcat' to be the target servlet container (relevant for shared 
-     * scenarios only). */ 
-    'camunda.deployment.container' : 'tomcat',
     /* By default auto reload bpmn deployment in 'dev' and 'test' environments, for all
      * others disable it. */
     'camunda.deployment.autoreload' : {
       Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]
     },
+    /* By default assume 'tomcat' to be the target servlet container (relevant for shared 
+     * scenarios only). */ 
+    'camunda.deployment.shared.container' : 'tomcat',
     /* By default update database schema for environments 'dev' and 'test', for all 
      * others don't touch camunda's default. */
     'camunda.engine.configuration.databaseSchemaUpdate' : {
@@ -67,15 +67,15 @@ class Configuration {
       assert AbstractProcessApplication.isAssignableFrom(value as Class) :
         "Config property $property must be assignable from ${AbstractProcessApplication.name}, instead it was: '$value'"
     },
-    'camunda.deployment.container' : { property, value ->
+    'camunda.deployment.autoreload' : { property, value ->
+      assert value instanceof Boolean :
+        "Config property $property must be instance of ${Boolean.class.name}, instead it was: '$value'"
+    },
+    'camunda.deployment.shared.container' : { property, value ->
       def allowed = ['tomcat']
       assert value in allowed :
       "Config property $property must be one of $allowed, instead it was: '$value'"
     },
-    'camunda.deployment.autoreload' : { property, value ->
-      assert value instanceof Boolean :
-      "Config property $property must be instance of ${Boolean.class.name}, instead it was: '$value'"
-    }
   ]
 
   /**

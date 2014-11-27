@@ -47,7 +47,7 @@ eventCreateWarStart = { warName, stagingDir ->
         ant.mkdir(dir: "${stagingDir}/WEB-INF/classes/META-INF")
         ant.touch(file: "${stagingDir}/WEB-INF/classes/META-INF/processes.xml")
         // for tomcat, provide resource links, but respect 'web-app/META-INF/context.xml'
-        if (config('camunda.deployment.container') == 'tomcat') {
+        if (config('camunda.deployment.shared.container') == 'tomcat') {
             ant.mkdir(dir: "${stagingDir}/META-INF")
             ant.copy(file: "${camundaPluginDir}/web-app/META-INF/context.xml", todir: "${stagingDir}/META-INF")
         }

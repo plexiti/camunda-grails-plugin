@@ -99,7 +99,7 @@ class CamundaPluginSupport {
     static doWithWebDescriptor = { webXml ->
         // for tomcat, declare resource links in web xml
         if (config('camunda.deployment.scenario') == 'shared'
-            && (config('camunda.deployment.container') == 'tomcat')) {
+            && (config('camunda.deployment.shared.container') == 'tomcat')) {
             def element = webXml.'context-param'
             element[element.size() - 1] + {
                 'resource-ref' {

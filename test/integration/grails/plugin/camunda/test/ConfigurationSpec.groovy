@@ -22,7 +22,7 @@ class ConfigurationSpec extends Specification {
       property                                            | value
       'camunda.deployment.scenario'                       | 'embedded'
       'camunda.deployment.application'                    | SpringServletProcessApplication
-      'camunda.deployment.container'                      | 'tomcat'
+      'camunda.deployment.shared.container'               | 'tomcat'
       'camunda.deployment.autoreload'                     | Environment.current in [Environment.DEVELOPMENT, Environment.TEST]
       'camunda.engine.configuration.databaseSchemaUpdate' | { Environment.current in [Environment.DEVELOPMENT, Environment.TEST] ? true : null }.call()
       'camunda.engine.configuration.jobExecutorActivate'  | false
@@ -38,7 +38,7 @@ class ConfigurationSpec extends Specification {
       deployment.keySet() == [
         'camunda.deployment.scenario',
         'camunda.deployment.application',
-        'camunda.deployment.container',
+        'camunda.deployment.shared.container',
         'camunda.deployment.autoreload',
       ].toSet()
       deployment['camunda.deployment.autoreload'] == Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]
@@ -53,11 +53,11 @@ class ConfigurationSpec extends Specification {
     then:
       thrown(AssertionError)
     where:
-      property                         | value
-      'camunda.deployment.scenario'    | 'something'
-      'camunda.deployment.application' | getClass()
-      'camunda.deployment.container'   | 'jboss'
-      'camunda.deployment.autoreload'  | 'untrue'
+      property                              | value
+      'camunda.deployment.scenario'         | 'something'
+      'camunda.deployment.application'      | getClass()
+      'camunda.deployment.shared.container' | 'jboss'
+      'camunda.deployment.autoreload'       | 'untrue'
   }
   
   @Unroll
@@ -70,7 +70,7 @@ class ConfigurationSpec extends Specification {
       property                                            | value
       'camunda.deployment.scenario'                       | 'shared'
       'camunda.deployment.application'                    | ServletProcessApplication
-      'camunda.deployment.container'                      | 'tomcat'
+      'camunda.deployment.shared.container'               | 'tomcat'
       'camunda.deployment.autoreload'                     | false
       'camunda.engine.configuration.databaseSchemaUpdate' | false
       'camunda.engine.configuration.jobExecutorActivate'  | true
@@ -89,7 +89,7 @@ class ConfigurationSpec extends Specification {
       property                                            | value                           | overridden                     | actual
       'camunda.deployment.scenario'                       | 'shared'                        | 'embedded'                     | 'embedded'
       'camunda.deployment.application'                    | SpringServletProcessApplication | ServletProcessApplication.name | ServletProcessApplication
-      'camunda.deployment.container'                      | 'jboss'                         | 'tomcat'                       | 'tomcat'
+      'camunda.deployment.shared.container'               | 'jboss'                         | 'tomcat'                       | 'tomcat'
       'camunda.deployment.autoreload'                     | true                            | 'false'                        | false
       'camunda.engine.configuration.jobExecutorActivate'  | true                            | 'false'                        | false
   }
@@ -105,7 +105,7 @@ class ConfigurationSpec extends Specification {
       property                         | value
       'camunda.deployment.scenario'                       | 'embedded'
       'camunda.deployment.application'                    | SpringServletProcessApplication
-      'camunda.deployment.container'                      | 'tomcat'
+      'camunda.deployment.shared.container'               | 'tomcat'
       'camunda.deployment.autoreload'                     | Environment.current in [Environment.DEVELOPMENT, Environment.TEST]
       'camunda.engine.configuration.databaseSchemaUpdate' | { Environment.current in [Environment.DEVELOPMENT, Environment.TEST] ? true : null }.call()
       'camunda.engine.configuration.jobExecutorActivate'  | false
@@ -125,7 +125,7 @@ class ConfigurationSpec extends Specification {
         'camunda.deployment.test',
         'camunda.deployment.scenario',
         'camunda.deployment.application',
-        'camunda.deployment.container',
+        'camunda.deployment.shared.container',
         'camunda.deployment.autoreload',
         'camunda.engine.configuration.jobExecutorActivate',
         'camunda.engine.configuration.databaseSchemaUpdate',
