@@ -177,8 +177,18 @@ class Configuration {
 
   static boolean containsKey(String property) {
     def configObject = getConfigObject(property)
-    configObject?.isSet(property.substring(property.lastIndexOf('.') + 1)) && 
+    configObject && isSet(configObject, property.substring(property.lastIndexOf('.') + 1)) && 
       !(getProperty(property) instanceof ConfigObject) 
+  }
+  
+  private static Boolean isSet(ConfigObject configObject, String option) {
+    if (configObject.containsKey(option)) {
+      Object entry = configObject.get(option);
+      if (!(entry instanceof ConfigObject) || !((ConfigObject) entry).isEmpty()) {
+        return Boolean.TRUE;
+      }
+    }
+    return Boolean.FALSE;
   }
 
 }
