@@ -14,6 +14,99 @@ class ConfigurationSpec extends Specification {
   
   def grailsApplication
   
+  def init(String property) {
+    System.clearProperty(property)
+    Configuration.clearProperty(property)
+    assert !System.hasProperty(property)
+    assert !Configuration.containsKey(property)
+    assert !grailsApplication.config.flatten().containsKey(property)
+  }
+  
+  def setup() {
+    [
+      'camunda.deployment.test',
+      'camunda.deployment.scenario',
+      'camunda.deployment.application',
+      'camunda.deployment.shared.container',
+      'camunda.deployment.autoreload',
+      'camunda.engine.configuration.jobExecutorActivate',
+      'camunda.engine.configuration.databaseSchemaUpdate',
+      'camunda.engine.configuration.deploymentResources',
+    ].each { init(it) }
+  }
+  
+  def "Test programmatical retrieval of configuration values"() {
+    expect:
+      Configuration.getProperty('grails.doc.title') == 'camunda Grails plugin'
+    and:
+      Configuration.getProperty('camunda.deployment.scenario') == null
+    and:
+      !Configuration.containsKey('camunda.deployment.scenario')
+    when:
+      grailsApplication.config.camunda.deployment.scenario = 'embedded'
+    then:
+      Configuration.getProperty('camunda.deployment.scenario') == 'embedded'
+    and:
+      Configuration.containsKey('camunda.deployment.scenario')
+    when:
+      grailsApplication.config.camunda.deployment.scenario = null
+    then:
+      Configuration.getProperty('camunda.deployment.scenario') == null
+    and:
+      Configuration.containsKey('camunda.deployment.scenario')
+    and:
+      grailsApplication.config.flatten().containsKey('camunda.deployment.scenario')
+  }
+
+  def "Test programmatical change of configuration values"() {
+    expect:
+      Configuration.getProperty('camunda.deployment.scenario') == null
+    and:
+      !Configuration.containsKey('camunda.deployment.scenario')
+    when:
+      Configuration.setProperty('camunda.deployment.scenario', 'embedded')
+    then:
+      Configuration.getProperty('camunda.deployment.scenario') == 'embedded'
+    and:
+      Configuration.containsKey('camunda.deployment.scenario')
+    when:
+      Configuration.setProperty('camunda.deployment.scenario', null)
+    then:
+      Configuration.getProperty('camunda.deployment.scenario') == null
+    and:
+      Configuration.containsKey('camunda.deployment.scenario')
+    and:
+      grailsApplication.config.flatten().containsKey('camunda.deployment.scenario')
+  }
+
+  def "Test programmatical clearing of configuration values"() {
+    expect:
+      Configuration.getProperty('camunda.deployment.scenario') == null
+    and:
+      !Configuration.containsKey('camunda.deployment.scenario')
+    when:
+      Configuration.setProperty('camunda.deployment.scenario', 'embedded')
+    then:
+      Configuration.getProperty('camunda.deployment.scenario') == 'embedded'
+    and:
+      Configuration.containsKey('camunda.deployment.scenario')
+    when:
+      Configuration.clearProperty('camunda.deployment.scenario')
+    then:
+      Configuration.getProperty('camunda.deployment.scenario') == null
+    and:
+      !Configuration.containsKey('camunda.deployment.scenario')
+    and:
+      !grailsApplication.config.flatten().containsKey('camunda.deployment.scenario')
+  }
+  
+  def "Test to directly programmatically set a value hithereto unknown"() {
+    when:
+      Configuration.setProperty('x.y.z', 'jboss')
+    then:
+      grailsApplication.config.x.y.z == 'jboss'
+  }
+
   @Unroll
   def "Test that property '#property' has default value '#value'."() {
     expect:
@@ -47,7 +140,7 @@ class ConfigurationSpec extends Specification {
   @Unroll
   def "Test that property '#property' is not allowed to have value '#value'."() {
     given:
-      grailsApplication.config."$property" = value
+      Configuration.setProperty(property, value)
     when:
       Configuration.config(property) == value
     then:
@@ -59,11 +152,11 @@ class ConfigurationSpec extends Specification {
       'camunda.deployment.shared.container' | 'jboss'
       'camunda.deployment.autoreload'       | 'untrue'
   }
-  
+
   @Unroll
   def "Test that property '#property' has configured value '#value'."() {
     when:
-      grailsApplication.config."$property" = value
+      Configuration.setProperty(property, value)
     then:
       Configuration.config(property) == value
     where:
@@ -80,7 +173,7 @@ class ConfigurationSpec extends Specification {
   @Unroll
   def "Test that property '#property' can be overridden by system property '#overridden'."() {
     given:
-      grailsApplication.config."$property" = value
+      Configuration.setProperty(property, value)
     when:
       System.setProperty(property, overridden)
     then:
@@ -95,18 +188,29 @@ class ConfigurationSpec extends Specification {
   }
 
   @Unroll
-  def "Test that property '#property' has default value '#value' when explicitely set to null."() {
+  def "Test that property '#property' has value null when explicitely configured to null."() {
     when:
-      System.clearProperty(property)
-      grailsApplication.config."$property" = null
+      Configuration.setProperty(property, null)
     then:
-      Configuration.config(property) == value
+      Configuration.config(property) == null
     where:
-      property                         | value
-      'camunda.deployment.scenario'                       | 'embedded'
-      'camunda.deployment.application'                    | SpringServletProcessApplication
-      'camunda.deployment.shared.container'               | 'tomcat'
-      'camunda.deployment.autoreload'                     | Environment.current in [Environment.DEVELOPMENT, Environment.TEST]
+      property << [
+        'camunda.engine.configuration.databaseSchemaUpdate',
+        'camunda.engine.configuration.jobExecutorActivate',
+        'camunda.engine.configuration.deploymentResources',      
+      ]                                            
+  }
+
+  @Unroll
+  def "Test that property '#property' has value null when explicitely overridden with empty system property."() {
+    given:
+      Configuration.setProperty(property, value)
+    when:
+      System.setProperty(property, '')
+    then:
+      Configuration.config(property) == null
+    where:
+      property                                            | value
       'camunda.engine.configuration.databaseSchemaUpdate' | { Environment.current in [Environment.DEVELOPMENT, Environment.TEST] ? true : null }.call()
       'camunda.engine.configuration.jobExecutorActivate'  | false
       'camunda.engine.configuration.deploymentResources'  | { Environment.current in [Environment.DEVELOPMENT, Environment.TEST] ? ['classpath:/**/*.bpmn', 'classpath:/**/*.bpmn20.xml'] : null }.call()

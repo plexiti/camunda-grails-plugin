@@ -32,26 +32,30 @@ class Configuration {
     /* By default assume 'tomcat' to be the target servlet container (relevant for shared 
      * scenarios only). */ 
     'camunda.deployment.shared.container' : 'tomcat',
-    /* By default update database schema for environments 'dev' and 'test', for all 
-     * others don't touch camunda's default. */
-    'camunda.engine.configuration.databaseSchemaUpdate' : {
-      Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ] ? true : null
-    },
-    /* By default turn off job executor to enable single threaded testing during test 
-     * phases (except functional), for all other cases enable it in 'dev' and 'test',
-     * for all others don't touch camunda's default. */
-    'camunda.engine.configuration.jobExecutorActivate' : {
-      config('grails.test.phase') && config('grails.test.phase') != 'functional' ? false : 
-        (Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ] ? true : null)
-    },
-    /* By default deploy bpmn resources in classpath for environments 'dev' and 'test', 
-     * for all others don't touch camunda's default. */
-    'camunda.engine.configuration.deploymentResources' : {
-      Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ] ?
-        ['classpath:/**/*.bpmn', 'classpath:/**/*.bpmn20.xml'] :
-        null
-    },
   ]
+  
+  static {
+    if (Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]) {
+      /* By default update database schema for environments 'dev' and 'test', for all 
+       * other environments don't touch camunda's default. 
+       */
+      defaults['camunda.engine.configuration.databaseSchemaUpdate'] = true
+      /* By default enable the job executor for environments 'dev' and 'test',
+       * for all other environments don't touch camunda's default. 
+       */
+      defaults['camunda.engine.configuration.jobExecutorActivate'] = true
+      /* By default deploy bpmn resources in classpath for environments 'dev' and 'test', 
+       * for all other environments don't touch camunda's default. 
+       */
+      defaults['camunda.engine.configuration.deploymentResources'] = ['classpath:/**/*.bpmn', 'classpath:/**/*.bpmn20.xml']
+    }
+    if (exists('grails.test.phase') && config('grails.test.phase') != 'functional') {
+      /* By default turn off job executor during test phases (except functional) for
+       * all environments to enable single threaded testing 
+       */
+      defaults['camunda.engine.configuration.jobExecutorActivate'] = false
+    }
+  }
 
   /**
    * Validators exist for plugin specific configuration only, not for 
@@ -106,20 +110,28 @@ class Configuration {
     }
   }
 
-  static def config(String property, ConfigObject conf = Holders.getGrailsApplication()?.config) {
-    assert conf
-    // First look, whether a system property exists
-    def value = System.getProperty(property)
-    // If not, look, whether a grails configuration property exists
-    value = value == null ? conf.flatten().get(property) : value
-    // If not, look, whether a default value exists
-    value = value == null ? defaults.get(property) : value
+  static def exists(String property) {
+    System.properties.containsKey(property) || containsKey(property) || defaults.containsKey(property)
+  }
+
+  static def config(String property) {
+    def value
+    if (System.properties.containsKey(property)) {
+      // First look, whether a system property exists
+      value = System.getProperty(property) ?: null
+    } else if (containsKey(property)) {
+      // If not, look, whether a grails configuration property exists
+      value = getProperty(property)
+    } else {
+      // If not, look, whether a default value exists
+      value = defaults.get(property)
+    }
     // In case the value we found is a closure, we evaluate it now
     value = value instanceof Closure ? value.call() : value
     try { // In case we deal with a string value we try to convert it now
       value = value instanceof String ? convert(property, value) : value
     } catch (RuntimeException e) {}
-    if (value != null) {
+    if (exists(property)) {
     // In case we have a value and know a validator, we use it now
       validators.get(property)?.call(property, value)
     } else {
@@ -131,11 +143,10 @@ class Configuration {
       keys.addAll(Holders.getGrailsApplication().config.flatten().keySet().collect { it.toString() })
       value = [:]
       // then we recursively evaluate the config value of all matching keys, but just 
-      // use those which are set (don't evaluate to null)
-      keys.findAll { it.startsWith("${property}.") }.each { prop -> 
-        def v = config(prop)
-        if (v != null) 
-          value[prop] = v 
+      // use those which are set to a value
+      keys.toSet().findAll { it.startsWith("${property}.") }.each { prop -> 
+        if (exists(prop)) 
+          value[prop] = config(prop) 
       }
       // In case we found such values, we were looking for a parent, in case we did 
       // not we were looking for a configuration value which evaluates to null (either 
@@ -144,5 +155,30 @@ class Configuration {
     }
     return value
   }
-  
+
+  static ConfigObject getConfigObject(String property, ConfigObject configObject = Holders.getGrailsApplication().config) {
+    int idx = property.indexOf('.')
+    configObject != null && idx > 0 ? 
+      getConfigObject(property.substring(idx + 1), configObject.getProperty(property.substring(0, idx)) as ConfigObject) 
+      : configObject
+  }
+
+  static Object getProperty(String property) {
+    getConfigObject(property)?.get(property.substring(property.lastIndexOf('.') + 1))
+  }
+
+  static void setProperty(String property, Object value) {
+    getConfigObject(property)?.put(property.substring(property.lastIndexOf('.') + 1), value)
+  }
+
+  static void clearProperty(String property) {
+    getConfigObject(property)?.remove(property.substring(property.lastIndexOf('.') + 1))
+  }
+
+  static boolean containsKey(String property) {
+    def configObject = getConfigObject(property)
+    configObject?.isSet(property.substring(property.lastIndexOf('.') + 1)) && 
+      !(getProperty(property) instanceof ConfigObject) 
+  }
+
 }

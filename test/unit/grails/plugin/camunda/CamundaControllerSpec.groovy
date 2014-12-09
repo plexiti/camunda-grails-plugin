@@ -13,18 +13,18 @@ class CamundaControllerSpec extends Specification {
   @Unroll
   void 'Test index() for scenario #scenario'() {
     given:
-      grailsApplication.config.camunda.deployment.scenario = scenario
+      Configuration.setProperty('camunda.deployment.scenario', scenario)
     when:
       controller.index()
     then:
       response.text.contains('camunda BPM')
     where:
-      scenario << ['embedded', null]
+      scenario << ['embedded']
   }
 
   void 'Test index() for scenario shared'() {
     given:
-      grailsApplication.config.camunda.deployment.scenario = 'shared'
+      Configuration.setProperty('camunda.deployment.scenario', 'shared')
     when:
       controller.index()
     then:
