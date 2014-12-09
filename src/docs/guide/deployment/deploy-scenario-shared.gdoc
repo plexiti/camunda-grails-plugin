@@ -22,6 +22,11 @@ When preparing the camunda BPM container for a production environment, you shoul
 'org.codehaus.groovy:groovy-all' library version bundled in the container matches the version you 
 need for your grails application and eventually replace it with the version you need.
 
+{note}
+You might want to check how to [configure and finetune the dependencies|guide:shared-war-excludes] 
+provided by a camunda BPM container for a shared engine in greater detail.
+{note}
+
 *Finally*, build your 'war' file ...
 
 {code:bash}

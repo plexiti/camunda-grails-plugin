@@ -24,6 +24,7 @@ configuration:
         title: Configure a 'shared' process engine
         processes-xml: Provide a custom processes.xml file
         process-application-class: Provide a custom process application class
+        shared-war-excludes: Configure and finetune dependencies provided by a camunda BPM container
     jul-logging: Consider 'java.util.logging' settings
     alternative-engine-version: Use an alternative version of camunda 
     bean-names: Provide alternative bean names

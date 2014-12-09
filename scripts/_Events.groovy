@@ -54,9 +54,12 @@ eventCreateWarStart = { warName, stagingDir ->
         // do not bundle libraries provided by container
         ant.delete() {
             fileset(dir: "${stagingDir}/WEB-INF/lib") {
-                include(name: "camunda-*.jar")
-                include(name: "groovy-all-*.jar")
-                exclude(name: "camunda-engine-spring-*.jar")
+                config('camunda.deployment.shared.war.excludes').each { String exclude ->
+                    include(name: exclude)
+                }
+                config('camunda.deployment.shared.war.includes').each { String include ->
+                    exclude(name: include)
+                }
             }
         }
     }

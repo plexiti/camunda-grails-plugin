@@ -32,6 +32,9 @@ class Configuration {
     /* By default assume 'tomcat' to be the target servlet container (relevant for shared 
      * scenarios only). */ 
     'camunda.deployment.shared.container' : 'tomcat',
+    /* By default exclude - or not - some jars when building a shared container war. */
+    'camunda.deployment.shared.war.excludes' : ['camunda-*.jar', 'groovy-all-*.jar'],
+    'camunda.deployment.shared.war.includes' : ['camunda-engine-spring-*.jar'],
   ]
   
   static {
@@ -73,12 +76,21 @@ class Configuration {
     },
     'camunda.deployment.autoreload' : { property, value ->
       assert value instanceof Boolean :
-        "Config property $property must be instance of ${Boolean.class.name}, instead it was: '$value'"
+        "Config property $property must be instance of ${Boolean.class.name}, instead it was: ${value?.class?.name}"
     },
     'camunda.deployment.shared.container' : { property, value ->
       def allowed = ['tomcat']
       assert value in allowed :
       "Config property $property must be one of $allowed, instead it was: '$value'"
+    },
+    'camunda.deployment.shared.war.excludes' : { property, value ->
+      assert value ? value instanceof List : true
+        "Config property $property must be instance of ${List.class.name}, instead it was: '${value?.class?.name}'"
+    },
+    'camunda.deployment.shared.war.includes' : { property, value ->
+      assert value ? value instanceof Collection && !value.find{!(it instanceof String)} : true
+      "Config property $property must be instance of ${Collection.class.name}, and its items must be instances of " +
+        "${String.class.name} instead it was: '${value}'"
     },
   ]
 

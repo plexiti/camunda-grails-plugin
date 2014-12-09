@@ -115,8 +115,10 @@ class ConfigurationSpec extends Specification {
       property                                            | value
       'camunda.deployment.scenario'                       | 'embedded'
       'camunda.deployment.application'                    | SpringServletProcessApplication
-      'camunda.deployment.shared.container'               | 'tomcat'
       'camunda.deployment.autoreload'                     | Environment.current in [Environment.DEVELOPMENT, Environment.TEST]
+      'camunda.deployment.shared.container'               | 'tomcat'
+      'camunda.deployment.shared.war.excludes'            | ['camunda-*.jar', 'groovy-all-*.jar']
+      'camunda.deployment.shared.war.includes'            | ['camunda-engine-spring-*.jar']
       'camunda.engine.configuration.databaseSchemaUpdate' | { Environment.current in [Environment.DEVELOPMENT, Environment.TEST] ? true : null }.call()
       'camunda.engine.configuration.jobExecutorActivate'  | false
       'camunda.engine.configuration.deploymentResources'  | { Environment.current in [Environment.DEVELOPMENT, Environment.TEST] ? ['classpath:/**/*.bpmn', 'classpath:/**/*.bpmn20.xml'] : null }.call()
@@ -127,12 +129,13 @@ class ConfigurationSpec extends Specification {
       def deployment = Configuration.config('camunda.deployment') as Map
     then:
       deployment instanceof Map
-      deployment.size() == 4
       deployment.keySet() == [
         'camunda.deployment.scenario',
         'camunda.deployment.application',
-        'camunda.deployment.shared.container',
         'camunda.deployment.autoreload',
+        'camunda.deployment.shared.container',
+        'camunda.deployment.shared.war.excludes',
+        'camunda.deployment.shared.war.includes',
       ].toSet()
       deployment['camunda.deployment.autoreload'] == Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]
   }
@@ -146,11 +149,13 @@ class ConfigurationSpec extends Specification {
     then:
       thrown(AssertionError)
     where:
-      property                              | value
-      'camunda.deployment.scenario'         | 'something'
-      'camunda.deployment.application'      | getClass()
-      'camunda.deployment.shared.container' | 'jboss'
-      'camunda.deployment.autoreload'       | 'untrue'
+      property                                 | value
+      'camunda.deployment.scenario'            | 'something'
+      'camunda.deployment.application'         | getClass()
+      'camunda.deployment.autoreload'          | 'untrue'
+      'camunda.deployment.shared.container'    | 'jboss'
+      'camunda.deployment.shared.war.excludes' | 'abc'
+      'camunda.deployment.shared.war.includes' | ['abc'.class]
   }
 
   @Unroll
@@ -168,6 +173,8 @@ class ConfigurationSpec extends Specification {
       'camunda.engine.configuration.databaseSchemaUpdate' | false
       'camunda.engine.configuration.jobExecutorActivate'  | true
       'camunda.engine.configuration.deploymentResources'  | ['classpath:/**/*.bpmn']
+      'camunda.deployment.shared.war.excludes'            | ['abc']
+      'camunda.deployment.shared.war.includes'            | ['abc', 'def']
   }
 
   @Unroll
@@ -224,7 +231,6 @@ class ConfigurationSpec extends Specification {
       def deployment = Configuration.config('camunda') as Map
     then:
       deployment instanceof Map
-      deployment.size() == 8
       deployment.keySet() == [
         'camunda.deployment.test',
         'camunda.deployment.scenario',
@@ -234,6 +240,8 @@ class ConfigurationSpec extends Specification {
         'camunda.engine.configuration.jobExecutorActivate',
         'camunda.engine.configuration.databaseSchemaUpdate',
         'camunda.engine.configuration.deploymentResources',
+        'camunda.deployment.shared.war.excludes',
+        'camunda.deployment.shared.war.includes',
       ].toSet()
       deployment['camunda.deployment.scenario'] == 'shared'
   }
