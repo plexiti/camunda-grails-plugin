@@ -60,7 +60,7 @@ class Configuration {
     }
   }
 
-  /**
+  /*
    * Validators exist for plugin specific configuration only, not for 
    * configuration dynamically used for camunda provided configuration beans.
    */
@@ -122,10 +122,22 @@ class Configuration {
     }
   }
 
+  /**
+   * @param property configuration property which should be tested
+   * @return true, in case at least one configuration source (being: system properties, 
+   * grails configuration and plugin defaults) explicitly knows a value for that property
+   */
   static def exists(String property) {
     System.properties.containsKey(property) || containsKey(property) || defaults.containsKey(property)
   }
 
+  /**
+   * Method to retrieve configuration value from three configuration sources system 
+   * properties overrides Config.groovy grails configuration properties, which override 
+   * any plugin defaults) directly set in this class
+   * @param property configuration property which should be retrieved
+   * @return property value 
+   */
   static def config(String property) {
     def value
     if (System.properties.containsKey(property)) {
@@ -148,20 +160,20 @@ class Configuration {
       validators.get(property)?.call(property, value)
     } else {
       // In case we still don't have a value, it could be that we were looking for a 
-      // parent configuration property of many children, so we try to build it by
-      // putting all keys into a set
+      // parent configuration property of many children, so we try to build it
+      // First we put all keys into a collection
       def keys = defaults.keySet().toList()
       keys.addAll(System.properties.stringPropertyNames())
       keys.addAll(Holders.getGrailsApplication().config.flatten().keySet().collect { it.toString() })
-      value = [:]
       // then we recursively evaluate the config value of all matching keys, but just 
-      // use those which are set to a value
+      // use those which 'exist' in at least one configuration source
+      value = [:]
       keys.toSet().findAll { it.startsWith("${property}.") }.each { prop -> 
         if (exists(prop)) 
           value[prop] = config(prop) 
       }
       // In case we found such values, we were looking for a parent, in case we did 
-      // not we were looking for a configuration value which evaluates to null (either 
+      // not, we were looking for a configuration value which evaluates to null (either 
       // parent or child)
       value = value ?: null
     }
@@ -175,32 +187,40 @@ class Configuration {
       : configObject
   }
 
+  /*
+   * Helper method to retrieve a property style key from grails configuration
+   */
   static Object getProperty(String property) {
     getConfigObject(property)?.get(property.substring(property.lastIndexOf('.') + 1))
   }
 
+  /*
+   * Helper method to change a property style key in grails configuration
+   */
   static void setProperty(String property, Object value) {
     getConfigObject(property)?.put(property.substring(property.lastIndexOf('.') + 1), value)
   }
 
+  /*
+   * Helper method to remove a property style key from grails configuration
+   */
   static void clearProperty(String property) {
     getConfigObject(property)?.remove(property.substring(property.lastIndexOf('.') + 1))
   }
 
+  /*
+   * Helper method to test whether a property style key exists in grails configuration
+   */
   static boolean containsKey(String property) {
     def configObject = getConfigObject(property)
-    configObject && isSet(configObject, property.substring(property.lastIndexOf('.') + 1)) && 
-      !(getProperty(property) instanceof ConfigObject) 
-  }
-  
-  private static Boolean isSet(ConfigObject configObject, String option) {
+    def option = property.substring(property.lastIndexOf('.') + 1)
     if (configObject.containsKey(option)) {
-      Object entry = configObject.get(option);
-      if (!(entry instanceof ConfigObject) || !((ConfigObject) entry).isEmpty()) {
-        return Boolean.TRUE;
+      Object entry = configObject.get(option)
+      if (!(entry instanceof ConfigObject)) {
+        return true
       }
     }
-    return Boolean.FALSE;
+    return false
   }
 
 }
