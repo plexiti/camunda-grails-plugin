@@ -2,7 +2,7 @@ In your BuildConfig.groovy configure the following plugin dependency:
 
 {code:xml}
 plugins {
-    compile \":camunda:0.3.0"
+    compile \":camunda:0.4.0"
 }
 {code}
 
