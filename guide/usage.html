@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4 User Guide 0.3.0</title>
+    <title>4 User Guide 0.4.0</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -36,10 +36,16 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../guide/usage.html"><strong>4</strong><span>User Guide</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/testing.html"><strong>5</strong><span>Testing Guide</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/configuration.html"><strong>5</strong><span>Configuration Guide</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/resources.html"><strong>6</strong><span>Further Resources</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/deployment.html"><strong>6</strong><span>Deployment Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/testing.html"><strong>7</strong><span>Testing Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/resources.html"><strong>8</strong><span>Further Resources</span></a>
                     </div>
                     
                 </div>
@@ -75,7 +81,7 @@ function addJsClass() {
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../guide/testing.html"><strong>5</strong><span>Testing Guide</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/configuration.html"><strong>5</strong><span>Configuration Guide</span> >></a></div>
                 
 
 
@@ -84,7 +90,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Martin Schimak</p>
 
-                    <p><strong>Version:</strong> 0.3.0</p>
+                    <p><strong>Version:</strong> 0.4.0</p>
 
                     
                 </div>
@@ -99,34 +105,10 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0px"><a href="#services"><strong>4.2</strong><span>Inject camunda API Services</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#configuration"><strong>4.3</strong><span>Configure the camunda plugin</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#embedded-forms"><strong>4.3</strong><span>Develop a camunda BPM tasklist application</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:10px"><a href="#deployment-scenario"><strong>4.3.1</strong><span>Set the deployment scenario</span></a>
-                    </div>
-                    
-                    <div class="toc-item" style="margin-left:10px"><a href="#process-engine-configuration"><strong>4.3.2</strong><span>Configure your process engine</span></a>
-                    </div>
-                    
-                    <div class="toc-item" style="margin-left:10px"><a href="#configuration-possibilities"><strong>4.3.3</strong><span>Use primitive types, any object or even spring beans</span></a>
-                    </div>
-                    
-                    <div class="toc-item" style="margin-left:10px"><a href="#jul-logging"><strong>4.3.4</strong><span>Consider 'java.util.logging' settings</span></a>
-                    </div>
-                    
-                    <div class="toc-item" style="margin-left:10px"><a href="#alternative-database"><strong>4.3.5</strong><span>Use a different database</span></a>
-                    </div>
-                    
-                    <div class="toc-item" style="margin-left:10px"><a href="#alternative-engine-version"><strong>4.3.6</strong><span>Use an alternative version of camunda</span></a>
-                    </div>
-                    
-                    <div class="toc-item" style="margin-left:10px"><a href="#bean-names"><strong>4.3.7</strong><span>Provide alternative bean names</span></a>
-                    </div>
-                    
-                    <div class="toc-item" style="margin-left:10px"><a href="#override-configuration"><strong>4.3.8</strong><span>Override plugin configuration with custom beans</span></a>
-                    </div>
-                    
-                    <div class="toc-item" style="margin-left:10px"><a href="#auto-reload-configuration"><strong>4.3.9</strong><span>Configure auto reloading of bpmn process definitions</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#custom-form-controllers"><strong>4.4</strong><span>Redirect camunda BPM tasklist to your own grails application</span></a>
                     </div>
                     
                 </div>
@@ -150,7 +132,7 @@ given: <span class="java&#45;quote">"a <span class="java&#45;keyword">new</span>
 runtimeService.startProcessInstanceByKey(<span class="java&#45;quote">"TestProcess"</span>)<p class="paragraph"/>when: <span class="java&#45;quote">"completing the user task"</span>
 def task = taskService.createTaskQuery().singleResult()
 taskService.complete(task.id)<p class="paragraph"/>then: <span class="java&#45;quote">"the service method defined <span class="java&#45;keyword">for</span> the subsequent service task was called exactly once"</span>
-1 &#42; sampleTestProcessService.serviceMethod()
+1 &#42; sampleTestProcessService.serviceMethod(_ as Execution)
 &#91;...&#93;</pre></div><p class="paragraph"/>&#8230; again to get you started with typical process testing boilerplate readily adapted to your freshly created
 process definition and to build upon. Please check out the chapter about <a href="../guide/single.html#conventions" class="guide">conventions</a> in order
 to fully appreciate the consequences of the process template being generated for you.
@@ -158,7 +140,8 @@ to fully appreciate the consequences of the process template being generated for
 
 
 <h2 id="services">4.2 Inject camunda API Services</h2>
-You can inject the camunda process engine API services into your grails artifacts (like
+You can easily use the process engine internally in your application. Just inject 
+the camunda process engine API services into your grails artifacts (like
 controllers, services, etc). The following services can be found in the package
 <a href="http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/package-summary.html" target="blank">org.camunda.bpm.engine</a>
 and are made available under their 'bean style' class names, as shown here in alphabetical order:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.camunda.bpm.engine.&#42;
@@ -179,206 +162,52 @@ avoid potential name conflicts with grails services pre-existing in your project
 <strong class="bold">change these default bean names</strong> via <a href="../guide/single.html#bean-names" class="guide">configuration</a>. </blockquote><p class="paragraph"/>In addition to the camunda API services, the ProcessEngine itself can be used as an injectable
 dependency, too:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> org.camunda.bpm.engine.&#42;
 &#8230; 
-ProcessEngine processEngine</pre></div><p class="paragraph"/>
+ProcessEngine processEngine</pre></div><p class="paragraph"/>As an alternative to building your custom 'full fledged' grails application, you might 
+want to use <strong class="bold"><a href="http://docs.camunda.org/latest/guides/user-guide/#tasklist" target="blank">camunda tasklist</a></strong> 
+to work yourself through your processes. In that case you will want to create 
+some forms which can be presented to your camunda BPM tasklist user.
 
 
-<h2 id="configuration">4.3 Configure the camunda plugin</h2>
-It is not necessary to add configuration in order to <a href="../guide/single.html#get-started" class="guide">get started</a>. However,
-you will need some configuration to deploy to other environments than <strong class="bold">dev</strong>elopment and <strong class="bold">test</strong>.
-The plugin provides the possibility to adapt to your specific requirements by adding a new
-section '<strong class="bold">camunda</strong>' to your <strong class="bold">Config.groovy</strong> (either top-level or beneath a specific environment):<p class="paragraph"/><div class="code"><pre>camunda &#123;
-  &#8230;
-&#125;</pre></div><p class="paragraph"/><blockquote class="note"> You will need such a configuration section to deploy to other environments than
-<strong class="bold">dev</strong>elopment and <strong class="bold">test</strong>. Find out more in the following two chapters. </blockquote>
-
-
-<h2 id="deployment-scenario">4.3.1 Set the deployment scenario</h2>
-You can set the <a href="http://docs.camunda.org/latest/guides/user-guide/#introduction-architecture-overview-camunda-bpm-platform-architecture" target="blank">deployment
-scenario</a>
-for your process engine. The plugin currently supports the deployment scenarios 
-<ul class="minus">
-<li>'<strong class="bold">embedded</strong>' (default): the process engine is embedded into your grails application and started and stopped with your grails application lifecycle</li>
-<li>'<strong class="bold">none</strong>': the process engine configuration and startup is turned off</li>
-</ul><p class="paragraph"/><div class="code"><pre>camunda &#123;
-  deployment.scenario = <span class="java&#45;quote">"embedded"</span> // (or <span class="java&#45;quote">"none"</span>)
-&#125;</pre></div><p class="paragraph"/><blockquote class="note">
-The value 'embedded' is the <strong class="bold">default</strong> in case you do not set and change it explicitely.
+<h2 id="embedded-forms">4.3 Develop a camunda BPM tasklist application</h2>
+<blockquote class="note">
+Using the camunda BPM tasklist with 'embedded' forms as described in this section, will just 
+work with a 'shared' process engine <a href="../guide/single.html#deployment-scenario" class="guide">deployment scenario</a>.
+</blockquote><p class="paragraph"/><img border="0" class="center" src="../img/tasklist-dashboard.png"></img><p class="paragraph"/>With the help of the <strong class="bold">camunda Grails Plugin</strong> you can <strong class="bold">use grails gsp views to dynamically</strong> 
+<strong class="bold">render 'embedded' forms</strong> and hook them to the camunda BPM tasklist. You just need two things: 
+<strong class="bold">First</strong>, place your form into the views folder, like e.g. ...<p class="paragraph"/><div class="code"><pre>/grails&#45;app/views/test/sampleForm.gsp</pre></div><p class="paragraph"/>&#8230; and <strong class="bold">second</strong>, associate your form to your process definition by attaching an attribute 
+<strong class="bold">camunda:formKey</strong> to your 'userTask' xml element:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;userTask id=<span class="xml&#45;quote">"UserTask_1"</span> name=<span class="xml&#45;quote">"Sample UserTask"</span> camunda:formKey=<span class="xml&#45;quote">"embedded:app:camunda/test/sampleForm"</span>/&#62;</span></pre></div><p class="paragraph"/>Or, for a start event, it would look very similar:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;startEvent id=<span class="xml&#45;quote">"StartEvent_1"</span> name=<span class="xml&#45;quote">"Sample StartEvent"</span> camunda:formKey=<span class="xml&#45;quote">"embedded:app:camunda/test/sampleForm"</span>/&#62;</span></pre></div><p class="paragraph"/>Of course, you can also do this by making use of the camunda modeler properties pane:<p class="paragraph"/><img border="0" class="center" src="../img/modeler-form-key.png"></img><p class="paragraph"/>But what happens now behind the scenes at run time? First, when you start a process or open a task with 
+camunda BPM task list, it will realise that you want to use an 'embedded' form and that you want to 
+provide it via your grails web 'app' (from camunda's tasklist perspective you provide it from the 
+application, which deployed the process definition with that formKey). The tasklist will therefore 
+request the form from the absolute path '/your-grails-app-context/camunda/test/sampleForm'. The string 
+'camunda/test/sampleForm' is the string you provided in the formKey. camunda Grails Plugin will then 
+respond with the html <strong class="bold">body</strong> only of your 'test/sampleForm.gsp' and deliver it to the task list (by 
+means of a plugin provided grails controller named 'camunda').<p class="paragraph"/><blockquote class="note">
+Make sure that the body of your gsp just contains a single <strong class="bold">form</strong> element and that the html follows 
+the conventions for camunda embedded forms. Of course you are free to dynamically generate that html 
+via gsp mechanisms. To learn more about camunda embedded forms, you may want to look at the 
+<a href="https://github.com/plexiti/camunda-grails-plugin/blob/master/grails-app/views/test/sampleForm.gsp" target="blank">raw html code</a> 
+of the sample form provided with <strong class="bold">camunda Grails Plugin</strong> or consult camunda's 
+<a href="http://docs.camunda.org/latest/guides/user-guide/#tasklist-task-forms-creating-embedded-task-forms" target="blank">embedded-task-forms docs</a>.
 </blockquote>
+ 
 
 
-
-<h2 id="process-engine-configuration">4.3.2 Configure your process engine</h2>
-You can fully control your embedded camunda process engine configuration via Config.groovy:<p class="paragraph"/><div class="code"><pre>camunda &#123;
-  engine &#123;
-    configuration &#123;
-      &#8230;
-    &#125;
-  &#125;
-&#125;</pre></div><p class="paragraph"/>Find a full specification of the values possible in the camunda docs for the spring <a href="http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/spring/SpringProcessEngineConfiguration.html" target="blank">process
-engine configuration</a>.<p class="paragraph"/>Note that in case you do not configure a value the plugin relies on the default values coming
-with the camunda engine in use - with the following three exceptions for the default grails
-environments <strong class="bold">dev</strong>elopment and <strong class="bold">test</strong>:
-<ul class="minus">
-<li>your database is populated with camunda tables the first time the database is accessed</li>
-<li>any *.bpmn process definitions found in the classpath will be deployed to the database</li>
-<li>the job executor is turned on</li>
-</ul><p class="paragraph"/><blockquote class="note">This choice was made in order to make it as easy as possible to <a href="../guide/single.html#get-started" class="guide">get
-started</a> while relying on explicit configuration choices when deploying to
-other (and potentially production) databases.</blockquote><p class="paragraph"/>That means if you want to have that same behaviour for any other environment, you need to
-explicitely configure that in Config.groovy:<p class="paragraph"/><div class="code"><pre>camunda &#123;
-  engine &#123;
-    configuration &#123;
-      databaseSchemaUpdate = <span class="java&#45;keyword">true</span>
-      deploymentResources = &#91;'classpath:/&#42;&#42;/&#42;.bpmn'&#93;
-      jobExecutorActivate = <span class="java&#45;keyword">true</span>
-    &#125;
-  &#125;
-&#125;</pre></div><p class="paragraph"/>Obviously you can also change the configuration for the environments development and test, for
-the sake of the example e.g. to the current camunda defaults used for the grails environment
-<strong class="bold">prod</strong>uction:<p class="paragraph"/><div class="code"><pre>camunda &#123;
-  engine &#123;
-    configuration &#123;
-      databaseSchemaUpdate = <span class="java&#45;keyword">false</span>
-      deploymentResources = &#91;&#93;
-      jobExecutorActivate = <span class="java&#45;keyword">false</span>
-    &#125;
-  &#125;
-&#125;</pre></div><p class="paragraph"/><blockquote class="note"> Please be aware that during integration test phase of any environment, two more camunda
-configuration values are set by the plugin: the camunda job executor is turned off and service
-mocking is made available. Find more information about that in section
-<a href="../guide/single.html#testing" class="guide">testing</a>.</blockquote>
-
-
-<h2 id="configuration-possibilities">4.3.3 Use primitive types, any object or even spring beans</h2>
-For configuration, you can of course use primitive typed configuration values such as Strings and booleans, like e.g.<p class="paragraph"/><div class="code"><pre>camunda &#123;
-  engine &#123;
-    configuration &#123;
-      processEngineName = <span class="java&#45;quote">"myCustomName"</span>
-      databaseSchemaUpdate = <span class="java&#45;keyword">false</span>
-    &#125;
-  &#125;
-&#125;</pre></div><p class="paragraph"/>but also any object available in Config.groovy or directly constructed within it, like e.g.<p class="paragraph"/><div class="code"><pre>List&#60;BpmnParseListener&#62; parseHandlers = <span class="java&#45;keyword">new</span> ArrayList&#60;BpmnParseListener&#62;();
-parseHandlers.add(<span class="java&#45;keyword">new</span> CustomParseHandler());<p class="paragraph"/>camunda &#123;
-    engine &#123;
-        configuration &#123;
-            preParseListeners = parseHandlers
-        &#125;
-    &#125;
-&#125;</pre></div><p class="paragraph"/>or even spring beans configured e.g. via '<strong class="bold">grails-app/conf/spring/resources.groovy</strong>' or e.g. via '<strong class="bold">grails-app/conf/DataSource.groovy</strong>',
-simply referencing them via their <strong class="bold">bean name</strong>:<p class="paragraph"/><div class="code"><pre>camunda &#123;
-    engine &#123;
-        configuration &#123;
-            dataSource = <span class="java&#45;quote">"dataSource_camunda"</span>
-        &#125;
-    &#125;
-&#125;</pre></div>
-
-
-
-<h2 id="jul-logging">4.3.4 Consider 'java.util.logging' settings</h2>
-camunda uses <a href="http://docs.camunda.org/latest/guides/user-guide/#process-engine-logging" target="blank">java.util.logging</a>.
-Therefore you need to make a conscious choice about whether to turn on/off the 'grails.logging.jul.usebridge'
-setting in your Config.groovy. See the information about the performance impact on
-<a href="http://www.slf4j.org/legacy.html#jul-to-slf4j" target="blank">http://www.slf4j.org</a>.<p class="paragraph"/><strong class="bold">In case the bridge is not turned off explicitely by you, the plugin will turn it on for all Grails test phases.</strong>
-However, your explicit choice won't be overridden.<p class="paragraph"/><blockquote class="note">This decision in particular makes sure that the bridge is turned on for tests executed in the default Grails
-environment '<strong class="bold">test</strong>', for which no explicit setting is made in the default grails application. As soon as you make
-an explicit decision for any of your default or custom environments, the plugin won't interfere anymore.</blockquote>
-
-
-<h2 id="alternative-database">4.3.5 Use a different database</h2>
-camunda's ORM mapping is provided by the mybatis mapping framework. Therefore the plugin can -
-and does by default - reuse your Grails 'dataSource' and 'transactionManager' beans, however it
-needs to be informed about a databaseType different from Grails default 'h2':<p class="paragraph"/><div class="code"><pre>camunda &#123;
-  engine &#123;
-    configuration &#123;
-      databaseType = <span class="java&#45;quote">"postgres"</span> // one of (as of writing): &#91;h2, mysql, oracle, postgres, mssql, db2&#93;
-    &#125;
-  &#125;
-&#125;</pre></div><p class="paragraph"/>Find here a list of camunda's <a href="http://docs.camunda.org/7.0/guides/user-guide/#introduction-supported-environments" target="blank">enviroments supported</a> 
-by the version bundled with the plugin and the corresponding 
-<a href="http://docs.camunda.org/latest/guides/user-guide/#process-engine-database-configuration" target="blank">configuration values</a> 
-for different database types.<p class="paragraph"/>You can also point the process engine to a different database than the one you use for your grails 
-domain objects. First configure it in your '<strong class="bold">grails-app/conf/DataSource.groovy</strong>'...<p class="paragraph"/><div class="code"><pre>dataSource &#123;
-  dbCreate = <span class="java&#45;quote">"create&#45;drop"</span> // one of 'create', 'create&#45;drop', 'update', 'validate', ''
-  url = <span class="java&#45;quote">"jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"</span>
-&#125;
-&#8230;
-dataSource_camunda &#123;
-  dbCreate = <span class="java&#45;quote">"create&#45;drop"</span> // one of 'create', 'create&#45;drop', 'update', 'validate', ''
-  url = <span class="java&#45;quote">"jdbc:h2:mem:devDbCamunda;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"</span>
-&#125;</pre></div><p class="paragraph"/>&#8230; then reference this alternative dataSource bean in '<strong class="bold">grails-app/conf/Config.groovy</strong>':<p class="paragraph"/><div class="code"><pre>camunda &#123;
-  engine &#123;
-    configuration &#123;
-      dataSource = <span class="java&#45;quote">"dataSource_camunda"</span>
-    &#125;
-  &#125;
-&#125;</pre></div>
-
-
-
-<h2 id="alternative-engine-version">4.3.6 Use an alternative version of camunda</h2>
-Currently the plugin comes bundled with a dependency to the release <strong class="bold">7.1.0-Final</strong> of camunda BPM.
-However you may want to choose another version. You then have to explicitely override the needed 
-dependencies in your BuildConfig.groovy:<p class="paragraph"/><div class="code"><pre>dependencies &#123;
-  compile (<span class="xml&#45;quote">"org.camunda.bpm:camunda&#45;engine:$camundaVersion"</span>) &#123;
-    excludes 'spring&#45;beans'
-  &#125;
-  runtime (<span class="xml&#45;quote">"org.camunda.bpm:camunda&#45;engine&#45;spring:$camundaVersion"</span>) &#123;
-    excludes 'spring&#45;context', 'spring&#45;jdbc', 'spring&#45;orm'
-  &#125;
-&#125;</pre></div><p class="paragraph"/>Replace '$camundaVersion' with the version of camunda of your choice. It is recommended to
-explicitely exclude any spring dependencies coming with camunda and make sure to properly test
-your application with the spring framework version provided by the Grails version you use.<p class="paragraph"/>Note that for camunda versions prior to 7.1.0-Final, you must also configure camunda's custom 
-maven repository:<p class="paragraph"/><div class="code"><pre>repositories &#123;
-    mavenRepo <span class="java&#45;quote">"https://app.camunda.com/nexus/content/groups/<span class="java&#45;keyword">public</span>"</span>
-  &#125;</pre></div>
-
-
-
-<h2 id="bean-names">4.3.7 Provide alternative bean names</h2>
-Many of camunda's API service names are quite generic (like 'taskService', 'managementService' etc) and could
-easily clash with names you want to use in your application for other purposes - even more so when having in mind
-the Grails naming convention to use <strong class="bold">&#42;Service</strong> as a name pattern for Grails services. On the other hand typical
-camunda users are used to the established service names and will expect to use these services via their
-established names. Therefore the plugin provides these services via the <a href="../guide/single.html#services" class="guide">established names</a>.
-However, in order to avoid potential name conflicts with grails services pre-existing in your project, the plugin
-also allows to change these default bean names via configuration:<p class="paragraph"/><div class="code"><pre>camunda &#123;
-  beans.runtimeService = 'myCamundaRuntimeService'
-&#125;</pre></div><p class="paragraph"/>Internally the plugin realises this with Spring's bean aliasing mechanism. Instead of the default 
-alias 'runtimeService' the custom alias 'myCamundaRuntimeService' is used. You can then inject
-your 'org.camunda.bpm.engine.RuntimeService'-typed bean as<p class="paragraph"/><div class="code"><pre>def myCamundaRuntimeService</pre></div>
-
-
-<h2 id="override-configuration">4.3.8 Override plugin configuration with custom beans</h2>
-Of course, it is also possible to override some or all of the camunda spring beans defined by the
-plugin via the standard Grails way: by editing '<strong class="bold">grails-app/conf/spring/resources.groovy</strong>'. In
-order to do that properly it is useful to know that the plugin registers all beans following the
-name convention <strong class="bold">camunda&#91;DefaultAlias&#93;Bean</strong>, e.g. the 'processEngine' is registered as bean
-'camundaProcessEngineBean', then given either its default alias 'processEngine' (or its <a href="../guide/single.html#bean-names" class="guide">custom
-alias</a> defined by the user).<p class="paragraph"/><blockquote class="note"> This decision was made partly in order to allow the configuration of <a href="../guide/single.html#bean-names" class="guide">alternative bean
-names</a>, partly because some historic 2.3 versions of Grails display issues with
-custom spring beans named in potential "conflict" with the *Service name convention for Grails
-services. </blockquote>
-
-
-
-<h2 id="auto-reload-configuration">4.3.9 Configure auto reloading of bpmn process definitions</h2>
-You can automatically reload and redeploy '<strong class="bold">.bpmn</strong>' process definitions placed beneath 
-'<strong class="bold">grails-app/processes</strong>'. When changing the process definition while you are running 
-your application with '<strong class="bold">run-app</strong>', it will be redeployed to the process engine.<p class="paragraph"/>You can turn this feature on/off explicitely:<p class="paragraph"/><div class="code"><pre>camunda &#123;
-  deployment.autoreload = <span class="java&#45;keyword">true</span> // (or <span class="java&#45;keyword">false</span>)
-&#125;</pre></div><p class="paragraph"/><blockquote class="note">
-The autoreload feature is <strong class="bold">by default enabled</strong> for grails 'dev' and 'test' environments. 
-For all other environments it is by default disabled.
-</blockquote>
-
+<h2 id="custom-form-controllers">4.4 Redirect camunda BPM tasklist to your own grails application</h2>
+Of course, you are also free to use your own controller actions to deliver forms, be it for embedded purposes...<p class="paragraph"/><div class="code"><pre>camunda:formKey=<span class="java&#45;quote">"embedded:app:forms/index"</span></pre></div><p class="paragraph"/>or as an external form link clickable via the task list:<p class="paragraph"/><div class="code"><pre>camunda:formKey=<span class="java&#45;quote">"app:forms/index"</span></pre></div><p class="paragraph"/>In both cases camunda's task list would now invoke your 'FormsController's 'index()' method (provided 
+you use a standard grails UrlMappings layout). For embedded forms it would again expect to see just a HTML 
+'form' element. 
+For <a href="http://docs.camunda.org/latest/guides/user-guide/#tasklist-task-forms-external-task-forms" target="blank">external forms</a>, 
+you would render the full page yourself and would also need to take care of the subsequent form actions 
+yourself. camunda BPM tasklist will provide you with a <code>taskId</code> url parameter to look up the task as well 
+as with a <code>callbackUrl</code> parameter to redirect back to the task list.
 
 
                 <div style="clear:both;margin-top:15px;"></div>
                 
                     <div class="toc-item prev-left"><a href="../guide/conventions.html">&lt;&lt; <strong>3</strong><span>A Word about Conventions</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../guide/testing.html"><strong>5</strong><span>Testing Guide</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/configuration.html"><strong>5</strong><span>Configuration Guide</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>

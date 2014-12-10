@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>camunda Grails plugin 0.3.0</title>
+        <title>camunda Grails plugin 0.4.0</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -31,9 +31,13 @@ function addJsClass(el) {
                             
                             <div class="toc-item" style="margin-left:0"><a href="../guide/usage.html"><strong>4</strong><span>User Guide</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:0"><a href="../guide/testing.html"><strong>5</strong><span>Testing Guide</span></a></div>
+                            <div class="toc-item" style="margin-left:0"><a href="../guide/configuration.html"><strong>5</strong><span>Configuration Guide</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:0"><a href="../guide/resources.html"><strong>6</strong><span>Further Resources</span></a></div>
+                            <div class="toc-item" style="margin-left:0"><a href="../guide/deployment.html"><strong>6</strong><span>Deployment Guide</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="../guide/testing.html"><strong>7</strong><span>Testing Guide</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="../guide/resources.html"><strong>8</strong><span>Further Resources</span></a></div>
                             
                         </div>
                     </div>
@@ -66,7 +70,7 @@ function addJsClass(el) {
                         <div class="project">
                             <h1>camunda Grails plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Martin Schimak</p>
-                            <p><strong>Version:</strong> 0.3.0</p>
+                            <p><strong>Version:</strong> 0.4.0</p>
                             
                         </div>
 
@@ -84,6 +88,8 @@ function addJsClass(el) {
                             
                             <div class="toc-item" style="margin-left:10px"><a href="../guide/get-started.html#execute-test"><strong>2.3</strong><span>Execute the integration test</span></a></div>
                             
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/get-started.html#deploy-webapp"><strong>2.4</strong><span>Wanna see camunda BPM in action?</span></a></div>
+                            
                             <div class="toc-item" style="margin-left:0px"><a href="../guide/conventions.html"><strong>3</strong><span>A Word about Conventions</span></a></div>
                             
                             <div class="toc-item" style="margin-left:0px"><a href="../guide/usage.html"><strong>4</strong><span>User Guide</span></a></div>
@@ -92,41 +98,63 @@ function addJsClass(el) {
                             
                             <div class="toc-item" style="margin-left:10px"><a href="../guide/usage.html#services"><strong>4.2</strong><span>Inject camunda API Services</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:10px"><a href="../guide/usage.html#configuration"><strong>4.3</strong><span>Configure the camunda plugin</span></a></div>
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/usage.html#embedded-forms"><strong>4.3</strong><span>Develop a camunda BPM tasklist application</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:20px"><a href="../guide/usage.html#deployment-scenario"><strong>4.3.1</strong><span>Set the deployment scenario</span></a></div>
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/usage.html#custom-form-controllers"><strong>4.4</strong><span>Redirect camunda BPM tasklist to your own grails application</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:20px"><a href="../guide/usage.html#process-engine-configuration"><strong>4.3.2</strong><span>Configure your process engine</span></a></div>
+                            <div class="toc-item" style="margin-left:0px"><a href="../guide/configuration.html"><strong>5</strong><span>Configuration Guide</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:20px"><a href="../guide/usage.html#configuration-possibilities"><strong>4.3.3</strong><span>Use primitive types, any object or even spring beans</span></a></div>
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/configuration.html#deployment-scenario"><strong>5.1</strong><span>Set the deployment scenario</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:20px"><a href="../guide/usage.html#jul-logging"><strong>4.3.4</strong><span>Consider 'java.util.logging' settings</span></a></div>
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/configuration.html#configuration-embedded"><strong>5.2</strong><span>Configure an 'embedded' process engine</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:20px"><a href="../guide/usage.html#alternative-database"><strong>4.3.5</strong><span>Use a different database</span></a></div>
+                            <div class="toc-item" style="margin-left:20px"><a href="../guide/configuration.html#process-engine-configuration"><strong>5.2.1</strong><span>Configure your process engine</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:20px"><a href="../guide/usage.html#alternative-engine-version"><strong>4.3.6</strong><span>Use an alternative version of camunda</span></a></div>
+                            <div class="toc-item" style="margin-left:20px"><a href="../guide/configuration.html#configuration-possibilities"><strong>5.2.2</strong><span>Use primitive types, beans or any other object</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:20px"><a href="../guide/usage.html#bean-names"><strong>4.3.7</strong><span>Provide alternative bean names</span></a></div>
+                            <div class="toc-item" style="margin-left:20px"><a href="../guide/configuration.html#alternative-database"><strong>5.2.3</strong><span>Use an alternative database</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:20px"><a href="../guide/usage.html#override-configuration"><strong>4.3.8</strong><span>Override plugin configuration with custom beans</span></a></div>
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/configuration.html#configuration-shared"><strong>5.3</strong><span>Configure a 'shared' process engine</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:20px"><a href="../guide/usage.html#auto-reload-configuration"><strong>4.3.9</strong><span>Configure auto reloading of bpmn process definitions</span></a></div>
+                            <div class="toc-item" style="margin-left:20px"><a href="../guide/configuration.html#processes-xml"><strong>5.3.1</strong><span>Provide a custom processes.xml file</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:0px"><a href="../guide/testing.html"><strong>5</strong><span>Testing Guide</span></a></div>
+                            <div class="toc-item" style="margin-left:20px"><a href="../guide/configuration.html#process-application-class"><strong>5.3.2</strong><span>Provide a custom process application class</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:10px"><a href="../guide/testing.html#drive-process"><strong>5.1</strong><span>Drive the process instances</span></a></div>
+                            <div class="toc-item" style="margin-left:20px"><a href="../guide/configuration.html#shared-war-excludes"><strong>5.3.3</strong><span>Configure and finetune dependencies provided by a camunda BPM container</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:10px"><a href="../guide/testing.html#mock-services"><strong>5.2</strong><span>Mock the service calls</span></a></div>
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/configuration.html#jul-logging"><strong>5.4</strong><span>Consider 'java.util.logging' settings</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:10px"><a href="../guide/testing.html#auto-reload"><strong>5.3</strong><span>Auto reload and redeploy your bpmn process definitions</span></a></div>
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/configuration.html#alternative-engine-version"><strong>5.5</strong><span>Use an alternative version of camunda</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:0px"><a href="../guide/resources.html"><strong>6</strong><span>Further Resources</span></a></div>
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/configuration.html#bean-names"><strong>5.6</strong><span>Provide alternative bean names</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:10px"><a href="../guide/resources.html#plugin-resources"><strong>6.1</strong><span>camunda Grails plugin</span></a></div>
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/configuration.html#override-configuration"><strong>5.7</strong><span>Override plugin configuration with custom beans</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:10px"><a href="../guide/resources.html#camunda-resources"><strong>6.2</strong><span>camunda BPM</span></a></div>
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/configuration.html#auto-reload-configuration"><strong>5.8</strong><span>Configure auto reloading of bpmn process definitions</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:10px"><a href="../guide/resources.html#modeler-resources"><strong>6.3</strong><span>camunda Modeler</span></a></div>
+                            <div class="toc-item" style="margin-left:0px"><a href="../guide/deployment.html"><strong>6</strong><span>Deployment Guide</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/deployment.html#configuration-of-deployment-scenario"><strong>6.1</strong><span>Consider your deployment scenario</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/deployment.html#deploy-scenario-shared"><strong>6.2</strong><span>Scenario 'shared' process engine</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/deployment.html#deploy-scenario-embedded"><strong>6.3</strong><span>Scenario 'embedded' process engine</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="../guide/testing.html"><strong>7</strong><span>Testing Guide</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/testing.html#drive-process"><strong>7.1</strong><span>Drive the process instances</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/testing.html#mock-services"><strong>7.2</strong><span>Mock the service calls</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/testing.html#auto-reload"><strong>7.3</strong><span>Auto reload and redeploy your bpmn process definitions</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="../guide/resources.html"><strong>8</strong><span>Further Resources</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/resources.html#plugin-resources"><strong>8.1</strong><span>camunda Grails plugin</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/resources.html#camunda-resources"><strong>8.2</strong><span>camunda BPM</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="../guide/resources.html#modeler-resources"><strong>8.3</strong><span>camunda Modeler</span></a></div>
                             
                             <div style="clear:both" ></div>
                         </div>

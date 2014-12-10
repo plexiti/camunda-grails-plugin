@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>2 Get Started 0.3.0</title>
+    <title>2 Get Started 0.4.0</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -36,10 +36,16 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../guide/usage.html"><strong>4</strong><span>User Guide</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/testing.html"><strong>5</strong><span>Testing Guide</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/configuration.html"><strong>5</strong><span>Configuration Guide</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/resources.html"><strong>6</strong><span>Further Resources</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/deployment.html"><strong>6</strong><span>Deployment Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/testing.html"><strong>7</strong><span>Testing Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/resources.html"><strong>8</strong><span>Further Resources</span></a>
                     </div>
                     
                 </div>
@@ -84,7 +90,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Martin Schimak</p>
 
-                    <p><strong>Version:</strong> 0.3.0</p>
+                    <p><strong>Version:</strong> 0.4.0</p>
 
                     
                 </div>
@@ -102,6 +108,9 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0px"><a href="#execute-test"><strong>2.3</strong><span>Execute the integration test</span></a>
                     </div>
                     
+                    <div class="toc-item" style="margin-left:0px"><a href="#deploy-webapp"><strong>2.4</strong><span>Wanna see camunda BPM in action?</span></a>
+                    </div>
+                    
                 </div>
                 
 
@@ -113,7 +122,7 @@ function addJsClass() {
 
 <h2 id="install">2.1 Install the plugin</h2>
 In your BuildConfig.groovy configure the following plugin dependency:<p class="paragraph"/><div class="code"><pre>plugins &#123;
-    compile &#34;:camunda:0.3.0"
+    compile &#34;:camunda:0.4.0"
 &#125;</pre></div><p class="paragraph"/>You may want to refresh your dependencies now in order to make sure that Grails properly
 installs the plugin. Type on your command line<p class="paragraph"/><div class="code"><pre>grails refresh&#45;dependencies</pre></div>
 
@@ -129,7 +138,7 @@ given: <span class="java&#45;quote">"a <span class="java&#45;keyword">new</span>
 runtimeService.startProcessInstanceByKey(<span class="java&#45;quote">"TestProcess"</span>)<p class="paragraph"/>when: <span class="java&#45;quote">"completing the user task"</span>
 def task = taskService.createTaskQuery().singleResult()
 taskService.complete(task.id)<p class="paragraph"/>then: <span class="java&#45;quote">"the service method defined <span class="java&#45;keyword">for</span> the subsequent service task was called exactly once"</span>
-1 &#42; sampleTestProcessService.serviceMethod()
+1 &#42; sampleTestProcessService.serviceMethod(_ as Execution)
 &#91;...&#93;</pre></div><p class="paragraph"/>&#8230; again to get you started with typical process testing boilerplate readily adapted to your
 freshly created process definition and to build upon. You can directly execute that test:
 
@@ -141,7 +150,25 @@ tables. By default, this will be a H2 in memory database preconfigured by Grails
 fine with that. For other databases, you will need to adapt the <a href="../guide/single.html#alternative-database" class="guide">plugin
 configuration</a>, too.</blockquote><p class="paragraph"/><div class="code"><pre>grails test&#45;app integration: org.camunda.my.TestProcess</pre></div><p class="paragraph"/>When executing the test you should see the following familiar output :-)<p class="paragraph"/><div class="code"><pre>| Running 1 integration test&#8230; 1 of 1
 | Completed 1 integration test, 0 failed in 0m 0s
-| Tests PASSED &#45; view reports in ./target/test&#45;reports</pre></div><p class="paragraph"/><strong class="bold">Congrats!</strong> You are successfully using camunda BPM with the Grails framework!
+| Tests PASSED &#45; view reports in ./target/test&#45;reports</pre></div><p class="paragraph"/><strong class="bold">Congrats!</strong> You are successfully using an embedded camunda BPM engine with the Grails framework!
+If you want to use camunda "behind the scenes" of your grails app that's all that is needed! But
+maybe you &#8230;
+
+
+<h2 id="deploy-webapp">2.4 Wanna see camunda BPM in action?</h2>
+Do you want to see the <strong class="bold">camunda BPM</strong> tasklist and cockpit web apps <strong class="bold">in action</strong> with your 
+freshly created process? Then download a <strong class="bold"><a href="http://camunda.org/download/" target="blank">camunda BPM</a> distribution</strong> 
+for <strong class="bold">tomcat</strong>, expand the archive, go to the expanded folder and start it by issuing:<p class="paragraph"/><div class="code"><pre>./start&#45;camunda.sh</pre></div><p class="paragraph"/>Now, return to your your grails project command line, and create a 'war' file prepared to use
+the process engine managed by the camunda BPM tomcat container and shared with your grails app:<p class="paragraph"/><div class="code"><pre>grails war</pre></div><p class="paragraph"/>Move the war generated in your target folder into the camunda BPM tomcat 'webapp' folder. 
+Open <a href="http://localhost:8080/camunda-welcome" target="blank">http://localhost:8080/camunda-welcome</a> and navigate 
+to the tasklist application. Log in with user 'demo', password 'demo' and start your new process 
+via the (little bit hidden :-) "start process" button in the top right corner:<p class="paragraph"/><img border="0" class="center" src="../img/tasklist-dashboard-start-process.png"></img><p class="paragraph"/>The sample form shows you different types of fields. You must at least select one of the values
+in the 'sampleRequiredSelectionField' in order to validate the start form and enable the 
+"Start"-Button. Start the process and you should see the "Sample UserTask" of your process 
+assigned to you as user "demo". You may want to check out the diagram pane of your process and then
+complete the task via the form. This will execute the subsequent service task (which logs 
+the process variables provided by you into your tomcats logs/catalina.out file) and immediately 
+after that finish your process instance.
 
 
                 <div style="clear:both;margin-top:15px;"></div>

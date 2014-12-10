@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4.3 Configure the camunda plugin 0.3.0</title>
+    <title>5 Configuration Guide 0.4.0</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -20,26 +20,32 @@ function addJsClass() {
     <ul>
         <li>
             <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
-                <a href="../../guide/index.html" class="button">Table of contents</a>
+                <a href="../guide/index.html" class="button">Table of contents</a>
 
                 <div id="nav-summary-childs" style="display:none;">
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/get-started.html"><strong>2</strong><span>Get Started</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/get-started.html"><strong>2</strong><span>Get Started</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/conventions.html"><strong>3</strong><span>A Word about Conventions</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/conventions.html"><strong>3</strong><span>A Word about Conventions</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/usage.html"><strong>4</strong><span>User Guide</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/usage.html"><strong>4</strong><span>User Guide</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/testing.html"><strong>5</strong><span>Testing Guide</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/configuration.html"><strong>5</strong><span>Configuration Guide</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/resources.html"><strong>6</strong><span>Further Resources</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/deployment.html"><strong>6</strong><span>Deployment Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/testing.html"><strong>7</strong><span>Testing Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/resources.html"><strong>8</strong><span>Further Resources</span></a>
                     </div>
                     
                 </div>
@@ -69,22 +75,22 @@ function addJsClass() {
             <div id="main" class="corner-all">
 
                 
-                    <div class="toc-item prev-left"><a href="../../guide/conventions.html">&lt;&lt; <strong>3</strong><span>A Word about Conventions</span></a></div>
+                    <div class="toc-item prev-left"><a href="../guide/usage.html">&lt;&lt; <strong>4</strong><span>User Guide</span></a></div>
                 
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../../guide/testing.html"><strong>5</strong><span>Testing Guide</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/deployment.html"><strong>6</strong><span>Deployment Guide</span> >></a></div>
                 
 
 
                 <div class="project">
-                    <h1>4.3 Configure the camunda plugin - Reference Documentation</h1>
+                    <h1>5 Configuration Guide - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Martin Schimak</p>
 
-                    <p><strong>Version:</strong> 0.3.0</p>
+                    <p><strong>Version:</strong> 0.4.0</p>
 
                     
                 </div>
@@ -93,31 +99,46 @@ function addJsClass() {
                 <div id="table-of-content">
                     <h2>Table of Contents</h2>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#deployment-scenario"><strong>4.1</strong><span>Set the deployment scenario</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#deployment-scenario"><strong>5.1</strong><span>Set the deployment scenario</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#process-engine-configuration"><strong>4.2</strong><span>Configure your process engine</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#configuration-embedded"><strong>5.2</strong><span>Configure an 'embedded' process engine</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#configuration-possibilities"><strong>4.3</strong><span>Use primitive types, any object or even spring beans</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#process-engine-configuration"><strong>5.2.1</strong><span>Configure your process engine</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#jul-logging"><strong>4.4</strong><span>Consider 'java.util.logging' settings</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#configuration-possibilities"><strong>5.2.2</strong><span>Use primitive types, beans or any other object</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#alternative-database"><strong>4.5</strong><span>Use a different database</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#alternative-database"><strong>5.2.3</strong><span>Use an alternative database</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#alternative-engine-version"><strong>4.6</strong><span>Use an alternative version of camunda</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#configuration-shared"><strong>5.3</strong><span>Configure a 'shared' process engine</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#bean-names"><strong>4.7</strong><span>Provide alternative bean names</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#processes-xml"><strong>5.3.1</strong><span>Provide a custom processes.xml file</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#override-configuration"><strong>4.8</strong><span>Override plugin configuration with custom beans</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#process-application-class"><strong>5.3.2</strong><span>Provide a custom process application class</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#auto-reload-configuration"><strong>4.9</strong><span>Configure auto reloading of bpmn process definitions</span></a>
+                    <div class="toc-item" style="margin-left:10px"><a href="#shared-war-excludes"><strong>5.3.3</strong><span>Configure and finetune dependencies provided by a camunda BPM container</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#jul-logging"><strong>5.4</strong><span>Consider 'java.util.logging' settings</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#alternative-engine-version"><strong>5.5</strong><span>Use an alternative version of camunda</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#bean-names"><strong>5.6</strong><span>Provide alternative bean names</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#override-configuration"><strong>5.7</strong><span>Override plugin configuration with custom beans</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#auto-reload-configuration"><strong>5.8</strong><span>Configure auto reloading of bpmn process definitions</span></a>
                     </div>
                     
                 </div>
@@ -125,7 +146,7 @@ function addJsClass() {
 
                 
 
-<h2 id="configuration">4.3 Configure the camunda plugin</h2>
+<h1 id="configuration">5 Configuration Guide</h1>
 It is not necessary to add configuration in order to <a href="../guide/single.html#get-started" class="guide">get started</a>. However,
 you will need some configuration to deploy to other environments than <strong class="bold">dev</strong>elopment and <strong class="bold">test</strong>.
 The plugin provides the possibility to adapt to your specific requirements by adding a new
@@ -135,23 +156,45 @@ section '<strong class="bold">camunda</strong>' to your <strong class="bold">Con
 <strong class="bold">dev</strong>elopment and <strong class="bold">test</strong>. Find out more in the following two chapters. </blockquote>
 
 
-<h2 id="deployment-scenario">4.3.1 Set the deployment scenario</h2>
+<h2 id="deployment-scenario">5.1 Set the deployment scenario</h2>
 You can set the <a href="http://docs.camunda.org/latest/guides/user-guide/#introduction-architecture-overview-camunda-bpm-platform-architecture" target="blank">deployment
 scenario</a>
 for your process engine. The plugin currently supports the deployment scenarios 
 <ul class="minus">
-<li>'<strong class="bold">embedded</strong>' (default): the process engine is embedded into your grails application and started and stopped with your grails application lifecycle</li>
+<li>'<strong class="bold">embedded</strong>' the process engine is embedded into your grails application and started and stopped with your grails application lifecycle</li>
+<li>'<strong class="bold">shared</strong>': the process engine is shared, so preconfigured within and managed by your container</li>
 <li>'<strong class="bold">none</strong>': the process engine configuration and startup is turned off</li>
 </ul><p class="paragraph"/><div class="code"><pre>camunda &#123;
-  deployment.scenario = <span class="java&#45;quote">"embedded"</span> // (or <span class="java&#45;quote">"none"</span>)
+  deployment.scenario = <span class="java&#45;quote">"embedded"</span> // (or <span class="java&#45;quote">"shared"</span>, <span class="java&#45;quote">"none"</span>)
 &#125;</pre></div><p class="paragraph"/><blockquote class="note">
-The value 'embedded' is the <strong class="bold">default</strong> in case you do not set and change it explicitely.
-</blockquote>
+As long as you do not set this value explicitely, the plugin assumes for grails' environments <code>dev</code> 
+and <code>test</code> the value 'embedded' to be the default scenario, *for all other environment the value 
+'shared'* (except if you have provided explicit <code>camunda.engine.configuration</code> values for an embedded 
+engine in which case 'embedded' remains default for other environments, too). The moment you 
+set this value explicitely, the plugin of course won't interfere anymore!
+</blockquote><p class="paragraph"/>The moment you set the value explicitely, the plugin won't interfere with your decision. However,  
+<blockquote class="note"><p class="paragraph"/>Typically, you will want to use the 'shared' engine only for those grails environments which you 
+use to prepare your container deployment war, e.g. 'production':<p class="paragraph"/><div class="code"><pre>environments &#123;
+    production &#123;
+        camunda &#123;
+            deployment &#123;
+                scenario = <span class="java&#45;quote">"shared"</span>
+            &#125;
+        &#125;
+    &#125;
+&#125;</pre></div><p class="paragraph"/></blockquote>
+Currently the plugin only supports <strong class="bold">tomcat</strong> as a container to look up a shared process engine. Download 
+camunda BPM <strong class="bold">Tomcat</strong> distribution.
+<blockquote class="note">null</blockquote>
 
 
 
-<h2 id="process-engine-configuration">4.3.2 Configure your process engine</h2>
-You can fully control your embedded camunda process engine configuration via Config.groovy:<p class="paragraph"/><div class="code"><pre>camunda &#123;
+<h2 id="configuration-embedded">5.2 Configure an 'embedded' process engine</h2>
+
+
+
+<h2 id="process-engine-configuration">5.2.1 Configure your process engine</h2>
+You can fully control your <strong class="bold">embedded</strong> camunda process engine configuration via Config.groovy:<p class="paragraph"/><div class="code"><pre>camunda &#123;
   engine &#123;
     configuration &#123;
       &#8230;
@@ -163,7 +206,7 @@ with the camunda engine in use - with the following three exceptions for the def
 environments <strong class="bold">dev</strong>elopment and <strong class="bold">test</strong>:
 <ul class="minus">
 <li>your database is populated with camunda tables the first time the database is accessed</li>
-<li>any *.bpmn process definitions found in the classpath will be deployed to the database</li>
+<li>any <strong class="bold">.bpmn (and for legacy reasons </strong>.bpmn20.xml) process definitions found in the classpath will be deployed to the database</li>
 <li>the job executor is turned on</li>
 </ul><p class="paragraph"/><blockquote class="note">This choice was made in order to make it as easy as possible to <a href="../guide/single.html#get-started" class="guide">get
 started</a> while relying on explicit configuration choices when deploying to
@@ -172,7 +215,7 @@ explicitely configure that in Config.groovy:<p class="paragraph"/><div class="co
   engine &#123;
     configuration &#123;
       databaseSchemaUpdate = <span class="java&#45;keyword">true</span>
-      deploymentResources = &#91;'classpath:/&#42;&#42;/&#42;.bpmn'&#93;
+      deploymentResources = &#91;'classpath:/&#42;&#42;/&#42;.bpmn', 'classpath:/&#42;&#42;/&#42;.bpmn20.xml'&#93;
       jobExecutorActivate = <span class="java&#45;keyword">true</span>
     &#125;
   &#125;
@@ -186,13 +229,13 @@ the sake of the example e.g. to the current camunda defaults used for the grails
       jobExecutorActivate = <span class="java&#45;keyword">false</span>
     &#125;
   &#125;
-&#125;</pre></div><p class="paragraph"/><blockquote class="note"> Please be aware that during integration test phase of any environment, two more camunda
+&#125;</pre></div><p class="paragraph"/><blockquote class="note"> Please be aware that during integration test phase of any environment, two camunda
 configuration values are set by the plugin: the camunda job executor is turned off and service
 mocking is made available. Find more information about that in section
 <a href="../guide/single.html#testing" class="guide">testing</a>.</blockquote>
 
 
-<h2 id="configuration-possibilities">4.3.3 Use primitive types, any object or even spring beans</h2>
+<h2 id="configuration-possibilities">5.2.2 Use primitive types, beans or any other object</h2>
 For configuration, you can of course use primitive typed configuration values such as Strings and booleans, like e.g.<p class="paragraph"/><div class="code"><pre>camunda &#123;
   engine &#123;
     configuration &#123;
@@ -218,17 +261,7 @@ simply referencing them via their <strong class="bold">bean name</strong>:<p cla
 
 
 
-<h2 id="jul-logging">4.3.4 Consider 'java.util.logging' settings</h2>
-camunda uses <a href="http://docs.camunda.org/latest/guides/user-guide/#process-engine-logging" target="blank">java.util.logging</a>.
-Therefore you need to make a conscious choice about whether to turn on/off the 'grails.logging.jul.usebridge'
-setting in your Config.groovy. See the information about the performance impact on
-<a href="http://www.slf4j.org/legacy.html#jul-to-slf4j" target="blank">http://www.slf4j.org</a>.<p class="paragraph"/><strong class="bold">In case the bridge is not turned off explicitely by you, the plugin will turn it on for all Grails test phases.</strong>
-However, your explicit choice won't be overridden.<p class="paragraph"/><blockquote class="note">This decision in particular makes sure that the bridge is turned on for tests executed in the default Grails
-environment '<strong class="bold">test</strong>', for which no explicit setting is made in the default grails application. As soon as you make
-an explicit decision for any of your default or custom environments, the plugin won't interfere anymore.</blockquote>
-
-
-<h2 id="alternative-database">4.3.5 Use a different database</h2>
+<h2 id="alternative-database">5.2.3 Use an alternative database</h2>
 camunda's ORM mapping is provided by the mybatis mapping framework. Therefore the plugin can -
 and does by default - reuse your Grails 'dataSource' and 'transactionManager' beans, however it
 needs to be informed about a databaseType different from Grails default 'h2':<p class="paragraph"/><div class="code"><pre>camunda &#123;
@@ -259,8 +292,86 @@ dataSource_camunda &#123;
 
 
 
-<h2 id="alternative-engine-version">4.3.6 Use an alternative version of camunda</h2>
-Currently the plugin comes bundled with a dependency to the release <strong class="bold">7.1.0-Final</strong> of camunda BPM.
+<h2 id="configuration-shared">5.3 Configure a 'shared' process engine</h2>
+
+
+
+<h2 id="processes-xml">5.3.1 Provide a custom processes.xml file</h2>
+When deploying to a 'shared' process engine container, <strong class="bold">camunda Grails Plugin</strong> will 
+automatically add an empty <code>META-INF/processes.xml</code> to your <code>war</code> file, in case you 
+do not provide your own.<p class="paragraph"/><blockquote class="note">
+Please read about camunda's 
+<a href="http://docs.camunda.org/latest/api-references/deployment-descriptors/#descriptors-processesxml" target="blank">processes.xml</a> 
+to learn more about its configuration possibilities.
+</blockquote><p class="paragraph"/>If you want to provide your custom <code>processes.xml</code>, just place it into your <code>grails-app/processes</code> folder like<p class="paragraph"/><div class="code"><pre>/grails&#45;app/processes/META&#45;INF/processes.xml</pre></div><p class="paragraph"/>This will be bundled with your war like any other resource file and the plugin won't 
+interfere anymore with an empty processes.xml when building your war.
+
+
+
+<h2 id="process-application-class">5.3.2 Provide a custom process application class</h2>
+<strong class="bold">camunda Grails Plugin</strong> will automatically take care of registering a default 
+<a href="http://docs.camunda.org/latest/guides/user-guide/#process-applications-the-process-application-class" target="blank">process application class</a>
+of type <code>org.camunda.bpm.engine.spring.application.SpringServletProcessApplication</code> 
+for you. So normally you don't need to do anything.<p class="paragraph"/>However, for some reason, you may want to provide a custom process application class. Place this class 
+inside your grails application's <code>/src/groovy</code> or <code>src/java</code> folder and register it like<p class="paragraph"/><div class="code"><pre>environments &#123;
+    production &#123;
+        camunda &#123;
+            deployment &#123;
+                scenario = <span class="java&#45;quote">"shared"</span>
+                application = my.project.pkg.MyCustomSpringServletProcessApplication 
+            &#125;
+        &#125;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>The plugin will then use this class for either registering your custom spring process application (in 
+case this class extends <code>org.camunda.bpm.engine.spring.application.SpringServletProcessApplication</code>) 
+or for all other types the plugin will register nothing and assume that you want your container to detect and 
+use that class. In that latter case don't forget to annotate it with <code>org.camunda.bpm.application.ProcessApplication</code>.
+
+
+
+<h2 id="shared-war-excludes">5.3.3 Configure and finetune dependencies provided by a camunda BPM container</h2>
+When needing to prepare a war for a 'shared' process engine scenario, one needs to be aware that
+<ol>
+<li>the 'org.camunda.bpm:camunda-engine' dependencies are provided by the container</li>
+<li>the 'org.codehaus.groovy:groovy-all' library is provided by the container</li>
+</ol><p class="paragraph"/>One therefore will need to configure the project dependencies in BuildConfig.groovy in a way which 
+makes sure that those dependencies are not included in such a war (scope: 'provided'). At the same 
+time, one might face the issue, that one needs those dependencies included in another war which is 
+meant to work with an embedded engine (e.g. when excuting 'grails run-war'). As of Grails 2.3.x, 
+environments can be safely used in BuildConfig.groovy. One can therefore configure something along 
+the following lines:<p class="paragraph"/><div class="code"><pre>environments &#123;
+  production &#123;
+    provided (<span class="java&#45;quote">"org.camunda.bpm:camunda&#45;engine:$camundaVersion"</span>) &#123;
+      excludes 'spring&#45;beans'
+    &#125;
+  &#125;
+&#125;</pre></div><p class="paragraph"/>However, in order to provide an improved 'out of the box' experience for new camunda Grails Plugin
+users as well as provide some finetuning possibilities for advanced users, the plugin provides 
+two configuration options with which the 'WEB-INF/lib' folder of a war prepared for a 'shared' engine 
+scenario (and only for those scenarios) can be manipulated after having been filled with all the 
+configured jars. Those properties are set to defaults which make sure that you can directly deploy
+to shared engine containers just as easy as you deploy for embedded engine scenarios. In Config.groovy 
+you can use<p class="paragraph"/><div class="code"><pre>camunda.deployment.shared.war.excludes = &#91;'camunda&#45;&#42;.jar', 'groovy&#45;all&#45;&#42;.jar'&#93;
+camunda.deployment.shared.war.includes = &#91;'camunda&#45;engine&#45;spring&#45;&#42;.jar'&#93;</pre></div><p class="paragraph"/>With the 'includes' setting you can make an exception to the 'excludes' setting. The example given shows 
+the defaults used by the plugin. In case you configure all the camunda dependencies for all your 
+environments yourself in a more proper way with 'provided' scopes as shown above, you should override 
+the defaults of those two values and set them to null. Then the plugin won't interfere with your
+'shared' engine war generation any longer.
+
+
+
+<h2 id="jul-logging">5.4 Consider 'java.util.logging' settings</h2>
+camunda uses <a href="http://docs.camunda.org/latest/guides/user-guide/#process-engine-logging" target="blank">java.util.logging</a>.
+Therefore you need to make a conscious choice about whether to turn on/off the 'grails.logging.jul.usebridge'
+setting in your Config.groovy. See the information about the performance impact on
+<a href="http://www.slf4j.org/legacy.html#jul-to-slf4j" target="blank">http://www.slf4j.org</a>.<p class="paragraph"/><strong class="bold">In case the bridge is not turned off explicitely by you, the plugin will turn it on for all Grails test phases.</strong>
+However, your explicit choice won't be overridden.<p class="paragraph"/><blockquote class="note">This decision in particular makes sure that the bridge is turned on for tests executed in the default Grails
+environment '<strong class="bold">test</strong>', for which no explicit setting is made in the default grails application. As soon as you make
+an explicit decision for any of your default or custom environments, the plugin won't interfere anymore.</blockquote>
+
+
+<h2 id="alternative-engine-version">5.5 Use an alternative version of camunda</h2>
+Currently the plugin comes bundled with a dependency to the release <strong class="bold">7.2.0</strong> of camunda BPM.
 However you may want to choose another version. You then have to explicitely override the needed 
 dependencies in your BuildConfig.groovy:<p class="paragraph"/><div class="code"><pre>dependencies &#123;
   compile (<span class="xml&#45;quote">"org.camunda.bpm:camunda&#45;engine:$camundaVersion"</span>) &#123;
@@ -273,12 +384,12 @@ dependencies in your BuildConfig.groovy:<p class="paragraph"/><div class="code">
 explicitely exclude any spring dependencies coming with camunda and make sure to properly test
 your application with the spring framework version provided by the Grails version you use.<p class="paragraph"/>Note that for camunda versions prior to 7.1.0-Final, you must also configure camunda's custom 
 maven repository:<p class="paragraph"/><div class="code"><pre>repositories &#123;
-    mavenRepo <span class="java&#45;quote">"https://app.camunda.com/nexus/content/groups/<span class="java&#45;keyword">public</span>"</span>
-  &#125;</pre></div>
+  mavenRepo <span class="java&#45;quote">"https://app.camunda.com/nexus/content/groups/<span class="java&#45;keyword">public</span>"</span>
+&#125;</pre></div>
 
 
 
-<h2 id="bean-names">4.3.7 Provide alternative bean names</h2>
+<h2 id="bean-names">5.6 Provide alternative bean names</h2>
 Many of camunda's API service names are quite generic (like 'taskService', 'managementService' etc) and could
 easily clash with names you want to use in your application for other purposes - even more so when having in mind
 the Grails naming convention to use <strong class="bold">&#42;Service</strong> as a name pattern for Grails services. On the other hand typical
@@ -292,7 +403,7 @@ alias 'runtimeService' the custom alias 'myCamundaRuntimeService' is used. You c
 your 'org.camunda.bpm.engine.RuntimeService'-typed bean as<p class="paragraph"/><div class="code"><pre>def myCamundaRuntimeService</pre></div>
 
 
-<h2 id="override-configuration">4.3.8 Override plugin configuration with custom beans</h2>
+<h2 id="override-configuration">5.7 Override plugin configuration with custom beans</h2>
 Of course, it is also possible to override some or all of the camunda spring beans defined by the
 plugin via the standard Grails way: by editing '<strong class="bold">grails-app/conf/spring/resources.groovy</strong>'. In
 order to do that properly it is useful to know that the plugin registers all beans following the
@@ -305,7 +416,7 @@ services. </blockquote>
 
 
 
-<h2 id="auto-reload-configuration">4.3.9 Configure auto reloading of bpmn process definitions</h2>
+<h2 id="auto-reload-configuration">5.8 Configure auto reloading of bpmn process definitions</h2>
 You can automatically reload and redeploy '<strong class="bold">.bpmn</strong>' process definitions placed beneath 
 '<strong class="bold">grails-app/processes</strong>'. When changing the process definition while you are running 
 your application with '<strong class="bold">run-app</strong>', it will be redeployed to the process engine.<p class="paragraph"/>You can turn this feature on/off explicitely:<p class="paragraph"/><div class="code"><pre>camunda &#123;
@@ -319,9 +430,9 @@ For all other environments it is by default disabled.
 
                 <div style="clear:both;margin-top:15px;"></div>
                 
-                    <div class="toc-item prev-left"><a href="../../guide/conventions.html">&lt;&lt; <strong>3</strong><span>A Word about Conventions</span></a></div>
+                    <div class="toc-item prev-left"><a href="../guide/usage.html">&lt;&lt; <strong>4</strong><span>User Guide</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../../guide/testing.html"><strong>5</strong><span>Testing Guide</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../guide/deployment.html"><strong>6</strong><span>Deployment Guide</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
@@ -329,7 +440,7 @@ For all other environments it is by default disabled.
         <td id="col2">
             <div class="local clearfix">
                 <div class="local-title">
-                    <a href="../../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <a href="../guide/index.html" target="mainFrame">Quick Reference</a>
                     <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
                 </div>
                 <div class="menu">
@@ -337,31 +448,31 @@ For all other environments it is by default disabled.
                     <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Beans</h1><div class="menu-sub">
                         
                             
-                            <div class="menu-item"><a href="../../ref/Beans/authorizationService.html">authorizationService</a>
+                            <div class="menu-item"><a href="../ref/Beans/authorizationService.html">authorizationService</a>
                             </div>
                             
-                            <div class="menu-item"><a href="../../ref/Beans/formService.html">formService</a>
+                            <div class="menu-item"><a href="../ref/Beans/formService.html">formService</a>
                             </div>
                             
-                            <div class="menu-item"><a href="../../ref/Beans/historyService.html">historyService</a>
+                            <div class="menu-item"><a href="../ref/Beans/historyService.html">historyService</a>
                             </div>
                             
-                            <div class="menu-item"><a href="../../ref/Beans/identityService.html">identityService</a>
+                            <div class="menu-item"><a href="../ref/Beans/identityService.html">identityService</a>
                             </div>
                             
-                            <div class="menu-item"><a href="../../ref/Beans/managementService.html">managementService</a>
+                            <div class="menu-item"><a href="../ref/Beans/managementService.html">managementService</a>
                             </div>
                             
-                            <div class="menu-item"><a href="../../ref/Beans/processEngine.html">processEngine</a>
+                            <div class="menu-item"><a href="../ref/Beans/processEngine.html">processEngine</a>
                             </div>
                             
-                            <div class="menu-item"><a href="../../ref/Beans/repositoryService.html">repositoryService</a>
+                            <div class="menu-item"><a href="../ref/Beans/repositoryService.html">repositoryService</a>
                             </div>
                             
-                            <div class="menu-item"><a href="../../ref/Beans/runtimeService.html">runtimeService</a>
+                            <div class="menu-item"><a href="../ref/Beans/runtimeService.html">runtimeService</a>
                             </div>
                             
-                            <div class="menu-item"><a href="../../ref/Beans/taskService.html">taskService</a>
+                            <div class="menu-item"><a href="../ref/Beans/taskService.html">taskService</a>
                             </div>
                             
                             </div>
@@ -370,7 +481,7 @@ For all other environments it is by default disabled.
                     <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Command Line</h1><div class="menu-sub">
                         
                             
-                            <div class="menu-item"><a href="../../ref/Command%20Line/create-process.html">create-process</a>
+                            <div class="menu-item"><a href="../ref/Command%20Line/create-process.html">create-process</a>
                             </div>
                             
                             </div>

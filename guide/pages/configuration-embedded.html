@@ -1,0 +1,298 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>5.2 Configure an 'embedded' process engine 0.4.0</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
+    <script type="text/javascript">
+function addJsClass() {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+</head>
+
+<body class="body" onload="addJsClass();">
+<div id="navigation">
+    <ul>
+        <li>
+            <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                <a href="../../guide/index.html" class="button">Table of contents</a>
+
+                <div id="nav-summary-childs" style="display:none;">
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/get-started.html"><strong>2</strong><span>Get Started</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/conventions.html"><strong>3</strong><span>A Word about Conventions</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/usage.html"><strong>4</strong><span>User Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/configuration.html"><strong>5</strong><span>Configuration Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/deployment.html"><strong>6</strong><span>Deployment Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/testing.html"><strong>7</strong><span>Testing Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/resources.html"><strong>8</strong><span>Further Resources</span></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </li>
+        <li class="separator selected">
+            <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+        </li>
+    </ul>
+</div>
+<div id="header">
+    <div class="images clearfix">
+        
+        <span id="logo"><span style="white-space: nowrap"><img alt="camunda Logo" title="camunda Grails plugin" src="http://plexiti.github.io/camunda-grails-plugin/img/camunda.png" style="margin-right: 10px"/><span style="vertical-align: middle; font-size: 2.5em">camunda Grails plugin</span><br/><br/></span></span>
+        
+        
+        <span id="sponsor"><span style="vertical-align: middle"><a href="http://plexiti.com" target="_blank"><img alt="plexiti Logo" title="plexiti GmbH" src="http://plexiti.github.io/camunda-grails-plugin/img/plexiti.png"/></a></span></span>
+        
+    </div>
+    <p>The camunda Grails plugin integrates the camunda BPM platform with the Grails web application framework.</p>
+</div>
+
+
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="corner-all">
+
+                
+                    <div class="toc-item prev-left"><a href="../../guide/usage.html">&lt;&lt; <strong>4</strong><span>User Guide</span></a></div>
+                
+
+                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                
+                    <div class="toc-item next-right"><a href="../../guide/deployment.html"><strong>6</strong><span>Deployment Guide</span> >></a></div>
+                
+
+
+                <div class="project">
+                    <h1>5.2 Configure an 'embedded' process engine - Reference Documentation</h1>
+
+                    <p><strong>Authors:</strong> Martin Schimak</p>
+
+                    <p><strong>Version:</strong> 0.4.0</p>
+
+                    
+                </div>
+
+                
+                <div id="table-of-content">
+                    <h2>Table of Contents</h2>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#process-engine-configuration"><strong>5.1</strong><span>Configure your process engine</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#configuration-possibilities"><strong>5.2</strong><span>Use primitive types, beans or any other object</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#alternative-database"><strong>5.3</strong><span>Use an alternative database</span></a>
+                    </div>
+                    
+                </div>
+                
+
+                
+
+<h2 id="configuration-embedded">5.2 Configure an 'embedded' process engine</h2>
+
+
+
+<h2 id="process-engine-configuration">5.2.1 Configure your process engine</h2>
+You can fully control your <strong class="bold">embedded</strong> camunda process engine configuration via Config.groovy:<p class="paragraph"/><div class="code"><pre>camunda &#123;
+  engine &#123;
+    configuration &#123;
+      &#8230;
+    &#125;
+  &#125;
+&#125;</pre></div><p class="paragraph"/>Find a full specification of the values possible in the camunda docs for the spring <a href="http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/spring/SpringProcessEngineConfiguration.html" target="blank">process
+engine configuration</a>.<p class="paragraph"/>Note that in case you do not configure a value the plugin relies on the default values coming
+with the camunda engine in use - with the following three exceptions for the default grails
+environments <strong class="bold">dev</strong>elopment and <strong class="bold">test</strong>:
+<ul class="minus">
+<li>your database is populated with camunda tables the first time the database is accessed</li>
+<li>any <strong class="bold">.bpmn (and for legacy reasons </strong>.bpmn20.xml) process definitions found in the classpath will be deployed to the database</li>
+<li>the job executor is turned on</li>
+</ul><p class="paragraph"/><blockquote class="note">This choice was made in order to make it as easy as possible to <a href="../guide/single.html#get-started" class="guide">get
+started</a> while relying on explicit configuration choices when deploying to
+other (and potentially production) databases.</blockquote><p class="paragraph"/>That means if you want to have that same behaviour for any other environment, you need to
+explicitely configure that in Config.groovy:<p class="paragraph"/><div class="code"><pre>camunda &#123;
+  engine &#123;
+    configuration &#123;
+      databaseSchemaUpdate = <span class="java&#45;keyword">true</span>
+      deploymentResources = &#91;'classpath:/&#42;&#42;/&#42;.bpmn', 'classpath:/&#42;&#42;/&#42;.bpmn20.xml'&#93;
+      jobExecutorActivate = <span class="java&#45;keyword">true</span>
+    &#125;
+  &#125;
+&#125;</pre></div><p class="paragraph"/>Obviously you can also change the configuration for the environments development and test, for
+the sake of the example e.g. to the current camunda defaults used for the grails environment
+<strong class="bold">prod</strong>uction:<p class="paragraph"/><div class="code"><pre>camunda &#123;
+  engine &#123;
+    configuration &#123;
+      databaseSchemaUpdate = <span class="java&#45;keyword">false</span>
+      deploymentResources = &#91;&#93;
+      jobExecutorActivate = <span class="java&#45;keyword">false</span>
+    &#125;
+  &#125;
+&#125;</pre></div><p class="paragraph"/><blockquote class="note"> Please be aware that during integration test phase of any environment, two camunda
+configuration values are set by the plugin: the camunda job executor is turned off and service
+mocking is made available. Find more information about that in section
+<a href="../guide/single.html#testing" class="guide">testing</a>.</blockquote>
+
+
+<h2 id="configuration-possibilities">5.2.2 Use primitive types, beans or any other object</h2>
+For configuration, you can of course use primitive typed configuration values such as Strings and booleans, like e.g.<p class="paragraph"/><div class="code"><pre>camunda &#123;
+  engine &#123;
+    configuration &#123;
+      processEngineName = <span class="java&#45;quote">"myCustomName"</span>
+      databaseSchemaUpdate = <span class="java&#45;keyword">false</span>
+    &#125;
+  &#125;
+&#125;</pre></div><p class="paragraph"/>but also any object available in Config.groovy or directly constructed within it, like e.g.<p class="paragraph"/><div class="code"><pre>List&#60;BpmnParseListener&#62; parseHandlers = <span class="java&#45;keyword">new</span> ArrayList&#60;BpmnParseListener&#62;();
+parseHandlers.add(<span class="java&#45;keyword">new</span> CustomParseHandler());<p class="paragraph"/>camunda &#123;
+    engine &#123;
+        configuration &#123;
+            preParseListeners = parseHandlers
+        &#125;
+    &#125;
+&#125;</pre></div><p class="paragraph"/>or even spring beans configured e.g. via '<strong class="bold">grails-app/conf/spring/resources.groovy</strong>' or e.g. via '<strong class="bold">grails-app/conf/DataSource.groovy</strong>',
+simply referencing them via their <strong class="bold">bean name</strong>:<p class="paragraph"/><div class="code"><pre>camunda &#123;
+    engine &#123;
+        configuration &#123;
+            dataSource = <span class="java&#45;quote">"dataSource_camunda"</span>
+        &#125;
+    &#125;
+&#125;</pre></div>
+
+
+
+<h2 id="alternative-database">5.2.3 Use an alternative database</h2>
+camunda's ORM mapping is provided by the mybatis mapping framework. Therefore the plugin can -
+and does by default - reuse your Grails 'dataSource' and 'transactionManager' beans, however it
+needs to be informed about a databaseType different from Grails default 'h2':<p class="paragraph"/><div class="code"><pre>camunda &#123;
+  engine &#123;
+    configuration &#123;
+      databaseType = <span class="java&#45;quote">"postgres"</span> // one of (as of writing): &#91;h2, mysql, oracle, postgres, mssql, db2&#93;
+    &#125;
+  &#125;
+&#125;</pre></div><p class="paragraph"/>Find here a list of camunda's <a href="http://docs.camunda.org/7.0/guides/user-guide/#introduction-supported-environments" target="blank">enviroments supported</a> 
+by the version bundled with the plugin and the corresponding 
+<a href="http://docs.camunda.org/latest/guides/user-guide/#process-engine-database-configuration" target="blank">configuration values</a> 
+for different database types.<p class="paragraph"/>You can also point the process engine to a different database than the one you use for your grails 
+domain objects. First configure it in your '<strong class="bold">grails-app/conf/DataSource.groovy</strong>'...<p class="paragraph"/><div class="code"><pre>dataSource &#123;
+  dbCreate = <span class="java&#45;quote">"create&#45;drop"</span> // one of 'create', 'create&#45;drop', 'update', 'validate', ''
+  url = <span class="java&#45;quote">"jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"</span>
+&#125;
+&#8230;
+dataSource_camunda &#123;
+  dbCreate = <span class="java&#45;quote">"create&#45;drop"</span> // one of 'create', 'create&#45;drop', 'update', 'validate', ''
+  url = <span class="java&#45;quote">"jdbc:h2:mem:devDbCamunda;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"</span>
+&#125;</pre></div><p class="paragraph"/>&#8230; then reference this alternative dataSource bean in '<strong class="bold">grails-app/conf/Config.groovy</strong>':<p class="paragraph"/><div class="code"><pre>camunda &#123;
+  engine &#123;
+    configuration &#123;
+      dataSource = <span class="java&#45;quote">"dataSource_camunda"</span>
+    &#125;
+  &#125;
+&#125;</pre></div>
+
+
+
+                <div style="clear:both;margin-top:15px;"></div>
+                
+                    <div class="toc-item prev-left"><a href="../../guide/usage.html">&lt;&lt; <strong>4</strong><span>User Guide</span></a></div>
+                
+                    <div class="toc-item next-right"><a href="../../guide/deployment.html"><strong>6</strong><span>Deployment Guide</span> >></a></div>
+                
+                <div style="clear:both"></div>
+            </div>
+        </td>
+        <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Beans</h1><div class="menu-sub">
+                        
+                            
+                            <div class="menu-item"><a href="../../ref/Beans/authorizationService.html">authorizationService</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Beans/formService.html">formService</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Beans/historyService.html">historyService</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Beans/identityService.html">identityService</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Beans/managementService.html">managementService</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Beans/processEngine.html">processEngine</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Beans/repositoryService.html">repositoryService</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Beans/runtimeService.html">runtimeService</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Beans/taskService.html">taskService</a>
+                            </div>
+                            
+                            </div>
+                    </div>
+                    
+                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Command Line</h1><div class="menu-sub">
+                        
+                            
+                            <div class="menu-item"><a href="../../ref/Command%20Line/create-process.html">create-process</a>
+                            </div>
+                            
+                            </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="footer">
+    <div>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+<img alt="Creative Commons 4.0" style="border-width:0; vertical-align: middle" src="http://i.creativecommons.org/l/by/4.0/80x15.png"></img></a>
+<span style="vertical-align: middle"><a href="http://github.com/martinschimak" property="cc:attributionName" rel="cc:attributionURL">Martin Schimak</a>, 
+<a href="http://plexiti.com" property="cc:attributionName" rel="cc:attributionURL">plexiti GmbH</a></span>
+</div>
+
+    
+</div>
+
+<script type="text/javascript" src="../js/docs.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>6 Deployment Guide 0.4.0</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
+    <script type="text/javascript">
+function addJsClass() {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+</head>
+
+<body class="body" onload="addJsClass();">
+<div id="navigation">
+    <ul>
+        <li>
+            <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                <a href="../guide/index.html" class="button">Table of contents</a>
+
+                <div id="nav-summary-childs" style="display:none;">
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/get-started.html"><strong>2</strong><span>Get Started</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/conventions.html"><strong>3</strong><span>A Word about Conventions</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/usage.html"><strong>4</strong><span>User Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/configuration.html"><strong>5</strong><span>Configuration Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/deployment.html"><strong>6</strong><span>Deployment Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/testing.html"><strong>7</strong><span>Testing Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/resources.html"><strong>8</strong><span>Further Resources</span></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </li>
+        <li class="separator selected">
+            <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+        </li>
+    </ul>
+</div>
+<div id="header">
+    <div class="images clearfix">
+        
+        <span id="logo"><span style="white-space: nowrap"><img alt="camunda Logo" title="camunda Grails plugin" src="http://plexiti.github.io/camunda-grails-plugin/img/camunda.png" style="margin-right: 10px"/><span style="vertical-align: middle; font-size: 2.5em">camunda Grails plugin</span><br/><br/></span></span>
+        
+        
+        <span id="sponsor"><span style="vertical-align: middle"><a href="http://plexiti.com" target="_blank"><img alt="plexiti Logo" title="plexiti GmbH" src="http://plexiti.github.io/camunda-grails-plugin/img/plexiti.png"/></a></span></span>
+        
+    </div>
+    <p>The camunda Grails plugin integrates the camunda BPM platform with the Grails web application framework.</p>
+</div>
+
+
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="corner-all">
+
+                
+                    <div class="toc-item prev-left"><a href="../guide/configuration.html">&lt;&lt; <strong>5</strong><span>Configuration Guide</span></a></div>
+                
+
+                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                
+                    <div class="toc-item next-right"><a href="../guide/testing.html"><strong>7</strong><span>Testing Guide</span> >></a></div>
+                
+
+
+                <div class="project">
+                    <h1>6 Deployment Guide - Reference Documentation</h1>
+
+                    <p><strong>Authors:</strong> Martin Schimak</p>
+
+                    <p><strong>Version:</strong> 0.4.0</p>
+
+                    
+                </div>
+
+                
+                <div id="table-of-content">
+                    <h2>Table of Contents</h2>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#configuration-of-deployment-scenario"><strong>6.1</strong><span>Consider your deployment scenario</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#deploy-scenario-shared"><strong>6.2</strong><span>Scenario 'shared' process engine</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0px"><a href="#deploy-scenario-embedded"><strong>6.3</strong><span>Scenario 'embedded' process engine</span></a>
+                    </div>
+                    
+                </div>
+                
+
+                
+
+<h1 id="deployment">6 Deployment Guide</h1>
+Before deploying your application to a servlet container, you should make up your 
+mind about a few things.
+
+
+<h2 id="configuration-of-deployment-scenario">6.1 Consider your deployment scenario</h2>
+Does your application work with an 'embedded' or a 'shared' process engine?<p class="paragraph"/>Do you <strong class="bold">either</strong> want to use the engine just <strong class="bold">behind the scenes</strong> of your own 
+custom grails application with your own forms, controllers, services etc? Then 
+go for the embedded engine. <strong class="bold">Or</strong> do you want to use the camunda BPM platform 
+'tasklist' with embedded forms and implement a grails based <strong class="bold">process application</strong> 
+for it? Then go for the shared engine. In that case you will still want to use
+an embedded engine for testing your application.<p class="paragraph"/>Now, <strong class="bold">configure your <a href="../guide/single.html#deployment-scenario" class="guide">deployment scenario</a> accordingly!</strong>
+Then move on with deploying your application according to your scenario.
+
+
+
+<h2 id="deploy-scenario-shared">6.2 Scenario 'shared' process engine</h2>
+(1) Download a <a href="http://camunda.org/download/" target="blank">camunda BPM Tomcat distribution</a>. Make 
+sure that the version of your camunda BPM container matches the version you use in 
+your grails application. If necessary <a href="../guide/single.html#alternative-engine-version" class="guide">change the camunda BPM version</a> 
+used by the grails application.<p class="paragraph"/>(2) Make sure you declared the shared engine for those grails environments with which 
+you prepare your container deployment war, e.g. 'production':<p class="paragraph"/><div class="code"><pre>environments &#123;
+    production &#123;
+        camunda.deployment.scenario = <span class="java&#45;quote">"shared"</span>
+    &#125;
+&#125;</pre></div><p class="paragraph"/>(3) camunda BPM comes bundled with a dependency to the '<strong class="bold">org.codehaus.groovy:groovy-all</strong>' library,
+which causes failure when deploying groovy/grails based applications bundled with their own version
+of that library. Therefore the plugin prevents the bundling of the 'org.codehaus.groovy:groovy-all' 
+library bundled with grails and instead assumes that this library is already provided by the container. 
+When preparing the camunda BPM container for a production environment, you should check that the 
+'org.codehaus.groovy:groovy-all' library version bundled in the container matches the version you 
+need for your grails application and eventually replace it with the version you need.<p class="paragraph"/><blockquote class="note">
+You might want to check how to <a href="../guide/single.html#shared-war-excludes" class="guide">configure and finetune the dependencies</a> 
+provided by a camunda BPM container for a shared engine in greater detail.
+</blockquote><p class="paragraph"/><strong class="bold">Finally</strong>, build your 'war' file ...<p class="paragraph"/><div class="code"><pre>grails war</pre></div><p class="paragraph"/>...and deploy it to your camunda BPM containers 'webapp' folder. Open 
+<a href="http://localhost:8080/camunda-welcome" target="blank">http://localhost:8080/camunda-welcome</a> and browse to camunda 
+cockpit or tasklist application.
+
+
+
+<h2 id="deploy-scenario-embedded">6.3 Scenario 'embedded' process engine</h2>
+Download and start a vanilla servlet container, e.g. <a href="http://tomcat.apache.org/download-70.cgi" target="blank">Tomcat</a>.
+Furthermore, you will need to add some explicit configuration, as the plugin 
+doesn't interfere with default camunda configuration values for production 
+environments. To get started with a basic configuration for your embedded engine 
+'<strong class="bold">production</strong>' environment, this might look like<p class="paragraph"/><div class="code"><pre>environments &#123;
+    production &#123;
+        camunda &#123;
+            deployment.scenario = 'embedded'
+            engine &#123;
+                configuration &#123;
+                    databaseSchemaUpdate = <span class="java&#45;keyword">true</span>
+                    deploymentResources = &#91;'classpath:/&#42;&#42;/&#42;.bpmn'&#93;
+                    jobExecutorActivate = <span class="java&#45;keyword">true</span>
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;</pre></div><p class="paragraph"/><strong class="bold">Finally</strong>, build your 'war' file ...<p class="paragraph"/><div class="code"><pre>grails war</pre></div><p class="paragraph"/>...and deploy it to your servlet container, e.g. by placing it into tomcats 'webapp' folder.<p class="paragraph"/>Optionally, you might want to download <a href="http://camunda.org/download/" target="blank">camunda BPM standalone webapp</a>, 
+deploy it alongside your grails' webapp and point it to the database of your embedded engine. You can 
+then use camunda BPM cockpit to monitor and manage your processes. You can also use tasklist and work 
+with 'generated' and/or 'external' forms, 'embedded' forms however will just work in the 'shared' 
+process engine scenario.
+
+
+
+                <div style="clear:both;margin-top:15px;"></div>
+                
+                    <div class="toc-item prev-left"><a href="../guide/configuration.html">&lt;&lt; <strong>5</strong><span>Configuration Guide</span></a></div>
+                
+                    <div class="toc-item next-right"><a href="../guide/testing.html"><strong>7</strong><span>Testing Guide</span> >></a></div>
+                
+                <div style="clear:both"></div>
+            </div>
+        </td>
+        <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Beans</h1><div class="menu-sub">
+                        
+                            
+                            <div class="menu-item"><a href="../ref/Beans/authorizationService.html">authorizationService</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Beans/formService.html">formService</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Beans/historyService.html">historyService</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Beans/identityService.html">identityService</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Beans/managementService.html">managementService</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Beans/processEngine.html">processEngine</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Beans/repositoryService.html">repositoryService</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Beans/runtimeService.html">runtimeService</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../ref/Beans/taskService.html">taskService</a>
+                            </div>
+                            
+                            </div>
+                    </div>
+                    
+                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Command Line</h1><div class="menu-sub">
+                        
+                            
+                            <div class="menu-item"><a href="../ref/Command%20Line/create-process.html">create-process</a>
+                            </div>
+                            
+                            </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="footer">
+    <div>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+<img alt="Creative Commons 4.0" style="border-width:0; vertical-align: middle" src="http://i.creativecommons.org/l/by/4.0/80x15.png"></img></a>
+<span style="vertical-align: middle"><a href="http://github.com/martinschimak" property="cc:attributionName" rel="cc:attributionURL">Martin Schimak</a>, 
+<a href="http://plexiti.com" property="cc:attributionName" rel="cc:attributionURL">plexiti GmbH</a></span>
+</div>
+
+    
+</div>
+
+<script type="text/javascript" src="../js/docs.js"></script>
+
+</body>
+</html>

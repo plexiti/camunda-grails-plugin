@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4.3.2 Configure your process engine 0.3.0</title>
+    <title>5.2.1 Configure your process engine 0.4.0</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -36,10 +36,16 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../../guide/usage.html"><strong>4</strong><span>User Guide</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/testing.html"><strong>5</strong><span>Testing Guide</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/configuration.html"><strong>5</strong><span>Configuration Guide</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/resources.html"><strong>6</strong><span>Further Resources</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/deployment.html"><strong>6</strong><span>Deployment Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/testing.html"><strong>7</strong><span>Testing Guide</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/resources.html"><strong>8</strong><span>Further Resources</span></a>
                     </div>
                     
                 </div>
@@ -69,22 +75,22 @@ function addJsClass() {
             <div id="main" class="corner-all">
 
                 
-                    <div class="toc-item prev-left"><a href="../../guide/conventions.html">&lt;&lt; <strong>3</strong><span>A Word about Conventions</span></a></div>
+                    <div class="toc-item prev-left"><a href="../../guide/usage.html">&lt;&lt; <strong>4</strong><span>User Guide</span></a></div>
                 
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
-                    <div class="toc-item next-right"><a href="../../guide/testing.html"><strong>5</strong><span>Testing Guide</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/deployment.html"><strong>6</strong><span>Deployment Guide</span> >></a></div>
                 
 
 
                 <div class="project">
-                    <h1>4.3.2 Configure your process engine - Reference Documentation</h1>
+                    <h1>5.2.1 Configure your process engine - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> Martin Schimak</p>
 
-                    <p><strong>Version:</strong> 0.3.0</p>
+                    <p><strong>Version:</strong> 0.4.0</p>
 
                     
                 </div>
@@ -93,8 +99,8 @@ function addJsClass() {
 
                 
 
-<h2 id="process-engine-configuration">4.3.2 Configure your process engine</h2>
-You can fully control your embedded camunda process engine configuration via Config.groovy:<p class="paragraph"/><div class="code"><pre>camunda &#123;
+<h2 id="process-engine-configuration">5.2.1 Configure your process engine</h2>
+You can fully control your <strong class="bold">embedded</strong> camunda process engine configuration via Config.groovy:<p class="paragraph"/><div class="code"><pre>camunda &#123;
   engine &#123;
     configuration &#123;
       &#8230;
@@ -106,7 +112,7 @@ with the camunda engine in use - with the following three exceptions for the def
 environments <strong class="bold">dev</strong>elopment and <strong class="bold">test</strong>:
 <ul class="minus">
 <li>your database is populated with camunda tables the first time the database is accessed</li>
-<li>any *.bpmn process definitions found in the classpath will be deployed to the database</li>
+<li>any <strong class="bold">.bpmn (and for legacy reasons </strong>.bpmn20.xml) process definitions found in the classpath will be deployed to the database</li>
 <li>the job executor is turned on</li>
 </ul><p class="paragraph"/><blockquote class="note">This choice was made in order to make it as easy as possible to <a href="../guide/single.html#get-started" class="guide">get
 started</a> while relying on explicit configuration choices when deploying to
@@ -115,7 +121,7 @@ explicitely configure that in Config.groovy:<p class="paragraph"/><div class="co
   engine &#123;
     configuration &#123;
       databaseSchemaUpdate = <span class="java&#45;keyword">true</span>
-      deploymentResources = &#91;'classpath:/&#42;&#42;/&#42;.bpmn'&#93;
+      deploymentResources = &#91;'classpath:/&#42;&#42;/&#42;.bpmn', 'classpath:/&#42;&#42;/&#42;.bpmn20.xml'&#93;
       jobExecutorActivate = <span class="java&#45;keyword">true</span>
     &#125;
   &#125;
@@ -129,7 +135,7 @@ the sake of the example e.g. to the current camunda defaults used for the grails
       jobExecutorActivate = <span class="java&#45;keyword">false</span>
     &#125;
   &#125;
-&#125;</pre></div><p class="paragraph"/><blockquote class="note"> Please be aware that during integration test phase of any environment, two more camunda
+&#125;</pre></div><p class="paragraph"/><blockquote class="note"> Please be aware that during integration test phase of any environment, two camunda
 configuration values are set by the plugin: the camunda job executor is turned off and service
 mocking is made available. Find more information about that in section
 <a href="../guide/single.html#testing" class="guide">testing</a>.</blockquote>
@@ -137,9 +143,9 @@ mocking is made available. Find more information about that in section
 
                 <div style="clear:both;margin-top:15px;"></div>
                 
-                    <div class="toc-item prev-left"><a href="../../guide/conventions.html">&lt;&lt; <strong>3</strong><span>A Word about Conventions</span></a></div>
+                    <div class="toc-item prev-left"><a href="../../guide/usage.html">&lt;&lt; <strong>4</strong><span>User Guide</span></a></div>
                 
-                    <div class="toc-item next-right"><a href="../../guide/testing.html"><strong>5</strong><span>Testing Guide</span> >></a></div>
+                    <div class="toc-item next-right"><a href="../../guide/deployment.html"><strong>6</strong><span>Deployment Guide</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
