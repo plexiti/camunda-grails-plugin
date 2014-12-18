@@ -89,6 +89,7 @@ class CamundaPluginSupport {
             camundaAuthorizationServiceBean(camundaProcessEngineBean: 'getAuthorizationService')
             camundaHistoryServiceBean(camundaProcessEngineBean: 'getHistoryService')
             camundaFormServiceBean(camundaProcessEngineBean: 'getFormService')
+            camundaCaseServiceBean(camundaProcessEngineBean: 'getCaseService')
             // Finally, register all camunda beans under their default or user configured aliases
             springConfig.beanNames.findAll { it.startsWith("camunda") && it.endsWith("Bean") }.each {
                 springConfig.addAlias Identifiers.beanName(it), it
