@@ -21,6 +21,7 @@ import org.camunda.bpm.ProcessApplicationService
 import org.camunda.bpm.ProcessEngineService
 import org.camunda.bpm.engine.ProcessEngineException
 import org.camunda.bpm.engine.RepositoryService
+import org.camunda.bpm.engine.impl.ProcessEngineImpl
 import org.camunda.bpm.engine.repository.DeploymentBuilder
 import org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration
 import org.camunda.bpm.engine.spring.ProcessEngineFactoryBean
@@ -28,6 +29,8 @@ import org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
 import org.camunda.bpm.engine.test.mock.MockExpressionManager
 import org.slf4j.bridge.SLF4JBridgeHandler
 import org.springframework.beans.BeanUtils
+
+import java.lang.reflect.Method
 
 import static grails.plugin.camunda.Configuration.*
 
@@ -81,15 +84,11 @@ class CamundaPluginSupport {
         }
         if (springConfig.beanNames.find { it == 'camundaProcessEngineBean' }) {
             // Instantiate camunda service API beans
-            camundaRuntimeServiceBean(camundaProcessEngineBean: 'getRuntimeService')
-            camundaRepositoryServiceBean(camundaProcessEngineBean: 'getRepositoryService')
-            camundaTaskServiceBean(camundaProcessEngineBean: 'getTaskService')
-            camundaManagementServiceBean(camundaProcessEngineBean: 'getManagementService')
-            camundaIdentityServiceBean(camundaProcessEngineBean: 'getIdentityService')
-            camundaAuthorizationServiceBean(camundaProcessEngineBean: 'getAuthorizationService')
-            camundaHistoryServiceBean(camundaProcessEngineBean: 'getHistoryService')
-            camundaFormServiceBean(camundaProcessEngineBean: 'getFormService')
-            camundaCaseServiceBean(camundaProcessEngineBean: 'getCaseService')
+            ProcessEngineImpl.class.declaredMethods.each { Method method ->
+                if(method.name.startsWith('get') && method.name.endsWith('Service')) {
+                    "camunda${method.name.substring(3)}Bean"(camundaProcessEngineBean: method.name)
+                }
+            }
             // Finally, register all camunda beans under their default or user configured aliases
             springConfig.beanNames.findAll { it.startsWith("camunda") && it.endsWith("Bean") }.each {
                 springConfig.addAlias Identifiers.beanName(it), it
