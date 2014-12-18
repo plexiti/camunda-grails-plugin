@@ -1,0 +1,14 @@
+h2. Bean 'caseService'
+
+You can use the *[org.camunda.bpm.engine.CaseService|http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/CaseService.html]* as an injectable bean:
+
+{code}
+def caseService
+{code}
+
+The plugin registers the bean as 'camundaCaseServiceBean' with the default alias 'caseService'.
+You can change this default alias via [configuration|guide:bean-names].
+
+{note}
+The caseService is just available from camunda BPM version 7.2.0 onwards.
+{note}

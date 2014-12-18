@@ -1,0 +1,14 @@
+h2. Bean 'filterService'
+
+You can use the *[org.camunda.bpm.engine.FilterService|http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/FilterService.html]* as an injectable bean:
+
+{code}
+def filterService
+{code}
+
+The plugin registers the bean as 'camundaFilterServiceBean' with the default alias 'filterService'.
+You can change this default alias via [configuration|guide:bean-names].
+
+{note}
+The filterService is just available from camunda BPM version 7.2.0 onwards.
+{note}
