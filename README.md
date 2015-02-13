@@ -58,7 +58,7 @@ If you'd look at it with [camunda modeler](http://camunda.org/bpmn/tool/), it wo
 
 You will now already be able to **use camunda BPM as internal process engine** for your grails application. 
 Maybe you want to `grails test-app` and have a look at the 
-[spock specification](https://github.com/plexiti/camunda-grails-plugin/blob/feature/extended-readme/test/integration/grails/plugin/camunda/test/TestProcessSpec.groovy) 
+[spock specification](test/integration/grails/plugin/camunda/test/TestProcessSpec.groovy) 
 executed by that command. However, if you want to see **camunda BPM tasklist in action**, you will want to move on and ...
 
 <a name="install"/>
