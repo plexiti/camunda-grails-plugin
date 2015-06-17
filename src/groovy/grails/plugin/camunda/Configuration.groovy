@@ -128,7 +128,7 @@ class Configuration {
    * grails configuration and plugin defaults) explicitly knows a value for that property
    */
   static def exists(String property) {
-    System.properties.containsKey(property) || containsKey(property) || defaults.containsKey(property)
+    System.properties.containsKey(property) || configObjectContainsKey(property) || defaults.containsKey(property)
   }
 
   /**
@@ -143,9 +143,9 @@ class Configuration {
     if (System.properties.containsKey(property)) {
       // First look, whether a system property exists
       value = System.getProperty(property) ?: null
-    } else if (containsKey(property)) {
+    } else if (configObjectContainsKey(property)) {
       // If not, look, whether a grails configuration property exists
-      value = getProperty(property)
+      value = getConfigObjectProperty(property)
     } else {
       // If not, look, whether a default value exists
       value = defaults.get(property)
@@ -190,28 +190,28 @@ class Configuration {
   /*
    * Helper method to retrieve a property style key from grails configuration
    */
-  static Object getProperty(String property) {
+  static Object getConfigObjectProperty(String property) {
     getConfigObject(property)?.get(property.substring(property.lastIndexOf('.') + 1))
   }
 
   /*
    * Helper method to change a property style key in grails configuration
    */
-  static void setProperty(String property, Object value) {
+  static void setConfigObjectProperty(String property, Object value) {
     getConfigObject(property)?.put(property.substring(property.lastIndexOf('.') + 1), value)
   }
 
   /*
    * Helper method to remove a property style key from grails configuration
    */
-  static void clearProperty(String property) {
+  static void clearConfigObjectProperty(String property) {
     getConfigObject(property)?.remove(property.substring(property.lastIndexOf('.') + 1))
   }
 
   /*
    * Helper method to test whether a property style key exists in grails configuration
    */
-  static boolean containsKey(String property) {
+  static boolean configObjectContainsKey(String property) {
     def configObject = getConfigObject(property)
     def option = property.substring(property.lastIndexOf('.') + 1)
     if (configObject.containsKey(option)) {

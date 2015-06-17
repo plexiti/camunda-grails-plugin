@@ -13,7 +13,7 @@ class CamundaControllerSpec extends Specification {
   @Unroll
   void 'Test index() for scenario #scenario'() {
     given:
-      Configuration.setProperty('camunda.deployment.scenario', scenario)
+      Configuration.setConfigObjectProperty('camunda.deployment.scenario', scenario)
     when:
       controller.index()
     then:
@@ -24,7 +24,7 @@ class CamundaControllerSpec extends Specification {
 
   void 'Test index() for scenario shared'() {
     given:
-      Configuration.setProperty('camunda.deployment.scenario', 'shared')
+      Configuration.setConfigObjectProperty('camunda.deployment.scenario', 'shared')
     when:
       controller.index()
     then:

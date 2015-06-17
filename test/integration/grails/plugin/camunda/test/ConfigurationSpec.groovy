@@ -16,9 +16,9 @@ class ConfigurationSpec extends Specification {
   
   def init(String property) {
     System.clearProperty(property)
-    Configuration.clearProperty(property)
+    Configuration.clearConfigObjectProperty(property)
     assert !System.hasProperty(property)
-    assert !Configuration.containsKey(property)
+    assert !Configuration.configObjectContainsKey(property)
     assert !grailsApplication.config.flatten().containsKey(property)
   }
   
@@ -37,72 +37,72 @@ class ConfigurationSpec extends Specification {
   
   def "Test programmatical retrieval of configuration values"() {
     expect:
-      Configuration.getProperty('grails.doc.title') == 'camunda Grails plugin'
+      Configuration.getConfigObjectProperty('grails.doc.title') == 'camunda Grails plugin'
     and:
-      Configuration.getProperty('camunda.deployment.scenario') == null
+      Configuration.getConfigObjectProperty('camunda.deployment.scenario') == null
     and:
-      !Configuration.containsKey('camunda.deployment.scenario')
+      !Configuration.configObjectContainsKey('camunda.deployment.scenario')
     when:
       grailsApplication.config.camunda.deployment.scenario = 'embedded'
     then:
-      Configuration.getProperty('camunda.deployment.scenario') == 'embedded'
+      Configuration.getConfigObjectProperty('camunda.deployment.scenario') == 'embedded'
     and:
-      Configuration.containsKey('camunda.deployment.scenario')
+      Configuration.configObjectContainsKey('camunda.deployment.scenario')
     when:
       grailsApplication.config.camunda.deployment.scenario = null
     then:
-      Configuration.getProperty('camunda.deployment.scenario') == null
+      Configuration.getConfigObjectProperty('camunda.deployment.scenario') == null
     and:
-      Configuration.containsKey('camunda.deployment.scenario')
+      Configuration.configObjectContainsKey('camunda.deployment.scenario')
     and:
       grailsApplication.config.flatten().containsKey('camunda.deployment.scenario')
   }
 
   def "Test programmatical change of configuration values"() {
     expect:
-      Configuration.getProperty('camunda.deployment.scenario') == null
+      Configuration.getConfigObjectProperty('camunda.deployment.scenario') == null
     and:
-      !Configuration.containsKey('camunda.deployment.scenario')
+      !Configuration.configObjectContainsKey('camunda.deployment.scenario')
     when:
-      Configuration.setProperty('camunda.deployment.scenario', 'embedded')
+      Configuration.setConfigObjectProperty('camunda.deployment.scenario', 'embedded')
     then:
-      Configuration.getProperty('camunda.deployment.scenario') == 'embedded'
+      Configuration.getConfigObjectProperty('camunda.deployment.scenario') == 'embedded'
     and:
-      Configuration.containsKey('camunda.deployment.scenario')
+      Configuration.configObjectContainsKey('camunda.deployment.scenario')
     when:
-      Configuration.setProperty('camunda.deployment.scenario', null)
+      Configuration.setConfigObjectProperty('camunda.deployment.scenario', null)
     then:
-      Configuration.getProperty('camunda.deployment.scenario') == null
+      Configuration.getConfigObjectProperty('camunda.deployment.scenario') == null
     and:
-      Configuration.containsKey('camunda.deployment.scenario')
+      Configuration.configObjectContainsKey('camunda.deployment.scenario')
     and:
       grailsApplication.config.flatten().containsKey('camunda.deployment.scenario')
   }
 
   def "Test programmatical clearing of configuration values"() {
     expect:
-      Configuration.getProperty('camunda.deployment.scenario') == null
+      Configuration.getConfigObjectProperty('camunda.deployment.scenario') == null
     and:
-      !Configuration.containsKey('camunda.deployment.scenario')
+      !Configuration.configObjectContainsKey('camunda.deployment.scenario')
     when:
-      Configuration.setProperty('camunda.deployment.scenario', 'embedded')
+      Configuration.setConfigObjectProperty('camunda.deployment.scenario', 'embedded')
     then:
-      Configuration.getProperty('camunda.deployment.scenario') == 'embedded'
+      Configuration.getConfigObjectProperty('camunda.deployment.scenario') == 'embedded'
     and:
-      Configuration.containsKey('camunda.deployment.scenario')
+      Configuration.configObjectContainsKey('camunda.deployment.scenario')
     when:
-      Configuration.clearProperty('camunda.deployment.scenario')
+      Configuration.clearConfigObjectProperty('camunda.deployment.scenario')
     then:
-      Configuration.getProperty('camunda.deployment.scenario') == null
+      Configuration.getConfigObjectProperty('camunda.deployment.scenario') == null
     and:
-      !Configuration.containsKey('camunda.deployment.scenario')
+      !Configuration.configObjectContainsKey('camunda.deployment.scenario')
     and:
       !grailsApplication.config.flatten().containsKey('camunda.deployment.scenario')
   }
   
   def "Test to directly programmatically set a value hithereto unknown"() {
     when:
-      Configuration.setProperty('x.y.z', 'jboss')
+      Configuration.setConfigObjectProperty('x.y.z', 'jboss')
     then:
       grailsApplication.config.x.y.z == 'jboss'
   }
@@ -143,7 +143,7 @@ class ConfigurationSpec extends Specification {
   @Unroll
   def "Test that property '#property' is not allowed to have value '#value'."() {
     given:
-      Configuration.setProperty(property, value)
+      Configuration.setConfigObjectProperty(property, value)
     when:
       Configuration.config(property) == value
     then:
@@ -161,7 +161,7 @@ class ConfigurationSpec extends Specification {
   @Unroll
   def "Test that property '#property' has configured value '#value'."() {
     when:
-      Configuration.setProperty(property, value)
+      Configuration.setConfigObjectProperty(property, value)
     then:
       Configuration.config(property) == value
     where:
@@ -180,7 +180,7 @@ class ConfigurationSpec extends Specification {
   @Unroll
   def "Test that property '#property' can be overridden by system property '#overridden'."() {
     given:
-      Configuration.setProperty(property, value)
+      Configuration.setConfigObjectProperty(property, value)
     when:
       System.setProperty(property, overridden)
     then:
@@ -197,7 +197,7 @@ class ConfigurationSpec extends Specification {
   @Unroll
   def "Test that property '#property' has value null when explicitely configured to null."() {
     when:
-      Configuration.setProperty(property, null)
+      Configuration.setConfigObjectProperty(property, null)
     then:
       Configuration.config(property) == null
     where:
@@ -211,7 +211,7 @@ class ConfigurationSpec extends Specification {
   @Unroll
   def "Test that property '#property' has value null when explicitely overridden with empty system property."() {
     given:
-      Configuration.setProperty(property, value)
+      Configuration.setConfigObjectProperty(property, value)
     when:
       System.setProperty(property, '')
     then:
