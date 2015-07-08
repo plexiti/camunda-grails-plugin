@@ -16,7 +16,7 @@ grails.project.fork = [
     console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
 ]
 
-def camundaVersion = System.getProperty("camunda-bpm.version") ?: "7.2.0"
+def camundaVersion = System.getProperty("camunda-bpm.version") ?: "7.3.0"
 
 grails.project.repos.snapshots.url = "https://repository-plexiti-foss.forge.cloudbees.com/snapshot/"
 grails.project.repos.snapshots.username = "martinschimak"
