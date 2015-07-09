@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>4.2 Inject camunda API Services 0.4.0</title>
+    <title>4.2 Inject camunda API Services 0.5.0</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -90,7 +90,7 @@ function addJsClass() {
 
                     <p><strong>Authors:</strong> Martin Schimak</p>
 
-                    <p><strong>Version:</strong> 0.4.0</p>
+                    <p><strong>Version:</strong> 0.5.0</p>
 
                     
                 </div>
@@ -113,7 +113,9 @@ IdentityService identityService
 ManagementService managementService
 RepositoryService repositoryService
 RuntimeService runtimeService
-TaskService taskService</pre></div><p class="paragraph"/><blockquote class="note"> Note that many of these bean names are quite generic (like 'taskService', 'managementService' etc) and
+TaskService taskService
+CaseService caseService
+FilterService filterService</pre></div><p class="paragraph"/><blockquote class="note"> Note that many of these bean names are quite generic (like 'taskService', 'managementService' etc) and
 could easily clash with names you want to use in your application for other purposes - even more so when having in
 mind the Grails naming convention to use <strong class="bold">&#42;Service</strong> as a name pattern for Grails services. On the other hand
 typical camunda users are used to the service names shown above and will expect to use these services via their
@@ -149,6 +151,12 @@ some forms which can be presented to your camunda BPM tasklist user.
                         
                             
                             <div class="menu-item"><a href="../../ref/Beans/authorizationService.html">authorizationService</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Beans/caseService.html">caseService</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Beans/filterService.html">filterService</a>
                             </div>
                             
                             <div class="menu-item"><a href="../../ref/Beans/formService.html">formService</a>

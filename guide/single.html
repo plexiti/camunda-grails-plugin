@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>camunda Grails plugin 0.4.0</title>
+        <title>camunda Grails plugin 0.5.0</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -70,7 +70,7 @@ function addJsClass(el) {
                         <div class="project">
                             <h1>camunda Grails plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Martin Schimak</p>
-                            <p><strong>Version:</strong> 0.4.0</p>
+                            <p><strong>Version:</strong> 0.5.0</p>
                             
                         </div>
 
@@ -176,7 +176,7 @@ to get started with the camunda Grails plugin!<p class="paragraph"/><img border=
 
 <h2 id="install">2.1 Install the plugin</h2>
 In your BuildConfig.groovy configure the following plugin dependency:<p class="paragraph"/><div class="code"><pre>plugins &#123;
-    compile &#34;:camunda:0.4.0"
+    compile &#34;:camunda:0.5.0"
 &#125;</pre></div><p class="paragraph"/>You may want to refresh your dependencies now in order to make sure that Grails properly
 installs the plugin. Type on your command line<p class="paragraph"/><div class="code"><pre>grails refresh&#45;dependencies</pre></div>
 
@@ -293,7 +293,9 @@ IdentityService identityService
 ManagementService managementService
 RepositoryService repositoryService
 RuntimeService runtimeService
-TaskService taskService</pre></div><p class="paragraph"/><blockquote class="note"> Note that many of these bean names are quite generic (like 'taskService', 'managementService' etc) and
+TaskService taskService
+CaseService caseService
+FilterService filterService</pre></div><p class="paragraph"/><blockquote class="note"> Note that many of these bean names are quite generic (like 'taskService', 'managementService' etc) and
 could easily clash with names you want to use in your application for other purposes - even more so when having in
 mind the Grails naming convention to use <strong class="bold">&#42;Service</strong> as a name pattern for Grails services. On the other hand
 typical camunda users are used to the service names shown above and will expect to use these services via their
@@ -568,7 +570,7 @@ an explicit decision for any of your default or custom environments, the plugin 
 
 
 <h2 id="alternative-engine-version">5.5 Use an alternative version of camunda</h2>
-Currently the plugin comes bundled with a dependency to the release <strong class="bold">7.2.0</strong> of camunda BPM.
+Currently the plugin comes bundled with a dependency to the release <strong class="bold">7.3.0</strong> of camunda BPM.
 However you may want to choose another version. You then have to explicitely override the needed 
 dependencies in your BuildConfig.groovy:<p class="paragraph"/><div class="code"><pre>dependencies &#123;
   compile (<span class="xml&#45;quote">"org.camunda.bpm:camunda&#45;engine:$camundaVersion"</span>) &#123;
@@ -781,6 +783,12 @@ your application with '<strong class="bold">run-app</strong>', it will be redepl
                         
                         
                         <div class="menu-item"><a href="../ref/Beans/authorizationService.html">authorizationService</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="../ref/Beans/caseService.html">caseService</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="../ref/Beans/filterService.html">filterService</a>
                         </div>
                         
                         <div class="menu-item"><a href="../ref/Beans/formService.html">formService</a>
