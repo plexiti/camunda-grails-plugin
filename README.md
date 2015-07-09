@@ -35,7 +35,7 @@ grails create-app camunda-on-grails
 In your `camunda-on-grails/grails-app/conf/BuildConfig.groovy`, add to the plugins section
 ```groovy
 plugins {
-    compile ":camunda:0.4.0"
+    compile ":camunda:0.5.0"
 }
 ```
 and back in your `camunda-on-grails` project folder execute
