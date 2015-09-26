@@ -1,1 +1,1 @@
-include 'camunda-grails3-plugin'
+include 'camunda-grails3-plugin', 'camunda-grails3-plugin-test'
