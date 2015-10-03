@@ -1,0 +1,18 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+group = 'org.grails.plugins'
+version = '0.6.0-SNAPSHOT'
+
+sourceCompatibility = 1.7
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+}
+
+dependencies {
+  compile gradleApi()
+  compile localGroovy()
+  testCompile "org.spockframework:spock-core:1.0-groovy-2.3"
+}

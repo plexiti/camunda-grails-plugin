@@ -8,7 +8,6 @@ buildscript {
   }
   dependencies {
     classpath "org.grails:grails-gradle-plugin:$grailsVersion"
-    classpath files("grails-app/processes")
   }
 }
 
@@ -27,6 +26,7 @@ apply plugin: "spring-boot"
 apply plugin: "org.grails.grails-plugin"
 apply plugin: "org.grails.grails-gsp"
 apply plugin: "org.grails.grails-doc"
+apply plugin: "org.grails.plugins.camunda"
 // Used for publishing to central repository, remove if not needed
 apply from: 'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/grailsCentralPublishing.gradle'
 apply from: 'https://raw.githubusercontent.com/grails/grails-profile-repository/master/profiles/plugin/templates/bintrayPublishing.gradle'
@@ -39,20 +39,8 @@ ext {
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-sourceSets {
-  integrationTest {
-    resources {
-      srcDir "grails-app/processes"
-    }
-    output.resourcesDir = "build/classes/integrationTest"
-  }
-}
-
-// TODO sourceSets für main und im Livebetrieb testen
-// TODO Funktionieren die Source Sets auch wenn das Ding als Plugin genutzt wird?
 // TODO Event Scripts in den Gradle Build integrieren
 // TODO Cli Tests übertragen
-// TODO camunda-grails-plugin-test auf Grails 3 Plugin anwenden
 
 repositories {
   mavenLocal()
@@ -100,5 +88,20 @@ task wrapper(type: Wrapper) {
 }
 
 jar {
-  baseName "camunda"
+  def gradlePlugin = project(":camunda-gradle-plugin")
+  dependsOn gradlePlugin.classes
+  from (gradlePlugin.sourceSets.main.output.classesDir,
+    gradlePlugin.sourceSets.main.output.resourcesDir)
+}
+
+install {
+  dependsOn publishToMavenLocal
+}
+
+publishing {
+  publications {
+    maven(MavenPublication) {
+      artifactId 'camunda'
+    }
+  }
 }

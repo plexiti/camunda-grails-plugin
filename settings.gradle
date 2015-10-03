@@ -1,1 +1,2 @@
-include 'camunda-grails3-plugin', 'camunda-grails3-plugin-test'
+rootProject.name = "camunda-grails-plugin"
+include 'camunda-grails3-plugin', 'camunda-gradle-plugin', 'camunda-grails3-plugin-test'
