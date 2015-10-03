@@ -28,6 +28,8 @@ description ("Creates a new Camunda BPM process definition.") {
   flag name:'force', description: "Whether to overwrite existing files"
 }
 
+// TODO Document flag --force
+
 def classLoader = this.class.classLoader
 def constants = classLoader.loadClass("grails.plugin.camunda.Constants") as Constants
 

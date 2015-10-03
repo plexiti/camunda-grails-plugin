@@ -26,10 +26,17 @@ target('default' : 'Creates a new camunda BPM process definition.') {
     "create-process"()    
 }
 
-USAGE = """
-    create-process [NAME]
+USAGE = """| Command: create-process
 
-where
-    NAME = The package and name of the process definition, e.g. my.package.SampleProcess 
-           If not provided, this command will ask you for the name.
+| Description:
+Creates a new Camunda BPM process definition.
+
+| Usage:
+grails create-process [NAME]
+
+| Arguments:
+* Name - The package and name of the process definition, e.g. my.package.SampleProcess (REQUIRED)
+
+| Flags:
+* force - Whether to overwrite existing files
 """
