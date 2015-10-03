@@ -56,7 +56,9 @@ class CamundaPluginSupport {
                         SLF4JBridgeHandler.install();
                     }
                     // During test phases (except functional), use MockExpressionManager
-                    expressionManager = bean(MockExpressionManager) // TODO document
+                    if (BuildScope.current in [BuildScope.ALL, BuildScope.TEST]) {
+                        expressionManager = bean(MockExpressionManager)
+                    }
                 }
                 // Now set configuration 
                 (config('camunda.engine.configuration') as Map<String, Object>).each {
