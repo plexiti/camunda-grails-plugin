@@ -3,7 +3,6 @@ package grails.plugin.camunda.test
 import org.camunda.bpm.engine.RuntimeService
 import grails.test.mixin.integration.Integration
 import grails.transaction.Rollback
-import grails.plugin.camunda.test.SampleService
 import org.camunda.bpm.engine.TaskService
 import org.camunda.bpm.engine.runtime.Execution
 import org.camunda.bpm.engine.test.mock.Mocks
