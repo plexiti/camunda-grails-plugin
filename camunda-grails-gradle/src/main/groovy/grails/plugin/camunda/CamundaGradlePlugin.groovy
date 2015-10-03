@@ -13,13 +13,13 @@ class CamundaGradlePlugin implements Plugin<Project> {
         project.sourceSets {
             integrationTest {
                 resources {
-                    srcDir "grails-app/processes"
+                    srcDir Constants.PROCESS_PATH
                 }
                 output.resourcesDir = output.classesDir
             }
             main {
                 resources {
-                    srcDir "grails-app/processes"
+                    srcDir Constants.PROCESS_PATH
                 }
             }
         }
