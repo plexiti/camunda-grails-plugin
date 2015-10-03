@@ -1,4 +1,4 @@
 apply plugin: "groovy"
 
-sourceSets.main.groovy.srcDirs = ["../camunda-gradle-plugin/src/main/groovy"]
-sourceSets.main.resources.srcDirs = ["../camunda-gradle-plugin/src/main/resources"]
+sourceSets.main.groovy.srcDirs = ["../camunda-gradle-plugin/src/main/groovy", "../camunda-grails-core/src/main/groovy"]
+sourceSets.main.resources.srcDirs = ["../camunda-gradle-plugin/src/main/resources", "../camunda-grails-core/src/main/resources"]
