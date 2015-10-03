@@ -89,7 +89,7 @@ task wrapper(type: Wrapper) {
 }
 
 jar {
-  def gradlePlugin = project(":camunda-gradle-plugin")
+  def gradlePlugin = project(":camunda-grails-gradle")
   def grailsCore = project(":camunda-grails-core")
   dependsOn gradlePlugin.classes, grailsCore.classes
   from (gradlePlugin.sourceSets.main.output.classesDir,
