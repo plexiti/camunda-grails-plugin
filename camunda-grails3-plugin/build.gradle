@@ -39,8 +39,10 @@ ext {
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-// TODO Event Scripts in den Gradle Build integrieren
+// TODO WAR generation scripts in den Gradle Build integrieren
 // TODO Cli Tests übertragen
+// TODO separate documentation
+// TODO add Null class to grails 2 plugin, too, but respect real null there, too
 
 repositories {
   mavenLocal()
