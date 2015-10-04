@@ -1,22 +1,28 @@
-def camundaVersion = System.getProperty("camunda-bpm.version") ?: "7.3.0"
-
 allprojects {
   apply plugin: 'java'
+
   group 'org.grails.plugins'
   version '0.6.0-SNAPSHOT'
+
   sourceCompatibility = 1.7
   targetCompatibility = 1.7
-}
-
-subprojects {
+  
+  ext {
+    grailsVersion = rootProject.grailsVersion
+    gradleWrapperVersion = rootProject.gradleWrapperVersion
+    camundaVersion = System.getProperty("camunda-bpm.version") ?: rootProject.camundaVersion
+    spockVersion = rootProject.spockVersion
+  }
+  
   repositories {
     mavenLocal()
     mavenCentral()
     maven { url "https://repo.grails.org/grails/core" }
     maven { url "https://app.camunda.com/nexus/content/groups/public" }
   }
+
   dependencies {
-    compile "org.grails:grails-core:3.0.7"
+    compile "org.grails:grails-core:$grailsVersion"
     compile("org.camunda.bpm:camunda-engine:$camundaVersion") {
       exclude(group: 'org.springframework', module: 'spring-beans')
     }
@@ -26,4 +32,5 @@ subprojects {
       exclude(group: 'org.springframework', module: 'spring-orm')
     }
   }
+
 }

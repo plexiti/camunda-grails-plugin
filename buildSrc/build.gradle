@@ -3,7 +3,14 @@ apply plugin: "groovy"
 sourceSets.main.groovy.srcDirs = ["../camunda-grails-gradle/src/main/groovy", "../camunda-grails-core/src/main/groovy"]
 sourceSets.main.resources.srcDirs = ["../camunda-grails-gradle/src/main/resources", "../camunda-grails-core/src/main/resources"]
 
-def camundaVersion = System.getProperty("camunda-bpm.version") ?: "7.3.0"
+Properties props = new Properties()
+props.load(new FileInputStream("$project.rootDir/../gradle.properties"))
+
+ext {
+  grailsVersion = props.getProperty('grailsVersion')
+  gradleWrapperVersion = props.getProperty('gradleWrapperVersion')
+  camundaVersion = System.getProperty("camunda-bpm.version") ?: props.getProperty('camundaVersion')
+}
 
 repositories {
   mavenLocal()
@@ -13,7 +20,7 @@ repositories {
 }
 
 dependencies {
-  compile "org.grails:grails-core:3.0.7"
+  compile "org.grails:grails-core:$grailsVersion"
   compile("org.camunda.bpm:camunda-engine:$camundaVersion") {
     exclude(group: 'org.springframework', module: 'spring-beans')
   }
