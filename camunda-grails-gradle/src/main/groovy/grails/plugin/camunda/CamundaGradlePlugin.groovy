@@ -8,22 +8,26 @@ import org.gradle.api.Project
  */
 class CamundaGradlePlugin implements Plugin<Project> {
 
-    void apply(Project project) {
-        project.apply plugin: "java"
-        project.sourceSets {
-            integrationTest {
-                resources {
-                    srcDir Constants.PROCESS_PATH
-                }
-                output.resourcesDir = output.classesDir
-            }
-            main {
-                resources {
-                    srcDir Constants.PROCESS_PATH
-                }
-            }
+  void apply(Project project) {
+    project.apply plugin: "java"
+    sourceSets(project)
+  }
+
+  static void sourceSets(Project project) {
+    project.sourceSets {
+      integrationTest {
+        resources {
+          srcDir Constants.PROCESS_PATH
         }
+        output.resourcesDir = output.classesDir
+      }
+      main {
+        resources {
+          srcDir Constants.PROCESS_PATH
+        }
+      }
     }
+  }
 
 }
 
