@@ -16,9 +16,6 @@ plugins {
   id "com.jfrog.bintray" version "1.2"
 }
 
-group 'org.grails.plugins'
-version '0.6.0-SNAPSHOT'
-
 apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
@@ -36,20 +33,10 @@ ext {
   gradleWrapperVersion = project.gradleWrapperVersion
 }
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
-
 // TODO WAR generation scripts in den Gradle Build integrieren
 // TODO Cli Tests übertragen
 // TODO separate documentation
 // TODO add Null class to grails 2 plugin, too, but respect real null there, too
-
-repositories {
-  mavenLocal()
-  mavenCentral()
-  maven { url "https://repo.grails.org/grails/core" }
-  maven { url "https://app.camunda.com/nexus/content/groups/public" }
-}
 
 dependencyManagement {
   imports {
@@ -58,17 +45,7 @@ dependencyManagement {
   applyMavenExclusions false
 }
 
-def camundaVersion = System.getProperty("camunda-bpm.version") ?: "7.3.0"
-
 dependencies {
-  compile("org.camunda.bpm:camunda-engine:$camundaVersion") {
-    exclude(group: 'org.springframework', module: 'spring-beans')
-  }
-  compile("org.camunda.bpm:camunda-engine-spring:$camundaVersion") {
-    exclude(group: 'org.springframework', module: 'spring-context')
-    exclude(group: 'org.springframework', module: 'spring-jdbc')
-    exclude(group: 'org.springframework', module: 'spring-orm')
-  }
   provided project(":camunda-grails-core")
 
   provided 'org.springframework.boot:spring-boot-starter-logging'
