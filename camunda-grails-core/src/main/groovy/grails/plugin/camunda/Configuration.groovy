@@ -54,7 +54,7 @@ class Configuration {
       defaults['camunda.engine.configuration.deploymentResources'] = ['classpath:/**/*.bpmn', 'classpath:/**/*.bpmn20.xml']
     }
     defaults['camunda.engine.configuration.jobExecutorActivate'] = {
-      BuildScope.current == BuildScope.TEST
+      !(BuildScope.current in [BuildScope.ALL, BuildScope.TEST])
     }
   }
 

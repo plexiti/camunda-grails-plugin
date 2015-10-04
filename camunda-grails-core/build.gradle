@@ -8,9 +8,22 @@ sourceCompatibility = 1.7
 repositories {
   mavenLocal()
   mavenCentral()
+  maven { url "https://repo.grails.org/grails/core" }
+  maven { url "https://app.camunda.com/nexus/content/groups/public" }
 }
 
+def camundaVersion = System.getProperty("camunda-bpm.version") ?: "7.3.0"
+
 dependencies {
+  compile "org.grails:grails-core:3.0.7"
+  compile("org.camunda.bpm:camunda-engine:$camundaVersion") {
+    exclude(group: 'org.springframework', module: 'spring-beans')
+  }
+  compile("org.camunda.bpm:camunda-engine-spring:$camundaVersion") {
+    exclude(group: 'org.springframework', module: 'spring-context')
+    exclude(group: 'org.springframework', module: 'spring-jdbc')
+    exclude(group: 'org.springframework', module: 'spring-orm')
+  }
   compile "org.codehaus.groovy:groovy:2.4.4"
   testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
 }

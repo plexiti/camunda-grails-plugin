@@ -2,3 +2,24 @@ apply plugin: "groovy"
 
 sourceSets.main.groovy.srcDirs = ["../camunda-grails-gradle/src/main/groovy", "../camunda-grails-core/src/main/groovy"]
 sourceSets.main.resources.srcDirs = ["../camunda-grails-gradle/src/main/resources", "../camunda-grails-core/src/main/resources"]
+
+def camundaVersion = System.getProperty("camunda-bpm.version") ?: "7.3.0"
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+  maven { url "https://repo.grails.org/grails/core" }
+  maven { url "https://app.camunda.com/nexus/content/groups/public" }
+}
+
+dependencies {
+  compile "org.grails:grails-core:3.0.7"
+  compile("org.camunda.bpm:camunda-engine:$camundaVersion") {
+    exclude(group: 'org.springframework', module: 'spring-beans')
+  }
+  compile("org.camunda.bpm:camunda-engine-spring:$camundaVersion") {
+    exclude(group: 'org.springframework', module: 'spring-context')
+    exclude(group: 'org.springframework', module: 'spring-jdbc')
+    exclude(group: 'org.springframework', module: 'spring-orm')
+  }
+}
