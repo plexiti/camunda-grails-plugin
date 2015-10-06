@@ -33,4 +33,8 @@ allprojects {
     }
   }
 
+  test {
+    jvmArgs "-XX:MaxPermSize=256m"
+  }
+  
 }

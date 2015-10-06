@@ -1,7 +1,13 @@
 apply plugin: "groovy"
 
-sourceSets.main.groovy.srcDirs = ["../camunda-grails-gradle/src/main/groovy", "../camunda-grails-core/src/main/groovy"]
-sourceSets.main.resources.srcDirs = ["../camunda-grails-gradle/src/main/resources", "../camunda-grails-core/src/main/resources"]
+sourceSets.main.groovy.srcDirs = 
+  ["../camunda-grails-gradle/src/main/groovy", 
+   "../camunda-grails-core/src/main/groovy", 
+   "../camunda-grails3-plugin/src/main/groovy"]
+sourceSets.main.resources.srcDirs = 
+  ["../camunda-grails-gradle/src/main/resources", 
+   "../camunda-grails-core/src/main/resources", 
+   "../camunda-grails3-plugin/src/main/resources"]
 
 Properties props = new Properties()
 props.load(new FileInputStream("$project.rootDir/../gradle.properties"))

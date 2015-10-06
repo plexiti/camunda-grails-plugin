@@ -58,3 +58,7 @@ dependencies {
 task wrapper(type: Wrapper) {
   gradleVersion = gradleWrapperVersion
 }
+
+integrationTest {
+  jvmArgs "-XX:MaxPermSize=256m"
+}
