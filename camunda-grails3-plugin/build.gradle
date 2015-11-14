@@ -65,10 +65,6 @@ jar {
     grailsCore.sourceSets.main.output.resourcesDir)
 }
 
-install {
-  dependsOn publishToMavenLocal
-}
-
 publishing {
   publications {
     maven(MavenPublication) {
