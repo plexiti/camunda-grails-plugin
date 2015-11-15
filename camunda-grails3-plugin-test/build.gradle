@@ -1,13 +1,29 @@
 buildscript {
+  Properties props = new Properties()
+  props.load(new FileInputStream("$project.rootDir/../gradle.properties"))
+  ext {
+    grailsVersion = props.getProperty('grailsVersion')
+  }
+  repositories {
+    mavenLocal()
+    maven { url "https://repo.grails.org/grails/core" }
+  }
   dependencies {
     classpath "org.grails:grails-gradle-plugin:$grailsVersion"
     classpath 'com.bertramlabs.plugins:asset-pipeline-gradle:2.5.0'
+    classpath "org.grails.plugins:camunda:0.6.0-SNAPSHOT"
   }
 }
 
 plugins {
   id "io.spring.dependency-management" version "0.5.2.RELEASE"
 }
+
+Properties props = new Properties()
+props.load(new FileInputStream("$project.rootDir/../gradle.properties"))
+
+version "0.6.0-SNAPSHOT"
+group props.getProperty('group')
 
 apply plugin: "spring-boot"
 apply plugin: "war"
@@ -18,9 +34,19 @@ apply plugin: "org.grails.grails-web"
 apply plugin: "org.grails.grails-gsp"
 apply plugin: "org.grails.plugins.camunda"
 
+ext {
+  grailsVersion = props.getProperty('grailsVersion')
+  gradleWrapperVersion = props.getProperty('gradleWrapperVersion')
+}
+
 assets {
   minifyJs = true
   minifyCss = true
+}
+
+repositories {
+  mavenLocal()
+  maven { url "https://repo.grails.org/grails/core" }
 }
 
 dependencyManagement {
@@ -31,6 +57,9 @@ dependencyManagement {
 }
 
 dependencies {
+
+  compile "org.grails.plugins:camunda:$version"
+
   compile "org.springframework.boot:spring-boot-starter-logging"
   compile "org.springframework.boot:spring-boot-starter-actuator"
   compile "org.springframework.boot:spring-boot-autoconfigure"
@@ -38,7 +67,6 @@ dependencies {
   compile "org.grails:grails-dependencies"
   compile "org.grails:grails-web-boot"
 
-  compile project(':camunda-grails3-plugin')
   compile "org.grails.plugins:hibernate"
   compile "org.grails.plugins:cache"
   compile "org.hibernate:hibernate-ehcache"
@@ -59,6 +87,3 @@ task wrapper(type: Wrapper) {
   gradleVersion = gradleWrapperVersion
 }
 
-integrationTest {
-  jvmArgs "-XX:MaxPermSize=256m"
-}
