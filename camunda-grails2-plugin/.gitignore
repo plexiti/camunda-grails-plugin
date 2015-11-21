@@ -2,3 +2,4 @@
 /webapp/WEB-INF/plugins
 /webapp/WEB-INF/classes
 release*.sh
+grails-camunda-*
