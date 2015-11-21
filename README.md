@@ -1,7 +1,9 @@
 # camunda Grails plugin 
 
 This plugin integrates **Camunda BPM** (all versions) with the **Grails 2** web 
-application framework. A **Grails 3 version is currently under development.**
+application framework. 
+
+:information_source: A **Grails 3 version is currently under development.**
 
 **[camunda BPM](http://camunda.org)** is a flexible framework for workflow and process automation. 
 It's core is a native **[BPMN 2.0](http://www.omg.org/spec/BPMN/2.0/)** process engine that runs 
@@ -22,6 +24,9 @@ for **[Grails](http://grails.org)**, too.
 2> grails create-process my.own.camunda.GrailsProcess
 3> grails war # and deploy it in the camunda BPM tomcat container
 ```
+
+:warning: For Grails **2.5.x**, replace the `groovy-all-2.3.0.jar` in Camunda BPM's tomcat `lib` folder with a
+`groovy-all-2.4.x.jar`!
 
 Then open [http://localhost:8080/camunda-on-grails-0.1/camunda](http://localhost:8080/camunda-on-grails-0.1/camunda), 
 browse to camunda tasklist and work with your own camunda GrailsProcess. But if you are new to camunda BPM and/or 
@@ -71,7 +76,12 @@ executed by that command. However, if you want to see **camunda BPM tasklist in 
 ### 3. Download camunda BPM and deploy your Grails WAR file
 
 [Download camunda BPM **Tomcat**](http://camunda.org/download/) and expand it to a folder, let's call it 
-$CAMUNDA_HOME. Start camunda BPM Tomcat by executing:
+$CAMUNDA_HOME. 
+
+:warning: For Grails **2.5.x**, replace the `groovy-all-2.3.0.jar` in Camunda BPM's tomcat `lib` folder with a
+`groovy-all-2.4.x.jar`!
+
+Start camunda BPM Tomcat by executing:
 
 ```bash
 ./start-camunda.sh
