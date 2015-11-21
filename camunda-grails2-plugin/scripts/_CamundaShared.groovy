@@ -17,12 +17,12 @@ includeTargets << grailsScript("_GrailsInit")
 includeTargets << grailsScript("_GrailsCreateArtifacts")
 
 /**
- * Gant target that creates a camunda BPM process definition
+ * Gant target that creates a Camunda BPM process definition
  *
  * @author Martin Schimak <martin.schimak@plexiti.com>
  * @since 0.1
  */
-target('create-process' : 'Creates a new camunda BPM process definition.') {
+target('create-process' : 'Creates a new Camunda BPM process definition.') {
     depends(compile, checkVersion, parseArguments)
 
     def constants = classLoader.loadClass("grails.plugin.camunda.Constants")

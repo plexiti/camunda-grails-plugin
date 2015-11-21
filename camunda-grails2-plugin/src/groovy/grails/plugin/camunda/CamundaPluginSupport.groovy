@@ -91,13 +91,13 @@ class CamundaPluginSupport {
             camundaProcessEngineBean(camundaProcessEngineServiceBean: 'getDefaultProcessEngine')
         }
         if (springConfig.beanNames.find { it == 'camundaProcessEngineBean' }) {
-            // Retrieve camunda service API beans
+            // Retrieve Camunda service API beans
             ProcessEngineImpl.class.declaredMethods.each { Method method ->
                 if(method.name.startsWith('get') && method.name.endsWith('Service')) {
                     "camunda${method.name.substring(3)}Bean"(camundaProcessEngineBean: method.name)
                 }
             }
-            // Finally, register all camunda beans under their default or user configured aliases
+            // Finally, register all Camunda beans under their default or user configured aliases
             springConfig.beanNames.findAll { it.startsWith("camunda") && it.endsWith("Bean") }.each {
                 springConfig.addAlias Identifiers.beanName(it), it
             }

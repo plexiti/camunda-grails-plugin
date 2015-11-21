@@ -3,7 +3,7 @@
 grails.doc.title = "camunda Grails plugin"
 grails.doc.logo = """<span style="white-space: nowrap"><img alt="camunda Logo" title="camunda Grails plugin" src="http://plexiti.github.io/camunda-grails-plugin/img/camunda.png" style="margin-right: 10px"/><span style="vertical-align: middle; font-size: 2.5em">camunda Grails plugin</span><br/><br/></span>"""
 grails.doc.sponsorLogo = """<span style="vertical-align: middle"><a href="http://plexiti.com" target="_blank"><img alt="plexiti Logo" title="plexiti GmbH" src="http://plexiti.github.io/camunda-grails-plugin/img/plexiti.png"/></a></span>"""
-grails.doc.subtitle = """The camunda Grails plugin integrates the camunda BPM platform with the Grails web application framework."""
+grails.doc.subtitle = """The Camunda Grails plugin integrates the Camunda BPM platform with the Grails web application framework."""
 grails.doc.copyright = """\
 <div>
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">

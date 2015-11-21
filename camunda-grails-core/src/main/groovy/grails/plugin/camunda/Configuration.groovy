@@ -41,15 +41,15 @@ class Configuration {
   static {
     if (Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]) {
       /* By default update database schema for environments 'dev' and 'test', for all 
-       * other environments don't touch camunda's default. 
+       * other environments don't touch Camunda's default. 
        */
       defaults['camunda.engine.configuration.databaseSchemaUpdate'] = true
       /* By default enable the job executor for environments 'dev' and 'test',
-       * for all other environments don't touch camunda's default. 
+       * for all other environments don't touch Camunda's default. 
        */
       defaults['camunda.engine.configuration.jobExecutorActivate'] = true
       /* By default deploy bpmn resources in classpath for environments 'dev' and 'test', 
-       * for all other environments don't touch camunda's default. 
+       * for all other environments don't touch Camunda's default. 
        */
       defaults['camunda.engine.configuration.deploymentResources'] = ['classpath:/**/*.bpmn', 'classpath:/**/*.bpmn20.xml']
     }
@@ -60,7 +60,7 @@ class Configuration {
 
   /*
    * Validators exist for plugin specific configuration only, not for 
-   * configuration dynamically used for camunda provided configuration beans.
+   * configuration dynamically used for Camunda provided configuration beans.
    */
   private static def validators = [
     'camunda.deployment.scenario' : { property, value ->

@@ -2,7 +2,7 @@ Does your application work with an 'embedded' or a 'shared' process engine?
  
 Do you *either* want to use the engine just *behind the scenes* of your own 
 custom grails application with your own forms, controllers, services etc? Then 
-go for the embedded engine. *Or* do you want to use the camunda BPM platform 
+go for the embedded engine. *Or* do you want to use the Camunda BPM platform 
 'tasklist' with embedded forms and implement a grails based *process application* 
 for it? Then go for the shared engine. In that case you will still want to use
 an embedded engine for testing your application.

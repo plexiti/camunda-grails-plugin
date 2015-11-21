@@ -1,5 +1,5 @@
 During the integration test phase of Grails (any environment), two configuration values are set by the plugin: the
-camunda [job executor|http://docs.camunda.org/latest/guides/user-guide/#process-engine-the-job-executor] is *by
+Camunda [job executor|http://docs.camunda.org/latest/guides/user-guide/#process-engine-the-job-executor] is *by
 default* turned *off* and service [mocking|http://docs.camunda.org/latest/guides/user-guide/#testing-using-mocks-to-test-your-process-application]
 is made available.
 

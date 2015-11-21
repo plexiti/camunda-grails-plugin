@@ -6,12 +6,12 @@ import org.camunda.bpm.engine.test.mock.Mocks
 import spock.lang.Specification
 
 /**
- * Integration Test for camunda @artifact.testclass@ 
+ * Integration Test for Camunda @artifact.testclass@ 
  */
 class @artifact.name@ extends Specification {
 
     /**
-     * 1) Inject camunda process engine API service beans
+     * 1) Inject Camunda process engine API service beans
      */
     RuntimeService runtimeService
     TaskService taskService

@@ -1,4 +1,4 @@
-Currently the plugin comes bundled with a dependency to the release *7.3.0* of camunda BPM.
+Currently the plugin comes bundled with a dependency to the release *7.3.0* of Camunda BPM.
 However you may want to choose another version. You then have to explicitely override the needed 
 dependencies in your BuildConfig.groovy:
 
@@ -13,11 +13,11 @@ dependencies {
 }
 {code}
 
-Replace '$camundaVersion' with the version of camunda of your choice. It is recommended to
-explicitely exclude any spring dependencies coming with camunda and make sure to properly test
+Replace '$camundaVersion' with the version of Camunda of your choice. It is recommended to
+explicitely exclude any spring dependencies coming with Camunda and make sure to properly test
 your application with the spring framework version provided by the Grails version you use.
 
-Note that for camunda versions prior to 7.1.0-Final, you must also configure camunda's custom 
+Note that for Camunda versions prior to 7.1.0-Final, you must also configure camunda's custom 
 maven repository:
 
 {code:groovy}

@@ -9,9 +9,9 @@ import spock.lang.Unroll
  */
 class CamundaBpmVersionSpec extends Specification {
 
-    void "Test whether camunda BPM version is retrievable"() {
+    void "Test whether Camunda BPM version is retrievable"() {
 
-        when: "we retrieve the actual camunda BPM version"
+        when: "we retrieve the actual Camunda BPM version"
         def version = CamundaBpmVersion.version
 
         then: "we expect to see a specific pattern"
@@ -20,9 +20,9 @@ class CamundaBpmVersionSpec extends Specification {
     }
     
     @Unroll
-    void "Test whether camunda BPM #actualVersion is at least #neededVersion"() {
+    void "Test whether Camunda BPM #actualVersion is at least #neededVersion"() {
 
-        given: "we set a camunda BPM version as test value"
+        given: "we set a Camunda BPM version as test value"
         CamundaBpmVersion.testVersion = actualVersion
         
         when: "we check for a specific needed version"

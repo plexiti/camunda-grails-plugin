@@ -19,7 +19,7 @@ modeler|http://camunda.org/bpmn/tool/].
 
 Find more information about the generated artifacts in the [User Guide|guide:create-process]. You should also read
 the remarks about [conventions|guide:conventions] in order to understand the consequences of this script command
-for your camunda API calls. The short version is that you can instantiate this freshly created process via
+for your Camunda API calls. The short version is that you can instantiate this freshly created process via
 issueing
 
 {code:groovy}

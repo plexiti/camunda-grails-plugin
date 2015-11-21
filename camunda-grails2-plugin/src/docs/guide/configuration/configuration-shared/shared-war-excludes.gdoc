@@ -20,7 +20,7 @@ environments {
 }
 {code}
 
-However, in order to provide an improved 'out of the box' experience for new camunda Grails Plugin
+However, in order to provide an improved 'out of the box' experience for new Camunda Grails Plugin
 users as well as provide some finetuning possibilities for advanced users, the plugin provides 
 two configuration options with which the 'WEB-INF/lib' folder of a war prepared for a 'shared' engine 
 scenario (and only for those scenarios) can be manipulated after having been filled with all the 
@@ -34,7 +34,7 @@ camunda.deployment.shared.war.includes = ['camunda-engine-spring-*.jar']
 {code}
 
 With the 'includes' setting you can make an exception to the 'excludes' setting. The example given shows 
-the defaults used by the plugin. In case you configure all the camunda dependencies for all your 
+the defaults used by the plugin. In case you configure all the Camunda dependencies for all your 
 environments yourself in a more proper way with 'provided' scopes as shown above, you should override 
 the defaults of those two values and set them to null. Then the plugin won't interfere with your
 'shared' engine war generation any longer.

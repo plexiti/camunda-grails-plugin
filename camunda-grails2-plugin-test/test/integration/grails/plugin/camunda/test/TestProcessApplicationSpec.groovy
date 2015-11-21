@@ -7,7 +7,7 @@ import org.camunda.bpm.engine.test.mock.Mocks
 import spock.lang.Specification
 
 /**
- * Integration Test for camunda TestProcess 
+ * Integration Test for Camunda TestProcess 
  */
 class TestProcessApplicationSpec extends Specification {
 

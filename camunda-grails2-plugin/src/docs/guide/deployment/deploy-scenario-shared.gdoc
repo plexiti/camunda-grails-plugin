@@ -1,6 +1,6 @@
 (1) Download a [camunda BPM Tomcat distribution|http://camunda.org/download/]. Make 
-sure that the version of your camunda BPM container matches the version you use in 
-your grails application. If necessary [change the camunda BPM version|guide:alternative-engine-version] 
+sure that the version of your Camunda BPM container matches the version you use in 
+your grails application. If necessary [change the Camunda BPM version|guide:alternative-engine-version] 
 used by the grails application.
  
 (2) Make sure you declared the shared engine for those grails environments with which 
@@ -14,17 +14,17 @@ environments {
 }
 {code}
 
-(3) camunda BPM comes bundled with a dependency to the '*org.codehaus.groovy:groovy-all*' library,
+(3) Camunda BPM comes bundled with a dependency to the '*org.codehaus.groovy:groovy-all*' library,
 which causes failure when deploying groovy/grails based applications bundled with their own version
 of that library. Therefore the plugin prevents the bundling of the 'org.codehaus.groovy:groovy-all' 
 library bundled with grails and instead assumes that this library is already provided by the container. 
-When preparing the camunda BPM container for a production environment, you should check that the 
+When preparing the Camunda BPM container for a production environment, you should check that the 
 'org.codehaus.groovy:groovy-all' library version bundled in the container matches the version you 
 need for your grails application and eventually replace it with the version you need.
 
 {note}
 You might want to check how to [configure and finetune the dependencies|guide:shared-war-excludes] 
-provided by a camunda BPM container for a shared engine in greater detail.
+provided by a Camunda BPM container for a shared engine in greater detail.
 {note}
 
 *Finally*, build your 'war' file ...
@@ -33,6 +33,6 @@ provided by a camunda BPM container for a shared engine in greater detail.
 grails war
 {code}
 
-...and deploy it to your camunda BPM containers 'webapp' folder. Open 
-[http://localhost:8080/camunda-welcome|http://localhost:8080/camunda-welcome] and browse to camunda 
+...and deploy it to your Camunda BPM containers 'webapp' folder. Open 
+[http://localhost:8080/camunda-welcome|http://localhost:8080/camunda-welcome] and browse to Camunda 
 cockpit or tasklist application.

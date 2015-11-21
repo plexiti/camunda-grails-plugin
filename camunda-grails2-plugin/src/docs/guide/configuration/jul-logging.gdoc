@@ -1,4 +1,4 @@
-camunda uses [java.util.logging|http://docs.camunda.org/latest/guides/user-guide/#process-engine-logging].
+Camunda uses [java.util.logging|http://docs.camunda.org/latest/guides/user-guide/#process-engine-logging].
 Therefore you need to make a conscious choice about whether to turn on/off the 'grails.logging.jul.usebridge'
 setting in your Config.groovy. See the information about the performance impact on
 [http://www.slf4j.org|http://www.slf4j.org/legacy.html#jul-to-slf4j].

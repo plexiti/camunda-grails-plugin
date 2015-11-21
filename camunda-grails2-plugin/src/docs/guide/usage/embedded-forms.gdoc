@@ -1,12 +1,12 @@
 {note}
-Using the camunda BPM tasklist with 'embedded' forms as described in this section, will just 
+Using the Camunda BPM tasklist with 'embedded' forms as described in this section, will just 
 work with a 'shared' process engine [deployment scenario|guide:deployment-scenario].
 {note}
 
 !tasklist-dashboard.png!
 
 With the help of the *camunda Grails Plugin* you can *use grails gsp views to dynamically* 
-*render 'embedded' forms* and hook them to the camunda BPM tasklist. You just need two things: 
+*render 'embedded' forms* and hook them to the Camunda BPM tasklist. You just need two things: 
 *First*, place your form into the views folder, like e.g. ...
 
 {code}
@@ -26,23 +26,23 @@ Or, for a start event, it would look very similar:
 <startEvent id="StartEvent_1" name="Sample StartEvent" camunda:formKey="embedded:app:camunda/test/sampleForm"/>
 {code}
 
-Of course, you can also do this by making use of the camunda modeler properties pane:
+Of course, you can also do this by making use of the Camunda modeler properties pane:
 
 !modeler-form-key.png!
 
 But what happens now behind the scenes at run time? First, when you start a process or open a task with 
-camunda BPM task list, it will realise that you want to use an 'embedded' form and that you want to 
+Camunda BPM task list, it will realise that you want to use an 'embedded' form and that you want to 
 provide it via your grails web 'app' (from camunda's tasklist perspective you provide it from the 
 application, which deployed the process definition with that formKey). The tasklist will therefore 
 request the form from the absolute path '/your-grails-app-context/camunda/test/sampleForm'. The string 
-'camunda/test/sampleForm' is the string you provided in the formKey. camunda Grails Plugin will then 
+'camunda/test/sampleForm' is the string you provided in the formKey. Camunda Grails Plugin will then 
 respond with the html *body* only of your 'test/sampleForm.gsp' and deliver it to the task list (by 
 means of a plugin provided grails controller named 'camunda').
 
 {note}
 Make sure that the body of your gsp just contains a single *form* element and that the html follows 
-the conventions for camunda embedded forms. Of course you are free to dynamically generate that html 
-via gsp mechanisms. To learn more about camunda embedded forms, you may want to look at the 
+the conventions for Camunda embedded forms. Of course you are free to dynamically generate that html 
+via gsp mechanisms. To learn more about Camunda embedded forms, you may want to look at the 
 [raw html code|https://github.com/plexiti/camunda-grails-plugin/blob/master/grails-app/views/test/sampleForm.gsp] 
 of the sample form provided with *camunda Grails Plugin* or consult camunda's 
 [embedded-task-forms docs|http://docs.camunda.org/latest/guides/user-guide/#tasklist-task-forms-creating-embedded-task-forms].

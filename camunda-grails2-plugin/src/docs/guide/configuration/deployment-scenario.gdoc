@@ -37,5 +37,5 @@ environments {
 
 {note}
 Currently the plugin only supports *tomcat* as a container to look up a shared process engine. Download 
-camunda BPM *Tomcat* distribution.
+Camunda BPM *Tomcat* distribution.
 {note}

@@ -15,5 +15,5 @@ you use a standard grails UrlMappings layout). For embedded forms it would again
 'form' element. 
 For [external forms|http://docs.camunda.org/latest/guides/user-guide/#tasklist-task-forms-external-task-forms], 
 you would render the full page yourself and would also need to take care of the subsequent form actions 
-yourself. camunda BPM tasklist will provide you with a @taskId@ url parameter to look up the task as well 
+yourself. Camunda BPM tasklist will provide you with a @taskId@ url parameter to look up the task as well 
 as with a @callbackUrl@ parameter to redirect back to the task list.

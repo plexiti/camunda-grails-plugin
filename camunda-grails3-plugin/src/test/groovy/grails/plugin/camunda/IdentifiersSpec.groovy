@@ -13,7 +13,7 @@ import spock.lang.Unroll
 class IdentifiersSpec extends Specification {
     
     @Unroll
-    void "Test camunda bean names"() {
+    void "Test Camunda bean names"() {
         
         given:
         Holders.config['camunda.beans.taskService'] = "myTaskService"

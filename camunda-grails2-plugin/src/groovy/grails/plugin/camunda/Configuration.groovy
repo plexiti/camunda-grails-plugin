@@ -58,7 +58,7 @@ class Configuration {
 
   /*
    * Validators exist for plugin specific configuration only, not for 
-   * configuration dynamically used for camunda provided configuration beans.
+   * configuration dynamically used for Camunda provided configuration beans.
    */
   private static def validators = [
     'camunda.deployment.scenario' : { property, value ->

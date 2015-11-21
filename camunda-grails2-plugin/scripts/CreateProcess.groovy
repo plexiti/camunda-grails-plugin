@@ -15,14 +15,14 @@
  */
 
 /**
- * Gant script that creates a camunda BPM process definition
+ * Gant script that creates a Camunda BPM process definition
  *
  * @author Martin Schimak <martin.schimak@plexiti.com>
  * @since 0.1
  */
 includeTargets << new File(camundaPluginDir, "scripts/_CamundaShared.groovy")
 
-target('default' : 'Creates a new camunda BPM process definition.') {
+target('default' : 'Creates a new Camunda BPM process definition.') {
     "create-process"()    
 }
 

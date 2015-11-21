@@ -10,5 +10,5 @@ The plugin registers the bean as 'camundaCaseServiceBean' with the default alias
 You can change this default alias via [configuration|guide:bean-names].
 
 {note}
-The caseService is just available from camunda BPM version 7.2.0 onwards.
+The caseService is just available from Camunda BPM version 7.2.0 onwards.
 {note}

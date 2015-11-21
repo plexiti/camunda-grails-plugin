@@ -1,4 +1,4 @@
-{note}Beware that this test will populate your test environment database with camunda related
+{note}Beware that this test will populate your test environment database with Camunda related
 tables. By default, this will be a H2 in memory database preconfigured by Grails - so everything
 fine with that. For other databases, you will need to adapt the [plugin
 configuration|guide:alternative-database], too.{note}
@@ -15,6 +15,6 @@ When executing the test you should see the following familiar output :-)
 | Tests PASSED - view reports in ./target/test-reports
 {code}
 
-*Congrats!* You are successfully using an embedded camunda BPM engine with the Grails framework!
-If you want to use camunda "behind the scenes" of your grails app that's all that is needed! But
+*Congrats!* You are successfully using an embedded Camunda BPM engine with the Grails framework!
+If you want to use Camunda "behind the scenes" of your grails app that's all that is needed! But
 maybe you ...

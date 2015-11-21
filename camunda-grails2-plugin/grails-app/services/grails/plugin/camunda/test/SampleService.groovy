@@ -13,7 +13,7 @@ class SampleService {
     RuntimeService runtimeService
 
     def serviceMethod(Execution execution) {
-        logger.info("${SampleService.class.simpleName} called from camunda BPM ProcessInstance (id='${execution.processInstanceId}').")
+        logger.info("${SampleService.class.simpleName} called from Camunda BPM ProcessInstance (id='${execution.processInstanceId}').")
         runtimeService.getVariables(execution.processInstanceId).each {
             logger.info("- Process Variable '${it.key}' = ${it.value} (${it.value?.class})")
         }

@@ -7,13 +7,13 @@ for *tomcat*, expand the archive, go to the expanded folder and start it by issu
 {code}
 
 Now, return to your your grails project command line, and create a 'war' file prepared to use
-the process engine managed by the camunda BPM tomcat container and shared with your grails app:
+the process engine managed by the Camunda BPM tomcat container and shared with your grails app:
 
 {code:bash}
 grails war
 {code}
 
-Move the war generated in your target folder into the camunda BPM tomcat 'webapp' folder. 
+Move the war generated in your target folder into the Camunda BPM tomcat 'webapp' folder. 
 Open [http://localhost:8080/camunda-welcome|http://localhost:8080/camunda-welcome] and navigate 
 to the tasklist application. Log in with user 'demo', password 'demo' and start your new process 
 via the (little bit hidden :-) "start process" button in the top right corner:

@@ -1,4 +1,4 @@
-Of course, it is also possible to override some or all of the camunda spring beans defined by the
+Of course, it is also possible to override some or all of the Camunda spring beans defined by the
 plugin via the standard Grails way: by editing '*grails-app/conf/spring/resources.groovy*'. In
 order to do that properly it is useful to know that the plugin registers all beans following the
 name convention *camunda\[DefaultAlias\]Bean*, e.g. the 'processEngine' is registered as bean

@@ -1,10 +1,10 @@
-This plugin integrates the camunda BPM platform with the Grails web application framework.
+This plugin integrates the Camunda BPM platform with the Grails web application framework.
 *[camunda BPM|http://camunda.org]* is a flexible framework for workflow and process automation.
 It's core is a native *[BPMN 2.0|http://www.omg.org/spec/BPMN/2.0/]* process engine that runs
 inside the Java Virtual Machine. It is a perfect match for the Spring Framework - and therefore for
 *[Grails|http://grails.org]*, too.
 
-Please check out *[camunda.org|http://camunda.org/]* to get started with camunda BPM. Read on here
-to get started with the camunda Grails plugin!
+Please check out *[camunda.org|http://camunda.org/]* to get started with Camunda BPM. Read on here
+to get started with the Camunda Grails plugin!
 
 !modeler.png!
