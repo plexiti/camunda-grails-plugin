@@ -14,16 +14,18 @@ Find a full specification of the values possible in the camunda docs for the spr
 engine configuration|http://docs.camunda.org/latest/api-references/javadoc/org/camunda/bpm/engine/spring/SpringProcessEngineConfiguration.html].
 
 Note that in case you do not configure a value the plugin relies on the default values coming
-with the camunda engine in use - with the following three exceptions for the default grails
+with the camunda engine in use - with the following two exceptions for the default grails
 environments *dev*elopment and *test*:
 
 - your database is populated with camunda tables the first time the database is accessed
-- any *.bpmn (and for legacy reasons *.bpmn20.xml) process definitions found in the classpath will be deployed to the database
 - the job executor is turned on
 
 {note}This choice was made in order to make it as easy as possible to [get
 started|guide:get-started] while relying on explicit configuration choices when deploying to
-other (and potentially production) databases.{note}
+other (and potentially production) databases. Also, note that until version 0.5.0 of the 
+plugin, the deploymentResources param was set to scan the classpath for bpmn files. This 
+is not necessary anymore, since now the concept of "process applications" is used, which
+include automatical resource scanning by default.{note}
 
 That means if you want to have that same behaviour for any other environment, you need to
 explicitely configure that in Config.groovy:
@@ -33,7 +35,6 @@ camunda {
   engine {
     configuration {
       databaseSchemaUpdate = true
-      deploymentResources = ['classpath:/**/*.bpmn', 'classpath:/**/*.bpmn20.xml']
       jobExecutorActivate = true
     }
   }
@@ -49,7 +50,6 @@ camunda {
   engine {
     configuration {
       databaseSchemaUpdate = false
-      deploymentResources = []
       jobExecutorActivate = false
     }
   }

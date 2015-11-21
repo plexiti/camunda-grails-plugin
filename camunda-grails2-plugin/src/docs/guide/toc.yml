@@ -18,13 +18,14 @@ configuration:
     configuration-embedded:
         title: Configure an 'embedded' process engine
         process-engine-configuration: Configure your process engine
+        process-engine-plugins: Configure process engine plugins
         configuration-possibilities: Use primitive types, beans or any other object
         alternative-database: Use an alternative database 
     configuration-shared:
         title: Configure a 'shared' process engine
-        processes-xml: Provide a custom processes.xml file
-        process-application-class: Provide a custom process application class
         shared-war-excludes: Configure and finetune dependencies provided by a camunda BPM container
+    processes-xml: Provide a custom processes.xml file
+    process-application-class: Provide a custom process application class
     jul-logging: Consider 'java.util.logging' settings
     alternative-engine-version: Use an alternative version of camunda 
     bean-names: Provide alternative bean names

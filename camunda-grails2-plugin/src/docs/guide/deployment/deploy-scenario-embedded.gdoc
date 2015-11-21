@@ -12,7 +12,6 @@ environments {
             engine {
                 configuration {
                     databaseSchemaUpdate = true
-                    deploymentResources = ['classpath:/**/*.bpmn']
                     jobExecutorActivate = true
                 }
             }

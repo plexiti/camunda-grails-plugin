@@ -1,0 +1,14 @@
+In particular, you might want to configure process engine plugins, like e.g. the
+[process application event listener plugin|https://docs.camunda.org/manual/7.3/guides/user-guide/#process-applications-process-application-event-listeners]
+(which is registered by default in Camunda BPM shared engine containers). This plugin allows to 
+intercept execution and task lifecycle events:
+
+{code}
+camunda {
+    engine {
+        configuration {
+            processEnginePlugins = [ new org.camunda.bpm.application.impl.event.ProcessApplicationEventListenerPlugin() ]
+        }
+    }
+}
+{code}
