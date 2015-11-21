@@ -12,7 +12,7 @@ class CreateWarTests extends AbstractCliTestCase {
 
     void "test development war file"() {
         execute(["dev", "-Dgrails.war.exploded=true", "war"]) {
-            assert !new File("$stageDir/WEB-INF/classes/META-INF/processes.xml").exists()
+            assert new File("$stageDir/WEB-INF/classes/META-INF/processes.xml").exists()
             assert !new File("$stageDir/META-INF/context.xml").exists()
             assert jars.find { it.startsWith('groovy-all-') }
             assert jars.count { it.startsWith('camunda-') } == 5

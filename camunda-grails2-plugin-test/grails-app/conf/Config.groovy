@@ -93,6 +93,14 @@ environments {
             beans {
                 historyService = 'alternativeHistoryServiceName'
             }
+            deployment {
+                application = grails.plugin.camunda.test.TestProcessApplication
+            }
+            engine {
+                configuration {
+                    processEnginePlugins = [ new org.camunda.bpm.application.impl.event.ProcessApplicationEventListenerPlugin() ]
+                }
+            }
         }
     }
     production {
