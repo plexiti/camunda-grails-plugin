@@ -28,7 +28,7 @@ class DependencyInjectionSpec extends Specification {
       processEngine
       processEngineConfiguration
       !processEngineService
-      !processApplication
+      processApplication
       repositoryService
       taskService
       managementService

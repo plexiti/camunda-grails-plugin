@@ -47,10 +47,6 @@ class Configuration {
        * for all other environments don't touch camunda's default. 
        */
       defaults['camunda.engine.configuration.jobExecutorActivate'] = true
-      /* By default deploy bpmn resources in classpath for environments 'dev' and 'test', 
-       * for all other environments don't touch camunda's default. 
-       */
-      defaults['camunda.engine.configuration.deploymentResources'] = ['classpath:/**/*.bpmn', 'classpath:/**/*.bpmn20.xml']
     }
     if (exists('grails.test.phase') && config('grails.test.phase') != 'functional') {
       /* By default turn off job executor during test phases (except functional) for

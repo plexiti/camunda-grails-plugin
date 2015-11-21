@@ -31,21 +31,8 @@ eventTestPhaseEnd = { phase ->
 eventCreateWarStart = { warName, stagingDir ->
     def constants = classLoader.loadClass("grails.plugin.camunda.Constants")
     def config = classLoader.loadClass("grails.plugin.camunda.Configuration").&config
-    // 1) include the resources in the processes dir
-    def processesDir = "${basedir}/${constants.PROCESS_PATH}"
-    if ((processesDir as File).exists()) {
-        ant.copy(todir: "${stagingDir}/WEB-INF/classes") {
-            fileset(dir: processesDir) {
-                include(name: "**")
-                include(name: "META-INF/**")
-            }
-        }
-    }
-    // 2) support 'shared' deployment scenario
+    // support 'shared' deployment scenario
     if (config('camunda.deployment.scenario') == 'shared') {
-        // create empty processes.xml but respect 'grails-app/conf/META-INF/processes.xml'
-        ant.mkdir(dir: "${stagingDir}/WEB-INF/classes/META-INF")
-        ant.touch(file: "${stagingDir}/WEB-INF/classes/META-INF/processes.xml")
         // for tomcat, provide resource links, but respect 'web-app/META-INF/context.xml'
         if (config('camunda.deployment.shared.container') == 'tomcat') {
             ant.mkdir(dir: "${stagingDir}/META-INF")
@@ -76,5 +63,23 @@ eventCompileStart = { type ->
                 include(name: "**/*.bpmn20.xml")
             }
         }
+    }
+}
+
+eventCompileEnd = { type ->
+    def constants = classLoader.loadClass("grails.plugin.camunda.Constants")
+    def processesDir = "${basedir}/${constants.PROCESS_PATH}"
+    if ((processesDir as File).exists()) {
+        // copy resources to classes dir
+        ant.mkdir(dir: classesDir)
+        ant.copy(todir: classesDir) {
+            fileset(dir: processesDir) {
+                include(name: "**")
+                include(name: "META-INF/**")
+            }
+        }
+        // create empty processes.xml but respect 'grails-app/META-INF/processes.xml'
+        ant.mkdir(dir: "${classesDir}/META-INF")
+        ant.touch(file: "${classesDir}/META-INF/processes.xml")
     }
 }
