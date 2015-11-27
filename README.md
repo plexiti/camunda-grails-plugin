@@ -1,7 +1,7 @@
-# Camunda Grails plugin 
+# Camunda Grails Plugin 
 
 This plugin integrates **Camunda BPM** (all versions) with the **Grails 2** web 
-application framework. 
+application framework. <a href="https://travis-ci.org/plexiti/camunda-grails-plugin"><img align="right" src="https://travis-ci.org/plexiti/camunda-grails-plugin.png" alt="Build Status"/></a>
 
 :information_source: A **Grails 3 version is currently under development.**
 
@@ -139,9 +139,8 @@ Camunda BPM and **[grails.org](http://grails.org/learn)** to learn Grails in 5 e
 * [Changelog](https://github.com/plexiti/camunda-grails-plugin/milestones?direction=desc&sort=completeness&state=closed)
 * [Roadmap](https://github.com/martinschimak/camunda-grails-plugin/milestones)
 * [Issue Tracking](https://github.com/plexiti/camunda-grails-plugin/issues)
-* [Continuous Integration](https://plexiti-foss.ci.cloudbees.com/job/camunda-grails-plugin/job/camunda-grails-plugin/)
+* [Continuous Integration](https://travis-ci.org/plexiti/camunda-grails-plugin)
 * [Maven Release Repository](http://repo.grails.org/grails/plugins-releases/org/grails/plugins/camunda/)
-* [Maven Snapshot Repository](https://repository-plexiti-foss.forge.cloudbees.com/snapshot/org/grails/plugins/camunda/)
 
 Want to **contribute**? Need help? You are very welcome! Please contact me directly via [eMail](mailto:martin.schimak@plexiti.com).
 
@@ -153,4 +152,4 @@ Martin Schimak - [eMail](mailto:martin.schimak@plexiti.com) - [GitHub](https://g
 <a name="license"/>
 ## License
 
-Apache License, Version 2.0
+Apache License, Version 2.0 <a href="https://travis-ci.org/plexiti/camunda-grails-plugin"><img align="right" src="https://travis-ci.org/plexiti/camunda-grails-plugin.png" alt="Build Status"/></a>

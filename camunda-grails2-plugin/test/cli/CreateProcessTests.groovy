@@ -9,31 +9,24 @@ class CreateProcessTests extends AbstractCliTestCase {
         
         this.timeout = 5 * 60 * 1000
 
-        def bpmnFile = new File("${workDir}/grails-app/processes/com/plexiti/SampleProcess.bpmn")
-        def testFile = new File("${workDir}/test/integration/com/plexiti/SampleProcessSpec.groovy")
-        if (bpmnFile.exists())
-            bpmnFile.delete()
-        if (testFile.exists())
-            testFile.delete()
-        assert !bpmnFile.exists()
-        assert !testFile.exists()
+        def bpmnFile = new File("${workDir}/target/cli-output/grails-app/processes/com/plexiti/SampleProcess.bpmn")
+        def testFile = new File("${workDir}/target/cli-output/test/integration/com/plexiti/SampleProcessSpec.groovy")
 
-        try {
-            execute(["create-process", "com.plexiti.SampleProcess"])
+        if (!bpmnFile.exists() && !testFile.exists()) {
+            execute(["create-process", "com.plexiti.SampleProcess", "--force", "--test"])
             assert waitForProcess() == 0
             verifyHeader()
-            assert bpmnFile.exists()
+        }
+
+        try {
             assert (new String(bpmnFile.readBytes()) =~ /SampleProcess/).size() == 3 // number of expected replacements
-            assert testFile.exists()
             assert (new String(testFile.readBytes()) =~ /SampleProcess/).size() == 11 // number of expected occurrences
             assert (new String(testFile.readBytes()) =~ /SampleProcessSpec/).size() == 1 // number of expected occurrences
         } finally {
-            if (bpmnFile.exists())
-                bpmnFile.delete()
-            if (testFile.exists())
-                testFile.delete()
+            bpmnFile.delete()
+            testFile.delete()
         }
-
+        
     }
     
 }

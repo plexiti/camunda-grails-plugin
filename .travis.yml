@@ -1,0 +1,21 @@
+sudo: false
+language: groovy
+jdk:
+  - oraclejdk7
+branches:
+  only:      
+    - master
+script: cd camunda-grails2-plugin
+  && ./grailsw refresh-dependencies
+  && ./grailsw create-process com.plexiti.SampleProcess --force --test
+  && ./grailsw test-app
+  && ./grailsw maven-install
+  && cd ../camunda-grails2-plugin-test
+  && ./grailsw refresh-dependencies       
+  && ./grailsw "test-app" "unit:"        
+  && ./grailsw "test-app" "integration:" 
+  && ./grailsw dev -Dgrails.war.exploded=true war
+  && mv -v ./target/work/stage ./target/stage-dev
+  && ./grailsw prod -Dgrails.war.exploded=true war
+  && mv -v ./target/work/stage ./target/stage-prod
+  && ./grailsw "test-app" "other:" 

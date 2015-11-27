@@ -34,9 +34,12 @@ target('create-process' : 'Creates a new Camunda BPM process definition.') {
     def process = params[0]
     def overwrite = argsMap["force"]
     def (pkg, name) = identifiers.generate(process)
+    
+    def path = argsMap["test"] ? "./target/cli-output" : "."
+    def testPath = "${path}/test/integration"
 
     try {
-        def file = new File("${basedir}/${constants.PROCESS_PATH}/${pkg.replace('.', '/')}/${name}${constants.TYPE}.${constants.EXTENSION}")
+        def file = new File("${basedir}/${path}/${constants.PROCESS_PATH}/${pkg.replace('.', '/')}/${name}${constants.TYPE}.${constants.EXTENSION}")
         if (!overwrite && file.exists()) {
             if (!confirmInput("${constants.TYPE} ${name}${constants.TYPE}.${constants.EXTENSION} already exists. Overwrite?","${name}${constants.TYPE}.${constants.EXTENSION}.overwrite")) {
                 return
@@ -50,11 +53,19 @@ target('create-process' : 'Creates a new Camunda BPM process definition.') {
             }
         }
         event("CreatedFile", [file])
-        file = new File("${basedir}/test/integration/${pkg.replace('.', '/')}/${name}${constants.TYPE}Spec.groovy")
+        file = new File("${basedir}/${testPath}/${pkg.replace('.', '/')}/${name}${constants.TYPE}Spec.groovy")
         if (overwrite && file.exists()) {
             file.delete()
         }
-        createIntegrationTest(name: "${pkg}.${name}", suffix: constants.TYPE)
+        createArtifact(
+            name: "${pkg}.${name}",
+            suffix: "ProcessSpec",
+            type: "Process",
+            path: testPath,
+            //superClass: superClass,
+            templatePath:"templates/testing",
+            skipPackagePrompt: true
+        )
     } catch (e) {
         e.printStackTrace()
         exit 1
