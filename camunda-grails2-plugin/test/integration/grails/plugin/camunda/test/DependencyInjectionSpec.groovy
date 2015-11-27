@@ -1,6 +1,6 @@
 package grails.plugin.camunda.test
 
-import grails.plugin.camunda.CamundaBpmVersion
+import grails.plugin.camunda.CamundaBpmApi
 import spock.lang.Specification
 
 /**
@@ -36,8 +36,8 @@ class DependencyInjectionSpec extends Specification {
       authorizationService
       runtimeService
       formService
-      CamundaBpmVersion.isAtLeast('7.2.0') ? caseService : true
-      CamundaBpmVersion.isAtLeast('7.2.0') ? filterService : true
+      CamundaBpmApi.supports('7.2') ? caseService : true
+      CamundaBpmApi.supports('7.2') ? filterService : true
   }
 
 }
