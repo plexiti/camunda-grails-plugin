@@ -25,9 +25,6 @@ for **[Grails](http://grails.org)**, too.
 3> grails war # and deploy it in the Camunda BPM tomcat container
 ```
 
-:warning: For Grails **2.5.x**, replace the `groovy-all-2.3.0.jar` in Camunda BPM's tomcat `lib` folder with a
-`groovy-all-2.4.x.jar`!
-
 Then open [http://localhost:8080/camunda-on-grails-0.1/camunda](http://localhost:8080/camunda-on-grails-0.1/camunda), 
 browse to Camunda tasklist and work with your own Camunda GrailsProcess. But if you are new to Camunda BPM and/or 
 Grails, you might want to read the long story:
@@ -78,7 +75,8 @@ executed by that command. However, if you want to see **Camunda BPM tasklist in 
 [Download Camunda BPM **Tomcat**](http://camunda.org/download/) and expand it to a folder, let's call it 
 $CAMUNDA_HOME. 
 
-:warning: For Grails **2.5.x**, replace the `groovy-all-2.3.0.jar` in Camunda BPM's tomcat `lib` folder with a
+:warning: For the combination of Grails **>= 2.5** and Camunda **<= 7.3**, you must 
+replace the `groovy-all-2.3.0.jar` in Camunda BPM's tomcat `lib` folder with a current 
 `groovy-all-2.4.x.jar`!
 
 Start Camunda BPM Tomcat by executing:
