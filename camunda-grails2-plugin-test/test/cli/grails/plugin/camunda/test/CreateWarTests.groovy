@@ -1,5 +1,6 @@
 package grails.plugin.camunda.test
 
+import grails.plugin.camunda.CamundaBpmApi
 import grails.test.AbstractCliTestCase
 import groovy.xml.Namespace
 import org.camunda.bpm.ProcessApplicationService
@@ -11,11 +12,11 @@ import org.camunda.bpm.ProcessEngineService
 class CreateWarTests extends AbstractCliTestCase {
 
     void "test development war file"() {
-        execute(["dev", "-Dgrails.war.exploded=true", "war"]) {
+        execute(["dev", "-Dgrails.war.exploded=true", camundaVersionProperty, "war"]) {
             assert new File("$targetDir/WEB-INF/classes/META-INF/processes.xml").exists()
             assert !new File("$targetDir/META-INF/context.xml").exists()
             assert jars.find { it.startsWith('groovy-all-') }
-            assert jars.count { it.startsWith('camunda-') } == 5
+            assert jars.count { it.startsWith('camunda-') } == numberOfJars
             assert !webXml.depthFirst().find { Node node ->
                 node.name() == javaee.'res-type' && node.text() == ProcessEngineService.name
             }
@@ -26,7 +27,7 @@ class CreateWarTests extends AbstractCliTestCase {
     }
 
     void "test production war file"() {
-        execute(["prod", "-Dgrails.war.exploded=true", "war"]) {
+        execute(["prod", "-Dgrails.war.exploded=true", camundaVersionProperty, "war"]) {
             assert new File("$targetDir/META-INF/context.xml").exists()
             assert new File("$targetDir/WEB-INF/classes/META-INF/processes.xml").exists()
             assert !jars.find { it.startsWith('groovy-all') }
@@ -45,6 +46,8 @@ class CreateWarTests extends AbstractCliTestCase {
     File targetDir
     List<String> jars = []
     Node webXml
+    def camundaVersionProperty = '-Dcamunda-bpm.version=' + System.getProperty('camunda-bpm.version') ?: '7.4.0'
+    def numberOfJars = CamundaBpmApi.supports('7.4') ? 12 : 5
     
     void setUp() {
         timeout = 10 * 60 * 1000
