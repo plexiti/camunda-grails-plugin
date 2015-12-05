@@ -5,7 +5,10 @@ jdk:
 branches:
   only:      
     - master
-script: cd camunda-grails2-plugin
+script: gradle check install
+  && cd camunda-grails3-plugin-test
+  && gradle check
+  && cd ../camunda-grails2-plugin
   && ./grailsw refresh-dependencies
   && ./grailsw create-process com.plexiti.SampleProcess --force --test
   && ./grailsw test-app
