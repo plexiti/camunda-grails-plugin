@@ -125,7 +125,7 @@ class ConfigurationSpec extends Specification {
       'camunda.deployment.shared.war.includes'            | ['camunda-engine-spring-*.jar']
       'camunda.engine.configuration.databaseSchemaUpdate' | { Environment.current in [Environment.DEVELOPMENT, Environment.TEST] ? true : null }.call()
       'camunda.engine.configuration.jobExecutorActivate'  | false
-      'camunda.engine.configuration.deploymentResources'  | { Environment.current in [Environment.DEVELOPMENT, Environment.TEST] ? ['classpath:/**/*.bpmn', 'classpath:/**/*.bpmn20.xml'] : null }.call()
+      'camunda.engine.configuration.deploymentResources'  | null
   }
 
   def "Test that a property with subproperties returns an expected map."() {
@@ -243,7 +243,6 @@ class ConfigurationSpec extends Specification {
         'camunda.deployment.autoreload',
         'camunda.engine.configuration.jobExecutorActivate',
         'camunda.engine.configuration.databaseSchemaUpdate',
-        'camunda.engine.configuration.deploymentResources',
         'camunda.deployment.shared.war.excludes',
         'camunda.deployment.shared.war.includes',
       ].toSet()

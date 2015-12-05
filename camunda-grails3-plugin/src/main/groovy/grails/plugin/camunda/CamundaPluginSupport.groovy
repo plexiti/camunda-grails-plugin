@@ -18,6 +18,7 @@ package grails.plugin.camunda
 import grails.util.BuildScope
 import grails.util.Environment
 import grails.util.Metadata
+import groovy.util.logging.Log
 import org.camunda.bpm.BpmPlatform
 import org.camunda.bpm.ProcessApplicationService
 import org.camunda.bpm.ProcessEngineService
@@ -26,8 +27,9 @@ import org.camunda.bpm.engine.RepositoryService
 import org.camunda.bpm.engine.impl.ProcessEngineImpl
 import org.camunda.bpm.engine.repository.DeploymentBuilder
 import org.camunda.bpm.engine.spring.SpringProcessEngineConfiguration
+import org.camunda.bpm.engine.spring.application.SpringProcessApplication
 import org.camunda.bpm.engine.spring.ProcessEngineFactoryBean
-import org.camunda.bpm.engine.spring.application.SpringServletProcessApplication
+import org.camunda.bpm.engine.spring.container.ManagedProcessEngineFactoryBean
 import org.camunda.bpm.engine.test.mock.MockExpressionManager
 import org.slf4j.bridge.SLF4JBridgeHandler
 import org.springframework.beans.BeanUtils
@@ -39,11 +41,28 @@ import static grails.plugin.camunda.Configuration.*
 /**
  * @author Martin Schimak <martin.schimak@plexiti.com>
  */
+@Log
 class CamundaPluginSupport {
+    
+    // Make sure (for database migration plugin) that just one process application 
+    // is deployed and just first process engine is registered with JMX
+    static boolean firstContext = true
 
     static doWithSpring = {
+        if (firstContext) { // Make sure (for database migration plugin) that just one process application is deployed
+            def processApplicationName = "${Metadata.getCurrent().getApplicationName()}"
+            log.info(processApplicationName)
+            if (SpringProcessApplication.isAssignableFrom(config('camunda.deployment.application') as Class)) {
+                "${processApplicationName}"(config('camunda.deployment.application'))
+            }
+            if (springConfig.beanNames.find { it == processApplicationName }) {
+                springConfig.addAlias 'camundaProcessApplicationBean', processApplicationName
+                springConfig.addAlias Identifiers.beanName('camundaProcessApplicationBean'), processApplicationName
+            }
+        }
         if (config('camunda.deployment.scenario') == 'embedded') {
-            camundaProcessEngineBean(ProcessEngineFactoryBean) {
+            // Make sure (for database migration plugin) that just first process engine is registered with JMX
+            camundaProcessEngineBean(firstContext ?  ManagedProcessEngineFactoryBean : ProcessEngineFactoryBean) {
                 processEngineConfiguration = ref('camundaProcessEngineConfigurationBean')
             }
             camundaProcessEngineConfigurationBean(SpringProcessEngineConfiguration) { beanDefinition ->
@@ -75,17 +94,9 @@ class CamundaPluginSupport {
                 beanDefinition.factoryMethod = 'getProcessEngineService'
             }
             camundaProcessEngineBean(camundaProcessEngineServiceBean: 'getDefaultProcessEngine')
-            def processApplicationName = "${Metadata.current.'app.name'}"
-            if (SpringServletProcessApplication.isAssignableFrom(config('camunda.deployment.application') as Class)) {
-                "${processApplicationName}"(config('camunda.deployment.application'))
-            }
-            if (springConfig.beanNames.find { it == processApplicationName }) {
-                springConfig.addAlias 'camundaProcessApplicationBean', processApplicationName
-                springConfig.addAlias Identifiers.beanName('camundaProcessApplicationBean'), processApplicationName
-            }
         }
         if (springConfig.beanNames.find { it == 'camundaProcessEngineBean' }) {
-            // Instantiate Camunda service API beans
+            // Retrieve Camunda service API beans
             ProcessEngineImpl.class.declaredMethods.each { Method method ->
                 if(method.name.startsWith('get') && method.name.endsWith('Service')) {
                     "camunda${method.name.substring(3)}Bean"(camundaProcessEngineBean: method.name)
@@ -96,6 +107,7 @@ class CamundaPluginSupport {
                 springConfig.addAlias Identifiers.beanName(it), it
             }
         }
+        firstContext = false
     }
     
     static doWithWebDescriptor = { webXml ->

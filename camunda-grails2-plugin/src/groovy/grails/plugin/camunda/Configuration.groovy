@@ -40,7 +40,7 @@ class Configuration {
   static {
     if (Environment.current in [ Environment.DEVELOPMENT, Environment.TEST ]) {
       /* By default update database schema for environments 'dev' and 'test', for all 
-       * other environments don't touch camunda's default. 
+       * other environments don't touch Camunda's default. 
        */
       defaults['camunda.engine.configuration.databaseSchemaUpdate'] = true
       /* By default enable the job executor for environments 'dev' and 'test',

@@ -15,47 +15,25 @@ class CamundaGradlePlugin implements Plugin<Project> {
   void apply(Project project) {
     project.getPlugins().apply(JavaPlugin.class);
     // TODO Depends on Grails 'Gradle Plugin' or Grails 'Plugin Gradle Plugin' 
-    processProcessResources(project)
-    // TODO Depends on Grails 'War' Plugin applied before, if it is defined for the project
-    if (project.plugins.hasPlugin(WarPlugin))
-      war(project) 
-  }
-
-  static void processProcessResources(Project project) {
-    project.task('processIntegrationTestProcessResources') {
-      dependsOn 'processIntegrationTestResources'
-      doFirst {
-        project.ant.copy(todir: "${project.sourceSets.integrationTest.output.classesDir}") {
-          fileset(dir: "${project.projectDir}/${Constants.PROCESS_PATH}")
-        }
-      }
-    }
     // TODO Depends on Grails Integration Test Plugin and existence of such tests
     project.integrationTestClasses {
-      dependsOn 'processIntegrationTestProcessResources'
-    }
-    project.task('processTestProcessResources') {
-      dependsOn 'processTestResources'
       doFirst {
-        project.ant.copy(todir: "${project.sourceSets.test.output.classesDir}") {
-          fileset(dir: "${project.projectDir}/${Constants.PROCESS_PATH}")
-        }
+        processResources(project, "${project.sourceSets.integrationTest.output.classesDir}")
       }
     }
     project.testClasses {
-      dependsOn 'processTestProcessResources'
-    }
-    project.task('processProcessResources') {
-      dependsOn 'processResources'
       doFirst {
-        project.ant.copy(todir: "${project.sourceSets.main.output.classesDir}") {
-          fileset(dir: "${project.projectDir}/${Constants.PROCESS_PATH}")
-        }
+        processResources(project, "${project.sourceSets.test.output.classesDir}")
       }
     }
     project.classes {
-      dependsOn 'processProcessResources'
+      doFirst {
+        processResources(project, "${project.sourceSets.main.output.classesDir}")
+      }
     }
+    // TODO Depends on Grails 'War' Plugin applied before, if it is defined for the project
+    if (project.plugins.hasPlugin(WarPlugin))
+      war(project) 
   }
 
   static void war(Project project) {
@@ -66,11 +44,6 @@ class CamundaGradlePlugin implements Plugin<Project> {
         // support 'shared' deployment scenario
         // TODO Depends on accessibility of grails configuration
         // if (config('camunda.deployment.scenario') == 'shared') { 
-            def classesDir = project.sourceSets.main.output.classesDir
-            // create empty processes.xml but respect 'grails-app/processes/META-INF/processes.xml'
-            project.ant.mkdir(dir: "${classesDir}/META-INF")
-            project.ant.touch(file: "${classesDir}/META-INF/processes.xml")
-          // TODO Depends on accessibility of grails configuration
           // if (config('camunda.deployment.shared.container') == 'tomcat') {
             // for tomcat, provide resource links, but respect 'web-app/META-INF/context.xml'
             if (!new File("${project.projectDir}/src/main/webapp/META-INF/context.xml").exists()) {
@@ -97,6 +70,21 @@ class CamundaGradlePlugin implements Plugin<Project> {
       }
       */
     }
+  }
+
+  static void processResources(Project project, String classesDir) {
+    def processesDir = "${project.projectDir}/${Constants.PROCESS_PATH}"
+    // copy resources to classes dir
+    project.ant.mkdir(dir: classesDir)
+    project.ant.copy(todir: classesDir) {
+      fileset(dir: processesDir){
+        include(name: "**")
+        include(name: "META-INF/**")
+      }
+    }
+    // create empty processes.xml but respect 'grails-app/META-INF/processes.xml'
+    project.ant.mkdir(dir: "${classesDir}/META-INF")
+    project.ant.touch(file: "${classesDir}/META-INF/processes.xml")
   }
 
 }

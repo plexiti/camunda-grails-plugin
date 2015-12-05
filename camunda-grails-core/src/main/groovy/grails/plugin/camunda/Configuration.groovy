@@ -48,10 +48,6 @@ class Configuration {
        * for all other environments don't touch Camunda's default. 
        */
       defaults['camunda.engine.configuration.jobExecutorActivate'] = true
-      /* By default deploy bpmn resources in classpath for environments 'dev' and 'test', 
-       * for all other environments don't touch Camunda's default. 
-       */
-      defaults['camunda.engine.configuration.deploymentResources'] = ['classpath:/**/*.bpmn', 'classpath:/**/*.bpmn20.xml']
     }
     defaults['camunda.engine.configuration.jobExecutorActivate'] = {
       !(BuildScope.current in [BuildScope.ALL, BuildScope.TEST])
