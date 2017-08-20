@@ -1,6 +1,9 @@
 # camunda Grails plugin 
 
-This plugin integrates camunda BPM (all versions) with the Grails web application framework.
+This plugin integrates camunda BPM with the **Grails 2** web application framework. 
+It's therefore **outdated** in the sense that Grails 3 is out there since a long time.
+There is currently no work going on in the direction of porting this plugin to Grails 3.
+
 **[camunda BPM](http://camunda.org)** is a flexible framework for workflow and process automation. 
 It's core is a native **[BPMN 2.0](http://www.omg.org/spec/BPMN/2.0/)** process engine that runs 
 inside the Java Virtual Machine. It is a perfect match for the Spring Framework - and therefore 
